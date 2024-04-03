@@ -1,9 +1,10 @@
-const Button = ({text}) => {
-    return ( 
+const Button = ({ text, color, fontColor }) => {
+
+    return (
         <>
-            <button className="m1 py-1.5 px-4 rounded-md text-xl bg-blue-900 text-white">{text}</button>
+            <button  className={`btn w-full ${fontColor} ${color} rounded-md py-1 text-lg`}>{text}</button>
         </>
-     );
+    );
 }
- 
+
 export default Button;

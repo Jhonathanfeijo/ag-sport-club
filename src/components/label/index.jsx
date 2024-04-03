@@ -2,7 +2,7 @@ const Label = ({ text }) => {
 
     return (
         <>
-            <label className="text-white text-xl">{text}</label>
+            <label className="text-secundary text-xl">{text}</label>
         </>
     );
 }

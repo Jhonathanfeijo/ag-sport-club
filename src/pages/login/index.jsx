@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import Input from "../../components/input";
 import Label from "../../components/label";
 import Button from "../../components/button";
+
+const auth = () =>{
+    <Redirect />
+}
+
 const Login = () => {
     return (
         <div className="w-screen h-screen flex bg-principal justify-center items-center">
@@ -17,8 +22,8 @@ const Login = () => {
                         <Input type='text' />
                         <Label text={'Senha'} />
                         <Input type='password' />
-                        <Link className="my-2 text-white">Não tem cadastro?</Link>
-                        <Button  text={'Logar'}/>
+                        <Link className="my-2 text-secundary">Não tem cadastro?</Link>
+                        <Button text={'Logar'} fontColor={'text-xl text-primary'} color={"bg-secundary"} />
                     </form>
                 </div>
             </div>
