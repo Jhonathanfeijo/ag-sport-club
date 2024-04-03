@@ -7,7 +7,7 @@ import Button from "../../components/button";
 const Login = () => {
     return (
         <div className="w-screen h-screen flex bg-principal justify-center items-center">
-            <div className="w-4/5 h-full flex flex-row items-center justify-center">
+            <div className="w-3/5 h-full flex flex-row items-center justify-center">
                 <div className="w-1/2 flex justify-end">
                     <img src={logoAg} alt="" className="mr-10 w-4/" />
                 </div>

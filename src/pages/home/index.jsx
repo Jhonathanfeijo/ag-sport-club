@@ -11,7 +11,7 @@ const Home = () => {
                     <p className='text-lg mb-8'>Seja bem vindo!</p>
                     <p className='text-2xl'>Sobre você</p>
                     <p className='my-1'>Você não possui reservas próximas</p>
-                    <Button text={'Reservar'}></Button>                    
+                    <Button text={'Reservar'}></Button>
                 </div>
             </div>
         </>
