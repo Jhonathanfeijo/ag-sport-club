@@ -12,8 +12,8 @@ const Header = () => {
         <>
 
             <header className="w-1/6 h-screen bg-principal flex flex-col justify-between">
-                <nav className='w-full flex flex-col items-baseline gap-1.5 text-xl'>
-                    <img className='w-9/12 mt-12 mb-20 self-center' src={logo} alt="" />
+                <nav className='w-full flex flex-col items-baseline gap-2.5 text-xl'>
+                    <img className='w-9/12 mt-12 mb-10 self-center' src={logo} alt="" />
                     <NavLink className='flex flex-row items-center gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/'}>
                         <img className='w-8 h-8' src={logoHome} alt="" />
                         <p className='text-secundary' href="">Inicio</p>
