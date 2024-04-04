@@ -22,7 +22,7 @@ const Home = () => {
                     </section>
                     <section className='w-full mt-5 flex gap-5'>
                         <Table list = {esportes} cabeçalho={'Esportes em destaque'} />
-                        <Table list= {quadras} cabeçalho={'Quadras mais utilizadas'} />
+                        <Table list= {quadras} cabeçalho={'Quadras favoritas'} />
                     </section>
                 </div>
             </div>

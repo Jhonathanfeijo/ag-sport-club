@@ -5,14 +5,14 @@ import iconMedal from '../../assets/icons/medal.svg'
 import iconRectangle from '../../assets/icons/rectangle.svg'
 import iconUser from '../../assets/icons/user.svg'
 import iconOut from '../../assets/icons/out.svg'
-import { Link, NavLink, } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
     return (
         <>
 
-            <header className="w-1/6 h-screen bg-principal flex flex-col justify-between">
-                <nav className='w-full flex flex-col items-baseline gap-2.5 text-xl'>
+            <header className="w-1/6 h-screen bg-principal flex flex-col text-xl justify-between">
+                <nav className='w-full flex flex-col items-baseline gap-2.5 '>
                     <img className='w-9/12 mt-12 mb-10 self-center' src={logo} alt="" />
                     <NavLink className='flex flex-row items-center gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/'}>
                         <img className='w-8 h-8' src={logoHome} alt="" />
@@ -36,8 +36,8 @@ const Header = () => {
                     </NavLink>
                 </nav>
                 <nav className='w-full flex flex-col items-center gap-1'>
-                    <NavLink className='flex flex-row items-center gap-5 hover:opacity-80 transition-opacity duration-3000 mb-7' to='/login'>
-                        <img className='w-8 h-8' src={iconOut} alt="" />
+                    <NavLink className='flex flex-row items-center gap-3 hover:opacity-80 transition-opacity duration-3000 mb-7' to='/login'>
+                        <img className='w-6 h-6' src={iconOut} alt="" />
                         <p className='text-secundary' href="">Sair</p>
                     </NavLink>
                 </nav>
