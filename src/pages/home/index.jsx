@@ -9,7 +9,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="w-screen h-screen flex justify-center items-center">
+            <div className="w-screen h-screen flex justify-center items-center text-primary">
                 <Header />
                 <div className=" ml-10 h-full w-full flex-1 flex flex-col items-start justify-start">
                     <H1 text={'Olá, Jonas'} />

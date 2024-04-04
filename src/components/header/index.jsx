@@ -4,43 +4,43 @@ import iconReserv from '../../assets/icons/reserva.svg'
 import iconMedal from '../../assets/icons/medal.svg'
 import iconRectangle from '../../assets/icons/rectangle.svg'
 import iconUser from '../../assets/icons/user.svg'
-import { Link } from 'react-router-dom'
+import iconOut from '../../assets/icons/out.svg'
+import { Link, NavLink, } from 'react-router-dom'
 
 const Header = () => {
     return (
         <>
-            <header className="w-1/6 h-screen bg-principal flex flex-col items-baseline justify-start gap-2.5">
-                <img className='w-9/12 mt-12 mb-9 self-center' src={logo} alt="" />
-                <nav>
-                    <Link className='flex flex-row items-center  gap-4' to={'/'}>
-                        <img className='w-7 h-7 m-0 p-0' src={logoHome} alt="" />
-                        <p className='text-xl text-secundary' href="">Inicio</p>
-                    </Link>
+
+            <header className="w-1/6 h-screen bg-principal flex flex-col justify-between">
+                <nav className='w-full flex flex-col items-baseline gap-1.5 text-xl'>
+                    <img className='w-9/12 mt-12 mb-20 self-center' src={logo} alt="" />
+                    <NavLink className='flex flex-row items-center gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/'}>
+                        <img className='w-8 h-8' src={logoHome} alt="" />
+                        <p className='text-secundary' href="">Inicio</p>
+                    </NavLink>
+                    <NavLink className='flex flex-row items-center  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/'}>
+                        <img className='w-8 h-8' src={iconReserv} alt="" />
+                        <p className='text-secundary' href="">Reservas</p>
+                    </NavLink>
+                    <NavLink className='flex flex-row items-center  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/'}>
+                        <img className='w-8 h-8' src={iconMedal} alt="" />
+                        <p className='text-secundary' href="">Esportes</p>
+                    </NavLink>
+                    <NavLink className='flex flex-row items-center  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/'}>
+                        <img className='w-8 h-8' src={iconRectangle} alt="" />
+                        <p className='text-secundary' href="">Quadras</p>
+                    </NavLink>
+                    <NavLink className='flex flex-row items-center ml-8  gap-5 hover:opacity-80 transition-opacity duration-3000'>
+                        <img className='w-8 h-8' src={iconUser} alt="" />
+                        <p className='text-secundary' href="">Usuários</p>
+                    </NavLink>
                 </nav>
-                <nav >
-                    <Link className='flex flex-row items-center  gap-4' to={'/'}>
-                        <img className='w-7 h-7 m-0 p-0' src={iconReserv} alt="" />
-                        <a className='text-xl text-secundary' href="">Reservas</a>
-                    </Link>
+                <nav className='w-full flex flex-col items-center gap-1'>
+                    <NavLink className='flex flex-row items-center gap-5 hover:opacity-80 transition-opacity duration-3000 mb-7' to='/login'>
+                        <img className='w-8 h-8' src={iconOut} alt="" />
+                        <p className='text-secundary' href="">Sair</p>
+                    </NavLink>
                 </nav>
-                <nav >
-                    <Link className='flex flex-row items-center  gap-4' to={'/'}>
-                        <img className='w-7 h-7 m-0 p-0' src={iconMedal} alt="" />
-                        <a className='text-xl text-secundary' href="">Esportes</a>
-                    </Link>
-                </nav>
-                <nav >
-                    <Link className='flex flex-row items-center  gap-4' to={'/'}>
-                        <img className='w-7 h-7 m-0 p-0' src={iconRectangle} alt="" />
-                        <a className='text-xl text-secundary' href="">Quadras</a>
-                    </Link>
-                </nav>
-                <nav className='flex flex-row items-center ml-8  gap-4'>
-                    <img className='w-7 h-7 m-0 p-0' src={iconUser} alt="" />
-                    <a className='text-xl text-secundary' href="">Usuários</a>
-                </nav>
-                <div className='flex-1'></div>
-                <Link className='text-secundary text-xl mb-10' to='/login'>Sair</Link>
             </header>
         </>
     );

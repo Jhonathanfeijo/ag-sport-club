@@ -1,12 +1,12 @@
 import React from "react";
 import logoAg from '../../assets/logo/logo.svg'
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Input from "../../components/input";
 import Label from "../../components/label";
 import Button from "../../components/button";
 
 const auth = () =>{
-    <Redirect />
+   return (<Navigate to={'/'} replace = {true}/>)
 }
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
                         <Label text={'Senha'} />
                         <Input type='password' />
                         <Link className="my-2 text-secundary">Não tem cadastro?</Link>
-                        <Button text={'Logar'} fontColor={'text-xl text-primary'} color={"bg-secundary"} />
+                        <Button onClick={auth} text={'Logar'} fontColor={'text-xl text-primary'} color={"bg-secundary"} />
                     </form>
                 </div>
             </div>
