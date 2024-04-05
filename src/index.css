@@ -13,10 +13,10 @@
     background:linear-gradient(218deg, rgba(9,61,200,1) 0%, rgba(9,13,51,1) 78%);
 }
 
-NavLink,button{
+button{
     transition: 0.3s;
 }
 
-NavLink:hover,button:hover{
+button:hover{
     opacity: 0.7;
 }
