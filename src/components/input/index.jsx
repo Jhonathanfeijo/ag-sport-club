@@ -9,7 +9,7 @@ const Input = ({ type, control, name, defaultValue, errorMessage, ...rest }) => 
                 rules={{ required: true }}
                 defaultValue={defaultValue || ''}
                 render={({ field }) =>
-                    <input {...field} {...rest} type={type} className='w-full border-0 rounded p-1 text-md ' />}
+                    <input id={name} {...field} {...rest} type={type} className='w-full border rounded p-1 text-md ' />}
             />
         
         </>

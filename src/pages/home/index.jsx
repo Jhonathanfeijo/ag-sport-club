@@ -1,11 +1,15 @@
+import { Link } from 'react-router-dom';
 import Button from '../../components/button';
 import H1 from '../../components/h1';
 import Header from '../../components/header';
 import Table from '../../components/table';
+
+
 const Home = () => {
 
-    const quadras = ['D11', 'A10'];
-    const esportes = ['Futebol', 'Volei'];
+
+    const quadras = [{ "Quadras favoritas": "D10" }, { "Quadra favoritas": "A10" }]
+    const esportes = [{ "Esportes em destaque": 'Futebol' }, { "Esportes em destaque": 'Volei' }];
 
     return (
         <>
@@ -15,14 +19,16 @@ const Home = () => {
                     <H1 text={'Olá, Jonas'} />
                     <p className='text-lg mb-5'>Seja bem vindo!</p>
 
-                    <section>
-                        <p className='w-full mb-4 text-2xl'>Sobre você</p>
+                    <section className='mb-12'>
                         <p>Você não possui reservas próximas</p>
-                        <Button text={'Reservar'} color={'bg-primary'} fontColor={'text-secundary'} />
+                        <Link to={'/reservas'}>
+                            <Button text={'Reservar'} color={'bg-primary'} fontColor={'text-secundary'} />
+                        </Link>
                     </section>
-                    <section className='w-full mt-5 flex gap-5'>
-                        <Table list = {esportes} cabeçalho={'Esportes em destaque'} />
-                        <Table list= {quadras} cabeçalho={'Quadras favoritas'} />
+                    <p className='w-full text-2xl mb-2'>Sobre você</p>
+                    <section className='w-full flex gap-5'>
+                        <Table data={quadras} />
+                        <Table data={esportes} />
                     </section>
                 </div>
             </div>

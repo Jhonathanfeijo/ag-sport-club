@@ -1,21 +1,23 @@
-const Table = ({ cabeçalho, list }) => {
+const Table = ({ data }) => {
 
     return (
         <>
-            <div className='w-1/5 border rounded-md overflow-hidden'>
+            <div className='border rounded-md overflow-hidden'>
                 <table className='w-full'>
                     <thead className='bg-primary text-secundary'>
                         <tr>
-                            <th className='py-1'>{cabeçalho}</th>
+                            {Object.keys(data[0]).map((dado, index) => {
+                                return <th className="px-2 py-3" key={index}>{dado}</th>
+                            })}
                         </tr>
                     </thead>
                     <tbody>
-                        {list.map((item) => {
-                            return (
-                                <tr>
-                                    <td className='py-0.5 pl-4'>{item}</td>
-                                </tr>)
-                        })}
+                        {data.map((dado, index) => {
+                            return <tr>{Object.values(dado).map((valor, index) => {
+                                return <td className="py-2 px-5" key={index}>{valor}</td>
+                            })}</tr>
+                        })
+                        }
                     </tbody>
                 </table>
             </div>

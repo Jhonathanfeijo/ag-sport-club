@@ -11,7 +11,7 @@ const Button = ({ type, text, color, fontColor, onClick }) => {
 
     return (
         <>
-            <button type={type} onClick={handleOnClick} className={`btn w-full ${fontColor} ${color} rounded-md py-2 text-lg`}>{navigate}{text}</button>
+            <button type={type} onClick={handleOnClick} className={`btn w-full ${fontColor} ${color} border rounded-md py-2 text-lg`}>{navigate}{text}</button>
         </>
     );
 }

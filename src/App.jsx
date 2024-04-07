@@ -2,21 +2,26 @@ import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './pages/login'
 import Home from './pages/home'
+import Reserv from './pages/reserv'
+import { UserProvider } from './utils/userProvider'
+import Layout from './utils/layout'
+
 
 function App() {
-
   return (
     <div>
       <BrowserRouter>
-        <Routes>
-          <Route path='/login' element={<Login/>}/>
-          <Route path="/" element={<Home/>}/>
-          <Route/>
-          <Route/>
-        </Routes>
+        <UserProvider>
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route path="/" element={<Layout children={<Home />} />} />
+            <Route path="/home" element={<Layout children={<Home />} />} />
+            <Route path="/reservas" element={<Layout children={<Reserv></Reserv>} />} />
+          </Routes>
+        </UserProvider>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

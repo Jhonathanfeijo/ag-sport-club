@@ -1,6 +1,6 @@
 import React from "react";
 import logoAg from '../../assets/logo/logo.svg'
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/input";
 import Label from "../../components/label";
 import Button from "../../components/button";
@@ -8,9 +8,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup"
 import { useForm } from "react-hook-form";
 import { api } from "../../../services/api";
+import { useUser } from "../../utils/userProvider";
 
 const Login = () => {
-    const navigate = useNavigate();
+
+    const { login } = useUser();
     const schema = yup
         .object({
             email: yup.string().email('Email não é valido').required(),
@@ -27,16 +29,12 @@ const Login = () => {
         try {
             const { data } = await api.get(`users?email=${formData.email}&senha=${formData.senha}`)
             if (data.length === 1) {
-                navigate('/')
+                login(formData.email);
             } else
                 alert('Credenciais inválidas');
         } catch (error) {
             alert('Houve um erro de conexão');
         }
-    }
-
-    const auth = () => {
-        return (<Navigate to={'/'} replace={true} />)
     }
 
     return (
