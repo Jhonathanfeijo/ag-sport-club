@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext();
 export const setUserLocalStorage = (data) => {
-    localStorage.setItem('u', JSON.stringify(data));
+    if (data === null) {
+        localStorage.removeItem('u');
+    } else {
+        localStorage.setItem('u', JSON.stringify(data));
+    }
 }
 
 export const getUserLocalStorage = () => {
@@ -15,7 +19,7 @@ export const getUserLocalStorage = () => {
     return user;
 }
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null); // Movido para dentro do componente UserProvider
+    const [user, setUser] = useState(() => getUserLocalStorage()); // Inicializa o estado com base no localStorage
     const navigate = useNavigate();
 
     const login = (userData) => {

@@ -7,8 +7,15 @@ import Table from "../../components/table";
 import { useForm } from "react-hook-form";
 import * as yup from "yup"
 import Label from "../../components/label";
+import { useState } from "react";
 
 const Reserv = () => {
+
+    const [isModalCreateOpen, setIsModalCreateOpen] = useState('false');
+
+    const toOpenModal = () => {
+        setIsModalCreateOpen(true)
+    }
 
     const schema = yup
         .object({
@@ -37,9 +44,9 @@ const Reserv = () => {
     ]
 
 
+    console.log(isModalCreateOpen)
 
-
-    return (
+    return (<>
         <div className="w-screen h-screen flex justify-center items-center text-primary">
             <Header />
             <main className=" ml-10 h-full w-full h-full flex-1 flex flex-col items-start justify-start">
@@ -68,11 +75,21 @@ const Reserv = () => {
                     </form>
                     <Table data={reservs} />
                     <div className="w-1/2 mt-2">
-                        <Button type={'button'} text={'Fazer nova reserva'} color={'bg-primary'} fontColor={'text-secundary'}></Button>
+                        <Button type={'button'} onClick={toOpenModal} text={'Fazer nova reserva'} color={'bg-primary'} fontColor={'text-secundary'}></Button>
                     </div>
                 </section>
             </main>
         </div>
+        {isModalCreateOpen === true ? (
+            <div className='flex flex-col justify-center items-center opacity-100 fixed top-0 left-0 w-screen h-screen'>
+                <div className="h-2/3 w-96">
+                    <form className="flex flex-col h-full w-full bg-white border">
+
+                    </form>
+                </div>
+            </div>
+        ) : null}
+    </>
     );
 }
 

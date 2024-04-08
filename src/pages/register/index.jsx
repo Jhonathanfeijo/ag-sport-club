@@ -40,19 +40,24 @@ const Login = () => {
     return (
         <div className="w-screen h-screen flex bg-principal justify-center items-center">
             <div className="w-3/5 h-full flex flex-row items-center justify-center">
-                <div className="w-1/2 flex justify-end">
-                    <img src={logoAg} alt="" className="mr-10 w-96" />
-                </div>
                 <div className="w-1/2 flex items-start">
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col ml-10 w-80 text-secundary" action="">
+                    <img src={logoAg} alt="" className="mr-10 w-[200]" />
+                </div>
+                <div className="w-1/2 flex justify-baseline">
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1 ml-10 w-80 text-secundary" action="">
+                        <Label text={'Nome completo'} />
+                        <Input textColor={'text-primary'} control={control} name={'nome'} type='text' />
                         <Label text={'Email'} />
-                        <Input textColor={'text-primary'} control={control} name={'email'} type='text' />
+                        <Input textColor={'text-primary'} control={control} name={'email'} type='password' />
+                        <Label text={'Login'} />
+                        <Input textColor={'text-primary'} control={control} name={'login'} type='text' />
                         <Label text={'Senha'} />
                         <Input textColor={'text-primary'} control={control} name={'senha'} type='password' />
-                        <Link to={'/register'} className="my-2 text-secundary">Não tem cadastro?</Link>
-                        <Button type={'submit'} text={'Logar'} fontColor={'text-xl text-primary'} color={"bg-secundary"} />
+                        <Link to={'/login'} className="my-2 text-secundary">Já tem cadastro?</Link>
+                        <Button type={'submit'} text={'Cadastrar'} fontColor={'text-xl text-primary'} color={"bg-secundary"} />
                     </form>
                 </div>
+
             </div>
         </div>
     );

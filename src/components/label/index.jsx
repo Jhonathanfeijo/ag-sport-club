@@ -1,8 +1,8 @@
-const Label = ({ text }) => {
+const Label = ({ text, textColor }) => {
 
     return (
         <>
-            <label className="text-xl">{text}</label>
+            <label className={`text-xl ${textColor}`} >{text}</label>
         </>
     );
 }
