@@ -35,7 +35,7 @@ const{logout} = useUser();
                         <img className='w-8 h-8' src={iconRectangle} alt="" />
                         <p className='text-secundary' href="">Quadras</p>
                     </NavLink>
-                    <NavLink className='flex flex-row items-center ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000'>
+                    <NavLink className='flex flex-row items-center ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/users'}>
                         <img className='w-8 h-8' src={iconUser} alt="" />
                         <p className='text-secundary' href="">Usuários</p>
                     </NavLink>

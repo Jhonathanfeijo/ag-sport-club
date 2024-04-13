@@ -17,6 +17,10 @@ const Reserv = () => {
         setIsModalCreateOpen(true)
     }
 
+    const toCloseModal = () =>{
+        setIsModalCreateOpen(false)
+    }
+
     const schema = yup
         .object({
             data: yup.string().required(),
@@ -81,10 +85,12 @@ const Reserv = () => {
             </main>
         </div>
         {isModalCreateOpen === true ? (
-            <div className='flex flex-col justify-center items-center opacity-100 fixed top-0 left-0 w-screen h-screen'>
-                <div className="h-2/3 w-96">
-                    <form className="flex flex-col h-full w-full bg-white border">
-
+            <div className='bg-third bg-opacity-30 flex flex-col justify-start items-center opacity-100 fixed top-0 left-0 w-screen h-screen'>
+                <div className="mt-20 h-2/3 w-3/12">
+                    <form className="flex flex-col h-full w-full bg-secundary rounded-lg">
+                        <div className="self-center">
+                        <H1 text={'Nova reserva'}></H1>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -10,7 +10,8 @@ export default {
     },
     colors:{
       primary: '#1e3a8a',
-      secundary:'#ffffff'
+      secundary:'#ffffff',
+      third: '#000000'
     },
   },
   plugins: [],

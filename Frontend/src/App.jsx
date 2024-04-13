@@ -6,6 +6,7 @@ import Reserv from './pages/reserv'
 import { UserProvider } from './utils/userProvider'
 import Layout from './utils/layout'
 import Register from './pages/register'
+import Users from './pages/users'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Layout children={<Home />} />} />
             <Route path="/home" element={<Layout children={<Home />} />} />
             <Route path="/reservas" element={<Layout children={<Reserv></Reserv>} />} />
+            <Route path="/users" element={<Layout children={<Users></Users>} />} />
           </Routes>
         </UserProvider>
       </BrowserRouter>
