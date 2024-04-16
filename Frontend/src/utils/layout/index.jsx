@@ -2,31 +2,34 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../userProvider';
+import Header from '../../components/header';
 
 const Layout = ({ children }) => {
   const { user } = useUser();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true); // Adicione um estado para controlar o carregamento
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkAuthentication = async () => {
       if (user === null) {
         navigate('/login');
       } else {
-        setLoading(false); // Marque o carregamento como concluído quando a autenticação for verificada
+        setLoading(false);
       }
     };
 
     checkAuthentication();
   }, [user, navigate]);
 
-  // Se ainda estiver carregando, exiba uma mensagem de carregamento
   if (loading) {
     return <div>Carregando...</div>;
   }
 
-  // Se não estiver mais carregando e o usuário estiver autenticado, renderize o conteúdo da página
-  return <div>{children}</div>;
-};
+  return (
+    <div className="w-screen max-w-100 lg:h-screen flex flex-col lg:flex-row justify-center items-center lg:items-start lg:justify-start text-primary gap-10">
+      <Header />
+      {children}
+    </div>
+  )};
 
 export default Layout;

@@ -39,12 +39,12 @@ const Login = () => {
 
     return (
         <div className="w-screen h-screen flex bg-principal justify-center items-center">
-            <div className="w-3/5 h-full flex flex-row items-center justify-center">
-                <div className="w-1/2 flex justify-end">
-                    <img src={logoAg} alt="" className="mr-10 w-96" />
+            <div className="max-w-[80%] lg:w-3/5 h-full flex flex-col lg:flex-row items-center justify-center pb-28 lg:p-0 gap-14">
+                <div className="w-[450px] max-w-[100%] flex justify-center lg:justify-end">
+                    <img src={logoAg} alt="" className="w-96" />
                 </div>
-                <div className="w-1/2 flex items-start">
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col ml-10 w-80 text-secundary" action="">
+                <div className="w-[450px] max-w-[100%] flex items-start">
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full text-secundary" action="">
                         <Label text={'Email'} />
                         <Input textColor={'text-primary'} control={control} name={'email'} type='text' />
                         <Label text={'Senha'} />

@@ -13,24 +13,21 @@ const Home = () => {
 
     return (
         <>
-            <div className="w-screen h-screen flex justify-center items-center text-primary">
-                <Header />
-                <div className=" ml-10 h-full w-full flex-1 flex flex-col items-start justify-start">
-                    <H1 text={'Olá, Jonas'} />
-                    <p className='text-lg mb-5'>Seja bem vindo!</p>
+            <div className="h-full max-w-[85%] flex-1 flex flex-col items-center lg:items-start lg:justify-start mb-2">
+                <H1 text={'Olá, Jonas'} />
+                <p className='text-lg mb-5'>Seja bem vindo!</p>
 
-                    <section className='mb-12'>
-                        <p>Você não possui reservas próximas</p>
-                        <Link to={'/reservas'}>
-                            <Button text={'Reservar'} color={'bg-primary'} fontColor={'text-secundary'} />
-                        </Link>
-                    </section>
-                    <p className='w-full text-2xl mb-2'>Sobre você</p>
-                    <section className='w-full flex gap-5'>
-                        <Table data={quadras} />
-                        <Table data={esportes} />
-                    </section>
-                </div>
+                <section className='mb-12'>
+                    <p>Você não possui reservas próximas</p>
+                    <Link to={'/reservas'}>
+                        <Button text={'Reservar'} color={'bg-primary'} fontColor={'text-secundary'} />
+                    </Link>
+                </section>
+                <p className='text-2xl self-start mb-2'>Sobre você</p>
+                <section className='flex self-start flex-col lg:flex-row flex-wrap gap-5'>
+                    <Table data={quadras} />
+                    <Table data={esportes} />
+                </section>
             </div>
         </>
     );
