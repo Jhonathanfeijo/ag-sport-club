@@ -28,6 +28,7 @@ const Home = () => {
                     <Table data={quadras} />
                     <Table data={esportes} />
                 </section>
+
             </div>
         </>
     );
