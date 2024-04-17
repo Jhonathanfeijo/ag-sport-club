@@ -1,4 +1,4 @@
-package com.invictus.domain.service;
+package com.invictus.domain.infra;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

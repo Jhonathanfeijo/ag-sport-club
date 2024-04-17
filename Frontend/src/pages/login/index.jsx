@@ -1,6 +1,6 @@
 import React from "react";
 import logoAg from '../../assets/logo/logo.svg'
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Input from "../../components/input";
 import Label from "../../components/label";
 import Button from "../../components/button";
@@ -13,27 +13,36 @@ import { useUser } from "../../utils/userProvider";
 const Login = () => {
 
     const { login } = useUser();
-    const schema = yup
-        .object({
-            email: yup.string().email('Email não é valido').required(),
-            senha: yup.string().min(6, 'No minímo 6 caracteres').required(),
-        })
-        .required()
 
-    const { control, handleSubmit, watch, formState: { errors, isValid } } = useForm({
+    const schema = yup.object({
+        login: yup.string().required(),
+        senha: yup.string().min(6, 'No minímo 6 caracteres').required(),
+    }).required();
+
+    const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         mode: "onSubmit"
     });
 
-    const onSubmit = async formData => {
+    const onSubmit = async (data) => { // Adicionando parâmetro "data" para capturar os valores dos campos
         try {
-            const { data } = await api.get(`users?email=${formData.email}&senha=${formData.senha}`)
-            if (data.length === 1) {
-                login(formData.email);
-            } else
+            const response = await api.post(
+                "/auth/login",
+                {
+                    login: data.login, // Obtendo o valor do campo de login
+                    senha: data.senha // Obtendo o valor do campo de senha
+                }
+            );
+            if (response.data) {
+                login(response.data);
+            } else if (response.data === '') {
                 alert('Credenciais inválidas');
+            }
         } catch (error) {
-            alert('Houve um erro de conexão');
+            if (error.response.status === 403)
+                alert('Credenciais inválidas')
+            if (error.response.status === 500)
+                alert('Houve um erro na conexão')
         }
     }
 
@@ -45,10 +54,12 @@ const Login = () => {
                 </div>
                 <div className="w-[450px] max-w-[100%] flex items-start">
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full text-secundary" action="">
-                        <Label text={'Email'} />
-                        <Input textColor={'text-primary'} control={control} name={'email'} type='text' />
+                        <Label text={'Login'} />
+                        <Input textColor={'text-primary'} control={control} name={'login'} type='text' />
+                        {errors.login && <span className="text-red-500">{errors.login.message}</span>} {/* Exibindo mensagem de erro, se houver */}
                         <Label text={'Senha'} />
                         <Input textColor={'text-primary'} control={control} name={'senha'} type='password' />
+                        {errors.senha && <span className="text-red-500">{errors.senha.message}</span>} {/* Exibindo mensagem de erro, se houver */}
                         <Link to={'/register'} className="my-2 text-secundary">Não tem cadastro?</Link>
                         <Button type={'submit'} text={'Logar'} fontColor={'text-xl text-primary'} color={"bg-secundary"} />
                     </form>

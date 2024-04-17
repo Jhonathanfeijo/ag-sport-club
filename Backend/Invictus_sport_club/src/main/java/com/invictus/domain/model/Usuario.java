@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "idUsuario")
 public class Usuario implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
