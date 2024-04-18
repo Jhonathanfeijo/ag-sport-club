@@ -47,9 +47,8 @@ public class AuthenticationController {
 	public ResponseEntity cadastrar(@RequestBody UsuarioRegisterDTO usuarioRegister) {
 
 		var senhaCriptografa = passwordEncoder.encode(usuarioRegister.getSenha());
-		Usuario usuario = new Usuario(null, usuarioRegister.getPrimeironome(), usuarioRegister.getSobrenome(),
-				usuarioRegister.getCpf(), usuarioRegister.getLogin(), usuarioRegister.getEmail(),
-				senhaCriptografa);
+		Usuario usuario = new Usuario(null, usuarioRegister.getNome(), usuarioRegister.getCpf(),
+				usuarioRegister.getLogin(), usuarioRegister.getEmail(), senhaCriptografa);
 		usuario = usuarioRepository.save(usuario);
 
 		var usernamePassword = new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha());

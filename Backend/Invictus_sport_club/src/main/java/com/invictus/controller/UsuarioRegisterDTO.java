@@ -11,8 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UsuarioRegisterDTO {
 
-	private String primeironome;
-	private String sobrenome;
+	private String nome;
 	private String email;
 	private String cpf;
 	private String login;

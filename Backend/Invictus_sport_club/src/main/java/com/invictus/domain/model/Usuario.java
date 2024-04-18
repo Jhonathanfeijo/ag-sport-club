@@ -25,8 +25,7 @@ public class Usuario implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUsuario;
-	private String Primeironome;
-	private String sobrenome;
+	private String nome;
 	private String cpf;
 	private String login;
 	private String email;

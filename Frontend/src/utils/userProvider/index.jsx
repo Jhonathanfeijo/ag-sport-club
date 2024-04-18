@@ -57,8 +57,7 @@ export const UserProvider = ({ children }) => {
     const register = async (data) => {
         const response = await api.post("/auth/register",
             {
-                primeironome: data.primeironome,
-                sobrenome : data.sobrenome,
+                nome: data.nome,
                 cpf : data.cpf,
                 email :  data.email,
                 login : data.login,
