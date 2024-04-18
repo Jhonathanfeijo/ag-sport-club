@@ -7,7 +7,6 @@ import Button from "../../components/button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup"
 import { useForm } from "react-hook-form";
-import { api } from "../../../services/api";
 import { useUser } from "../../utils/userProvider";
 
 const Login = () => {
@@ -24,26 +23,8 @@ const Login = () => {
         mode: "onSubmit"
     });
 
-    const onSubmit = async (data) => { // Adicionando parâmetro "data" para capturar os valores dos campos
-        try {
-            const response = await api.post(
-                "/auth/login",
-                {
-                    login: data.login, // Obtendo o valor do campo de login
-                    senha: data.senha // Obtendo o valor do campo de senha
-                }
-            );
-            if (response.data) {
-                login(response.data);
-            } else if (response.data === '') {
-                alert('Credenciais inválidas');
-            }
-        } catch (error) {
-            if (error.response.status === 403)
-                alert('Credenciais inválidas')
-            if (error.response.status === 500)
-                alert('Houve um erro na conexão')
-        }
+    const onSubmit =  (data) => { // Adicionando parâmetro "data" para capturar os valores dos campos
+        login(data);
     }
 
     return (

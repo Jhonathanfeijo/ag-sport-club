@@ -7,16 +7,19 @@ import Button from "../../components/button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup"
 import { useForm } from "react-hook-form";
-import { api } from "../../../services/api";
 import { useUser } from "../../utils/userProvider";
 
 const Login = () => {
 
-    const { login } = useUser();
+    const { register } = useUser();
     const schema = yup
         .object({
-            email: yup.string().email('Email não é valido').required(),
-            senha: yup.string().min(6, 'No minímo 6 caracteres').required(),
+            primeironome: yup.string().required(),
+            sobrenome: yup.string().required(),
+            cpf: yup.string().required(),
+            email: yup.string().required(),
+            login: yup.string().required(),
+            senha: yup.string().required(),
         })
         .required()
 
@@ -25,30 +28,33 @@ const Login = () => {
         mode: "onSubmit"
     });
 
-    const onSubmit = async formData => {
-        try {
-            const { data } = await api.get(`users?email=${formData.email}&senha=${formData.senha}`)
-            if (data.length === 1) {
-                login(formData.email);
-            } else
-                alert('Credenciais inválidas');
-        } catch (error) {
-            alert('Houve um erro de conexão');
-        }
+    const onSubmit = (data) => {
+        console.log(data)
+        register(data)
     }
 
     return (
-        <div className="w-screen h-screen flex bg-principal justify-center items-center">
-            <div className="w-3/5 h-full flex flex-row items-center justify-center">
-                <div className="w-1/2 flex items-start">
-                    <img src={logoAg} alt="" className="mr-10 w-[200]" />
-                </div>
-                <div className="w-1/2 flex justify-baseline">
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1 ml-10 w-80 text-secundary" action="">
-                        <Label text={'Nome completo'} />
-                        <Input textColor={'text-primary'} control={control} name={'nome'} type='text' />
+        <div className="min-w-[100vw] min-h-[100vh] bg-principal" >
+            <div className="h-full flex flex-col items-center justify-center">
+                <img src={logoAg} alt="" className="w-[250px] max-w-[70%] my-3 lg:w-[300px]" />
+                <div className="w-[500px] max-w-[85%] flex flex-col items-center lg:w-[600px]">
+                    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-1 text-secundary mb-3" action="">
+                        <section className="flex items-end gap-2 w-full">
+                            <div className="w-[150px] max-w-[35%]">
+                                <Label text={'Primeiro nome'} />
+                                <Input textColor={'text-primary'} control={control} name={'primeironome'} type='text' />
+                            </div>
+                            <div className="flex-1">
+                                <Label text={'Sobrenome'} />
+                                <Input textColor={'text-primary'} control={control} name={'sobrenome'} type='text' />
+                            </div>
+                        </section>
+                        <div>
+                            <Label text={'CPF'} />
+                            <Input textColor={'text-primary'} control={control} name={'cpf'} type='text' />
+                        </div>
                         <Label text={'Email'} />
-                        <Input textColor={'text-primary'} control={control} name={'email'} type='password' />
+                        <Input textColor={'text-primary'} control={control} name={'email'} type='text' />
                         <Label text={'Login'} />
                         <Input textColor={'text-primary'} control={control} name={'login'} type='text' />
                         <Label text={'Senha'} />
