@@ -59,7 +59,7 @@ export const UserProvider = ({ children }) => {
             {
                 nome: data.nome,
                 cpf : data.cpf,
-                email :  data.email,
+                email : data.email,
                 login : data.login,
                 senha : data.senha
             }
