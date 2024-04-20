@@ -15,48 +15,49 @@ import com.invictus.domain.infra.TokenService;
 import com.invictus.domain.model.Usuario;
 import com.invictus.domain.repository.UsuarioRepository;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin("*")
 public class AuthenticationController {
 
 	@Autowired
-	private AuthenticationManager authenticationManager;
+	private AuthenticationManager manager;
 
 	@Autowired
 	private TokenService tokenService;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private UsuarioRepository usuarioRepository;
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private PasswordEncoder encoder;
 
 	@PostMapping("/login")
 	public ResponseEntity efetuarLogin(@RequestBody UsuarioAuth usuario) {
 
 		var usernamePassword = new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha());
-		var auth = authenticationManager.authenticate(usernamePassword);
 
-		var token = tokenService.generateToken((Usuario) auth.getPrincipal());
+		var auth = this.manager.authenticate(usernamePassword);
+		String token = tokenService.generateToken((Usuario) auth.getPrincipal());
 
 		return ResponseEntity.ok(token);
 	}
 
+	@Transactional
 	@PostMapping("/register")
 	public ResponseEntity cadastrar(@RequestBody UsuarioRegisterDTO usuarioRegister) {
 
-		var senhaCriptografa = passwordEncoder.encode(usuarioRegister.getSenha());
+		if (usuarioRepository.findByLogin(usuarioRegister.getLogin()) != null)
+			return ResponseEntity.badRequest().build();
+
+		var senhaCriptografa = encoder.encode(usuarioRegister.getSenha());
 		Usuario usuario = new Usuario(null, usuarioRegister.getNome(), usuarioRegister.getCpf(),
 				usuarioRegister.getLogin(), usuarioRegister.getEmail(), senhaCriptografa);
 		usuario = usuarioRepository.save(usuario);
 
-		var usernamePassword = new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha());
-		var auth = authenticationManager.authenticate(usernamePassword);
-
-		var token = tokenService.generateToken((Usuario) auth.getPrincipal());
-
-		return ResponseEntity.ok(token);
+		return ResponseEntity.ok().build();
 
 	}
 }
