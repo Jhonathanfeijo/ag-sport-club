@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.invictus.domain.model.TipoQuadra;
-import com.invictus.domain.service.TipoQuadraService;
+import com.invictus.domain.tipoQuadra.TipoQuadra;
+import com.invictus.services.TipoQuadraService;
 
 import jakarta.transaction.Transactional;
 

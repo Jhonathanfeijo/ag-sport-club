@@ -1,4 +1,4 @@
-package com.invictus.domain.model;
+package com.invictus.domain.esporte;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

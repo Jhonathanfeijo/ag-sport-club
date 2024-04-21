@@ -1,4 +1,4 @@
-package com.invictus.domain.model;
+package com.invictus.domain.usuario;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,6 +28,10 @@ public class Usuario implements UserDetails {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
@@ -43,6 +47,15 @@ public class Usuario implements UserDetails {
 	@Column(name = "senha")
 	private String senha;
 
+	public Usuario(RegistroUsuarioDTO usuario) {
+		this.idUsuario = null;
+		this.nome = usuario.getNome();
+		this.cpf = usuario.getCpf();
+		this.login = usuario.getLogin();
+		this.senha = usuario.getSenha();
+		this.email = usuario.getEmail();
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority("USER_ROLE"));
@@ -50,12 +63,12 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return senha;
+		return this.senha;
 	}
 
 	@Override
 	public String getUsername() {
-		return login;
+		return this.login;
 	}
 
 	@Override

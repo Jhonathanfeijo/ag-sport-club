@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.invictus.domain.model.FormPagamento;
-import com.invictus.domain.service.FormPagamentoService;
+import com.invictus.domain.formPagamento.FormPagamento;
+import com.invictus.services.FormPagamentoService;
 
 @RestController
 @RequestMapping("/formpagamento")

@@ -1,4 +1,4 @@
-package com.invictus.controller;
+package com.invictus.domain.usuario;
 
 import lombok.Getter;
 import lombok.Setter;

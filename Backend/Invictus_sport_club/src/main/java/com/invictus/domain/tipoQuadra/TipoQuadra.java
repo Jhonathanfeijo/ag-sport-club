@@ -1,4 +1,4 @@
-package com.invictus.domain.model;
+package com.invictus.domain.tipoQuadra;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,19 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "idFormPagamento")
-@Table(name = "form_pagamento")
-public class FormPagamento {
+@Table(name = "tipo_quadra")
+public class TipoQuadra {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_form_pagamento")
-	private Long idFormPagamento;
+	@Column(name = "id_tipo_quadra")
+	private Long idTipoQuadra;
 	private String descricao;
+	
 }

@@ -1,6 +1,9 @@
-package com.invictus.domain.model;
+package com.invictus.domain.quadra;
 
 import java.math.BigDecimal;
+
+import com.invictus.domain.esporte.Esporte;
+import com.invictus.domain.tipoQuadra.TipoQuadra;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

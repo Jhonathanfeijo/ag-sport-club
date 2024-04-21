@@ -41,7 +41,7 @@ export const UserProvider = ({ children }) => {
                 alert('Credenciais inválidas');
             }
         } catch (error) {
-            if (error.response.status === 403)
+            if (error.response.status === 403 || error.response.status === 400)
                 alert('Credenciais inválidas')
             if (error.response.status === 500)
                 alert('Houve um erro na conexão')
@@ -65,9 +65,7 @@ export const UserProvider = ({ children }) => {
             }
         );
         if (response.data) {
-            setUserLocalStorage(response.data);
-            setUser(response.data);
-            navigate('/')
+            navigate('/home')
         }
     }
 

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.invictus.domain.model.Quadra;
-import com.invictus.domain.repository.QuadraRepository;
+import com.invictus.domain.quadra.Quadra;
+import com.invictus.repository.QuadraRepository;
 
 @RestController
 @RequestMapping("/quadra")

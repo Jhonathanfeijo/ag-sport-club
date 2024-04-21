@@ -2,18 +2,17 @@ package com.invictus.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.invictus.domain.infra.TokenService;
-import com.invictus.domain.model.Usuario;
-import com.invictus.domain.repository.UsuarioRepository;
+import com.invictus.domain.usuario.RegistroUsuarioDTO;
+import com.invictus.domain.usuario.Usuario;
+import com.invictus.domain.usuario.UsuarioAuth;
+import com.invictus.infra.TokenService;
+import com.invictus.services.AuthorizationService;
 
 import jakarta.transaction.Transactional;
 
@@ -23,39 +22,30 @@ import jakarta.transaction.Transactional;
 public class AuthenticationController {
 
 	@Autowired
-	private AuthenticationManager manager;
-
-	@Autowired
 	private TokenService tokenService;
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
-
-	@Autowired
-	private PasswordEncoder encoder;
+	private AuthorizationService authService;
 
 	@PostMapping("/login")
-	public ResponseEntity efetuarLogin(@RequestBody UsuarioAuth usuario) {
+	public ResponseEntity efetuarLogin(@RequestBody UsuarioAuth usuarioAuth) {
 
-		var usernamePassword = new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha());
+		Usuario usuario = authService.efetuarLogin(usuarioAuth.getLogin(), usuarioAuth.getSenha());
+		if (usuario == null)
+			return ResponseEntity.badRequest().build();
 
-		var auth = this.manager.authenticate(usernamePassword);
-		String token = tokenService.generateToken((Usuario) auth.getPrincipal());
+		String token = tokenService.generateToken(usuario);
 
 		return ResponseEntity.ok(token);
 	}
 
 	@Transactional
 	@PostMapping("/register")
-	public ResponseEntity cadastrar(@RequestBody UsuarioRegisterDTO usuarioRegister) {
+	public ResponseEntity cadastrar(@RequestBody RegistroUsuarioDTO usuarioRegister) {
 
-		if (usuarioRepository.findByLogin(usuarioRegister.getLogin()) != null)
+		Usuario usuario = authService.cadastrarUsuario(usuarioRegister);
+		if (usuario == null)
 			return ResponseEntity.badRequest().build();
-
-		var senhaCriptografa = encoder.encode(usuarioRegister.getSenha());
-		Usuario usuario = new Usuario(null, usuarioRegister.getNome(), usuarioRegister.getCpf(),
-				usuarioRegister.getLogin(), usuarioRegister.getEmail(), senhaCriptografa);
-		usuario = usuarioRepository.save(usuario);
 
 		return ResponseEntity.ok().build();
 

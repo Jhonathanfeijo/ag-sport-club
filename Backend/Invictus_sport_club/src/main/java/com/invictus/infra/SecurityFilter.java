@@ -1,4 +1,4 @@
-package com.invictus.domain.infra;
+package com.invictus.infra;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.invictus.domain.repository.UsuarioRepository;
+import com.invictus.repository.UsuarioRepository;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,12 +1,12 @@
-package com.invictus.domain.service;
+package com.invictus.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.invictus.domain.model.FormPagamento;
-import com.invictus.domain.repository.FormPagamentoRepository;
+import com.invictus.domain.formPagamento.FormPagamento;
+import com.invictus.repository.FormPagamentoRepository;
 
 @Service
 public class FormPagamentoService {

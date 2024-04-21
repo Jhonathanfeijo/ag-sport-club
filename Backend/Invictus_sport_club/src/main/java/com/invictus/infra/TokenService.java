@@ -1,4 +1,4 @@
-package com.invictus.domain.infra;
+package com.invictus.infra;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -11,7 +11,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.invictus.domain.model.Usuario;
+import com.invictus.domain.usuario.Usuario;
 
 @Service
 public class TokenService {
@@ -22,7 +22,7 @@ public class TokenService {
 	public String generateToken(Usuario usuario) {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(secret);
-			return JWT.create().withIssuer("api-ag").withSubject(usuario.getLogin()).withExpiresAt(getExpirationDate()).sign(algorithm);
+			return JWT.create().withIssuer("api-ag").withSubject(usuario.getLogin()).sign(algorithm);
 		} catch (JWTCreationException ex) {
 			throw new RuntimeException("Não foi possível gerar o token");
 		}

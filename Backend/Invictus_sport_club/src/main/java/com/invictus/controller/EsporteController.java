@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.invictus.domain.model.Esporte;
-import com.invictus.domain.service.EsporteService;
+import com.invictus.domain.esporte.Esporte;
+import com.invictus.services.EsporteService;
 
 @RestController
 @RequestMapping("/esporte")

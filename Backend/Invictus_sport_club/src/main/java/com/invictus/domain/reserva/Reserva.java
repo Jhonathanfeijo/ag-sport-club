@@ -1,6 +1,10 @@
-package com.invictus.domain.model;
+package com.invictus.domain.reserva;
 
 import java.time.LocalDate;
+
+import com.invictus.domain.formPagamento.FormPagamento;
+import com.invictus.domain.quadra.Quadra;
+import com.invictus.domain.usuario.Usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

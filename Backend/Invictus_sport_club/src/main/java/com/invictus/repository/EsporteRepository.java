@@ -1,8 +1,8 @@
-package com.invictus.domain.repository;
+package com.invictus.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.invictus.domain.model.Esporte;
+import com.invictus.domain.esporte.Esporte;
 
 public interface EsporteRepository extends JpaRepository<Esporte, Long> {
 

@@ -1,12 +1,12 @@
-package com.invictus.domain.service;
+package com.invictus.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.invictus.domain.model.TipoQuadra;
-import com.invictus.domain.repository.TipoQuadraRepository;
+import com.invictus.domain.tipoQuadra.TipoQuadra;
+import com.invictus.repository.TipoQuadraRepository;
 
 @Service
 public class TipoQuadraService {
