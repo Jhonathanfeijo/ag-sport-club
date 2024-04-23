@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.invictus.domain.usuario.RegistroUsuarioDTO;
 import com.invictus.domain.usuario.Usuario;
 import com.invictus.domain.usuario.UsuarioAuth;
+import com.invictus.domain.usuario.UsuarioAuthResponse;
 import com.invictus.infra.TokenService;
 import com.invictus.services.AuthorizationService;
 
@@ -39,7 +40,7 @@ public class AuthenticationController {
 
 		String token = tokenService.generateToken(usuario);
 
-		return ResponseEntity.ok(token);
+		return ResponseEntity.ok(new UsuarioAuthResponse(usuario, token));
 	}
 
 	@Transactional

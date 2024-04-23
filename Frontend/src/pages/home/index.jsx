@@ -3,18 +3,21 @@ import Button from '../../components/button';
 import H1 from '../../components/h1';
 import Header from '../../components/header';
 import Table from '../../components/table';
+import { useUser } from '../../utils/userProvider';
 
 
 const Home = () => {
 
+const {user} = useUser();
 
     const quadras = [{ "Quadras favoritas": "D10" }, { "Quadra favoritas": "A10" }]
     const esportes = [{ "Esportes em destaque": 'Futebol' }, { "Esportes em destaque": 'Volei' }];
+    console.log(user.nome)
 
     return (
         <>
             <div className="h-full max-w-[85%] flex-1 flex flex-col items-center lg:items-start lg:justify-start mb-2">
-                <H1 text={'Olá, Jonas'} />
+                <H1 text={`Olá, ${user.nome}`} />
                 <p className='text-lg mb-5'>Seja bem vindo!</p>
 
                 <section className='mb-12'>

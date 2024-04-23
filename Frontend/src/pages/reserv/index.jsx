@@ -52,7 +52,6 @@ const Reserv = () => {
 
     return (<>
         <div className="w-screen h-screen flex justify-center items-center text-primary">
-            <Header />
             <main className=" ml-10 h-full w-full h-full flex-1 flex flex-col items-start justify-start">
                 <H1 text={'Reservas'} />
                 <section className='flex flex-col items-start mt-14 flex'>
@@ -85,7 +84,7 @@ const Reserv = () => {
             </main>
         </div>
         {isModalCreateOpen === true ? (
-            <div className='bg-third bg-opacity-30 flex flex-col justify-start items-center opacity-100 fixed top-0 left-0 w-screen h-screen'>
+            <div className='bg-third bg-opacity-20 flex flex-col justify-start items-center opacity-100 fixed top-0 left-0 w-screen h-screen'>
                 <div className="mt-20 h-2/3 w-3/12">
                     <form className="flex flex-col h-full w-full bg-secundary rounded-lg">
                         <div className="self-center">
