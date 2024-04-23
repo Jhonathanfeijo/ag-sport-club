@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.invictus.services.AuthorizationService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -32,7 +34,7 @@ public class SecurityConfiguration {
 
 	@Bean
 	AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-		return new ConfigAuthenticationManager();
+		return new AuthorizationService();
 	}
 
 	@Bean

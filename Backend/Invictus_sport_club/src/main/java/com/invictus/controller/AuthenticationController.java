@@ -27,12 +27,15 @@ public class AuthenticationController {
 	@Autowired
 	private AuthorizationService authService;
 
+	
+	
 	@PostMapping("/login")
 	public ResponseEntity efetuarLogin(@RequestBody UsuarioAuth usuarioAuth) {
 
+		
 		Usuario usuario = authService.efetuarLogin(usuarioAuth.getLogin(), usuarioAuth.getSenha());
 		if (usuario == null)
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.badRequest().body("Login/Senha inválido");
 
 		String token = tokenService.generateToken(usuario);
 
@@ -45,7 +48,7 @@ public class AuthenticationController {
 
 		Usuario usuario = authService.cadastrarUsuario(usuarioRegister);
 		if (usuario == null)
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.badRequest().body("Usuário já cadastrado");
 
 		return ResponseEntity.ok().build();
 
