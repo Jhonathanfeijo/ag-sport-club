@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logoAg from '../../assets/logo/logo.svg'
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/input";
@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 import { useUser } from "../../utils/userProvider";
 
 const Register = () => {
+
+    const [registerSucess, setRegisterSucess] = useState(true);
 
     const { register } = useUser();
     const schema = yup
@@ -51,7 +53,9 @@ const Register = () => {
                     <Button type={'submit'} text={'Cadastrar'} fontColor={'text-xl text-primary'} color={"bg-secundary"} />
                 </form>
             </div>
-
+            <div className="flex flex-col justify-center items-center fixed right-0 bottom-28 bg-secundary w-[450px] h-[100px] rounded-l-md">
+                <h1 className="text-primary text-2xl">A conta foi registrada</h1>
+            </div>
         </div>
     );
 }

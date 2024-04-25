@@ -64,7 +64,7 @@ export const UserProvider = ({ children }) => {
                 senha : data.senha
             }
         );
-        if (response.data) {
+        if (response.status == 200) {
             navigate('/home')
         }
     }

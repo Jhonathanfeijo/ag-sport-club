@@ -3,7 +3,7 @@ const Table = ({ data }) => {
     return (
         <>
             <div className='border rounded-md overflow-hidden'>
-                <table className='w-full table-auto overflow-auto'>
+                <table className='lg:w-full w-[500px] table-auto overflow-auto'>
                     <thead className='bg-primary text-secundary'>
                         <tr>
                             {Object.keys(data[0]).map((dado, index) => {

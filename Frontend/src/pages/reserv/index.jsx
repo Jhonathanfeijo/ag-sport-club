@@ -17,7 +17,7 @@ const Reserv = () => {
         setIsModalCreateOpen(true)
     }
 
-    const toCloseModal = () =>{
+    const toCloseModal = () => {
         setIsModalCreateOpen(false)
     }
 
@@ -52,11 +52,11 @@ const Reserv = () => {
 
     return (<>
         <div className="w-screen h-screen flex justify-center items-center text-primary">
-            <main className=" ml-10 h-full w-full h-full flex-1 flex flex-col items-start justify-start">
+            <main className=" pt-20 md:ml-10 w-[85%] md:w-full h-full flex-1 flex flex-col items-center md:items-start justify-start">
                 <H1 text={'Reservas'} />
-                <section className='flex flex-col items-start mt-14 flex'>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <fieldset className="flex jutify-start items-end text-primary gap-5 mb-2">
+                <section className='flex flex-col w-[95%] md:w-full items-start mt-10'>
+                    <form className="hidden md:block" onSubmit={handleSubmit(onSubmit)}>
+                        <fieldset className="flex w-full jutify-start items-end text-primary gap-5 mb-2">
 
                             <section className="flex flex-col justify-start w-24">
                                 <Label htmlFor="data" text={'Data'}></Label>
@@ -84,13 +84,15 @@ const Reserv = () => {
             </main>
         </div>
         {isModalCreateOpen === true ? (
-            <div className='bg-third bg-opacity-20 flex flex-col justify-start items-center opacity-100 fixed top-0 left-0 w-screen h-screen'>
-                <div className="mt-20 h-2/3 w-3/12">
-                    <form className="flex flex-col h-full w-full bg-secundary rounded-lg">
-                        <div className="self-center">
-                        <H1 text={'Nova reserva'}></H1>
-                        </div>
-                    </form>
+            <div className='bg-third bg-opacity-20 flex flex-col flex-wrap justify-start items-center opacity-100 fixed top-0 left-0 w-screen h-screen'>
+                <div className="mt-28 md:mt-20 h-[450px] lg:w-[500px] w-[85%] bg-secundary rounded-md ">
+                    <div className="w-full h-full py-10 flex flex-col justify-center items-center">
+                        <H1 className text={'Nova reserva'}></H1>
+                        <form className=" flex flex-col h-full w-full">
+                            <div className="self-center">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         ) : null}

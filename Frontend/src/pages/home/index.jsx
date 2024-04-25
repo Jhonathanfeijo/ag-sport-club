@@ -16,7 +16,7 @@ const {user} = useUser();
 
     return (
         <>
-            <div className="h-full max-w-[85%] flex-1 flex flex-col items-center lg:items-start lg:justify-start mb-2">
+            <div className="h-full max-w-[85%] pt-20 flex-1 flex flex-col items-center lg:items-start lg:justify-start mb-2">
                 <H1 text={`Olá, ${user.nome}`} />
                 <p className='text-lg mb-5'>Seja bem vindo!</p>
 
