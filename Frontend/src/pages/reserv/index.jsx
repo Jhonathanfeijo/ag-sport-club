@@ -54,7 +54,7 @@ const Reserv = () => {
         <div className="w-screen h-screen flex justify-center items-center text-primary">
             <main className=" pt-20 md:ml-10 w-[85%] md:w-full h-full flex-1 flex flex-col items-center md:items-start justify-start">
                 <H1 text={'Reservas'} />
-                <section className='flex flex-col w-[95%] md:w-full items-start mt-10'>
+                <section className='flex flex-col w-[85%] md:w-[500px] items-start mt-10'>
                     <form className="hidden md:block" onSubmit={handleSubmit(onSubmit)}>
                         <fieldset className="flex w-full jutify-start items-end text-primary gap-5 mb-2">
 

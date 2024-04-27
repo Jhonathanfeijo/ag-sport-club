@@ -8,7 +8,7 @@ import { useUser } from '../../utils/userProvider';
 
 const Home = () => {
 
-const {user} = useUser();
+    const { user } = useUser();
 
     const quadras = [{ "Quadras favoritas": "D10" }, { "Quadra favoritas": "A10" }]
     const esportes = [{ "Esportes em destaque": 'Futebol' }, { "Esportes em destaque": 'Volei' }];
@@ -16,7 +16,7 @@ const {user} = useUser();
 
     return (
         <>
-            <div className="h-full max-w-[85%] pt-20 flex-1 flex flex-col items-center lg:items-start lg:justify-start mb-2">
+            <div className="h-full max-w-[80%] pt-20 flex-1 flex flex-col items-center lg:items-start lg:justify-start mb-2">
                 <H1 text={`Olá, ${user.nome}`} />
                 <p className='text-lg mb-5'>Seja bem vindo!</p>
 
@@ -27,7 +27,7 @@ const {user} = useUser();
                     </Link>
                 </section>
                 <p className='text-2xl self-start mb-2'>Sobre você</p>
-                <section className='flex self-start flex-col lg:flex-row flex-wrap gap-5'>
+                <section className='w-[500px] max-w-[100%] flex flex-col lg:flex-row flex-wrap gap-5'>
                     <Table data={quadras} />
                     <Table data={esportes} />
                 </section>

@@ -11,7 +11,7 @@ import { useUser } from "../../utils/userProvider";
 
 const Register = () => {
 
-    const [registerSucess, setRegisterSucess] = useState(true);
+    const [registerSucess, setRegisterSucess] = useState(false);
 
     const { register } = useUser();
     const schema = yup
@@ -30,32 +30,37 @@ const Register = () => {
     });
 
     const onSubmit = (data) => {
-        console.log(data)
-        register(data)
+        register(data, setRegisterSucess)
     }
 
     return (
-        <div className="w-screen min-h-[100vh] h-screen bg-principal" >
+        <div className="relative w-screen min-h-[100vh] h-screen bg-principal" >
             <div className="h-full w-full flex flex-col items-center justify-center">
                 <img src={logoAg} alt="" className="w-[250px] max-w-[70%] my-5 md:my-8 md:w-[300px]" />
-                <form onSubmit={handleSubmit(onSubmit)} className="w-[500px] max-w-[85%] lg:w-[500px] flex flex-col md:gap-1 text-secundary mb-3" action="">
-                    <Label text={'Nome'} />
-                    <Input textColor={'text-primary'} control={control} name={'nome'} type='text' />
-                    <Label text={'CPF'} />
-                    <Input textColor={'text-primary'} control={control} name={'cpf'} type='text' />
-                    <Label text={'Email'} />
-                    <Input textColor={'text-primary'} control={control} name={'email'} type='text' />
-                    <Label text={'Login'} />
-                    <Input textColor={'text-primary'} control={control} name={'login'} type='text' />
-                    <Label text={'Senha'} />
-                    <Input textColor={'text-primary'} control={control} name={'senha'} type='password' />
-                    <Link to={'/login'} className="my-2 text-secundary">Já tem cadastro?</Link>
-                    <Button type={'submit'} text={'Cadastrar'} fontColor={'text-xl text-primary'} color={"bg-secundary"} />
-                </form>
+                {registerSucess ?
+                    <>
+                        <h1 className="text-secundary text-2xl">A conta foi criada com sucesso!</h1>
+                    </> :
+                    <>
+                        <form onSubmit={handleSubmit(onSubmit)} className="w-[500px] max-w-[85%] lg:w-[500px] flex flex-col md:gap-1 text-secundary mb-3" action="">
+                            <Label text={'Nome'} />
+                            <Input textColor={'text-primary'} control={control} name={'nome'} type='text' />
+                            <Label text={'CPF'} />
+                            <Input textColor={'text-primary'} control={control} name={'cpf'} type='text' />
+                            <Label text={'Email'} />
+                            <Input textColor={'text-primary'} control={control} name={'email'} type='text' />
+                            <Label text={'Login'} />
+                            <Input textColor={'text-primary'} control={control} name={'login'} type='text' />
+                            <Label text={'Senha'} />
+                            <Input textColor={'text-primary'} control={control} name={'senha'} type='password' />
+                            <Link to={'/login'} className="my-2 text-secundary">Já tem cadastro?</Link>
+                            <Button type={'submit'} text={'Cadastrar'} fontColor={'text-xl text-primary'} color={"bg-secundary"} />
+                        </form>
+                    </>
+                }
             </div>
-            <div className="flex flex-col justify-center items-center fixed right-0 bottom-28 bg-secundary w-[450px] h-[100px] rounded-l-md">
-                <h1 className="text-primary text-2xl">A conta foi registrada</h1>
-            </div>
+
+
         </div>
     );
 }

@@ -16,7 +16,7 @@ const Header = () => {
     return (
         <>
 
-            <header className="max-w-full fixed top-0 left-0 px-3 py-2 flex lg:w-56 lg:flex lg:max-w-[25%] w-full lg:h-screen bg-principal lg:flex-col items-center lg:items-start text-xl justify-between">
+            <header className="max-w-full fixed top-0 left-0 px-3 py-2 flex lg:w-56 lg:flex lg:max-w-[25%] w-full lg:h-screen bg-principal lg:flex-col items-center lg:items-start text-xl justify-between shadow-lg drop-shadow-lg">
                 <nav className='w-full flex flex-wrap lg:flex-col items-baseline gap-2.5'>
                     <img className='w-48 mt-12 mb-10 self-center hidden lg:block' src={logo} alt="" />
                     <NavLink className='flex flex-row items-center lg:ml-5 gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/home'}>

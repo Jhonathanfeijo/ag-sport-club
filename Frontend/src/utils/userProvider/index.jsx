@@ -54,18 +54,27 @@ export const UserProvider = ({ children }) => {
         navigate('/login');
     };
 
-    const register = async (data) => {
-        const response = await api.post("/auth/register",
-            {
-                nome: data.nome,
-                cpf : data.cpf,
-                email : data.email,
-                login : data.login,
-                senha : data.senha
-            }
-        );
-        if (response.status == 200) {
-            navigate('/home')
+    const register = async (data, setRegisterSuccess) => {
+        // Declaração do timeoutId fora do bloco if
+        let timeoutId;
+
+        const response = await api.post("/auth/register", {
+            nome: data.nome,
+            cpf: data.cpf,
+            email: data.email,
+            login: data.login,
+            senha: data.senha
+        });
+
+        if (response.status === 200) {
+            setRegisterSuccess(true);
+            timeoutId = setTimeout(() => {
+                setRegisterSuccess(false);
+                navigate('/home');
+            }, 3000);
+
+        } else {
+            clearTimeout(timeoutId);
         }
     }
 
