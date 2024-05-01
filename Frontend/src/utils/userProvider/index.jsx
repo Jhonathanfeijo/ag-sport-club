@@ -23,20 +23,24 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(() => getUserLocalStorage()); // Inicializa o estado com base no localStorage
     const navigate = useNavigate();
 
-    const login = async (userData) => {
-        console.log(userData)
+    const login = async (userData, setIsLoginSucess) => {
         try {
             const response = await api.post(
                 "/auth/login",
                 {
-                    login: userData.login, // Obtendo o valor do campo de login
-                    senha: userData.senha // Obtendo o valor do campo de senha
+                    login: userData.login, 
+                    senha: userData.senha 
                 }
             );
             if (response.data) {
-                setUserLocalStorage(response.data);
-                setUser(response.data);
-                navigate('/')
+                setIsLoginSucess(true)
+                let timeoutId;
+                timeoutId = setTimeout(() => {
+                    setIsLoginSucess(false)
+                    setUserLocalStorage(response.data);
+                    setUser(response.data);
+                    navigate('/')
+                }, 3000);
             } else if (response.data === '') {
                 alert('Credenciais inválidas');
             }

@@ -12,7 +12,6 @@ const Home = () => {
 
     const quadras = [{ "Quadras favoritas": "D10" }, { "Quadra favoritas": "A10" }]
     const esportes = [{ "Esportes em destaque": 'Futebol' }, { "Esportes em destaque": 'Volei' }];
-    console.log(user.nome)
 
     return (
         <>

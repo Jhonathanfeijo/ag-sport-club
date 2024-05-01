@@ -2,18 +2,18 @@ const Table = ({ data }) => {
 
     return (
         <>
-            <div className='border w-full md:w-auto rounded-md overflow-hidden'>
-                <table className='lg:w-full max-w-[100%] w-[500px] table-auto overflow-auto'>
-                    <thead className='bg-primary text-secundary'>
-                        <tr>
+            <div className='border w-full md:w-auto rounded-md overflow-auto'>
+                <table className='w-full table-auto'>
+                    <thead className='bg-primary text-secundary w-full'>
+                        <tr className="bg-primary">
                             {Object.keys(data[0]).map((dado, index) => {
-                                return <th className="px-2 py-3" key={index}>{dado}</th>
+                                return <th className="px-5 py-3" key={index}>{dado}</th>
                             })}
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="">
                         {data.map((dado, index) => {
-                            return <tr>{Object.values(dado).map((valor, index) => {
+                            return <tr key={index}>{Object.values(dado).map((valor, index) => {
                                 return <td className="py-2 px-5" key={index}>{valor}</td>
                             })}</tr>
                         })

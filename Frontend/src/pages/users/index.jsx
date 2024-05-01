@@ -44,9 +44,6 @@ const Users = () => {
         { Nome: "Celso", Login: "aleatorio", Email: "jhonathan@gmail.com", CPF: "068.791.991-60"}
     ]
 
-
-    console.log(isModalCreateOpen)
-
     return (<>
         <div className="w-screen h-screen flex justify-center items-center text-primary">
             <Header />
