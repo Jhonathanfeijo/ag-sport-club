@@ -5,14 +5,14 @@ import { api } from "../../../services/api"
 const UserContext = createContext();
 export const setUserLocalStorage = (data) => {
     if (data === null) {
-        localStorage.removeItem('u');
+        localStorage.removeItem('ag-token');
     } else {
-        localStorage.setItem('u', JSON.stringify(data));
+        localStorage.setItem('ag-token', JSON.stringify(data));
     }
 }
 
 export const getUserLocalStorage = () => {
-    const json = localStorage.getItem('u');
+    const json = localStorage.getItem('ag-token');
     if (!json)
         return null
 
@@ -37,7 +37,7 @@ export const UserProvider = ({ children }) => {
                 let timeoutId;
                 timeoutId = setTimeout(() => {
                     setIsLoginSucess(false)
-                    setUserLocalStorage(response.data);
+                    setUserLocalStorage(response.data.token);
                     setUser(response.data);
                     navigate('/')
                 }, 3000);
