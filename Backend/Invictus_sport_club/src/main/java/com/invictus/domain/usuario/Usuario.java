@@ -46,6 +46,7 @@ public class Usuario implements UserDetails {
 	private String email;
 	@Column(name = "senha")
 	private String senha;
+	private String nivelPermissao;
 
 	public Usuario(RegistroUsuarioDTO usuario) {
 		this.idUsuario = null;
@@ -54,11 +55,14 @@ public class Usuario implements UserDetails {
 		this.login = usuario.getLogin();
 		this.senha = usuario.getSenha();
 		this.email = usuario.getEmail();
+		this.nivelPermissao = "USER";
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority("USER_ROLE"));
+		return nivelPermissao.toUpperCase().equals("ADMIN")
+				? List.of(new SimpleGrantedAuthority("USER_ROLE"), new SimpleGrantedAuthority("ADMIN_ROLE"))
+				: List.of(new SimpleGrantedAuthority("USER_ROLE"));
 	}
 
 	@Override

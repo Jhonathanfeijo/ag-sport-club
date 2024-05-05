@@ -67,7 +67,7 @@ export const UserProvider = ({ children }) => {
             cpf: data.cpf,
             email: data.email,
             login: data.login,
-            senha: data.senha
+            senha: data.senha,
         });
 
         if (response.status === 200) {

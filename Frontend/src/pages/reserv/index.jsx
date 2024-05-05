@@ -16,7 +16,7 @@ const Reserv = () => {
         { Data: "11-07-2022", Horario: "14:00 - 15:00", Quadra: "A05", Status: "Pago" },
         { Data: "08-04-2024", Horario: "16:00 - 17:00", Quadra: "D10", Status: "Pendente" }
     ]
-
+    const [quadras, setQuadras] = useState([])
     const [isModalCreateOpen, setIsModalCreateOpen] = useState('false');
     const [reservs, setReservs] = useState(reservsRequest);
     const [valuesInputSearch, setValuesInputSearch] = useState({
@@ -26,7 +26,6 @@ const Reserv = () => {
     })
     const sports = ['Futebol', 'Futsal', 'Volei']
     const status = ['pago', 'cancelado', 'pendente']
-    const quadras = ['A10', 'D05']
     const payments = ['Dinheiro', 'PIX', 'Cartão de crédito', 'Cartão de débito']
 
 
@@ -88,8 +87,8 @@ const Reserv = () => {
                                 <input className="w-auto px-2 py-1 border rounded" type='date' name={'dateSearch'} />
                             </section>
                             <section className="flex flex-col justify-start">
-                                <Label htmlFor="quadraSearch" text={'Quadra'}></Label>
-                                <select className="py-1 border rounded" name="quadra" id="quadra" onChange={onChangeInputSearch}>
+                                <Label htmlFor="quadraSearch" text={'Quadras'}></Label>
+                                <select className="p-1 border rounded" name="quadra" id="quadra" onChange={onChangeInputSearch}>
                                     <option value="">Todas</option>
                                     {quadras.map((quadra, index) => <option value={quadra === 'todas' ? '' : quadra} key={index}>{capitalizeFirstLetter(quadra)}</option>)}
                                 </select>
@@ -116,8 +115,8 @@ const Reserv = () => {
             </main>
         </div>
         {isModalCreateOpen === true ? (
-            <div className='bg-third bg-opacity-20 flex flex-col flex-wrap justify-start items-center opacity-100 fixed top-0 left-0 w-screen h-screen duration-500'>
-                <div className="mt-28 md:mt-20 h-[70%] lg:w-[500px] w-[85%] bg-secundary rounded-md shadow-xl drop-shadow duration-500 ">
+            <div className='bg-third bg-opacity-0 flex flex-col flex-wrap justify-start items-center opacity-100 fixed top-0 left-0 w-screen h-screen duration-500'>
+                <div className="mt-28 md:mt-20 h-[70%] lg:w-[500px] w-[85%] bg-secundary rounded-md shadow-xl drop-shadow-xl duration-500 ">
                     <div className="w-full h-full py-10 flex flex-col justify-center items-center relative duration-500">
                         <img className="absolute right-[20px] top-[20px] w-8 opacity-50 hover:opacity-70 hover:cursor-pointer duration-200" src={closeIcon} onClick={toCloseModal} alt="" />
                         <H1 className text={'Reservar'}></H1>

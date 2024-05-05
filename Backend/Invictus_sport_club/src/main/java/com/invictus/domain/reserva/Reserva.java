@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@EqualsAndHashCode( of = "idReserva")
+@EqualsAndHashCode(of = "idReserva")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reserva {
@@ -35,5 +35,7 @@ public class Reserva {
 	@JoinColumn(name = "id_form_pagamento")
 	private FormPagamento formPagamento;
 	private LocalDate data;
-	
+	private int horarioInicial;
+	private int horasReservadas;
+
 }

@@ -21,6 +21,7 @@ const Register = () => {
             email: yup.string().required(),
             login: yup.string().required(),
             senha: yup.string().required(),
+            
         })
         .required()
 

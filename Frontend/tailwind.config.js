@@ -11,7 +11,8 @@ export default {
     colors:{
       primary: '#1e3a8a',
       secundary:'#ffffff',
-      third: '#000000'
+      third: '#000000',
+      danger: '#8C030E'
     },
   },
   plugins: [],

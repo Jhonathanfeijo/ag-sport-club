@@ -48,6 +48,7 @@ public class AuthorizationService implements UserDetailsService, AuthenticationM
 	public Usuario cadastrarUsuario(RegistroUsuarioDTO usuarioDto) {
 		if (existeLogin(usuarioDto.getLogin()))
 			return null;
+		
 		String senhaEncriptografada = passwordEncoder.encode(usuarioDto.getSenha());
 		usuarioDto.setSenha(senhaEncriptografada);
 		Usuario usuario = new Usuario(usuarioDto);
