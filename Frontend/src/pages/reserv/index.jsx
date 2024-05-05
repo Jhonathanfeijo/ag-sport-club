@@ -9,6 +9,8 @@ import Label from "../../components/label";
 import { useEffect, useState } from "react";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import closeIcon from '../../assets/icons/x.svg'
+import { api } from "../../../services/api";
+import { getUserLocalStorage } from "../../utils/userProvider";
 
 const Reserv = () => {
     const reservsRequest = [
@@ -16,6 +18,8 @@ const Reserv = () => {
         { Data: "11-07-2022", Horario: "14:00 - 15:00", Quadra: "A05", Status: "Pago" },
         { Data: "08-04-2024", Horario: "16:00 - 17:00", Quadra: "D10", Status: "Pendente" }
     ]
+    const [isQuadraDataLoadered, setIsQuadraDataLoadered] = useState(false);
+    const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
     const [quadras, setQuadras] = useState([])
     const [isModalCreateOpen, setIsModalCreateOpen] = useState('false');
     const [reservs, setReservs] = useState(reservsRequest);
@@ -28,6 +32,19 @@ const Reserv = () => {
     const status = ['pago', 'cancelado', 'pendente']
     const payments = ['Dinheiro', 'PIX', 'Cartão de crédito', 'Cartão de débito']
 
+
+    useEffect(() => {
+        const token = getUserLocalStorage();
+        const fetchQuadras = async () => await api.get("/quadra", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        );
+        const quadras = fetchQuadras();
+        setIsQuadraDataLoadered(true);
+        
+    }, [])
 
     useEffect(() => {
         const reservsFiltered = reservsRequest.filter(item => {
@@ -87,7 +104,7 @@ const Reserv = () => {
                                 <input className="w-auto px-2 py-1 border rounded" type='date' name={'dateSearch'} />
                             </section>
                             <section className="flex flex-col justify-start">
-                                <Label htmlFor="quadraSearch" text={'Quadras'}></Label>
+                                <Label htmlFor="quadraSearch" text={'Quadra'}></Label>
                                 <select className="p-1 border rounded" name="quadra" id="quadra" onChange={onChangeInputSearch}>
                                     <option value="">Todas</option>
                                     {quadras.map((quadra, index) => <option value={quadra === 'todas' ? '' : quadra} key={index}>{capitalizeFirstLetter(quadra)}</option>)}
@@ -146,7 +163,7 @@ const Reserv = () => {
                             <div className="my-5 py-2 px-1 w-full">
                                 <Button text={'Cadastrar'} color={'bg-primary'} fontColor={'text-secundary'}></Button>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
