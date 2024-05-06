@@ -4,7 +4,7 @@ import { api } from "../../../services/api";
 import { useUser } from "../../utils/userProvider";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Label from "../../components/label";
 import Input from "../../components/input";
 import Button from "../../components/button";
@@ -22,9 +22,8 @@ const Users = () => {
     const toFilterUser = (data) => {
         const content = data.map((userData) => {
             return {
-                ID: userData.idUsuario,
                 Nome: userData.nome,
-                CPF: userData.cpf
+
             }
         })
         return content;
@@ -56,7 +55,6 @@ const Users = () => {
         email_novo_usuario: yup.string().email("Digite um email válido").required(),
         nome_novo_usuario: yup.string().min(3, "O nome precisa ter mais de 3 letras").required(),
         cpf_novo_usuario: yup.string().required(),
-        permissao_novo_usuario: yup.string().required()
     }).required();
 
     const { control, handleSubmit, watch, formState: { errors, invalid } } = useForm({
@@ -64,22 +62,23 @@ const Users = () => {
         mode: "onSubmit"
     });
 
+    const postData = async (data) => {
+
+        const response = await api.post("/auth/register",
+            {
+                nome: data.nome_novo_usuario,
+                cpf: data.cpf_novo_usuario,
+                email: data.email_novo_usuario,
+                login: data.login_novo_usuario,
+                senha: data.senha_novo_usuario
+            }
+        );
+        if (response)
+            console.log(response)
+    }
     const onSubmit = (data) => {
         console.log(data)
-        const postData = async () => {
-
-            const response = await api.post("/auth/register",
-                {
-                    nome: data.nome_novo_usuario,
-                    cpf: data.cpf_novo_usuario,
-                    email: data.email_novo_usuario,
-                    login: data.login_novo_usuario,
-                    senha: data.senha_novo_usuario
-                }
-            )
-            if (response.status)
-                console.log("A")
-        }
+        postData(data);
     }
 
     return (
@@ -103,8 +102,8 @@ const Users = () => {
                             </div>
                         </section>
                         <section className="w-[92%] lg:w-[600px] rounded-lg flex flex-col justify-center items-center lg:items-start">
-                            <table className="w-full rounded-lg border table-auto overflow-auto drop-shadow-md shadow-xl">
-                                <thead className="bg-primary">
+                            <table className="w-full h-full rounded-lg border table-auto overflow-auto drop-shadow-md shadow-xl">
+                                <thead className="bg-primary overflow-auto">
                                     <tr>
                                         <>{Object.keys(usersFiltered[0]).map((key, index) => {
                                             return <th className="text-left text-secundary px-2 py-3" key={index}>{key}</th>
@@ -133,7 +132,7 @@ const Users = () => {
                         </section>
                         {isModalOpen && (
                             <div className="fixed h-screen w-screen bg-third bg-opacity-10 top-0 left-0 flex justify-center items-start">
-                                <div className="bg-secundary w-[90%] lg:w-[400px] h-[75%] drop-shadow-md shadow-xl rounded-lg flex flex-col items-center mt-28">
+                                <div className="bg-secundary w-[90%] md:w-[400px] h-[80%] md:h-[650px] drop-shadow-md shadow-xl rounded-lg flex flex-col items-center mt-28">
                                     <div className="my-7">
                                         <H1 text={"Novo usuario"}></H1>
                                     </div>
@@ -144,20 +143,15 @@ const Users = () => {
                                         <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"cpf_novo_usuario"} />
                                         <Label textColor={"text-primary"} text={"Email"} />
                                         <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"email_novo_usuario"} />
-                                        <Label textColor={"text-primary"} text={"Nivel de permissão"}></Label>
-                                        <select control = {control} className="w-full py-1 border border-primary rounded" name="permissao_novo_usuario" id="permissao_novo_usuario">
-                                            <option value="USER">Usuário</option>
-                                            <option value="ADMIN">Admin</option>
-                                        </select>
                                         <Label textColor={"text-primary"} text={"Login"} />
                                         <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"login_novo_usuario"} />
                                         <Label textColor={"text-primary"} text={"Senha"} />
                                         <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"password"} name={"senha_novo_usuario"} />
 
                                         <Button type={"submit"} color={"bg-primary"} fontColor={"text-secundary"} text={"Cadastrar"}></Button>
+                                        <Button onClick={handleModal} type={"button"} color={"bg-secundary"} fontColor={"text-primary"} text={"Cancelar"}></Button>
                                     </form>
                                     <div className="w-[90%] mt-2">
-                                        <Button onClick={handleModal} type={"button"} color={"bg-secundary"} fontColor={"text-primary"} text={"Cancelar"}></Button>
                                     </div>
                                 </div>
 
