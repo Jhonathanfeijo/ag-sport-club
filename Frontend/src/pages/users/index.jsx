@@ -51,15 +51,15 @@ const Users = () => {
     }
 
     const schema = yup.object({
-        loginNovoUsuario: yup.string().required(),
-        senhaNovoUsuario: yup.string().min(6, 'No minímo 6 caracteres').required(),
-        emailNovoUsuario: yup.string().email("Digite um email válido").required(),
-        nomeNovoUsuario: yup.string().min(3, "O nome precisa ter mais de 3 letras").required(),
-        cpfNovoUsuario: yup.string().required(),
-        nivelPermissaoNovoUsuario: yup.string().required()
+        login_novo_usuario: yup.string().required(),
+        senha_novo_usuario: yup.string().min(6, 'No minímo 6 caracteres').required(),
+        email_novo_usuario: yup.string().email("Digite um email válido").required(),
+        nome_novo_usuario: yup.string().min(3, "O nome precisa ter mais de 3 letras").required(),
+        cpf_novo_usuario: yup.string().required(),
+        permissao_novo_usuario: yup.string().required()
     }).required();
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, watch, formState: { errors, invalid } } = useForm({
         resolver: yupResolver(schema),
         mode: "onSubmit"
     });
@@ -70,23 +70,16 @@ const Users = () => {
 
             const response = await api.post("/auth/register",
                 {
-                    headers: {
-                        Authorization: "Bearer " + user.token
-                    },
-
-                }, {
-                nome: data.nomeNovoUsuario,
-                cpf: data.cpfNovoUsuario,
-                email: data.emailNovoUsuario,
-                nivelPermissao: data.nivelPermissaoNovoUsuario,
-                login: data.loginNovoUsuario,
-                senha: data.senhaNovoUsuario
-            }
+                    nome: data.nome_novo_usuario,
+                    cpf: data.cpf_novo_usuario,
+                    email: data.email_novo_usuario,
+                    login: data.login_novo_usuario,
+                    senha: data.senha_novo_usuario
+                }
             )
             if (response.status)
                 console.log("A")
         }
-        postData();
     }
 
     return (
@@ -102,7 +95,7 @@ const Users = () => {
                             </div>
                             <div className=" flex-wrap flex flex-col items-start justify-start">
                                 <label className="text-lg font-semibold" htmlFor="cpfBusca">CPF</label>
-                                <input className="w-[140px] p-1 border-2 border-primary rounded" type="text" name="cpfBusca" id="cpfBusca" />
+                                <input className="w-[140px] max-w-[90%] p-1 border-2 border-primary rounded" type="text" name="cpfBusca" id="cpfBusca" />
                             </div>
                             <div className="flex-1"></div>
                             <div>
@@ -129,8 +122,8 @@ const Users = () => {
                                                     <td className="px-2 py-2" key={index}>{userTd}</td>
                                                 )
                                             })}
-                                            <td className="px-2 py-1.5"><button className="rounded shadow drop-shadow bg-primary text-secundary p-1 px-2">Editar</button></td>
-                                            <td className="px-2 py-1.5"><button className="rounded shadow drop-shadow bg-danger text-secundary  p-1 px-2">Excluir</button></td>
+                                            <td className="px-2 py-1.5"><button className="rounded shadow-sm drop-shadow bg-primary text-secundary p-1 px-2">Editar</button></td>
+                                            <td className="px-2 py-1.5"><button className="rounded shadow-sm drop-shadow bg-danger text-secundary  p-1 px-2">Excluir</button></td>
 
                                         </>
                                         </tr>
@@ -140,29 +133,28 @@ const Users = () => {
                         </section>
                         {isModalOpen && (
                             <div className="fixed h-screen w-screen bg-third bg-opacity-10 top-0 left-0 flex justify-center items-start">
-                                <div className="bg-secundary w-[90%] h-[75%] drop-shadow-md shadow-xl rounded-lg flex flex-col items-center mt-28">
+                                <div className="bg-secundary w-[90%] lg:w-[400px] h-[75%] drop-shadow-md shadow-xl rounded-lg flex flex-col items-center mt-28">
                                     <div className="my-7">
                                         <H1 text={"Novo usuario"}></H1>
                                     </div>
-                                    <form className="w-[90%] flex flex-col justify-start items-start gap-2" onSubmit={handleSubmit(onSubmit)}>
+                                    <form onSubmit={handleSubmit(onSubmit)} className="w-[90%] flex flex-col justify-start items-start gap-2" action="">
                                         <Label textColor={"text-primary"} text={"Nome"} />
-                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"nomeNovoUsuario"} />
+                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"nome_novo_usuario"} />
                                         <Label textColor={"text-primary"} text={"CPF"} />
-                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"cpfNovoUsuario"} />
+                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"cpf_novo_usuario"} />
                                         <Label textColor={"text-primary"} text={"Email"} />
-                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"emailNovoUsuario"} />
+                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"email_novo_usuario"} />
                                         <Label textColor={"text-primary"} text={"Nivel de permissão"}></Label>
-                                        <select className="w-full py-1 border border-primary rounded" name="nivelPermissaoNovoUsuario" id="nivelPermissaoNovoUsuario">
+                                        <select control = {control} className="w-full py-1 border border-primary rounded" name="permissao_novo_usuario" id="permissao_novo_usuario">
                                             <option value="USER">Usuário</option>
                                             <option value="ADMIN">Admin</option>
                                         </select>
                                         <Label textColor={"text-primary"} text={"Login"} />
-                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"loginNovoUsuario"} />
+                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"login_novo_usuario"} />
                                         <Label textColor={"text-primary"} text={"Senha"} />
-                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"password"} name={"senhaNovoUsuario"} />
-                                        <div className="w-full">
-                                            <Button type={"submit"} color={"bg-primary"} fontColor={"text-secundary"} text={"Cadastrar"}></Button>
-                                        </div>
+                                        <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"password"} name={"senha_novo_usuario"} />
+
+                                        <Button type={"submit"} color={"bg-primary"} fontColor={"text-secundary"} text={"Cadastrar"}></Button>
                                     </form>
                                     <div className="w-[90%] mt-2">
                                         <Button onClick={handleModal} type={"button"} color={"bg-secundary"} fontColor={"text-primary"} text={"Cancelar"}></Button>

@@ -21,7 +21,6 @@ const Reserv = () => {
     const [isQuadraDataLoadered, setIsQuadraDataLoadered] = useState(false);
     const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
     const [quadras, setQuadras] = useState([])
-    const [isModalCreateOpen, setIsModalCreateOpen] = useState('false');
     const [reservs, setReservs] = useState(reservsRequest);
     const [valuesInputSearch, setValuesInputSearch] = useState({
         date: "",

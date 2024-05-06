@@ -16,5 +16,4 @@ public class RegistroUsuarioDTO {
 	private String cpf;
 	private String login;
 	private String senha;
-	
 }
