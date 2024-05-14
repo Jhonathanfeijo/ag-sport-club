@@ -8,10 +8,11 @@ import { useForm } from "react-hook-form";
 import Label from "../../components/label";
 import Input from "../../components/input";
 import Button from "../../components/button";
+import { getUserLocalStorage } from "../../utils/userProvider";
 
 const Users = () => {
 
-    const { user } = useUser();
+    const { logout } = useUser();
 
     const [isDataLoadered, setIsDataLoadered] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,17 +25,21 @@ const Users = () => {
             return {
                 Nome: userData.nome,
 
+
             }
         })
         return content;
     }
 
     useEffect(() => {
+        const user = getUserLocalStorage();
+        if (user === null)
+            logout();
         const fetchData = async () => {
             const data = await api.get("/usuario/all",
                 {
                     headers: {
-                        Authorization: "Bearer " + user.token
+                        Authorization: "Bearer " + user.token.replace(/['"]/g, '')
                     }
                 }
             )
@@ -43,7 +48,7 @@ const Users = () => {
             setIsDataLoadered(true)
         }
         fetchData();
-    }, [])
+    }, [usersFiltered])
 
     const handleModal = () => {
         setIsModalOpen((prev) => !prev)
@@ -73,47 +78,52 @@ const Users = () => {
                 senha: data.senha_novo_usuario
             }
         );
-        if (response)
-            console.log(response)
+        if (response) {
+            setIsModalOpen(false)
+            console.log(data.nome_novo_usuario)
+            setUsersFiltered([...usersFiltered, {
+                Nome: data.nome_novo_usuario
+            }])
+        }
+
     }
     const onSubmit = (data) => {
-        console.log(data)
-        postData(data);
+        postData(data)
     }
 
     return (
         <>
             {isDataLoadered ? (
-                <div className="w-screen h-screen flex justify-center items-center text-primary">
-                    <main className=" pt-20 md:ml-10 w-[85%] md:w-full h-full flex-1 flex flex-col items-center lg:items-start justify-start">
+                <div className="w-screen h-screen flex max-w-screen justify-center items-center text-primary mb-5">
+                    <main className=" pt-20 md:ml-10 w-[85%] max-w-[100%] md:w-full h-full flex-1 flex flex-col items-center lg:items-start justify-start">
                         <H1 text={'Usuarios'} />
                         <section className=" my-5 lg:mt-10 mb-2 w-[92%] lg:w-[600px] flex flex-col lg:items-end justify-start lg:flex-row lg:justify-start gap-2 lg:gap-3">
                             <div className="flex-wrap flex flex-col items-start justify-start">
-                                <label className="text-lg font-semibold" htmlFor="nomeBusca">Nome</label>
-                                <input className="py-1 border-2 border-primary rounded" type="text" name="nomeBusca" id="nomeBusca" />
+                                <label className="text-lg " htmlFor="nomeBusca">Nome</label>
+                                <input className="p-2 border border-primary rounded" type="text" name="nomeBusca" id="nomeBusca" />
                             </div>
                             <div className=" flex-wrap flex flex-col items-start justify-start">
-                                <label className="text-lg font-semibold" htmlFor="cpfBusca">CPF</label>
-                                <input className="w-[140px] max-w-[90%] p-1 border-2 border-primary rounded" type="text" name="cpfBusca" id="cpfBusca" />
+                                <label className="text-lg " htmlFor="cpfBusca">CPF</label>
+                                <input className="w-[150px] max-w-[90%] p-2 border border-primary rounded" type="text" name="cpfBusca" id="cpfBusca" />
                             </div>
                             <div className="flex-1"></div>
                             <div>
-                                <button onClick={handleModal} className="py-1 px-2 rounded border-2 border-primary bg-primary text-secundary">Adicionar usuário</button>
+                                <button onClick={handleModal} className="py-2 px-2 rounded border border-primary bg-primary text-lg text-secundary">Adicionar usuário</button>
                             </div>
                         </section>
-                        <section className="w-[92%] lg:w-[600px] rounded-lg flex flex-col justify-center items-center lg:items-start">
-                            <table className="w-full h-full rounded-lg border table-auto overflow-auto drop-shadow-md shadow-xl">
-                                <thead className="bg-primary overflow-auto">
-                                    <tr>
+                        <section className="w-[92%] lg:w-[600px] drop-shadow-md shadow-xl flex flex-col justify-center items-center lg:items-start">
+                            <table className="w-full ">
+                                <thead className="w-full bg-primary border-primary ">
+                                    <tr className="w-full">
                                         <>{Object.keys(usersFiltered[0]).map((key, index) => {
-                                            return <th className="text-left text-secundary px-2 py-3" key={index}>{key}</th>
+                                            return <th className={` ${index === 0 ? 'rounded-tl-lg' : ''} border w-full text-left text-secundary px-2 py-5`} key={index}>{key}</th>
                                         })}
-                                            <th></th>
-                                            <th></th>
+                                            <th className="m-0 px-2 py-4 h-full"></th>
+                                            <th className="rounded-tr-lg m-0 px-2 py-4 h-full"></th>
                                         </>
                                     </tr>
                                 </thead>
-                                <tbody className="overflow-auto">
+                                <tbody className="w-full border border-primary">
                                     {usersFiltered.map((userRow, index) => {
                                         return <tr key={index}> <>
                                             {Object.values(userRow).map((userTd, index) => {
@@ -121,8 +131,8 @@ const Users = () => {
                                                     <td className="px-2 py-2" key={index}>{userTd}</td>
                                                 )
                                             })}
-                                            <td className="px-2 py-1.5"><button className="rounded shadow-sm drop-shadow bg-primary text-secundary p-1 px-2">Editar</button></td>
-                                            <td className="px-2 py-1.5"><button className="rounded shadow-sm drop-shadow bg-danger text-secundary  p-1 px-2">Excluir</button></td>
+                                            <td className="px-2 py-1.5"><button className=" shadow-sm drop-shadow bg-primary text-secundary p-1 px-2">Editar</button></td>
+                                            <td className="px-2 py-1.5"><button className=" shadow-sm drop-shadow bg-danger text-secundary  p-1 px-2">Excluir</button></td>
 
                                         </>
                                         </tr>
@@ -132,11 +142,11 @@ const Users = () => {
                         </section>
                         {isModalOpen && (
                             <div className="fixed h-screen w-screen bg-third bg-opacity-10 top-0 left-0 flex justify-center items-start">
-                                <div className="bg-secundary w-[90%] md:w-[400px] h-[80%] md:h-[650px] drop-shadow-md shadow-xl rounded-lg flex flex-col items-center mt-28">
-                                    <div className="my-7">
-                                        <H1 text={"Novo usuario"}></H1>
+                                <div className="bg-secundary w-[90%] md:w-[500px] h-[87%] md:h-[650px] drop-shadow-xl shadow-xl rounded-lg flex flex-col items-center mt-20">
+                                    <div className="my-8">
+                                        <H1 text={"Cadastrar usuário"}></H1>
                                     </div>
-                                    <form onSubmit={handleSubmit(onSubmit)} className="w-[90%] flex flex-col justify-start items-start gap-2" action="">
+                                    <form onSubmit={handleSubmit(onSubmit)} className="w-[90%] md:w-[75%] flex flex-col justify-start items-start gap-1 text-base font-semibold" action="">
                                         <Label textColor={"text-primary"} text={"Nome"} />
                                         <Input textColor={"text-primary"} color={"bg-secundary"} control={control} type={"text"} name={"nome_novo_usuario"} />
                                         <Label textColor={"text-primary"} text={"CPF"} />

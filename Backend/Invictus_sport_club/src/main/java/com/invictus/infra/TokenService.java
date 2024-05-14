@@ -22,7 +22,9 @@ public class TokenService {
 	public String generateToken(Usuario usuario) {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(secret);
-			return JWT.create().withIssuer("api-ag").withSubject(usuario.getLogin()).sign(algorithm);
+			return JWT.create().withIssuer("api-ag").withClaim("permissao", usuario.getNivelPermissao())
+					.withClaim("login", usuario.getLogin()).withClaim("nome", usuario.getNome()).withClaim("id", usuario.getIdUsuario())
+					.withSubject(usuario.getLogin()).sign(algorithm);
 		} catch (JWTCreationException ex) {
 			throw new RuntimeException("Não foi possível gerar o token");
 		}
@@ -38,7 +40,7 @@ public class TokenService {
 			return "";
 		}
 	}
-	
+
 	private Instant getExpirationDate() {
 		return LocalDateTime.now().plusHours(5).toInstant(ZoneOffset.of("-03:00"));
 	}

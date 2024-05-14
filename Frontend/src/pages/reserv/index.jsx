@@ -131,7 +131,7 @@ const Reserv = () => {
             </main>
         </div>
         {isModalCreateOpen === true ? (
-            <div className='bg-third bg-opacity-0 flex flex-col flex-wrap justify-start items-center opacity-100 fixed top-0 left-0 w-screen h-screen duration-500'>
+            <div className='bg-third bg-opacity-10 flex flex-col flex-wrap justify-start items-center opacity-100 fixed top-0 left-0 w-screen h-screen duration-500'>
                 <div className="mt-28 md:mt-20 h-[70%] lg:w-[500px] w-[85%] bg-secundary rounded-md shadow-xl drop-shadow-xl duration-500 ">
                     <div className="w-full h-full py-10 flex flex-col justify-center items-center relative duration-500">
                         <img className="absolute right-[20px] top-[20px] w-8 opacity-50 hover:opacity-70 hover:cursor-pointer duration-200" src={closeIcon} onClick={toCloseModal} alt="" />

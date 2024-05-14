@@ -1,8 +1,9 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api"
-
+import { jwtDecode } from "jwt-decode";
 const UserContext = createContext();
+
 export const setUserLocalStorage = (data) => {
     if (data === null) {
         localStorage.removeItem('ag-token');
@@ -12,15 +13,22 @@ export const setUserLocalStorage = (data) => {
 }
 
 export const getUserLocalStorage = () => {
-    const json = localStorage.getItem('ag-token');
-    if (!json)
-        return null
-
-    const user = JSON.parse(json);
+    const jsonToken = localStorage.getItem('ag-token');
+    if (jsonToken === null )
+        return null;
+    const tokenDecoded = jwtDecode(jsonToken)
+    const user = {
+        nome: tokenDecoded.nome,
+        idUser: tokenDecoded.id,
+        login: tokenDecoded.login,
+        permissao: tokenDecoded.permissao,
+        token: jsonToken
+    }
     return user;
 }
+
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(() => getUserLocalStorage()); // Inicializa o estado com base no localStorage
+    const [user, setUser] = useState(() => getUserLocalStorage());
     const navigate = useNavigate();
 
     const login = async (userData, setIsLoginSucess) => {
@@ -28,8 +36,8 @@ export const UserProvider = ({ children }) => {
             const response = await api.post(
                 "/auth/login",
                 {
-                    login: userData.login, 
-                    senha: userData.senha 
+                    login: userData.login,
+                    senha: userData.senha
                 }
             );
             if (response.data) {
@@ -83,7 +91,7 @@ export const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, login, logout, register }}>
+        <UserContext.Provider value={{ user, setUser, login, logout, register }}>
             {children}
         </UserContext.Provider>
     );
@@ -91,5 +99,4 @@ export const UserProvider = ({ children }) => {
 
 export default UserProvider;
 
-// Hook personalizado para acessar o contexto do usuário
 export const useUser = () => useContext(UserContext);

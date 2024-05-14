@@ -9,9 +9,10 @@ import { NavLink } from 'react-router-dom'
 import { useUser } from '../../utils/userProvider'
 
 
-const Header = () => {
+const Header = ({ nivel_permissao }) => {
 
-    const { user, logout } = useUser();
+
+    const { logout } = useUser();
 
     return (
         <>
@@ -27,7 +28,7 @@ const Header = () => {
                         <img className='w-8 h-8' src={iconReserv} alt="" />
                         <p className='text-secundary hidden lg:block' href="">Reservas</p>
                     </NavLink>
-                    {user.nivelPermissao === "ADMIN" && (
+                    {nivel_permissao === "ADMIN" && (
                         <>
                             <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/'}>
                                 <img className='w-8 h-8' src={iconMedal} alt="" />
