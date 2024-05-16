@@ -9,6 +9,7 @@ import Label from "../../components/label";
 import Input from "../../components/input";
 import Button from "../../components/button";
 import { getUserLocalStorage } from "../../utils/userProvider";
+import { toast } from "react-toastify";
 
 const Users = () => {
 
@@ -78,12 +79,16 @@ const Users = () => {
                 senha: data.senha_novo_usuario
             }
         );
-        if (response) {
+        if (response.status === 200 || response.status(201)) {
+            toast.success("Usuário cadastrado")
             setIsModalOpen(false)
             console.log(data.nome_novo_usuario)
             setUsersFiltered([...usersFiltered, {
                 Nome: data.nome_novo_usuario
             }])
+            if (response.status === 403) {
+                
+            }
         }
 
     }
@@ -100,30 +105,30 @@ const Users = () => {
                         <section className=" my-5 lg:mt-10 mb-2 w-[92%] lg:w-[600px] flex flex-col lg:items-end justify-start lg:flex-row lg:justify-start gap-2 lg:gap-3">
                             <div className="flex-wrap flex flex-col items-start justify-start">
                                 <label className="text-lg " htmlFor="nomeBusca">Nome</label>
-                                <input className="p-2 border border-primary rounded" type="text" name="nomeBusca" id="nomeBusca" />
+                                <input className="p-1.5 border border-primary rounded" type="text" name="nomeBusca" id="nomeBusca" />
                             </div>
                             <div className=" flex-wrap flex flex-col items-start justify-start">
                                 <label className="text-lg " htmlFor="cpfBusca">CPF</label>
-                                <input className="w-[150px] max-w-[90%] p-2 border border-primary rounded" type="text" name="cpfBusca" id="cpfBusca" />
+                                <input className="w-[150px] max-w-[90%] p-1.5 border border-primary rounded" type="text" name="cpfBusca" id="cpfBusca" />
                             </div>
                             <div className="flex-1"></div>
                             <div>
-                                <button onClick={handleModal} className="py-2 px-2 rounded border border-primary bg-primary text-lg text-secundary">Adicionar usuário</button>
+                                <button onClick={handleModal} className="py-1.5 px-2 rounded border border-primary bg-primary text-lg text-secundary">Adicionar usuário</button>
                             </div>
                         </section>
-                        <section className="w-[92%] lg:w-[600px] drop-shadow-md shadow-xl flex flex-col justify-center items-center lg:items-start">
-                            <table className="w-full ">
-                                <thead className="w-full bg-primary border-primary ">
-                                    <tr className="w-full">
+                        <section className="w-[92%] lg:w-[600px] border rounded-lg drop-shadow-md shadow-xl flex flex-col justify-center items-center lg:items-start">
+                            <table className="w-full relative">
+                                <thead className="w-full top-0 left-0 sticky bg-primary border-primary">
+                                    <tr className="w-full bg-primary">
                                         <>{Object.keys(usersFiltered[0]).map((key, index) => {
-                                            return <th className={` ${index === 0 ? 'rounded-tl-lg' : ''} border w-full text-left text-secundary px-2 py-5`} key={index}>{key}</th>
+                                            return <th className={` ${index === 0 ? 'rounded-tl-lg' : ''} w-full text-left text-secundary px-2 py-5`} key={index}>{key}</th>
                                         })}
                                             <th className="m-0 px-2 py-4 h-full"></th>
                                             <th className="rounded-tr-lg m-0 px-2 py-4 h-full"></th>
                                         </>
                                     </tr>
                                 </thead>
-                                <tbody className="w-full border border-primary">
+                                <tbody className="w-full overflow-auto">
                                     {usersFiltered.map((userRow, index) => {
                                         return <tr key={index}> <>
                                             {Object.values(userRow).map((userTd, index) => {

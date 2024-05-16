@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api"
 import { jwtDecode } from "jwt-decode";
+import { toast } from 'react-toastify';
 const UserContext = createContext();
 
 export const setUserLocalStorage = (data) => {
@@ -41,22 +42,21 @@ export const UserProvider = ({ children }) => {
                 }
             );
             if (response.data) {
-                setIsLoginSucess(true)
+                toast.success("Logado com sucesso")
                 let timeoutId;
                 timeoutId = setTimeout(() => {
-                    setIsLoginSucess(false)
                     setUserLocalStorage(response.data.token);
                     setUser(response.data);
                     navigate('/')
-                }, 3000);
+                }, 3700);
             } else if (response.data === '') {
                 alert('Credenciais inválidas');
             }
         } catch (error) {
             if (error.response.status === 403 || error.response.status === 400)
-                alert('Credenciais inválidas')
+                toast.error("Login ou senha inválido")
             if (error.response.status === 500)
-                alert('Houve um erro na conexão')
+                toast.error("Opa, algo deu errado!")
         }
     };
 
@@ -83,7 +83,7 @@ export const UserProvider = ({ children }) => {
             timeoutId = setTimeout(() => {
                 setRegisterSuccess(false);
                 navigate('/home');
-            }, 3000);
+            }, 4000);
 
         } else {
             clearTimeout(timeoutId);
