@@ -1,11 +1,11 @@
-import logo from '../../assets/logo/logo.svg'
-import logoHome from '../../assets/icons/home.svg'
-import iconReserv from '../../assets/icons/reserva.svg'
-import iconMedal from '../../assets/icons/medal.svg'
-import iconRectangle from '../../assets/icons/rectangle.svg'
-import iconUser from '../../assets/icons/user.svg'
-import iconOut from '../../assets/icons/out.svg'
 import { NavLink } from 'react-router-dom'
+import logoHome from '../../assets/icons/home.svg'
+import iconMedal from '../../assets/icons/medal.svg'
+import iconOut from '../../assets/icons/out.svg'
+import iconRectangle from '../../assets/icons/rectangle.svg'
+import iconReserv from '../../assets/icons/reserva.svg'
+import iconUser from '../../assets/icons/user.svg'
+import logo from '../../assets/logo/logo.svg'
 import { useUser } from '../../utils/userProvider'
 
 
@@ -30,7 +30,7 @@ const Header = ({ nivel_permissao }) => {
                     </NavLink>
                     {nivel_permissao === "ADMIN" && (
                         <>
-                            <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/'}>
+                            <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/sports'}>
                                 <img className='w-8 h-8' src={iconMedal} alt="" />
                                 <p className='text-secundary hidden lg:block' href="">Esportes</p>
                             </NavLink>
