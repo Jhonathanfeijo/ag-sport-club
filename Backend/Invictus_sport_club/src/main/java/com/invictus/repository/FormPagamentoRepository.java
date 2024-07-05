@@ -6,4 +6,6 @@ import com.invictus.domain.formPagamento.FormPagamento;
 
 public interface FormPagamentoRepository extends JpaRepository<FormPagamento, Long> {
 
+	boolean existsByDescricao(String descricao);
+	
 }

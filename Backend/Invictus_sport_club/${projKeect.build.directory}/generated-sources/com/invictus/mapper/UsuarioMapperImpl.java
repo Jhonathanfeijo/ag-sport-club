@@ -3,12 +3,14 @@ package com.invictus.mapper;
 import com.invictus.domain.usuario.Usuario;
 import com.invictus.domain.usuario.UsuarioResponse;
 import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-14T07:52:59-0400",
+    date = "2024-07-05T13:16:06-0400",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 21.0.1 (Oracle Corporation)"
 )
+@Component
 public class UsuarioMapperImpl implements UsuarioMapper {
 
     @Override

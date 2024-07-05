@@ -9,6 +9,8 @@ import com.invictus.domain.reserva.Reserva;
 import com.invictus.domain.reserva.ReservaRequestDTO;
 import com.invictus.domain.usuario.Usuario;
 import com.invictus.repository.ReservaRepository;
+import com.invictus.services.formPagamento.FormPagamentoService;
+import com.invictus.services.quadra.QuadraService;
 
 @Service
 public class ReservaService {

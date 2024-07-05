@@ -1,4 +1,4 @@
-package com.invictus.services;
+package com.invictus.services.formPagamento;
 
 import java.util.List;
 
@@ -6,16 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.invictus.domain.formPagamento.FormPagamento;
+import com.invictus.domain.formPagamento.dto.FormPagamentoRequest;
+import com.invictus.mapper.FormPagamentoMapper;
 import com.invictus.repository.FormPagamentoRepository;
+import com.invictus.services.formPagamento.validadores.ValidadorFormPagamentoService;
 
 @Service
 public class FormPagamentoService {
 
 	@Autowired
 	private FormPagamentoRepository formPagamentoRepository;
+	
+	@Autowired
+	private List<ValidadorFormPagamentoService> validadores;
+	
+	@Autowired
+	private FormPagamentoMapper formPagamentoMapper;
 
-	public FormPagamento cadastrarFormaPagamento(FormPagamento formPagamento) {
-		return formPagamentoRepository.save(formPagamento);
+	public FormPagamento cadastrarFormaPagamento(FormPagamentoRequest request) {
+		
+		validadores.forEach((v) -> v.validar(request));
+		return formPagamentoRepository.save(null);
 	}
 
 	public List<FormPagamento> listarFormasPagamento() {

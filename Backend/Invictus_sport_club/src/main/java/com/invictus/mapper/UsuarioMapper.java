@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 import com.invictus.domain.usuario.Usuario;
 import com.invictus.domain.usuario.UsuarioResponse;
 
-@Mapper
-@Component
+@Mapper(componentModel = "Spring")
 public interface UsuarioMapper {
 
 	

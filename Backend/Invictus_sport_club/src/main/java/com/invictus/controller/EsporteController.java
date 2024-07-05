@@ -1,9 +1,9 @@
 package com.invictus.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.invictus.domain.esporte.Esporte;
+import com.invictus.domain.esporte.dto.EsporteRequest;
+import com.invictus.domain.esporte.dto.EsporteResponse;
+import com.invictus.mapper.EsporteMapper;
 import com.invictus.services.EsporteService;
 
 @RestController
@@ -28,16 +31,20 @@ public class EsporteController {
 	@Autowired
 	private EsporteService esporteService;
 
+	@Autowired
+	private EsporteMapper esporteMapper;
+
 	@PostMapping
-	public ResponseEntity cadastrarEsporte(@RequestBody Esporte esporte, UriComponentsBuilder builder) {
-		esporte = esporteService.cadastrarEsporte(esporte);
+	public ResponseEntity cadastrarEsporte(@RequestBody EsporteRequest request, UriComponentsBuilder builder) {
+		Esporte esporte = esporteService.cadastrarEsporte(request);
 		URI uri = builder.path("/{id}").buildAndExpand(esporte.getIdEsporte()).toUri();
-		return ResponseEntity.created(uri).body(esporte);
+		EsporteResponse response = esporteMapper.esporteToEsporteResponse(esporte);
+		return ResponseEntity.created(uri).body(response);
 	}
 
 	@GetMapping
-	public ResponseEntity obterEsportes(Pageable paginacao) {
-		Page<Esporte> esportes = esporteService.listarEsportes(paginacao);
+	public ResponseEntity obterEsportes() {
+		List<Esporte> esportes = esporteService.listarEsportes();
 		return ResponseEntity.ok(esportes);
 	}
 
@@ -54,8 +61,9 @@ public class EsporteController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity editarEsportePorId(@PathVariable("id") Long idEsporte, @RequestBody Esporte esporte) {
-		esporte = esporteService.editarEsporte(idEsporte, esporte);
+	public ResponseEntity editarEsportePorId(@PathVariable("id") Long idEsporte, @RequestBody EsporteRequest request) {
+		Esporte esporte = esporteService.editarEsporte(idEsporte, request);
+		EsporteResponse response = esporteMapper.esporteToEsporteResponse(esporte);
 		return ResponseEntity.ok(esporte);
 	}
 

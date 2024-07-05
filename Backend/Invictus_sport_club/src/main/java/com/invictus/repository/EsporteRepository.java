@@ -6,4 +6,6 @@ import com.invictus.domain.esporte.Esporte;
 
 public interface EsporteRepository extends JpaRepository<Esporte, Long> {
 
+	boolean existsByDescricao(String descricao);
+
 }
