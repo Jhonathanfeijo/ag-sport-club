@@ -26,7 +26,8 @@ public class FormPagamentoService {
 	public FormPagamento cadastrarFormaPagamento(FormPagamentoRequest request) {
 		
 		validadores.forEach((v) -> v.validar(request));
-		return formPagamentoRepository.save(null);
+		FormPagamento formPagamento = formPagamentoMapper.FormPagamentoRequestToFormPagamento(request);
+		return formPagamentoRepository.save(formPagamento);
 	}
 
 	public List<FormPagamento> listarFormasPagamento() {
@@ -44,8 +45,13 @@ public class FormPagamentoService {
 		return formPagamentoRepository.save(formPagamento);
 	}
 
+	public void deletarFormaPagamentoPorId(Long idFormPagamento) {
+		verificadorFormaPagamento(idFormPagamento);
+		formPagamentoRepository.deleteById(idFormPagamento);
+	}
+	
 	private void verificadorFormaPagamento(Long idFormPagamento) {
-		if (formPagamentoRepository.existsById(idFormPagamento))
+		if (!formPagamentoRepository.existsById(idFormPagamento))
 			throw new RuntimeException("Forma de pagamento não encontrada");
 	}
 }

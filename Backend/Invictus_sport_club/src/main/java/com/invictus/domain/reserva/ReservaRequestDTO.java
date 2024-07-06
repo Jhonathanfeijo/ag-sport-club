@@ -13,12 +13,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ReservaRequestDTO {
 
-	private Long idUsuario;
-	private Long idQuadra;
-	private Long idFormPagamento;
-	private LocalDate data;
-	private int horarioInicial;
-	private int horasReservadas;
-	private Long idPagamento;
+    private Long idUsuario;
+    private Long idQuadra;
+    private Long idFormPagamento;
+    private LocalDate data;
+    private int horarioInicial;
+    private int horasReservadas;
 
 }

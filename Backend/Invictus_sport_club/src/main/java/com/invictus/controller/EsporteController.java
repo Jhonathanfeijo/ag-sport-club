@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +22,8 @@ import com.invictus.domain.esporte.dto.EsporteResponse;
 import com.invictus.mapper.EsporteMapper;
 import com.invictus.services.EsporteService;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("/esporte")
 @CrossOrigin("*")
@@ -34,6 +35,7 @@ public class EsporteController {
 	@Autowired
 	private EsporteMapper esporteMapper;
 
+	@Transactional
 	@PostMapping
 	public ResponseEntity cadastrarEsporte(@RequestBody EsporteRequest request, UriComponentsBuilder builder) {
 		Esporte esporte = esporteService.cadastrarEsporte(request);
@@ -54,12 +56,14 @@ public class EsporteController {
 		return ResponseEntity.ok(esporte);
 	}
 
+	@Transactional
 	@DeleteMapping("/{id}")
 	public ResponseEntity deletarEsportePorId(@PathVariable("id") Long idEsporte) {
 		esporteService.deletarEsporte(idEsporte);
 		return ResponseEntity.noContent().build();
 	}
 
+	@Transactional
 	@PutMapping("/{id}")
 	public ResponseEntity editarEsportePorId(@PathVariable("id") Long idEsporte, @RequestBody EsporteRequest request) {
 		Esporte esporte = esporteService.editarEsporte(idEsporte, request);

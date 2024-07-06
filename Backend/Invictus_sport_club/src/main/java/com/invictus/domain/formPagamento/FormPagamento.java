@@ -23,4 +23,7 @@ public class FormPagamento {
 	@Column(name = "id_form_pagamento")
 	private Long idFormPagamento;
 	private String descricao;
+	private boolean ativo;
+	
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,19 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.invictus.domain.formPagamento.FormPagamento;
+import com.invictus.domain.formPagamento.dto.FormPagamentoRequest;
 import com.invictus.services.formPagamento.FormPagamentoService;
 
+import jakarta.transaction.Transactional;
+
 @RestController
-@RequestMapping("/formpagamento")
+@RequestMapping("/form_pagamento")
 public class FormPagamentoController {
 
 	@Autowired
 	private FormPagamentoService formPagamentoService;
-
+	
+	@Transactional
 	@PostMapping
-	public ResponseEntity cadastrarFormaPagamento(@RequestBody FormPagamento formPagamento,
+	public ResponseEntity cadastrarFormaPagamento(@RequestBody FormPagamentoRequest request,
 			UriComponentsBuilder builder) {
-		formPagamento = formPagamentoService.cadastrarFormaPagamento(formPagamento);
+		FormPagamento formPagamento = formPagamentoService.cadastrarFormaPagamento(request);
 		URI uri = builder.path("/{id}").buildAndExpand(formPagamento.getIdFormPagamento()).toUri();
 		return ResponseEntity.created(uri).body(formPagamento);
 	}
@@ -44,11 +49,19 @@ public class FormPagamentoController {
 		return ResponseEntity.ok(formPagamento);
 	}
 
+	@Transactional
 	@PutMapping("/{id}")
 	public ResponseEntity editarFormaPagamentoPorId(@RequestBody FormPagamento formPagamento,
 			@PathVariable("/{id}") Long idFormPagamento) {
 		formPagamento = formPagamentoService.buscarFormaPagamentoPorId(idFormPagamento);
 		return ResponseEntity.ok(formPagamento);
+	}
+
+	@Transactional
+	@DeleteMapping("/{id}")
+	public ResponseEntity deletarFormaPagamentoPorId(@PathVariable("id") Long idFormPagamento) {
+		formPagamentoService.deletarFormaPagamentoPorId(idFormPagamento);
+		return ResponseEntity.noContent().build();
 	}
 
 }

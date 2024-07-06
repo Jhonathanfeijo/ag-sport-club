@@ -37,5 +37,6 @@ public class Reserva {
 	private LocalDate data;
 	private int horarioInicial;
 	private int horasReservadas;
+	private String status;
 
 }

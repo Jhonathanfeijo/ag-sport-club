@@ -9,9 +9,9 @@ import com.invictus.domain.esporte.Esporte;
 import com.invictus.domain.quadra.Quadra;
 import com.invictus.domain.quadra.dto.QuadraRequest;
 import com.invictus.domain.tipoQuadra.TipoQuadra;
-import com.invictus.repository.EsporteRepository;
 import com.invictus.repository.QuadraRepository;
-import com.invictus.repository.TipoQuadraRepository;
+import com.invictus.services.EsporteService;
+import com.invictus.services.TipoQuadraService;
 
 @Service
 public class QuadraService {
@@ -20,10 +20,10 @@ public class QuadraService {
 	private QuadraRepository quadraRepository;
 
 	@Autowired
-	private EsporteRepository esporteRepository;
+	private EsporteService esporteService;
 
 	@Autowired
-	private TipoQuadraRepository tipoQuadraRepository;
+	private TipoQuadraService tipoQuadraService;
 
 	@Autowired
 	private List<ValidadorQuadraService> validadores;
@@ -32,8 +32,8 @@ public class QuadraService {
 
 		validadores.forEach((v) -> v.validar(request));
 
-		Esporte esporte = esporteRepository.findById(request.getIdEsporte()).get();
-		TipoQuadra tipoQuadra = tipoQuadraRepository.findById(request.getIdTipoQuadra()).get();
+		Esporte esporte = esporteService.buscarEsportePorId(request.getIdEsporte());
+		TipoQuadra tipoQuadra = tipoQuadraService.buscarTipoQuadraPorId(request.getIdTipoQuadra());
 
 		Quadra quadra = new Quadra(null, tipoQuadra, esporte, request.getLocQuadra(), request.getValorHora());
 
@@ -59,8 +59,8 @@ public class QuadraService {
 
 		verificaQuadraExiste(idQuadra);
 
-		Esporte esporte = esporteRepository.findById(request.getIdEsporte()).get();
-		TipoQuadra tipoQuadra = tipoQuadraRepository.findById(request.getIdTipoQuadra()).get();
+		Esporte esporte = esporteService.buscarEsportePorId(request.getIdEsporte());
+		TipoQuadra tipoQuadra = tipoQuadraService.buscarTipoQuadraPorId(request.getIdTipoQuadra());
 
 		Quadra quadra = new Quadra(idQuadra, tipoQuadra, esporte, request.getLocQuadra(), request.getValorHora());
 		return quadraRepository.save(quadra);
