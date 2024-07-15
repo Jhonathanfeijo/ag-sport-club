@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
-import { getUserLocalStorage } from "../../../utils/userProvider";
 import { api } from "../../../../services/api";
+import { getUserLocalStorage } from "../../../utils/userProvider";
 
 const ModalDeletePaymentType = ({paymentTypeDeleteId, setIsModalDeletePaymentTypeOpen, paymentTypes, setPaymentTypes}) => {
 
@@ -47,7 +47,7 @@ const ModalDeletePaymentType = ({paymentTypeDeleteId, setIsModalDeletePaymentTyp
     return (
         <>
             <div className="fixed top-0 left-0 w-screen h-screen bg-third/15 flex flex-col justify-center items-center">
-                <div className="bg-secundary rounded w-[350px] max-w-[95%] flex flex-col drop-shadow-lg shadow-lg flex flex-col items-start font-bold p-3">
+                <div className="bg-secundary rounded w-[350px] max-w-[95%] flex flex-col drop-shadow-lg shadow-lg items-start font-bold p-3">
                     <h1>Você tem certeza que deseja apagar esse tipo de pagamento?</h1>
                     <div className="self-end flex flex-row gap-2 mt-5">
                         <button onClick={() => setIsModalDeletePaymentTypeOpen(false)} className="bg-primary text-secundary rounded px-2 py-1">Cancelar</button>

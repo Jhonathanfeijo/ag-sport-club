@@ -55,7 +55,7 @@ public class FormPagamentoController {
 	@PutMapping("/{id}")
 	public ResponseEntity editarFormaPagamentoPorId(@RequestBody FormPagamentoRequest formPagamento,
 			@PathVariable("id") Long idFormPagamento) {
-		FormPagamento form = formPagamentoService.buscarFormaPagamentoPorId(idFormPagamento);
+		FormPagamento form = formPagamentoService.editarFormaPagamentoPorId(idFormPagamento, formPagamento);
 		return ResponseEntity.ok(form);
 	}
 

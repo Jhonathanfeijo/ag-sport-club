@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { getUserLocalStorage } from "../../../utils/userProvider";
-import { api } from "../../../../services/api";
 import { toast } from "react-toastify";
+import { api } from "../../../../services/api";
+import { getUserLocalStorage } from "../../../utils/userProvider";
 
 const ModalAddPaymentType = ({ paymentTypes, setPaymentTypes, setIsModalAddPaymentTypeOpen }) => {
 
@@ -18,13 +18,14 @@ const ModalAddPaymentType = ({ paymentTypes, setPaymentTypes, setIsModalAddPayme
         console.log(headers)
         let toastId = toast.loading("Adicionando forma de pagamento", { isLoading: true })
         const postData = async () => {
-            await api.post('form_pagamento', data,  headers ).then((json) => {
+            await api.post('form_pagamento', data,  {headers} ).then((json) => {
                 console.log(json)
                 toast.update(toastId, {
                     render: "A forma de pagamento foi adicionada com sucesso",
                     theme: "colored",
                     autoClose: 2000,
-                    isLoading: false
+                    isLoading: false,
+                    type:"success"
                 })
                 let paymentTypesAux = [...paymentTypes];
                 paymentTypesAux.push(json.data);

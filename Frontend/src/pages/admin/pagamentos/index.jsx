@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getUserLocalStorage } from "../../../utils/userProvider";
 import { api } from "../../../../services/api";
+import { getUserLocalStorage } from "../../../utils/userProvider";
 import ModalAddPaymentType from "./modalAddPaymentType";
 import ModalDeletePaymentType from "./modalDeletePaymentType";
 import ModalEditPaymentType from "./modalEditPaymentType";
@@ -35,12 +35,12 @@ const FormasPagamento = () => {
 
     return (
         <>
-            <div className="rounded m-4 w-full">
+            <div className="rounded w-full flex flex-col items-center lg:items-start px-3 lg:m-0 lg:px-0">
+                <button type="button" onClick={() => setIsModalAddPaymentTypeOpen(true)} className="bg-primary text-secundary px-2 py-1.5 mb-2 mt-4 rounded font-medium ">Adicionar forma de pagamento</button>
                 {statusDataLoading === "loaded" && (
                     <>
-                        <div className="table-container w-[350px] flex flex-col items-start">
-                            <button type="button" onClick={() => setIsModalAddPaymentTypeOpen(true)} className="bg-primary text-secundary px-3 py-1.5 mb-2 mt-4 rounded font-medium self-start">Adicionar forma de pagamento</button>
-                            <table className="shadow-lg drop-shadow-lg py-3">
+                        <div className="table-container w-[350px] flex flex-col items-center lg:items-start">
+                            <table className="shadow-lg drop-shadow-lg py-3 table-auto">
                                 <thead className="">
                                     <tr className="bg-primary text-secundary">
                                         <th className="py-1 px-2 text-left">Descricão</th>
@@ -49,26 +49,35 @@ const FormasPagamento = () => {
                                         <th className="py-1 px-2 text-left text-primary">Excluir</th>
                                     </tr>
                                 </thead>
-                                <tbody className="w-full max-w-[100%]">
-
+                                <tbody className="max-w-[300px] max-h-[100px] overflow-y-scroll">
                                     {paymentTypes.map((paymentType, index) => {
                                         return (
                                             <tr key={index} className={`${index % 2 === 1 ? "bg-primary/15" : ""} font-bold w-full`}>
-                                                <td className="px-2 flex-1 py-1">{paymentType.descricao}</td>
-                                                <td className="px-2 flex-1 py-1"> {paymentType ? "ATIVO" : "INATIVO"}</td>
-                                                <td onClick={() => {
-                                                    setPaymentTypeToEdit({...paymentType})
-                                                    setIsModalEditPaymentTypeOpen(true);
-
-                                                }} className="px-2 flex-1 py-1 font-normal"><button className="bg-primary text-secundary px-2 py-1 rounded">Editar</button></td>
-                                                <td onClick={() => {
-                                                    setPaymentDeleteId(paymentType.idFormPagamento);
-                                                    setIsModalDeletePaymentTypeOpen(true);
-                                                }} className="px-2 flex-1 py-1 font-normal"><button className={`${"bg-danger/70"} text-secundary px-1 rounded py-1`}>Deletar</button></td>
-                                            </tr>)
+                                                <td className="px-2 flex-1 py-1 break-words">{paymentType.descricao}</td>
+                                                <td className="px-2 flex-1 py-1 break-words">{paymentType ? "ATIVO" : "INATIVO"}</td>
+                                                <td
+                                                    onClick={() => {
+                                                        setPaymentTypeToEdit({ ...paymentType })
+                                                        setIsModalEditPaymentTypeOpen(true);
+                                                    }}
+                                                    className="px-2 flex-1 py-1 font-normal break-words"
+                                                >
+                                                    <button className="bg-primary text-secundary px-2 py-1 rounded">Editar</button>
+                                                </td>
+                                                <td
+                                                    onClick={() => {
+                                                        setPaymentDeleteId(paymentType.idFormPagamento);
+                                                        setIsModalDeletePaymentTypeOpen(true);
+                                                    }}
+                                                    className="px-2 flex-1 py-1 font-normal break-words"
+                                                >
+                                                    <button className="bg-danger/70 text-secundary px-1 rounded py-1">Deletar</button>
+                                                </td>
+                                            </tr>
+                                        );
                                     })}
-
                                 </tbody>
+
                             </table>
                         </div>
                     </>
@@ -81,7 +90,7 @@ const FormasPagamento = () => {
                 <ModalDeletePaymentType paymentTypeDeleteId={paymentDeleteId} paymentTypes={paymentTypes} setIsModalDeletePaymentTypeOpen={setIsModalDeletePaymentTypeOpen} setPaymentTypes={setPaymentTypes}></ModalDeletePaymentType>
             )}
             {isModalEditPaymentTypeOpen && (
-                <ModalEditPaymentType paymentTypeToEdit={paymentTypeToEdit} setIsModalEditPaymentTypeOpen={setIsModalEditPaymentTypeOpen} setPaymentTypes={setPaymentTypes} paymentTypes={paymentTypes} setPaymentTypeToEdit= {setPaymentTypeToEdit}></ModalEditPaymentType>
+                <ModalEditPaymentType paymentTypeToEdit={paymentTypeToEdit} setIsModalEditPaymentTypeOpen={setIsModalEditPaymentTypeOpen} setPaymentTypes={setPaymentTypes} paymentTypes={paymentTypes} setPaymentTypeToEdit={setPaymentTypeToEdit}></ModalEditPaymentType>
             )}
         </>
     )

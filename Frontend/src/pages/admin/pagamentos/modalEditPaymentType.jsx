@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { getUserLocalStorage } from "../../../utils/userProvider";
 import { toast } from "react-toastify";
 import { api } from "../../../../services/api";
+import { getUserLocalStorage } from "../../../utils/userProvider";
 
 const ModalEditPaymentType = ({ paymentTypeToEdit, setPaymentTypeToEdit, setIsModalEditPaymentTypeOpen, paymentTypes, setPaymentTypes }) => {
 
@@ -17,11 +17,13 @@ const ModalEditPaymentType = ({ paymentTypeToEdit, setPaymentTypeToEdit, setIsMo
         console.log(data)
         const putData = async () => {
             let toastId = toast.loading("Editando esporte", { loading: true });
-            await api.put(`form_pagamento/${paymentTypeToEdit.idFormPagamento}`, data,  headers )
+            await api.put(`form_pagamento/${paymentTypeToEdit.idFormPagamento}`, data,  {headers} )
                 .then((json) => {
                     console.log(json)
                     toast.update(toastId, { render: "Esporte foi atualizado", type: "success", isLoading: false, theme: "colored", autoClose: 2000 });
                     let paymentTypesAux = [...paymentTypes];
+                    console.log(paymentTypesAux);
+                    console.log(paymentTypeToEdit)
                     paymentTypesAux = paymentTypesAux.filter((paymentTypeAux) => paymentTypeAux.idFormPagamento != paymentTypeToEdit.idFormPagamento);
                     paymentTypesAux.push(json.data);
                     setPaymentTypes(paymentTypesAux);
