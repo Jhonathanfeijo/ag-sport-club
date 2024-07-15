@@ -39,10 +39,11 @@ public class FormPagamentoService {
 		return formPagamentoRepository.findById(idFormPagamento).get();
 	}
 
-	public FormPagamento editarFormaPagamentoPorId(Long idFormPagamento, FormPagamento formPagamento) {
+	public FormPagamento editarFormaPagamentoPorId(Long idFormPagamento, FormPagamentoRequest formPagamento) {
 		verificadorFormaPagamento(idFormPagamento);
-		formPagamento.setIdFormPagamento(idFormPagamento);
-		return formPagamentoRepository.save(formPagamento);
+		FormPagamento form = formPagamentoMapper.FormPagamentoRequestToFormPagamento(formPagamento);
+		form.setIdFormPagamento(idFormPagamento);
+		return formPagamentoRepository.save(form);
 	}
 
 	public void deletarFormaPagamentoPorId(Long idFormPagamento) {

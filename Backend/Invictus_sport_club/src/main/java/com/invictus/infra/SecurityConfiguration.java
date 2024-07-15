@@ -1,6 +1,6 @@
 package com.invictus.infra;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -24,14 +24,19 @@ public class SecurityConfiguration {
 	private SecurityFilter filter;
 
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/auth/*").permitAll()
-						.requestMatchers(HttpMethod.GET, "/esporte/*").hasAnyRole("USER", "ADMIN")
-						.requestMatchers("/esporte/*").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.GET, "/esporte/").hasAnyRole("USER", "ADMIN")
+						.requestMatchers(HttpMethod.DELETE,"/esporte/").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.PUT,"/esporte/","/esporte").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.POST,"/esporte/").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.GET, "/tipo_quadra/*").hasAnyRole("USER", "ADMIN")
-						.requestMatchers("/tipo_quadra/*").hasRole("ADMIN").anyRequest().permitAll())
+						.requestMatchers("/tipo_quadra/").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.GET,"/form_pagamento/").hasAnyRole("ADMIN", "USER")
+						.requestMatchers("/form_pagamento/").hasRole("ADMIN")
+						.anyRequest().permitAll())
 				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
 	}
 

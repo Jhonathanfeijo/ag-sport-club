@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/form_pagamento")
+@CrossOrigin("*")
 public class FormPagamentoController {
 
 	@Autowired
@@ -51,10 +53,10 @@ public class FormPagamentoController {
 
 	@Transactional
 	@PutMapping("/{id}")
-	public ResponseEntity editarFormaPagamentoPorId(@RequestBody FormPagamento formPagamento,
-			@PathVariable("/{id}") Long idFormPagamento) {
-		formPagamento = formPagamentoService.buscarFormaPagamentoPorId(idFormPagamento);
-		return ResponseEntity.ok(formPagamento);
+	public ResponseEntity editarFormaPagamentoPorId(@RequestBody FormPagamentoRequest formPagamento,
+			@PathVariable("id") Long idFormPagamento) {
+		FormPagamento form = formPagamentoService.buscarFormaPagamentoPorId(idFormPagamento);
+		return ResponseEntity.ok(form);
 	}
 
 	@Transactional

@@ -5,6 +5,7 @@ import iconOut from '../../assets/icons/out.svg'
 import iconRectangle from '../../assets/icons/rectangle.svg'
 import iconReserv from '../../assets/icons/reserva.svg'
 import iconUser from '../../assets/icons/user.svg'
+import config from '../../assets/icons/config.svg'
 import logo from '../../assets/logo/logo.svg'
 import { useUser } from '../../utils/userProvider'
 
@@ -41,6 +42,10 @@ const Header = ({ nivel_permissao }) => {
                             <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/users'}>
                                 <img className='w-8 h-8' src={iconUser} alt="" />
                                 <p className='text-secundary hidden lg:block' href="">Usuários</p>
+                            </NavLink>
+                            <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/config'}>
+                                <img className='w-8 h-8' src={config} alt="" />
+                                <p className='text-secundary hidden lg:block' href="">Ajustes</p>
                             </NavLink>
 
                         </>

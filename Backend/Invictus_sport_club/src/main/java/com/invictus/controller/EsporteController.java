@@ -1,6 +1,6 @@
 package com.invictus.controller;
 
-import java.net.URI;
+import java.net.URI; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +59,7 @@ public class EsporteController {
 	@Transactional
 	@DeleteMapping("/{id}")
 	public ResponseEntity deletarEsportePorId(@PathVariable("id") Long idEsporte) {
+		System.out.println("aqui");
 		esporteService.deletarEsporte(idEsporte);
 		return ResponseEntity.noContent().build();
 	}

@@ -25,7 +25,7 @@ const Login = () => {
         mode: "onSubmit"
     });
 
-    const onSubmit = (data) => { // Adicionando parâmetro "data" para capturar os valores dos campos
+    const onSubmit = (data) => { 
         login(data,setIsLoginSucess);
     }
 

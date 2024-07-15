@@ -42,7 +42,6 @@ public class EsporteService {
 
 	public Esporte editarEsporte(Long idEsporte, EsporteRequest request) {
 		verificadorEsporteExiste(idEsporte);
-		validadores.forEach((v) -> v.validar(request));
 		Esporte esporte = esporteMapper.esporteRequestToEsporte(request);
 		esporte.setIdEsporte(idEsporte);
 		return esporteRepository.save(esporte);
