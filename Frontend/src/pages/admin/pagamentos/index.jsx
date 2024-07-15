@@ -35,12 +35,12 @@ const FormasPagamento = () => {
 
     return (
         <>
-            <div className="rounded w-full flex flex-col items-center lg:items-start px-3 lg:m-0 lg:px-0">
+            <div className="rounded w-full flex flex-col items-center lg:items-start lg:m-0 lg:px-3">
                 <button type="button" onClick={() => setIsModalAddPaymentTypeOpen(true)} className="bg-primary text-secundary px-2 py-1.5 mb-2 mt-4 rounded font-medium ">Adicionar forma de pagamento</button>
                 {statusDataLoading === "loaded" && (
                     <>
-                        <div className="table-container w-[350px] flex flex-col items-center lg:items-start">
-                            <table className="shadow-lg drop-shadow-lg py-3 table-auto">
+                        <div className="table-container max-w-[100%] w-[350px] h-[320px]  lg:items-start overflow-auto flex flex-col items-center">
+                            <table className="shadow-lg drop-shadow-lg py-3 ">
                                 <thead className="">
                                     <tr className="bg-primary text-secundary">
                                         <th className="py-1 px-2 text-left">Descricão</th>
@@ -49,18 +49,18 @@ const FormasPagamento = () => {
                                         <th className="py-1 px-2 text-left text-primary">Excluir</th>
                                     </tr>
                                 </thead>
-                                <tbody className="max-w-[300px] max-h-[100px] overflow-y-scroll">
+                                <tbody >
                                     {paymentTypes.map((paymentType, index) => {
                                         return (
                                             <tr key={index} className={`${index % 2 === 1 ? "bg-primary/15" : ""} font-bold w-full`}>
-                                                <td className="px-2 flex-1 py-1 break-words">{paymentType.descricao}</td>
-                                                <td className="px-2 flex-1 py-1 break-words">{paymentType ? "ATIVO" : "INATIVO"}</td>
+                                                <td className="px-2 py-1 break-words">{paymentType.descricao}</td>
+                                                <td className="px-2 py-1 break-words">{paymentType ? "ATIVO" : "INATIVO"}</td>
                                                 <td
                                                     onClick={() => {
                                                         setPaymentTypeToEdit({ ...paymentType })
                                                         setIsModalEditPaymentTypeOpen(true);
                                                     }}
-                                                    className="px-2 flex-1 py-1 font-normal break-words"
+                                                    className="px-2 py-1 font-normal break-words"
                                                 >
                                                     <button className="bg-primary text-secundary px-2 py-1 rounded">Editar</button>
                                                 </td>
@@ -69,7 +69,7 @@ const FormasPagamento = () => {
                                                         setPaymentDeleteId(paymentType.idFormPagamento);
                                                         setIsModalDeletePaymentTypeOpen(true);
                                                     }}
-                                                    className="px-2 flex-1 py-1 font-normal break-words"
+                                                    className="px-2 py-1 font-normal break-words"
                                                 >
                                                     <button className="bg-danger/70 text-secundary px-1 rounded py-1">Deletar</button>
                                                 </td>
