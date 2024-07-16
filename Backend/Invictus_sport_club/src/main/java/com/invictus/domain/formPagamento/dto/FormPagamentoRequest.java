@@ -7,4 +7,5 @@ public class FormPagamentoRequest {
 
 	
 	private String descricao;
+	private boolean ativo;
 }
