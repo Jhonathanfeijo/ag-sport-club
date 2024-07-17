@@ -11,7 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,12 +26,12 @@ public class Reserva {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idReserva;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	@OneToOne
+	@ManyToOne
 	private Quadra quadra;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_form_pagamento")
 	private FormPagamento formPagamento;
 	private LocalDate data;
