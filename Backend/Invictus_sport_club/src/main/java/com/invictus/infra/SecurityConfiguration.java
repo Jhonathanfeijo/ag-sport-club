@@ -36,6 +36,8 @@ public class SecurityConfiguration {
 						.requestMatchers("/tipo_quadra/").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.GET,"/form_pagamento/").hasAnyRole("ADMIN", "USER")
 						.requestMatchers("/form_pagamento/").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.GET,"/quadra/").hasAnyRole("ADMIN", "USER")
+						.requestMatchers("/quadra/").hasRole("ADMIN")
 						.anyRequest().permitAll())
 				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
 	}

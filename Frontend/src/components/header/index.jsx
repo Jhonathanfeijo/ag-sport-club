@@ -25,24 +25,24 @@ const Header = ({ nivel_permissao }) => {
                         <img className='w-8 h-8' src={logoHome} alt="" />
                         <p className='text-secundary hidden lg:block' href="">Inicio</p>
                     </NavLink>
+                    <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/users'}>
+                        <img className='w-8 h-8' src={iconUser} alt="" />
+                        <p className='text-secundary hidden lg:block' href="">Meu perfil</p>
+                    </NavLink>
                     <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/reservas'}>
                         <img className='w-8 h-8' src={iconReserv} alt="" />
-                        <p className='text-secundary hidden lg:block' href="">Reservas</p>
+                        <p className='text-secundary hidden lg:block' href="">Minhas Reservas</p>
+                    </NavLink>
+                    <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/sports'}>
+                        <img className='w-8 h-8' src={iconMedal} alt="" />
+                        <p className='text-secundary hidden lg:block' href="">Esportes</p>
+                    </NavLink>
+                    <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/squirts'}>
+                        <img className='w-8 h-8' src={iconRectangle} alt="" />
+                        <p className='text-secundary hidden lg:block' href="">Quadras</p>
                     </NavLink>
                     {nivel_permissao === "ADMIN" && (
                         <>
-                            <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/sports'}>
-                                <img className='w-8 h-8' src={iconMedal} alt="" />
-                                <p className='text-secundary hidden lg:block' href="">Esportes</p>
-                            </NavLink>
-                            <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/'}>
-                                <img className='w-8 h-8' src={iconRectangle} alt="" />
-                                <p className='text-secundary hidden lg:block' href="">Quadras</p>
-                            </NavLink>
-                            <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/users'}>
-                                <img className='w-8 h-8' src={iconUser} alt="" />
-                                <p className='text-secundary hidden lg:block' href="">Usuários</p>
-                            </NavLink>
                             <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/config'}>
                                 <img className='w-8 h-8' src={config} alt="" />
                                 <p className='text-secundary hidden lg:block' href="">Ajustes</p>

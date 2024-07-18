@@ -19,7 +19,7 @@ const Sports = () => {
     const user = getUserLocalStorage();
     const headers = {
       "Content-Type": "application/json",
-      authorization: `Bearer ${user.token.repeat('"', '').repeat('"', '')}`,
+      authorization: `Bearer ${user.token.replace('"', '').replace('"', '')}`,
     };
     const fetchData = async () => {
       await api.get('esporte', headers).then(json => {
@@ -40,30 +40,36 @@ const Sports = () => {
 
   return (
     <>
-      <div className='mt-10 lg:mt-20 ml-4 w-max-full'>
+      <div className='mt-5 lg:mt-9 flex flex-col items-center w-full w-max-full'>
         <div className='flex flex-col'>
-          <H1 text={'Esportes'}></H1>
+          <h1 className='text-4xl font-bold' >Esportes</h1>
         </div>
-        <div className='flex flex-col my-5 able-container w-max-[85%]'>
+        <div className='flex flex-col items-center my-8 lg:my-10 w-full lg:w-[800px] px-2'>
           {statusDataSports === "loaded" && (
             <>
-              <div className='table-container w-max-[85%]'>
-                      <button onClick={() => setIsModalAddSportOpen(true)} className='px-2 py-1 self-end bg-primary text-secundary rounded'>Adicionar esporte</button>
-                <table className='my-1 w-max-full border-collapse'>
-                  <tr className='bg-primary text-left'>
-                    <th className='pl-[0.5rem] border-collapse md:pr-[5rem] py-1 text-secundary '>Nome</th>
-                    <th className='pl-[0.5rem] border-collapse md:pl-[2rem] pr-[0.5rem] text-primary'>Editar</th>
-                    <th className='py-1 border-collapse text-primary '>Excluir</th>
-                  </tr>
-                  {sportList.map((sport, index) => {
-                    return <tr key={index} className={`${index % 2 !== 0 ? 'bg-primary/15' : ''} font-medium`}>
-                      <td className='pl-[0.5rem] md:pr-[5rem] py-2 text-left'>{sport.descricao}</td>
-                      <td className='pl-[0.5rem] md:pl-[2rem] pr-[0.5rem] text-left'><button onClick={() =>{setSportToEdit({...sport}); setIsModalEditSportOpen(true)}} className='bg-primary text-secundary px-2 py-0.5 rounded'>Editar</button></td>
-                      <td className='text-left'><button onClick={() => deleteSport(sport.idEsporte)} className='bg-danger/70 text-secundary px-2 py-0.5 rounded'>Deletar</button></td>
-                    </tr>
-                  })}
-                </table>
+
+              <div className='w-[300px] max-w-full lg:w-full grid grid-cols-2 lg:grid-cols-4 gap-1'>
+                {sportList.map((sport) => {
+                  return (<div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-default duration-200 hover:opacity-80'><span>{sport.descricao}</span></div>);
+                })}
               </div>
+              { /*<div className='table-container w-full'>
+                <table className='my-1 w-full border-collapse shadow-lg drop-shadow-lg'>
+                  <thead className=''>
+                    <tr className='bg-primary text-left'>
+                      <th className='pl-2 py-2 rounded-b text-secundary '>Nome</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sportList.map((sport, index) => {
+                      return <tr key={index} className={`${index % 2 !== 0 ? 'bg-primary/15' : ''} font-medium`}>
+                        <td className='pl-2 py-2 text-left'>{sport.descricao}</td>
+                      </tr>
+                    })}
+                  </tbody>
+                </table>
+                <button onClick={() => setIsModalAddSportOpen(true)} className='hidden px-2 py-1.5 w-full bg-primary text-lg lg:text-xl mt-2 text-secundary rounded'>Adicionar esporte</button>
+              </div>*/}
             </>)
           }
         </div>
@@ -75,7 +81,7 @@ const Sports = () => {
         <ModalDeleteSport sportList={sportList} setSportList={setSportList} setIsModalDeleteSportOpen={setIsModalDeleteSportOpen} idSport={sportIdToDelete}></ModalDeleteSport>
       )}
       {isModalEditSportOpen && (
-        <ModalEditSport setIsModalEditSportOpen={setIsModalEditSportOpen} setSportList={setSportList} sportList={sportList} setSportToEdit = {setSportToEdit} sportToEdit = {sportToEdit}></ModalEditSport>
+        <ModalEditSport setIsModalEditSportOpen={setIsModalEditSportOpen} setSportList={setSportList} sportList={sportList} setSportToEdit={setSportToEdit} sportToEdit={sportToEdit}></ModalEditSport>
       )}
     </>
   );

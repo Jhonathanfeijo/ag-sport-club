@@ -35,16 +35,15 @@ const TiposQuadras = () => {
 
     return (
         <>
-            <div className="rounded w-full flex flex-col items-center lg:items-start lg:m-0">
+            <div className="rounded w-full flex flex-col items-center">
                 {statusDataLoading === "loaded" && (
                     <>
-                        <div className="table-container max-w-[100%] w-full lg:w-auto max-h-[320px] my-3  lg:items-start overflow-auto flex flex-col items-center">
+                        <div className="table-container max-w-[100%] w-full lg:w-[600px] max-h-[320px] my-3  lg:items-start overflow-auto flex flex-col items-center">
                             <table className="shadow-lg w-full drop-shadow-lg py-3 ">
                                 <thead className="">
                                     <tr className="bg-primary text-secundary rounded-b">
                                         <th className="py-1 px-2 text-left rounded-bl">Descricão</th>
-                                        <th className="py-1 text-left text-primary">Editar</th>
-                                        <th className="py-1 text-left text-primary rounded-br">Excluir</th>
+                                        <th className="py-1 text-left text-primary rounded-br">Editar</th>
                                     </tr>
                                 </thead>
                                 <tbody >
@@ -53,22 +52,17 @@ const TiposQuadras = () => {
                                             <tr key={index} className={`${index % 2 === 1 ? "bg-primary/15" : ""} font-bold w-full`}>
                                                 <td className="px-2 py-1 break-words">{tipoQuadra.descricao}</td>
                                                 <td
-                                                    onClick={() => {
+
+                                                    className="px-1 py-1 font-normal break-words flex flex-row justify-end gap-2"
+                                                >
+                                                    <button onClick={() => {
                                                         setTipoQuadraToEdit({ ...tipoQuadra })
                                                         setIsModalEditTipoQuadraOpen(true);
-                                                    }}
-                                                    className="px-1 py-1 font-normal break-words"
-                                                >
-                                                    <button className="bg-primary text-secundary px-2 py-1 rounded">Editar</button>
-                                                </td>
-                                                <td
-                                                    onClick={() => {
+                                                    }} className="bg-primary text-secundary px-2 py-1 rounded">Editar</button>
+                                                    <button onClick={() => {
                                                         setTipoQuadraDeleteId(tipoQuadra.idTipoQuadra);
                                                         setIsModalDeleteTipoQuadraOpen(true);
-                                                    }}
-                                                    className="px-1 py-1 font-normal break-words"
-                                                >
-                                                    <button className="bg-danger/70 text-secundary px-1 rounded py-1">Deletar</button>
+                                                    }} className="bg-danger/70 text-secundary px-1 rounded py-1">Deletar</button>
                                                 </td>
                                             </tr>
                                         );
@@ -79,7 +73,7 @@ const TiposQuadras = () => {
                         </div>
                     </>
                 )}
-                <button type="button" onClick={() => setIsModalAddTipoQuadraOpen(true)} className="bg-primary w-full lg:w-auto text-secundary px-2 py-1.5 mb-2 mt-4 rounded font-medium text-lg">Adicionar tipo de quadra</button>
+                <button type="button" onClick={() => setIsModalAddTipoQuadraOpen(true)} className="bg-primary w-full text-secundary px-2 py-1.5 mb-2 mt-4 rounded font-medium text-lg lg:text-xl lg:w-[600px]">Adicionar tipo de quadra</button>
             </div>
             {isModalAddTipoQuadraOpen && (
                 <ModalAddTipoQuadra setIsModalAddTipoQuadraOpen={setIsModalAddTipoQuadraOpen} tiposQuadra={tiposQuadra} setTiposQuadra={setTiposQuadra} ></ModalAddTipoQuadra>
