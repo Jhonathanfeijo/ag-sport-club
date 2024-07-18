@@ -35,11 +35,11 @@ const FormasPagamento = () => {
 
     return (
         <>
-            <div className="rounded w-full flex flex-col items-center">
+            <div className="w-full flex flex-col items-center">
                 {statusDataLoading === "loaded" && (
                     <>
-                        <div className="table-container max-w-[100%] my-3 w-[350px] lg:w-[600px] max-h-[320px]  lg:items-start overflow-auto flex flex-col items-center">
-                            <table className="shadow-lg drop-shadow-lg w-full">
+                        <div className="table-container max-w-[100%] my-3 w-[350px] lg:w-full max-h-[320px]  lg:items-start overflow-auto flex flex-col items-center">
+                            <table className="shadow-lg drop-shadow-lg  w-full">
                                 <thead className="font-bold">
                                     <tr className="bg-primary text-secundary">
                                         <th className="py-2 px-2 text-left rounded-bl">Descricão</th>
@@ -74,7 +74,7 @@ const FormasPagamento = () => {
                         </div>
                     </>
                 )}
-                <button type="button" onClick={() => setIsModalAddPaymentTypeOpen(true)} className="bg-primary text-secundary px-2 py-1.5 mb-2 w-full lg:w-[600px] rounded font-medium text-lg lg:text-xl">Adicionar forma de pagamento</button>
+                <button type="button" onClick={() => setIsModalAddPaymentTypeOpen(true)} className="bg-primary text-secundary px-2 py-1.5 mb-2 w-full rounded font-medium text-lg lg:text-xl">Adicionar forma de pagamento</button>
             </div>
             {isModalAddPaymentTypeOpen && (
                 <ModalAddPaymentType setIsModalAddPaymentTypeOpen={setIsModalAddPaymentTypeOpen} paymentTypes={paymentTypes} setPaymentTypes={setPaymentTypes} ></ModalAddPaymentType>

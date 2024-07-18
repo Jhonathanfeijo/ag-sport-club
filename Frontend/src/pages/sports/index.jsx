@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
+import { set } from 'react-hook-form';
 import { api } from '../../../services/api';
 import H1 from '../../components/h1';
 import { getUserLocalStorage } from '../../utils/userProvider';
 import ModalAddSport from './modalAddSport';
 import ModalDeleteSport from './modalDeleteSport';
 import ModalEditSport from './modalEditSport';
-import { set } from 'react-hook-form';
 
 const Sports = () => {
   const [sportList, setSportList] = useState([]);
@@ -40,17 +40,17 @@ const Sports = () => {
 
   return (
     <>
-      <div className='mt-5 lg:mt-9 flex flex-col items-center w-full w-max-full'>
+      <div className='mt-5 lg:mt-9 flex flex-col items-center w-full max-w-full'>
         <div className='flex flex-col'>
           <h1 className='text-4xl font-bold' >Esportes</h1>
         </div>
-        <div className='flex flex-col items-center my-8 lg:my-10 w-full lg:w-[800px] px-2'>
+        <div className='flex flex-col items-center my-8 lg:my-10 w-full lg:w-[850px] px-2'>
           {statusDataSports === "loaded" && (
             <>
 
-              <div className='w-[300px] max-w-full lg:w-full grid grid-cols-2 lg:grid-cols-4 gap-1'>
+              <div className='w-[300px] max-w-full lg:w-full grid grid-cols-2 lg:grid-cols-4 lg:flex-wrap items-center justify-center gap-2 grid-'>
                 {sportList.map((sport) => {
-                  return (<div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-default duration-200 hover:opacity-80'><span>{sport.descricao}</span></div>);
+                  return (<div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-pointer duration-200 hover:opacity-80 my-1'><span>{sport.descricao}</span></div>);
                 })}
               </div>
               { /*<div className='table-container w-full'>

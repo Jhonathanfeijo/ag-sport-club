@@ -38,11 +38,11 @@ const TiposQuadras = () => {
             <div className="rounded w-full flex flex-col items-center">
                 {statusDataLoading === "loaded" && (
                     <>
-                        <div className="table-container max-w-[100%] w-full lg:w-[600px] max-h-[320px] my-3  lg:items-start overflow-auto flex flex-col items-center">
-                            <table className="shadow-lg w-full drop-shadow-lg py-3 ">
+                        <div className="table-container max-w-[100%] w-full  max-h-[320px] my-3  lg:items-start overflow-auto flex flex-col items-center">
+                            <table className="shadow-lg w-full drop-shadow-lg mb-2 ">
                                 <thead className="">
                                     <tr className="bg-primary text-secundary rounded-b">
-                                        <th className="py-1 px-2 text-left rounded-bl">Descricão</th>
+                                        <th className="py-2 px-2 text-left rounded-bl">Descricão</th>
                                         <th className="py-1 text-left text-primary rounded-br">Editar</th>
                                     </tr>
                                 </thead>
