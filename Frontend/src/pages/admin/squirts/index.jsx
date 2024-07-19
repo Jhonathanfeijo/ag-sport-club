@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { getUserLocalStorage } from "../../../utils/userProvider";
 import { api } from "../../../../services/api";
+import { getUserLocalStorage } from "../../../utils/userProvider";
+import ModalAddSquirt from "./modalAddSquirts";
 
 const SquirtsAdmin = () => {
 
@@ -8,6 +9,7 @@ const SquirtsAdmin = () => {
     const [tipoQuadraList, setTipoQuadraList] = useState([]);
     const [squirtList, setSquirtList] = useState([])
     const [isDataLoaded, setIsDataLoaded] = useState(false);
+    const [isModalAddSquirtOpen, setIsModalAddSquirtOpen] = useState(false);
 
 
     useEffect(() => {
@@ -78,14 +80,19 @@ const SquirtsAdmin = () => {
                         </>
                     ) :
                         <>
-                            <h2 className="text-primary">Não há nenhuma quadra registrada</h2>
+                            <h2 className="text-primary text-center text-xl font-bold my-2 lg:my-4">Não há nenhuma quadra registrada</h2>
                         </>
                     }
-                    <button className="w-full py-1.5 text-xl text-secundary bg-primary rounded">Adicionar quadra</button>
+                    <button onClick={() => setIsModalAddSquirtOpen(true) } className="w-full py-1.5 text-xl text-secundary bg-primary rounded">Adicionar quadra</button>
                 </>
             )
             }
         </div>
+        {isModalAddSquirtOpen && (
+            <ModalAddSquirt setModalAddSquirtOpen={setIsModalAddSquirtOpen}> </ModalAddSquirt>
+        )
+
+        }
     </>)
 }
 

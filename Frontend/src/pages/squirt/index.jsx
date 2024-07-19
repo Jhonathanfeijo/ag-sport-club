@@ -49,7 +49,7 @@ const Squirts = () => {
                                                 <td className="pl-2 py-2 pr-5 text-left">{quadra.locQuadra}</td>
                                                 <td className="pl-2 py-2 pr-5 text-left">{quadra.tipoQuadra.descricao}</td>
                                                 <td className="pl-2 py-2 pr-5 text-left">{quadra.esporte.descricao}</td>
-                                                <td className="pl-2 py-2 pr-5 text-left">{quadra.valorHora}</td>
+                                                <td className="pl-2 py-2 pr-5 text-left">{`R$ ${parseFloat (quadra.valorHora).toFixed(2)}`}</td>
                                             </tr>
                                         })}
                                     </tbody>

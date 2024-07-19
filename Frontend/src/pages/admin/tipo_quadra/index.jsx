@@ -53,7 +53,7 @@ const TiposQuadras = () => {
                                                 <td className="px-2 py-1 break-words">{tipoQuadra.descricao}</td>
                                                 <td
 
-                                                    className="px-1 py-1 font-normal break-words flex flex-row justify-end gap-2"
+                                                    className="px-1 py-2 font-normal break-words flex flex-row justify-end gap-2"
                                                 >
                                                     <button onClick={() => {
                                                         setTipoQuadraToEdit({ ...tipoQuadra })
