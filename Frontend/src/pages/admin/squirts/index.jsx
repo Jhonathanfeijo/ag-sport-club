@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 import ModalAddSquirt from "./modalAddSquirts";
 
 const SquirtsAdmin = () => {
 
-    const [sportList, setSportList] = useState([]);
-    const [tipoQuadraList, setTipoQuadraList] = useState([]);
     const [squirtList, setSquirtList] = useState([])
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const [isModalAddSquirtOpen, setIsModalAddSquirtOpen] = useState(false);
 
+    const { register, handleSubmit } = useForm();
 
     useEffect(() => {
         const user = getUserLocalStorage();
@@ -20,18 +20,6 @@ const SquirtsAdmin = () => {
         }
 
         const fetchData = async () => {
-            await api.get("esporte", headers).then((json) => {
-                console.log(json)
-                setSportList(json.data)
-            }).catch((error) => {
-                console.log(error);
-            })
-            await api.get("tipo_quadra", headers).then((json) => {
-                console.log(json)
-                setTipoQuadraList(json.data)
-            }).catch((error) => {
-                console.log(error);
-            })
             await api.get("quadra", headers).then((json) => {
                 console.log(json)
                 setSquirtList(json.data)
@@ -61,7 +49,7 @@ const SquirtsAdmin = () => {
                                     </thead>
                                     <tbody>
                                         {squirtList.map((squirt, index) => {
-                                            return <tr className={`${index%2 === 0? "" : "bg-primary/10"}`} key={index}>
+                                            return <tr className={`${index % 2 === 0 ? "" : "bg-primary/10"}`} key={index}>
                                                 <td className="py-3 px-2">
                                                     {squirt.locQuadra}
                                                 </td>
@@ -83,7 +71,7 @@ const SquirtsAdmin = () => {
                             <h2 className="text-primary text-center text-xl font-bold my-2 lg:my-4">Não há nenhuma quadra registrada</h2>
                         </>
                     }
-                    <button onClick={() => setIsModalAddSquirtOpen(true) } className="w-full py-1.5 text-xl text-secundary bg-primary rounded">Adicionar quadra</button>
+                    <button onClick={() => setIsModalAddSquirtOpen(true)} className="w-full py-1.5 text-xl text-secundary bg-primary rounded">Adicionar quadra</button>
                 </>
             )
             }

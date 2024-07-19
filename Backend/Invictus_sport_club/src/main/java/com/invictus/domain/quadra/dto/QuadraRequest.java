@@ -9,7 +9,7 @@ public class QuadraRequest {
 
 	private Long idEsporte;
 	private Long idTipoQuadra;
-	private String LocQuadra;
+	private String locQuadra;
 	private BigDecimal valorHora;
 	
 }
