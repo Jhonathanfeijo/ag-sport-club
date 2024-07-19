@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { getUserLocalStorage } from "../../utils/userProvider";
-import { api } from "../../../services/api";
 import { render } from "react-dom";
+import { api } from "../../../../services/api";
+import { getUserLocalStorage } from "../../../utils/userProvider";
 
 const ModalAddSport = ({ setIsModalAddSportOpen, sportList, setSportList }) => {
 

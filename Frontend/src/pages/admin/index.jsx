@@ -1,6 +1,8 @@
 import { useState } from "react";
 import FormasPagamento from "./pagamentos";
 import TiposQuadras from "./tipo_quadra";
+import SportsAdmin from "./sports";
+import SquirtsAdmin from "./squirts";
 
 const AdminConfig = () => {
 
@@ -34,6 +36,12 @@ const AdminConfig = () => {
                     )}
                     {option === "tipos_quadra" && (
                         <TiposQuadras></TiposQuadras>
+                    )}
+                    {option === "esportes" && (
+                        <SportsAdmin></SportsAdmin>
+                    )}
+                    {option === "quadras" && (
+                        <SquirtsAdmin></SquirtsAdmin>
                     )}
                 </div>
             </div>

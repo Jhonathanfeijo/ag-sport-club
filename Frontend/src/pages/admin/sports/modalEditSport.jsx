@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { api } from "../../../services/api";
 import { toast } from "react-toastify";
-import { getUserLocalStorage } from "../../utils/userProvider";
+import { api } from "../../../../services/api";
+import { getUserLocalStorage } from "../../../utils/userProvider";
 
 const ModalEditSport = ({ sportToEdit, sportList, setSportList, setIsModalEditSportOpen, setSportToEdit }) => {
     const { register, handleSubmit } = useForm();

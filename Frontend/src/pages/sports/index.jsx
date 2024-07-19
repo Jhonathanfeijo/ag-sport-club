@@ -3,9 +3,7 @@ import { set } from 'react-hook-form';
 import { api } from '../../../services/api';
 import H1 from '../../components/h1';
 import { getUserLocalStorage } from '../../utils/userProvider';
-import ModalAddSport from './modalAddSport';
-import ModalDeleteSport from './modalDeleteSport';
-import ModalEditSport from './modalEditSport';
+
 
 const Sports = () => {
   const [sportList, setSportList] = useState([]);
@@ -47,42 +45,15 @@ const Sports = () => {
         <div className='flex flex-col items-center my-8 lg:my-10 w-full lg:w-[850px] px-2'>
           {statusDataSports === "loaded" && (
             <>
-
               <div className='w-[300px] max-w-full lg:w-full grid grid-cols-2 lg:grid-cols-4 lg:flex-wrap items-center justify-center gap-2 grid-'>
                 {sportList.map((sport) => {
                   return (<div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-pointer duration-200 hover:opacity-80 my-1'><span>{sport.descricao}</span></div>);
                 })}
               </div>
-              { /*<div className='table-container w-full'>
-                <table className='my-1 w-full border-collapse shadow-lg drop-shadow-lg'>
-                  <thead className=''>
-                    <tr className='bg-primary text-left'>
-                      <th className='pl-2 py-2 rounded-b text-secundary '>Nome</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {sportList.map((sport, index) => {
-                      return <tr key={index} className={`${index % 2 !== 0 ? 'bg-primary/15' : ''} font-medium`}>
-                        <td className='pl-2 py-2 text-left'>{sport.descricao}</td>
-                      </tr>
-                    })}
-                  </tbody>
-                </table>
-                <button onClick={() => setIsModalAddSportOpen(true)} className='hidden px-2 py-1.5 w-full bg-primary text-lg lg:text-xl mt-2 text-secundary rounded'>Adicionar esporte</button>
-              </div>*/}
             </>)
           }
         </div>
       </div>
-      {isModalAddSportOpen && (
-        <ModalAddSport setSportList={setSportList} sportList={sportList} setIsModalAddSportOpen={setIsModalAddSportOpen}></ModalAddSport>
-      )}
-      {isModalDeleteSportOpen && (
-        <ModalDeleteSport sportList={sportList} setSportList={setSportList} setIsModalDeleteSportOpen={setIsModalDeleteSportOpen} idSport={sportIdToDelete}></ModalDeleteSport>
-      )}
-      {isModalEditSportOpen && (
-        <ModalEditSport setIsModalEditSportOpen={setIsModalEditSportOpen} setSportList={setSportList} sportList={sportList} setSportToEdit={setSportToEdit} sportToEdit={sportToEdit}></ModalEditSport>
-      )}
     </>
   );
 };

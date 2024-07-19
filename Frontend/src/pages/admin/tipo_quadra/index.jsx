@@ -73,7 +73,7 @@ const TiposQuadras = () => {
                         </div>
                     </>
                 )}
-                <button type="button" onClick={() => setIsModalAddTipoQuadraOpen(true)} className="bg-primary w-full text-secundary px-2 py-1.5 mb-2 mt-4 rounded font-medium text-lg lg:text-xl lg:w-[600px]">Adicionar tipo de quadra</button>
+                <button type="button" onClick={() => setIsModalAddTipoQuadraOpen(true)} className="bg-primary w-full text-secundary px-2 py-1.5 mb-2 rounded font-medium text-lg lg:text-xl">Adicionar tipo de quadra</button>
             </div>
             {isModalAddTipoQuadraOpen && (
                 <ModalAddTipoQuadra setIsModalAddTipoQuadraOpen={setIsModalAddTipoQuadraOpen} tiposQuadra={tiposQuadra} setTiposQuadra={setTiposQuadra} ></ModalAddTipoQuadra>

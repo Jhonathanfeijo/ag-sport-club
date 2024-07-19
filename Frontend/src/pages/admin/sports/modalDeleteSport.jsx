@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
-import { getUserLocalStorage } from "../../utils/userProvider";
-import { api } from "../../../services/api";
+import { api } from "../../../../services/api";
+import { getUserLocalStorage } from "../../../utils/userProvider";
 
 const ModalDeleteSport = ({ setIsModalDeleteSportOpen, idSport, sportList, setSportList }) => {
 
