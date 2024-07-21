@@ -28,21 +28,20 @@ const ModalEditPaymentType = ({ paymentTypeToEdit, setPaymentTypeToEdit, setIsMo
                     setIsModalEditPaymentTypeOpen(false);
                 }).catch((error) => {
                     console.log(error)
-                    toast.update(toastId, { render: 'Algo deu errado', type: "error", theme: "colored", isLoading: false, autoClose: 2000 });
+                    if(error.response){
+                        toast.update(toastId, { render: error.response.data.message, type: "error", theme: "colored", isLoading: false, autoClose: 2000 });
+                    }
                 });
         };
         putData();
     };
 
-    const verifyIsPaymentTypeIsActived = () => {
-        return paymentTypeToEdit.ativo;
-    }
 
     return (
         <>
-            <div className="fixed top-0 left-0 bg-third/10 h-screen w-screen flex flex-col justify-center items-center">
-                <div className="bg-secundary rounded w-[350px] max-w-[95%] px-3 py-4 drop-shadow-lg shadow-lg">
-                    <h1 className="text-xl font-bold mb-4">Editar forma de pagamento</h1>
+            <div className="fixed bg-third/15 top-0 left-0 w-screen h-screen flex flex-col justify-center md:justify-start items-center">
+            <div className="bg-secundary md:mt-40 px-5 rounded shadow-xl drop-shadow-xl max-w-full w-[450px]">
+                    <h1 className="text-2xl font-bold my-5">Editar forma de pagamento</h1>
                     <form onSubmit={handleSubmit(editPaymentType)} className="flex flex-col" action="">
                         <label className="font-bold" htmlFor="">Descrição</label>
                         <input {...register("descricao")} name="descricao" id="descricao" onChange={(e) => {
@@ -57,9 +56,9 @@ const ModalEditPaymentType = ({ paymentTypeToEdit, setPaymentTypeToEdit, setIsMo
                                     <div class="relative w-11 h-6 bg-third/20 rounded-full peer peer-focus: peer-focus: dark:peer-focus:ring-primary dark:bg-third/40 peer-checked:after:-translate-x-full rtl:peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:end-[2px] after:bg-secundary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary/90"></div>
                             </label>
                         </div>
-                        <div className="flex flex-row gap-2 mt-2">
-                            <button type="button" onClick={() => setIsModalEditPaymentTypeOpen(false)} className="flex-1 py-1 rounded border">Cancelar</button>
-                            <button className="flex-1 py-1 rounded bg-primary text-secundary">Editar</button>
+                        <div className="flex flex-row gap-2 self-end my-3">
+                            <button type="button" onClick={() => setIsModalEditPaymentTypeOpen(false)} className="flex-1 lg:flex-none py-1 px-2 rounded border">Cancelar</button>
+                            <button className="flex-1 lg:flex-none py-1 rounded bg-primary px-4 text-secundary">Editar</button>
 
                         </div>
                     </form>

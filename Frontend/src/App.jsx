@@ -11,7 +11,7 @@ import Users from './pages/users'
 import Layout from './utils/layout'
 import { UserProvider } from './utils/userProvider'
 import AdminConfig from './pages/admin'
-import Squirts from './pages/squirt'
+import Courts from './pages/Courts'
 
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
             <Route path="/users" element={<Layout children={<Users></Users>} />} />
             <Route path="/sports" element={<Layout children={<Sports />} />} />
             <Route path="/config" element={<Layout children={<AdminConfig />} />} />
-            <Route path="/squirts" element={<Layout children={<Squirts/>} />} />
+            <Route path="/courts" element={<Layout children={<Courts/>} />} />
           </Routes>
         </UserProvider>
       </BrowserRouter>

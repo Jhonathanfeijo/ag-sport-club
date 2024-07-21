@@ -1,5 +1,6 @@
 package com.invictus.domain.reserva;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.invictus.domain.formPagamento.FormPagamento;
@@ -36,7 +37,8 @@ public class Reserva {
 	private FormPagamento formPagamento;
 	private LocalDate data;
 	private int horarioInicial;
-	private int horasReservadas;
+	private String esporteReserva;
+	private BigDecimal valorReserva;
 	private String status;
 
 }

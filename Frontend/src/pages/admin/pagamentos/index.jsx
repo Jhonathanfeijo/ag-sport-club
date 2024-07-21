@@ -35,22 +35,22 @@ const FormasPagamento = () => {
 
     return (
         <>
-            <div className="w-full flex flex-col items-center">
+            <div className="flex flex-col items-center w-full ">
                 {statusDataLoading === "loaded" && (
                     <>
-                        <div className="table-container max-w-[100%] my-3 w-[350px] lg:w-full max-h-[320px]  lg:items-start overflow-auto flex flex-col items-center">
-                            <table className="shadow-lg drop-shadow-lg  w-full">
-                                <thead className="font-bold">
-                                    <tr className="bg-primary text-secundary">
-                                        <th className="py-2 px-2 text-left rounded-bl">Descricão</th>
-                                        <th className="py-2 px-2 text-left">Status</th>
-                                        <th className="py-2 px-2 text-left text-primary rounded-br"></th>
+                        <div className="table-container max-w-[100%] max-h-[500px] my-3 w-full lg:items-start overflow-auto flex flex-col items-center">
+                            <table className="shadow-lg drop-shadow-lg w-full">
+                                <thead className="font-bold sticky">
+                                    <tr className="bg-primary sticky text-secundary">
+                                        <th className="py-2 px-2 sticky text-left rounded-bl">Descricão</th>
+                                        <th className="py-2 px-2 sticky text-left">Status</th>
+                                        <th className="py-2 px-2 sticky text-left text-primary rounded-br"></th>
                                     </tr>
                                 </thead>
                                 <tbody className="rounded-b" >
                                     {paymentTypes.map((paymentType, index) => {
                                         return (
-                                            <tr key={index} className={`${index % 2 === 1 ? "bg-primary/15" : ""} font-bold w-full`}>
+                                            <tr key={index} className={`${index % 2 === 1 ? "bg-primary/10" : ""} font-bold w-full`}>
                                                 <td className="px-2 py-1 break-words">{paymentType.descricao}</td>
                                                 <td className={`px-2 py-1 break-words ${paymentType.ativo ? "" : " text-danger/80"}`}>{paymentType.ativo ? "Ativo" : "Inativo"}</td>
                                                 <td

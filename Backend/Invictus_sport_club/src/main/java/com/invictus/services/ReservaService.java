@@ -1,5 +1,8 @@
 package com.invictus.services;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +36,8 @@ public class ReservaService {
 		Usuario usuario = usuarioService.obterUsuario(request.getIdUsuario());
 		Quadra quadra = quadraSevice.obterQuadraPorId(request.getIdQuadra());
 		FormPagamento formPagamento = formPagamentoService.buscarFormaPagamentoPorId(request.getIdFormPagamento());
-		Reserva reserva = new Reserva(null, usuario, quadra, formPagamento, request.getData(),
-				request.getHorarioInicial(), request.getHorasReservadas(), "pendente");
+		Reserva reserva = new Reserva(null, usuario, quadra, formPagamento, request.getDataReserva(),
+				request.getHorarioInicial(), quadra.getEsporte().getDescricao(), quadra.getValorHora(), "pendente");
 		return reservaRepository.save(reserva);
 	}
 
@@ -56,12 +59,26 @@ public class ReservaService {
 			throw new RuntimeException("Reserva não foi encontrada");
 	}
 
-	public Page<Reserva> obterReservas(Pageable paginacao){
+	public Page<Reserva> obterReservas(Pageable paginacao) {
 		return reservaRepository.findAll(paginacao);
 	}
-	
-	public List<Reserva> obterReservasPorIdUsuario(Long idUsuario){
+
+	public List<Reserva> obterReservasPorIdUsuario(Long idUsuario) {
 		return reservaRepository.findAllByUsuarioIdUsuario(idUsuario);
+	}
+
+	public List<Integer> obterHorariosDisponiveis(LocalDate dataReserva) {
+		List<Reserva> reservasMarcadasNaData = reservaRepository.findAllByDataReservada(dataReserva);
+		ArrayList<Integer> horariosDisponiveis;
+		if (dataReserva.getDayOfWeek().toString().toUpperCase().equals("SUNDAY"))
+			horariosDisponiveis = new ArrayList<>(Arrays.asList(8, 9, 10, 11, 13, 14, 15, 16, 17));
+		else
+			horariosDisponiveis = new ArrayList<>(Arrays.asList(8, 9, 10, 11, 13, 14, 15, 16, 17,18,19,20,21,22));
+	    for (Reserva reserva : reservasMarcadasNaData) {
+	        int horarioInicialReserva = reserva.getHorarioInicial(); 
+	        horariosDisponiveis.removeIf(horario -> horario == horarioInicialReserva);
+	    }
+		return horariosDisponiveis;
 	}
 
 }

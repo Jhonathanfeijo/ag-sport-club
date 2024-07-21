@@ -38,22 +38,22 @@ const TiposQuadras = () => {
             <div className="rounded w-full flex flex-col items-center">
                 {statusDataLoading === "loaded" && (
                     <>
-                        <div className="table-container max-w-[100%] w-full  max-h-[320px] my-3  lg:items-start overflow-auto flex flex-col items-center">
+                        <div className="table-container max-w-[100%] w-full max-h-[320px] my-3  lg:items-start overflow-auto flex flex-col items-center">
                             <table className="shadow-lg w-full drop-shadow-lg mb-2 ">
-                                <thead className="">
-                                    <tr className="bg-primary text-secundary rounded-b">
-                                        <th className="py-2 px-2 text-left rounded-bl">Descricão</th>
-                                        <th className="py-1 text-left text-primary rounded-br">Editar</th>
+                                <thead className="sticky">
+                                    <tr className="bg-primary sticky text-secundary rounded-b">
+                                        <th className="py-2 px-2 sticky text-left rounded-bl">Descricão</th>
+                                        <th className="py-1 sticky text-left text-primary rounded-br">Editar</th>
                                     </tr>
                                 </thead>
                                 <tbody >
                                     {tiposQuadra.map((tipoQuadra, index) => {
                                         return (
                                             <tr key={index} className={`${index % 2 === 1 ? "bg-primary/15" : ""} font-bold w-full`}>
-                                                <td className="px-2 py-1 break-words">{tipoQuadra.descricao}</td>
+                                                <td className="px-2 py-2 break-words max-w-[200px]">{tipoQuadra.descricao}</td>
                                                 <td
 
-                                                    className="px-1 py-2 font-normal break-words flex flex-row justify-end gap-2"
+                                                    className="px-2 py-1 font-normal break-words flex flex-row justify-end gap-2"
                                                 >
                                                     <button onClick={() => {
                                                         setTipoQuadraToEdit({ ...tipoQuadra })

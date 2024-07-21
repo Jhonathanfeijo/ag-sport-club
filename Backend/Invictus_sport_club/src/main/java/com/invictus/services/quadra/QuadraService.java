@@ -55,7 +55,6 @@ public class QuadraService {
 	}
 
 	public Quadra editarQuadraPorId(Long idQuadra, QuadraRequest request) {
-		validadores.forEach((v) -> v.validar(request));
 
 		verificaQuadraExiste(idQuadra);
 

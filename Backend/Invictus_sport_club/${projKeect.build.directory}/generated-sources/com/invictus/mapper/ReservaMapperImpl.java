@@ -4,14 +4,15 @@ import com.invictus.domain.quadra.Quadra;
 import com.invictus.domain.reserva.Reserva;
 import com.invictus.domain.reserva.ReservaResponseDto;
 import com.invictus.domain.usuario.Usuario;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-18T10:40:44-0400",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 21.0.1 (Oracle Corporation)"
+    date = "2024-07-21T13:43:00-0400",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.37.0.v20240215-1558, environment: Java 20 (Oracle Corporation)"
 )
 @Component
 public class ReservaMapperImpl implements ReservaMapper {
@@ -27,16 +28,22 @@ public class ReservaMapperImpl implements ReservaMapper {
         String quadraLoc = null;
         LocalDate dataLocacao = null;
         int horarioInicial = 0;
+        String esporteReserva = null;
         Long idReserva = null;
+        String status = null;
+        BigDecimal valorReserva = null;
 
         nomeUsuario = reservaUsuarioNome( reserva );
         cpfUsuario = reservaUsuarioCpf( reserva );
         quadraLoc = reservaQuadraLocQuadra( reserva );
         dataLocacao = reserva.getData();
         horarioInicial = reserva.getHorarioInicial();
+        esporteReserva = reserva.getEsporteReserva();
         idReserva = reserva.getIdReserva();
+        status = reserva.getStatus();
+        valorReserva = reserva.getValorReserva();
 
-        ReservaResponseDto reservaResponseDto = new ReservaResponseDto( nomeUsuario, cpfUsuario, idReserva, quadraLoc, dataLocacao, horarioInicial );
+        ReservaResponseDto reservaResponseDto = new ReservaResponseDto( nomeUsuario, cpfUsuario, idReserva, quadraLoc, dataLocacao, valorReserva, esporteReserva, horarioInicial, status );
 
         return reservaResponseDto;
     }

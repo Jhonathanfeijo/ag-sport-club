@@ -16,8 +16,7 @@ public class ReservaRequestDTO {
     private Long idUsuario;
     private Long idQuadra;
     private Long idFormPagamento;
-    private LocalDate data;
+    private LocalDate dataReserva;
     private int horarioInicial;
-    private int horasReservadas;
 
 }

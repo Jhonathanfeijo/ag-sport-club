@@ -2,11 +2,12 @@ import { useState } from "react";
 import FormasPagamento from "./pagamentos";
 import TiposQuadras from "./tipo_quadra";
 import SportsAdmin from "./sports";
-import SquirtsAdmin from "./squirts";
+import Courts from "./court";
+import Users from "./user";
 
 const AdminConfig = () => {
 
-    const [option, setOption] = useState('esportes');
+    const [option, setOption] = useState('');
 
     return (
         <>
@@ -23,14 +24,14 @@ const AdminConfig = () => {
                 <div className=" w-[350px] max-w-full flex flex-row lg:hidden">
                     <select onChange={(e) => { setOption(e.target.value) }} name="" id="" className="bg-primary text-secundary w-full border px-1 py-1 mt-5 text-center text-xl rounded">
                         <option className="bg-secundary text-primary" value="">Selecione</option>
-                        <option className="bg-secundary text-primary" value="esporte">Esporte</option>
+                        <option className="bg-secundary text-primary" value="esportes">Esporte</option>
                         <option className="bg-secundary text-primary" value="pagamentos">Formas de pagamento</option>
                         <option className="bg-secundary text-primary" value="quadras">Quadra</option>
                         <option className="bg-secundary text-primary" value="tipos_quadra">Tipos de quadra</option>
                         <option className="bg-secundary text-primary" value="usuarios">Usuários</option>
                     </select>
                 </div>
-                <div className="w-full lg:w-[720px] flex flex-col items-center">
+                <div className="w-full sm:w-[600px] lg:w-[720px] flex flex-col items-center">
                     {option === "pagamentos" && (
                         <FormasPagamento></FormasPagamento>
                     )}
@@ -41,7 +42,10 @@ const AdminConfig = () => {
                         <SportsAdmin></SportsAdmin>
                     )}
                     {option === "quadras" && (
-                        <SquirtsAdmin></SquirtsAdmin>
+                        <Courts editable={true}></Courts>
+                    )}
+                    {option === "usuarios" && (
+                        <Users type={"admin"} ></Users>
                     )}
                 </div>
             </div>

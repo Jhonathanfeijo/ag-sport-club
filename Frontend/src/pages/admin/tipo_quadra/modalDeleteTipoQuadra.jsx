@@ -36,7 +36,7 @@ const ModalDeleteTipoQuadra = ({tipoQuadraDeleteId, setIsModalDeleteTipoQuadraOp
                     theme: "colored",
                     type: "error",
                     isLoading: false,
-                    autoClose: 2000
+                    autoClose: 2500
                 })
             });
         };
@@ -46,10 +46,10 @@ const ModalDeleteTipoQuadra = ({tipoQuadraDeleteId, setIsModalDeleteTipoQuadraOp
 
     return (
         <>
-            <div className="fixed top-0 left-0 w-screen h-screen bg-third/15 flex flex-col justify-center items-center">
-                <div className="bg-secundary rounded w-[350px] max-w-[95%] flex flex-col drop-shadow-lg shadow-lg items-start font-bold p-3">
-                    <h1>Você tem certeza que deseja apagar esse tipo de quadra?</h1>
-                    <div className="self-end flex flex-row gap-2 mt-5">
+            <div className="w-screen h-screen fixed top-0 left-0 bg-third/10 flex flex-col justify-center md:justify-start items-center">
+            <div className="bg-secundary px-3 w-[400px] md:w-[500px] max-w-[95%] flex flex-col items-start md:mt-40 rounded shadow-lg drop-shadow-lg">
+                    <h1 className="font-bold text-lg mt-5">Você tem certeza que deseja apagar esse tipo de quadra?</h1>
+                    <div className="self-end flex flex-row gap-2 my-3">
                         <button onClick={() => setIsModalDeleteTipoQuadraOpen(false)} className="bg-primary text-secundary rounded px-2 py-1">Cancelar</button>
                         <button onClick={() => deleteTipoQuadra()} className="bg-danger/70 text-secundary rounded px-2 py-1">Deletar</button>
                     </div>

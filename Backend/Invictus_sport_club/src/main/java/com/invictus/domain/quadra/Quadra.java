@@ -27,7 +27,7 @@ public class Quadra {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idQuadra;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "id_tipo_quadra")
 	private TipoQuadra tipoQuadra;
 	@ManyToOne

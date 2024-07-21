@@ -37,7 +37,7 @@ const Header = ({ nivel_permissao }) => {
                         <img className='w-8 h-8' src={iconMedal} alt="" />
                         <p className='text-secundary hidden lg:block' href="">Esportes</p>
                     </NavLink>
-                    <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/squirts'}>
+                    <NavLink className='flex flex-row items-center lg:ml-5  gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/courts'}>
                         <img className='w-8 h-8' src={iconRectangle} alt="" />
                         <p className='text-secundary hidden lg:block' href="">Quadras</p>
                     </NavLink>

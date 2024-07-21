@@ -66,7 +66,7 @@ public class QuadraController {
 
 	
 	@Transactional
-	@DeleteMapping("/{id}]")
+	@DeleteMapping("/{id}")
 	public ResponseEntity deleteById(@PathVariable("id") Long idQuadra) {
 		quadraService.deletarQuadraPorId(idQuadra);
 		return ResponseEntity.noContent().build();

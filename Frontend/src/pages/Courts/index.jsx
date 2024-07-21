@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { api } from "../../../services/api";
 import { getUserLocalStorage } from "../../utils/userProvider";
 
-const Squirts = () => {
+const Courts = () => {
 
     const [quadraList, setQuadraList] = useState([]);
     const [isDataLoadered, setIsDataLoadered] = useState(false);
@@ -28,13 +28,13 @@ const Squirts = () => {
     return (
         <>
             <div className="px-2 w-[350px] max-w-full lg:w-full flex flex-col items-center ">
-                <div className="mt-10 w-full lg:w-[500px] flex flex-col items-center">
+                <div className="mt-10 lg:mt-20 w-full sm:w-[600px] lg:w-[750px] flex flex-col items-center">
 
                     <h1 className="text-4xl font-bold text-center mb-5 lg:mb-9">Quadras</h1>
                     {isDataLoadered && (
                         <>
-                            <div className="container-table overflow-auto w-[350px] lg:w-full max-w-full flex flex-col items-center">
-                                <table className="border-collapse w-full  table-auto shadow-lg drop-shadow-lg ">
+                            <div className="container-table overflow-auto w-full max-h-[500px] max-w-full flex flex-col items-center">
+                                <table className="border-collapse w-full max-w-full table-auto shadow-lg drop-shadow-lg font-bold ">
                                     <thead>
                                         <tr className="bg-primary text-secundary">
                                             <td className="pl-2 py-2 font-medium text-left rounded-bl">Nome</td>
@@ -43,7 +43,7 @@ const Squirts = () => {
                                             <td className="pl-2 py-2 font-medium pr-2 text-left rounded-br">R$ / Hora</td>
                                         </tr>
                                     </thead>
-                                    <tbody className="max-w-[100px] overflow-auto">
+                                    <tbody className="">
                                         {quadraList.map((quadra, index) => {
                                             return <tr className={`${index % 2 === 1 ? "bg-primary/10" : ""} text-primary`} key={index}>
                                                 <td className="pl-2 py-2 pr-5 text-left">{quadra.locQuadra}</td>
@@ -68,4 +68,4 @@ const Squirts = () => {
     )
 }
 
-export default Squirts
+export default Courts
