@@ -12,7 +12,8 @@ export default {
       primary: '#1e3a8a',
       secundary:'#ffffff',
       third: '#000000',
-      danger: '#8C030E'
+      danger: '#8C030E',
+      sucess:"#03A64A"
     },
   },
   plugins: [],

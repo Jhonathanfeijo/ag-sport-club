@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { api } from "../../../services/api";
 import { getUserLocalStorage } from "../../utils/userProvider";
 import ModalRegisterMyReserv from "./modalRegisterMyReserv";
+import ModalSeeMoreAboutReserv from "./modalSeeMoreAboutReserv";
 
 const Reserv = () => {
 
     const [myReservs, setMyReservs] = useState([]);
     const [isDataLoaded, setIsDataLoaded] = useState();
     const [isModalRegisterMyReservsOpen, setIsModalRegisterMyReservsOpen] = useState(false);
+    const [isModalSeeMoreAboutReservOpen, setIsModalSeeMoreAboutReservOpen] = useState(false);
+    const [reservToSee, setReservToSee] = useState();
 
     useEffect(() => {
         const user = getUserLocalStorage();
@@ -34,46 +37,46 @@ const Reserv = () => {
                 <h1 className="font-bold text-4xl text-center">Minhas reservas</h1>
                 {(isDataLoaded && isDataLoaded === true && myReservs.length > 0) && (
                     <>
-                    <div className="table-container max-h-[550px] w-full mt-4 overflow-auto drop-shadow-xl shadow-lg">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="text-secundary text-left">
-                                    <th className="bg-primary rounded-bl p-2">Data</th>
-                                    <th className="bg-primary p-2">Quadra</th>
-                                    <th className="bg-primary p-2">Esporte</th>
-                                    <th className="bg-primary p-2">Valor</th>
-                                    <th className="bg-primary p-2">Horario</th>
-                                    <th className="bg-primary p-2">Status</th>
-                                    <th className="bg-primary rounded-br p-2"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {myReservs.map((myReserv, index) => {
-                                    return <tr className={`${index % 2 === 1 ? "bg-primary/10" : ""} font-bold`} key={index}>
-                                        <td className="py-2 px-2">{myReserv.dataLocacao}</td>
-                                        <td className="py-2 px-2">{myReserv.quadraLoc}</td>
-                                        <td className="py-2 px-2">{myReserv.esporteReserva}</td>
-                                        <td className="py-2 px-2">{`R$ ${parseFloat(myReserv.valorReserva).toFixed(2)}`}</td>
-                                        <td className="py-2 px-2">{`${myReserv.horarioInicial}:00 - ${myReserv.horarioInicial + 1}:00`}</td>
-                                        <td className="py-2 px-2">{myReserv.status.toUpperCase()}</td>
-                                        {myReserv.status.toUpperCase() === "PENDENTE" ?
-                                            <td className="flex flex-row items py-1 center gap-2 text-secundary font-medium">
-                                                <button className="bg-danger/70 px-2 py-1 rounded">Cancelar</button>
-                                                <button className="bg-primary px-2 py-1 rounded"> Pagar</button>
-                                            </td> : <></>
-                                        }
+                        <div className="table-container max-h-[550px] w-full mt-4 overflow-auto drop-shadow-xl shadow-lg">
+                            <table className="w-full">
+                                <thead>
+                                    <tr className="text-secundary text-left">
+                                        <th className="bg-primary rounded-bl p-2">Data</th>
+                                        <th className="bg-primary p-2">Horario</th>
+                                        <th className="bg-primary p-2">Quadra</th>
+                                        <th className="bg-primary p-2">Valor / Hora</th>
+                                        <th className="bg-primary p-2">Status</th>
+                                        <th className="bg-primary rounded-br p-2"></th>
                                     </tr>
-                                })}
-                            </tbody>
-                        </table>
-                    </div>
-                    <button onClick={() =>setIsModalRegisterMyReservsOpen(true)} className="w-full text-secundary rounded bg-primary py-2 text-lg my-2">Fazer reserva</button>
+                                </thead>
+                                <tbody>
+                                    {myReservs.map((myReserv, index) => {
+                                        return <tr className={`${index % 2 === 1 ? "bg-primary/10" : ""} font-bold`} key={index}>
+                                            <td className="py-2 px-2">{myReserv.dataLocacao}</td>
+                                            <td className="py-2 px-2">{`${myReserv.horarioInicial}:00 - ${myReserv.horarioInicial + 1}:00`}</td>
+                                            <td className="py-2 px-2">{myReserv.quadraLoc}</td>
+                                            <td className="py-2 px-2">{`R$ ${parseFloat(myReserv.valorReserva).toFixed(2)}`}</td>
+                                            <td className="py-2 px-2">{myReserv.status.toUpperCase()}</td>
+                                            {myReserv.status.toUpperCase() === "PENDENTE" ?
+                                                <td className="flex flex-row items py-1 center gap-2 text-secundary font-medium">
+                                                    <button onClick={() => { setIsModalSeeMoreAboutReservOpen(true); setReservToSee({ ...myReserv }) }} className="bg-primary px-2 py-1 rounded"> Ver mais</button>
+                                                </td> : <></>
+                                            }
+                                        </tr>
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                        <button onClick={() => setIsModalRegisterMyReservsOpen(true)} className="w-full text-secundary rounded bg-primary py-2 text-lg my-2">Fazer reserva</button>
                     </>
                 )}
             </main>
         </div>
         {isModalRegisterMyReservsOpen && (
-            <ModalRegisterMyReserv setMyReservs={setMyReservs} myReservs = {myReservs} setIsModalRegisterMyReservsOpen = {setIsModalRegisterMyReservsOpen} ></ModalRegisterMyReserv>
+            <ModalRegisterMyReserv setMyReservs={setMyReservs} myReservs={myReservs} setIsModalRegisterMyReservsOpen={setIsModalRegisterMyReservsOpen} ></ModalRegisterMyReserv>
+        )}
+        {isModalSeeMoreAboutReservOpen && (
+            <ModalSeeMoreAboutReserv setMyReservs={setMyReservs} myReservs={myReservs} reserv={reservToSee} setIsModalSeeMoreAboutReservOpen={setIsModalSeeMoreAboutReservOpen}></ModalSeeMoreAboutReserv>
         )}
     </>
     );

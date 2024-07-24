@@ -1,6 +1,7 @@
 package com.invictus.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +37,7 @@ public class ReservaService {
 		Usuario usuario = usuarioService.obterUsuario(request.getIdUsuario());
 		Quadra quadra = quadraSevice.obterQuadraPorId(request.getIdQuadra());
 		FormPagamento formPagamento = formPagamentoService.buscarFormaPagamentoPorId(request.getIdFormPagamento());
-		Reserva reserva = new Reserva(null, usuario, quadra, formPagamento, request.getDataReserva(),
+		Reserva reserva = new Reserva(null, usuario, quadra, formPagamento, request.getDataReserva(),LocalDateTime.now(),
 				request.getHorarioInicial(), quadra.getEsporte().getDescricao(), quadra.getValorHora(), "pendente");
 		return reservaRepository.save(reserva);
 	}

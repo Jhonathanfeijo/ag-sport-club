@@ -2,6 +2,7 @@ package com.invictus.domain.reserva;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.invictus.domain.formPagamento.FormPagamento;
 import com.invictus.domain.quadra.Quadra;
@@ -36,6 +37,7 @@ public class Reserva {
 	@JoinColumn(name = "id_form_pagamento")
 	private FormPagamento formPagamento;
 	private LocalDate data;
+	private LocalDateTime realizacaoReserva;
 	private int horarioInicial;
 	private String esporteReserva;
 	private BigDecimal valorReserva;

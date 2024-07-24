@@ -12,6 +12,7 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
     const [statusDateAvailable, setStatusDateAvailable] = useState("quit");
     const [hoursAvailable, setHoursAvailable] = useState([]);
 
+
     const { register, handleSubmit } = useForm();
 
     useEffect(() => {
@@ -151,7 +152,7 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
                                 <input onSelect={(e) => { handleDateChange(e) }} onBlur={(e) => { handleDateChange(e) }} onChange={(e) => { handleDateChange(e) }} {...register("dataReserva")} className="rounded border p-1" type="date" name="dataReserva" id="dataReserva" />
 
                                 {statusDateAvailable === "notFound" && (
-                                    <span>Nenhum horário encontrado</span>
+                                    <span>Nenhum disponível encontrado</span>
                                 )}
                                 {statusDateAvailable === "loading" && (
                                     <span>Carregando horários...</span>
