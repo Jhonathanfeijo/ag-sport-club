@@ -13,6 +13,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "axios": "^1.6.8",
+    "framer-motion": "^11.3.18",
     "json-server": "^1.0.0-alpha.23",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
