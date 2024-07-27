@@ -41,64 +41,72 @@ const TiposQuadras = () => {
   return (
     <motion.div
       style={{ width: '100%', height: '100vh' }}
-      initial={{ opacity: 0, x: -5 }}
-      exit={{ opacity: 0, x: 5 }}
+      initial={{ opacity: 0, x: -15 }}
+      exit={{ opacity: 0, x: 15 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3 }}
     >
       <div className='rounded w-full flex flex-col items-center'>
         {statusDataLoading === 'loaded' && (
           <>
-            <div className='table-container max-w-[100%] w-full max-h-[320px] my-3  lg:items-start overflow-auto flex flex-col items-center'>
-              <table className='shadow-lg w-full drop-shadow-lg mb-2 '>
-                <thead className='sticky'>
-                  <tr className='bg-primary sticky text-secundary rounded-b'>
-                    <th className='py-2 px-2 sticky text-left rounded-bl'>
-                      Descricão
-                    </th>
-                    <th className='py-1 sticky text-left text-primary rounded-br'>
-                      Editar
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {tiposQuadra.map((tipoQuadra, index) => {
-                    return (
-                      <tr
-                        key={index}
-                        className={`${
-                          index % 2 === 1 ? 'bg-primary/15' : ''
-                        } font-bold w-full`}
-                      >
-                        <td className='px-2 py-2 break-words max-w-[200px]'>
-                          {tipoQuadra.descricao}
-                        </td>
-                        <td className='px-2 py-1 font-normal break-words flex flex-row justify-end gap-2'>
-                          <button
-                            onClick={() => {
-                              setTipoQuadraToEdit({ ...tipoQuadra });
-                              setIsModalEditTipoQuadraOpen(true);
-                            }}
-                            className='bg-primary text-secundary px-2 py-1 rounded'
-                          >
-                            Editar
-                          </button>
-                          <button
-                            onClick={() => {
-                              setTipoQuadraDeleteId(tipoQuadra.idTipoQuadra);
-                              setIsModalDeleteTipoQuadraOpen(true);
-                            }}
-                            className='bg-danger/70 text-secundary px-1 rounded py-1'
-                          >
-                            Deletar
-                          </button>
-                        </td>
+            {tiposQuadra.length === 0 && (
+              <>
+                <h2 className='text-lg lg:text-2xl font-medium mt-2 mb-5'>Não há tipos de quadra cadastrado</h2>
+              </>
+            )}
+            {tiposQuadra.length > 0 && (
+              <>
+                <div className='table-container max-w-[100%] w-full max-h-[320px] my-3  lg:items-start overflow-auto flex flex-col items-center'>
+                  <table className='shadow-lg w-full drop-shadow-lg mb-2 '>
+                    <thead className='sticky'>
+                      <tr className='bg-primary sticky text-secundary rounded-b'>
+                        <th className='py-2 px-2 sticky text-left rounded-bl'>
+                          Descricão
+                        </th>
+                        <th className='py-1 sticky text-left text-primary rounded-br'>
+                          Editar
+                        </th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+                    </thead>
+                    <tbody>
+                      {tiposQuadra.map((tipoQuadra, index) => {
+                        return (
+                          <tr
+                            key={index}
+                            className={`${index % 2 === 1 ? 'bg-primary/15' : ''
+                              } font-bold w-full`}
+                          >
+                            <td className='px-2 py-2 break-words max-w-[200px]'>
+                              {tipoQuadra.descricao}
+                            </td>
+                            <td className='px-2 py-1 font-normal break-words flex flex-row justify-end gap-2'>
+                              <button
+                                onClick={() => {
+                                  setTipoQuadraToEdit({ ...tipoQuadra });
+                                  setIsModalEditTipoQuadraOpen(true);
+                                }}
+                                className='bg-primary text-secundary px-2 py-1 rounded'
+                              >
+                                Editar
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setTipoQuadraDeleteId(tipoQuadra.idTipoQuadra);
+                                  setIsModalDeleteTipoQuadraOpen(true);
+                                }}
+                                className='bg-danger/70 text-secundary px-1 rounded py-1'
+                              >
+                                Deletar
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
           </>
         )}
         <button

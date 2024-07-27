@@ -18,55 +18,55 @@ const AdminConfig = () => {
       transition={{ duration: 0.3 }}
     >
       <div className='flex flex-col h-screen w-full items-center px-4'>
-        <h1 className='text-primary text-4xl font-bold my-5 text-center lg-text-left lg:my-9'>
+        <h1 className='text-primary text-4xl font-bold mt-10 text-center lg-text-left md:mt-20'>
           Ajustes
         </h1>
-        <div className='hidden lg:grid lg:grid-flow-col lg:w-[720px] gap'>
+        <div className='hidden mt-10 lg:grid lg:grid-flow-col lg:w-[720px] gap'>
           <div
             onClick={() => setOption('esportes')}
             className={`${
-              option === 'esportes' ? 'opacity-80' : ''
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 rounded-l`}
+              option === 'esportes' ? ' border-orange' : 'border-primary'
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 rounded-l`}
           >
             <span>Esportes</span>
           </div>
           <div
             onClick={() => setOption('pagamentos')}
             className={`${
-              option === 'pagamentos' ? 'opacity-80' : ''
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 `}
+              option === 'pagamentos' ? ' border-orange' : 'border-primary'
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 `}
           >
             <span>Formas de pagamento</span>
           </div>
           <div
             onClick={() => setOption('quadras')}
             className={`${
-              option === 'quadras' ? 'opacity-80' : ''
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 `}
+              option === 'quadras' ? ' border-orange' : 'border-primary'
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 `}
           >
             <span>Quadras</span>
           </div>
           <div
             onClick={() => setOption('reservas')}
             className={`${
-              option === 'reservas' ? 'opacity-80' : ''
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 `}
+              option === 'reservas' ? ' border-orange' : 'border-primary'
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 `}
           >
             <span>Reservas</span>
           </div>
           <div
             onClick={() => setOption('tipos_quadra')}
             className={`${
-              option === 'tipos_quadra' ? 'opacity-80' : ''
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 `}
+              option === 'tipos_quadra' ? ' border-orange' : 'border-primary'
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 `}
           >
             <span>Tipos de quadra</span>
           </div>
           <div
             onClick={() => setOption('usuarios')}
             className={`${
-              option === 'usuarios' ? 'opacity-80' : ''
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 rounded-r`}
+              option === 'usuarios' ? ' border-orange' : 'border-primary'
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 rounded-r`}
           >
             <span>Usuário</span>
           </div>

@@ -17,6 +17,7 @@ public interface ReservaMapper {
 	@Mapping(source = "reserva.quadra.locQuadra", target = "quadraLoc")
 	@Mapping(source = "reserva.data", target = "dataLocacao")
 	@Mapping(source = "reserva.horarioInicial", target = "horarioInicial")
+	@Mapping(source = "reserva.quadra.tipoQuadra.descricao", target = "tipoQuadra")
 	public ReservaResponseDto reservaToReservaResponseDto(Reserva reserva);
 	
 	

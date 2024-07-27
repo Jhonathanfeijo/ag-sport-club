@@ -81,5 +81,12 @@ public class ReservaService {
 	    }
 		return horariosDisponiveis;
 	}
+	
+	public Reserva atualizarReserva(Long idReserva, String status) {
+		verificadorReservaExiste(idReserva);
+		Reserva reserva = reservaRepository.findById(idReserva).get();
+		reserva.setStatus(status);
+		return reservaRepository.save(reserva);
+	}
 
 }

@@ -3,6 +3,7 @@ package com.invictus.mapper;
 import com.invictus.domain.quadra.Quadra;
 import com.invictus.domain.reserva.Reserva;
 import com.invictus.domain.reserva.ReservaResponseDto;
+import com.invictus.domain.tipoQuadra.TipoQuadra;
 import com.invictus.domain.usuario.Usuario;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-26T12:04:33-0400",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 21.0.1 (Oracle Corporation)"
+    date = "2024-07-26T19:34:41-0400",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.37.0.v20240215-1558, environment: Java 20 (Oracle Corporation)"
 )
 @Component
 public class ReservaMapperImpl implements ReservaMapper {
@@ -29,6 +30,7 @@ public class ReservaMapperImpl implements ReservaMapper {
         String quadraLoc = null;
         LocalDate dataLocacao = null;
         int horarioInicial = 0;
+        String tipoQuadra = null;
         String esporteReserva = null;
         Long idReserva = null;
         LocalDateTime realizacaoReserva = null;
@@ -40,13 +42,14 @@ public class ReservaMapperImpl implements ReservaMapper {
         quadraLoc = reservaQuadraLocQuadra( reserva );
         dataLocacao = reserva.getData();
         horarioInicial = reserva.getHorarioInicial();
+        tipoQuadra = reservaQuadraTipoQuadraDescricao( reserva );
         esporteReserva = reserva.getEsporteReserva();
         idReserva = reserva.getIdReserva();
         realizacaoReserva = reserva.getRealizacaoReserva();
         status = reserva.getStatus();
         valorReserva = reserva.getValorReserva();
 
-        ReservaResponseDto reservaResponseDto = new ReservaResponseDto( nomeUsuario, cpfUsuario, idReserva, quadraLoc, dataLocacao, realizacaoReserva, valorReserva, esporteReserva, horarioInicial, status );
+        ReservaResponseDto reservaResponseDto = new ReservaResponseDto( nomeUsuario, cpfUsuario, idReserva, quadraLoc, dataLocacao, realizacaoReserva, valorReserva, esporteReserva, horarioInicial, status, tipoQuadra );
 
         return reservaResponseDto;
     }
@@ -94,5 +97,24 @@ public class ReservaMapperImpl implements ReservaMapper {
             return null;
         }
         return locQuadra;
+    }
+
+    private String reservaQuadraTipoQuadraDescricao(Reserva reserva) {
+        if ( reserva == null ) {
+            return null;
+        }
+        Quadra quadra = reserva.getQuadra();
+        if ( quadra == null ) {
+            return null;
+        }
+        TipoQuadra tipoQuadra = quadra.getTipoQuadra();
+        if ( tipoQuadra == null ) {
+            return null;
+        }
+        String descricao = tipoQuadra.getDescricao();
+        if ( descricao == null ) {
+            return null;
+        }
+        return descricao;
     }
 }

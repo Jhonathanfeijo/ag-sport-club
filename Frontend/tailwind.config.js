@@ -13,7 +13,8 @@ export default {
       secundary:'#ffffff',
       third: '#000000',
       danger: '#8C030E',
-      sucess:"#03A64A"
+      sucess:"#03A64A",
+      orange:'#E6450F'
     },
   },
   plugins: [],

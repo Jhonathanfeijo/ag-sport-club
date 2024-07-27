@@ -47,22 +47,27 @@ const Sports = () => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className='mt-5 lg:mt-9 flex flex-col items-center w-full max-w-full'>
+      <div className='md:mt-20 flex flex-col items-center w-full max-w-full'>
         <div className='flex flex-col'>
           <h1 className='text-4xl font-bold'>Esportes</h1>
         </div>
         <div className='flex flex-col items-center my-8 lg:my-10 w-full lg:w-[850px] px-2'>
           {statusDataSports === 'loaded' && (
-            <>
-              <div className='w-[300px] max-w-full lg:w-full grid grid-cols-2 lg:grid-cols-4 lg:flex-wrap items-center justify-center gap-2 grid-'>
-                {sportList.map(sport => {
-                  return (
-                    <div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-pointer duration-200 hover:opacity-80 my-1'>
-                      <span>{sport.descricao}</span>
-                    </div>
-                  );
-                })}
-              </div>
+            <>{sportList.length === 0 && (
+              <>
+                <h2 className='text-lg md:text-3xl font-medium'>Não há esportes cadastrados</h2>
+              </>)}
+              {sportList.length > 0 && (<>
+                <div className='w-[300px]  max-w-full lg:w-full max-h-[350px] overflow-auto md:max-h-[500px] grid grid-cols-2 lg:grid-cols-4 lg:flex-wrap items-center justify-center gap-2 '>
+                  {sportList.map(sport => {
+                    return (
+                      <div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-pointer duration-200 hover:opacity-80 my-1'>
+                        <span>{sport.descricao}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>)}
             </>
           )}
         </div>

@@ -15,7 +15,7 @@ const ModalSeeMoreAboutReserv = ({ reserv, setMyReservs, myReservs, setIsModalSe
         <div className="fixed top-0 left-0 h-screen w-screen bg-third/15 flex flex-col items-center justify-center">
             <div className="bg-secundary rounded drop-shadow-xl shadow-lg p-4 sm:w-[400px] lg:w-[900px] font-bold flex flex-col items-center relative">
                 {isModalConfirmAlterReservStatusOpen && (
-                    <ModalConfirmAlterReservStatus action={action} myReservs={myReservs} reserv={reserv} setIsModalConfirmAlterReservStatusOpen={setIsModalConfirmAlterReservStatusOpen} setMyReservs={setMyReservs} />
+                    <ModalConfirmAlterReservStatus setIsModalSeeMoreAboutReservOpen={setIsModalSeeMoreAboutReservOpen} action={action} myReservs={myReservs} reserv={reserv} setIsModalConfirmAlterReservStatusOpen={setIsModalConfirmAlterReservStatusOpen} setMyReservs={setMyReservs} />
                 )}
                 <h1 className="text-2xl my-3 text-left font-bold">Detalhes sobre a reserva</h1>
                 <div className="flex flex-row flex-wrap gap-3">

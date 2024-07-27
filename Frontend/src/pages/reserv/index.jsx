@@ -35,25 +35,25 @@ const Reserv = () => {
   return (
     <motion.div
       style={{ width: '100%', height: '100vh' }}
-      initial={{ opacity: 0, x: -5 }}
-      exit={{ opacity: 0, x: 5 }}
+      initial={{ opacity: 0, x: -15 }}
+      exit={{ opacity: 0, x: 15 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3 }}
     >
       <div className='w-full h-screen flex justify-center items-center text-primary'>
-        <main className=' pt-20 w-full md:w-[700px] lg:w-[750px] max-w-full h-full flex flex-col items-center'>
+        <main className=' md:pt-20 w-full md:w-[700px] lg:w-[750px] max-w-full h-full flex flex-col items-center'>
           <h1 className='font-bold text-4xl text-center'>Minhas reservas</h1>
           {isDataLoaded && isDataLoaded === true && myReservs.length > 0 && (
             <>
-              <div className='table-container max-h-[550px] w-full mt-4 overflow-auto drop-shadow-xl shadow-lg'>
+              <div className='table-container w-[95%] max-w-[95%] md:max-w-full max-h-[400px] md:w-full mt-4 overflow-auto drop-shadow-xl shadow-lg'>
                 <table className='w-full'>
-                  <thead>
+                  <thead className='sticky top-0 left-0'>
                     <tr className='text-secundary text-left'>
                       <th className='bg-primary rounded-bl p-2'>Data</th>
                       <th className='bg-primary p-2'>Horario</th>
                       <th className='bg-primary p-2'>Quadra</th>
-                      <th className='bg-primary p-2'>Valor / Hora</th>
-                      <th className='bg-primary p-2'>Status</th>
+                      <th className='max-[800px]:hidden bg-primary p-2'>Valor / Hora</th>
+                      <th className='max-[800px]:hidden bg-primary p-2'>Status</th>
                       <th className='bg-primary rounded-br p-2'></th>
                     </tr>
                   </thead>
@@ -61,38 +61,33 @@ const Reserv = () => {
                     {myReservs.map((myReserv, index) => {
                       return (
                         <tr
-                          className={`${
-                            index % 2 === 1 ? 'bg-primary/10' : ''
-                          } font-bold`}
+                          className={`${index % 2 === 1 ? 'bg-primary/10' : ''
+                            } font-bold`}
                           key={index}
                         >
                           <td className='py-2 px-2'>{myReserv.dataLocacao}</td>
-                          <td className='py-2 px-2'>{`${
-                            myReserv.horarioInicial
-                          }:00 - ${myReserv.horarioInicial + 1}:00`}</td>
+                          <td className='py-2 px-2'>{`${myReserv.horarioInicial
+                            }:00 - ${myReserv.horarioInicial + 1}:00`}</td>
                           <td className='py-2 px-2'>{myReserv.quadraLoc}</td>
-                          <td className='py-2 px-2'>{`R$ ${parseFloat(
+                          <td className='py-2 px-2 max-[800px]:hidden'>{`R$ ${parseFloat(
                             myReserv.valorReserva,
                           ).toFixed(2)}`}</td>
-                          <td className='py-2 px-2'>
+                          <td className={`py-2 px-2 max-[800px]:hidden ${myReserv.status === 'CANCELADO' ? "text-danger/70" : ""}`}>
                             {myReserv.status.toUpperCase()}
                           </td>
-                          {myReserv.status.toUpperCase() === 'PENDENTE' ? (
-                            <td className='flex flex-row items py-1 center gap-2 text-secundary font-medium'>
-                              <button
-                                onClick={() => {
-                                  setIsModalSeeMoreAboutReservOpen(true);
-                                  setReservToSee({ ...myReserv });
-                                }}
-                                className='bg-primary px-2 py-1 rounded'
-                              >
-                                {' '}
-                                Ver mais
-                              </button>
-                            </td>
-                          ) : (
-                            <></>
-                          )}
+                          <td className='flex flex-row items py-1 center gap-2 text-secundary font-medium'>
+                            <button
+                              onClick={() => {
+                                setIsModalSeeMoreAboutReservOpen(true);
+                                setReservToSee({ ...myReserv });
+                              }}
+                              className='bg-primary px-2 py-1 rounded'
+                            >
+                              {' '}
+                              Ver mais
+                            </button>
+                          </td>
+
                         </tr>
                       );
                     })}
@@ -101,7 +96,7 @@ const Reserv = () => {
               </div>
               <button
                 onClick={() => setIsModalRegisterMyReservsOpen(true)}
-                className='w-full text-secundary rounded bg-primary py-2 text-lg my-2'
+                className='w-[95%] md:w-full text-secundary rounded bg-primary py-2 text-lg my-2'
               >
                 Fazer reserva
               </button>

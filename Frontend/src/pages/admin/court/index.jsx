@@ -40,9 +40,9 @@ const Courts = ({ editable }) => {
 
   return (
     <motion.div
-      style={{ width: '100%', height: '100vh' }}
-      initial={{ opacity: 0, x: -5 }}
-      exit={{ opacity: 0, x: 5 }}
+      style={{ width: '100%', height: '100vh',zIndex:0 }}
+      initial={{ opacity: 0, x: -15 }}
+      exit={{ opacity: 0, x: 15 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3 }}
     >
@@ -53,7 +53,7 @@ const Courts = ({ editable }) => {
               <>
                 <div className='table-container max-h-[500px] overflow-auto w-full'>
                   <table className='w-full mt-3 mb-2 shadow-lg drop-shadow-lg'>
-                    <thead className='sticky'>
+                    <thead className='sticky z-0'>
                       <tr className='bg-primary sticky text-secundary text-left'>
                         <th className='px-2 sticky py-2 rounded-bl'>
                           Descrição
@@ -110,14 +110,14 @@ const Courts = ({ editable }) => {
               </>
             ) : (
               <>
-                <h2 className='text-primary text-center text-xl font-bold my-2 lg:my-4'>
+                <h2 className='text-primary text-center text-lg lg:text-2xl font-medium my-2 lg:mb-5'>
                   Não há nenhuma quadra registrada
                 </h2>
               </>
             )}
             <button
               onClick={() => setIsModalAddCourtOpen(true)}
-              className='w-full py-1.5 text-xl text-secundary bg-primary rounded'
+              className='w-full py-1.5 font-medium text-lg md:text-xl text-secundary bg-primary rounded'
             >
               Adicionar quadra
             </button>

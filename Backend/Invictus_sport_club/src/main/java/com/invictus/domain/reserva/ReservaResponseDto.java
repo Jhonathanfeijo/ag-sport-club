@@ -25,5 +25,6 @@ public class ReservaResponseDto {
 	private String esporteReserva;
 	private int horarioInicial;
 	private String status;
+	private String tipoQuadra;
 	
 }

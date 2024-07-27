@@ -44,8 +44,8 @@ const SportsAdmin = () => {
   return (
     <motion.div
       style={{ width: '100%', height: '100vh' }}
-      initial={{ opacity: 0, x: -5 }}
-      exit={{ opacity: 0, x: 5 }}
+      initial={{ opacity: 0, x: -15 }}
+      exit={{ opacity: 0, x: 15 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3 }}
     >
@@ -53,60 +53,68 @@ const SportsAdmin = () => {
         <div className='flex flex-col items-center my-2 w-full'>
           {statusDataSports === 'loaded' && (
             <>
-              <div className='table-container overflow-auto max-h-[500px] w-full'>
-                <table className='my-1 w-full border-collapse shadow-lg drop-shadow-lg mb-2'>
-                  <thead className='sticky'>
-                    <tr className='bg-primary sticky text-left'>
-                      <th className='pl-2 py-2 sticky rounded-bl text-secundary '>
-                        Nome
-                      </th>
-                      <th className='pl-2 py-2 sticky rounded-br text-secundary '></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {sportList.map((sport, index) => {
-                      return (
-                        <tr
-                          key={index}
-                          className={`${
-                            index % 2 !== 0 ? 'bg-primary/15' : ''
-                          } font-bold`}
-                        >
-                          <td className='pl-2 py-2 text-left'>
-                            {sport.descricao}
-                          </td>
-                          <td className='flex py-1 flex-row items-center justify-end px-2 gap-2 text-secundary font-normal'>
-                            <button
-                              onClick={() => {
-                                setSportToEdit(sport),
-                                  setIsModalEditSportOpen(true);
-                              }}
-                              className=' py-1 px-2 rounded bg-primary'
-                            >
-                              Editar
-                            </button>
-                            <button
-                              onClick={() => {
-                                setSporteIdToDelete(sport.idEsporte),
-                                  setIsModalDeleteSportOpen(true);
-                              }}
-                              className=' py-1 px-1 rounded bg-danger/70'
-                            >
-                              Deletar
-                            </button>
-                          </td>
+              {sportList.length === 0 && (
+                <>
+                  <h2 className='text-lg md:text-2xl font-medium mb-5'>Não há esportes cadastrados</h2>
+                </>
+              )}
+              {sportList.length > 0 && (
+                <>
+                  <div className='table-container overflow-auto max-h-[500px] w-full'>
+                    <table className='my-1 w-full border-collapse shadow-lg drop-shadow-lg mb-2'>
+                      <thead className='sticky'>
+                        <tr className='bg-primary sticky text-left'>
+                          <th className='pl-2 py-2 sticky rounded-bl text-secundary '>
+                            Nome
+                          </th>
+                          <th className='pl-2 py-2 sticky rounded-br text-secundary '></th>
                         </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-                <button
-                  onClick={() => setIsModalAddSportOpen(true)}
-                  className='px-2 py-1.5 w-full bg-primary  mt-2 text-secundary rounded'
-                >
-                  Adicionar esporte
-                </button>
-              </div>
+                      </thead>
+                      <tbody>
+                        {sportList.map((sport, index) => {
+                          return (
+                            <tr
+                              key={index}
+                              className={`${index % 2 !== 0 ? 'bg-primary/15' : ''
+                                } font-bold`}
+                            >
+                              <td className='pl-2 py-2 text-left'>
+                                {sport.descricao}
+                              </td>
+                              <td className='flex py-1 flex-row items-center justify-end px-2 gap-2 text-secundary font-normal'>
+                                <button
+                                  onClick={() => {
+                                    setSportToEdit(sport),
+                                      setIsModalEditSportOpen(true);
+                                  }}
+                                  className=' py-1 px-2 rounded bg-primary'
+                                >
+                                  Editar
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    setSporteIdToDelete(sport.idEsporte),
+                                      setIsModalDeleteSportOpen(true);
+                                  }}
+                                  className=' py-1 px-1 rounded bg-danger/70'
+                                >
+                                  Deletar
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              )}
+              <button
+                onClick={() => setIsModalAddSportOpen(true)}
+                className='px-2 py-1.5 w-full bg-primary text-lg lg:text-xl font-medium  mt-2 text-secundary rounded'
+              >
+                Adicionar esporte
+              </button>
             </>
           )}
         </div>
