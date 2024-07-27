@@ -22,6 +22,8 @@ export const getUserLocalStorage = () => {
         nome: tokenDecoded.nome,
         idUser: tokenDecoded.id,
         login: tokenDecoded.login,
+        cpf:tokenDecoded.cpf,
+        email:tokenDecoded.email,
         permissao: tokenDecoded.permissao,
         token: jsonToken
     }

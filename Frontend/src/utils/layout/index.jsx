@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <div className="w-screen max-w-[100%] lg:h-screen flex flex-col lg:flex-row justify-center items-center lg:items-start lg:justify-start text-primary gap-10">
+    <div className="w-screen max-w-[100%] lg:h-screen flex flex-col lg:flex-row justify-center items-center lg:items-start lg:justify-start text-primary gap-10 md:gap-0">
       <Header nivel_permissao={user.permissao} />
       {children}
     </div>

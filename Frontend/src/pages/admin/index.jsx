@@ -18,7 +18,7 @@ const AdminConfig = () => {
       transition={{ duration: 0.3 }}
     >
       <div className='flex flex-col h-screen w-full items-center px-4'>
-        <h1 className='text-primary text-4xl font-bold mt-10 text-center lg-text-left md:mt-20'>
+        <h1 className='text-primary text-4xl font-bold text-center lg-text-left md:mt-20'>
           Ajustes
         </h1>
         <div className='hidden mt-10 lg:grid lg:grid-flow-col lg:w-[720px] gap'>
@@ -26,7 +26,7 @@ const AdminConfig = () => {
             onClick={() => setOption('esportes')}
             className={`${
               option === 'esportes' ? ' border-orange' : 'border-primary'
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 rounded-l`}
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-300 rounded-l`}
           >
             <span>Esportes</span>
           </div>
@@ -34,7 +34,7 @@ const AdminConfig = () => {
             onClick={() => setOption('pagamentos')}
             className={`${
               option === 'pagamentos' ? ' border-orange' : 'border-primary'
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 `}
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-300 `}
           >
             <span>Formas de pagamento</span>
           </div>
@@ -42,7 +42,7 @@ const AdminConfig = () => {
             onClick={() => setOption('quadras')}
             className={`${
               option === 'quadras' ? ' border-orange' : 'border-primary'
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 `}
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-300 `}
           >
             <span>Quadras</span>
           </div>
@@ -50,7 +50,7 @@ const AdminConfig = () => {
             onClick={() => setOption('reservas')}
             className={`${
               option === 'reservas' ? ' border-orange' : 'border-primary'
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 `}
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-300 `}
           >
             <span>Reservas</span>
           </div>
@@ -58,7 +58,7 @@ const AdminConfig = () => {
             onClick={() => setOption('tipos_quadra')}
             className={`${
               option === 'tipos_quadra' ? ' border-orange' : 'border-primary'
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 `}
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-300 `}
           >
             <span>Tipos de quadra</span>
           </div>
@@ -66,7 +66,7 @@ const AdminConfig = () => {
             onClick={() => setOption('usuarios')}
             className={`${
               option === 'usuarios' ? ' border-orange' : 'border-primary'
-            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-200 rounded-r`}
+            } bg-primary text-secundary w-[120px] flex justify-center items-center text-center text-lg p-2 hover:cursor-pointer hover:opacity-80 border-b-4 duration-300 rounded-r`}
           >
             <span>Usuário</span>
           </div>

@@ -94,14 +94,17 @@ const Reserv = () => {
                   </tbody>
                 </table>
               </div>
-              <button
-                onClick={() => setIsModalRegisterMyReservsOpen(true)}
-                className='w-[95%] md:w-full text-secundary rounded bg-primary py-2 text-lg my-2'
-              >
-                Fazer reserva
-              </button>
             </>
           )}
+          {(isDataLoaded && isDataLoaded === true && myReservs.length) === 0 && (
+            <h2 className='text-lg md:text-3xl font-medium mt-10 mb-5'>Não há reservas registradas ainda</h2>
+          )}
+          <button
+            onClick={() => setIsModalRegisterMyReservsOpen(true)}
+            className='w-[95%] md:w-full text-secundary rounded bg-primary py-2 text-lg my-2'
+          >
+            Fazer reserva
+          </button>
         </main>
       </div>
       {isModalRegisterMyReservsOpen && (

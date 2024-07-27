@@ -23,8 +23,9 @@ public class TokenService {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(secret);
 			return JWT.create().withIssuer("api-ag").withClaim("permissao", usuario.getNivelPermissao())
-					.withClaim("login", usuario.getLogin()).withClaim("nome", usuario.getNome()).withClaim("id", usuario.getIdUsuario())
-					.withSubject(usuario.getLogin()).sign(algorithm);
+					.withClaim("login", usuario.getLogin()).withClaim("nome", usuario.getNome())
+					.withClaim("id", usuario.getIdUsuario()).withClaim("cpf", usuario.getCpf())
+					.withClaim("email", usuario.getEmail()).withSubject(usuario.getLogin()).sign(algorithm);
 		} catch (JWTCreationException ex) {
 			throw new RuntimeException("Não foi possível gerar o token");
 		}
