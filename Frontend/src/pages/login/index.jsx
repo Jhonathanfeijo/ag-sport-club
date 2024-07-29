@@ -56,7 +56,6 @@ const Login = () => {
             {errors.login && (
               <span className='text-red-500'>{errors.login.message}</span>
             )}{' '}
-            {/* Exibindo mensagem de erro, se houver */}
             <Label text={'Senha'} />
             <Input
               textColor={'text-primary'}
@@ -67,7 +66,6 @@ const Login = () => {
             {errors.senha && (
               <span className='text-red-500'>{errors.senha.message}</span>
             )}{' '}
-            {/* Exibindo mensagem de erro, se houver */}
             <Link to={'/register'} className='my-2 text-secundary'>
               Não tem cadastro?
             </Link>
