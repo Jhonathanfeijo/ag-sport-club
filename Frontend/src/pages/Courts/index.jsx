@@ -42,6 +42,7 @@ const Courts = () => {
                                 <h2 className="text-lg md:text-3xl font-medium ">Não há quadras cadastradas</h2>
                             )}
                             {quadraList.length > 0 && (
+                                <>
                                 <div className="grid w-full gap-2 max-[400px]:grid-cols-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-h-[350px] overflow-auto">
                                     {quadraList.map((quadra, index) => {
                                         return <div className={'text-secundary bg-primary rounded flex flex-col items-center justify-center hover:opacity-80 duration-200 hover:cursor-default py-6'} key={index}>
@@ -49,12 +50,13 @@ const Courts = () => {
                                             <div className="px-1">{`${quadra.esporte.descricao} - R$ ${parseFloat(quadra.valorHora).toFixed(2)}`}</div>
                                         </div>
                                     })}
+                                </div>
                                     <div className="w-full">
                                         <Link to={"/reservas"}>
                                             <button className="w-full bg-primary text-secundary rounded py-2 lg:text-xl my-3 lg:my-10 text-lg">Fazer reserva</button>
                                         </Link>
                                     </div>
-                                </div>
+                                </>
                             )}
                         </>
                     )}
