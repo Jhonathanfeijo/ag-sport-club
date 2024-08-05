@@ -37,5 +37,6 @@ public class Quadra {
 	private String locQuadra;
 	@Column(name = "valor_hora")
 	private BigDecimal valorHora;
-	
+	private boolean ativo;
+
 }

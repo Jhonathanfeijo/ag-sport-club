@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class FormPagamentoRequest {
 
-	
 	private String descricao;
 	private boolean ativo;
 }

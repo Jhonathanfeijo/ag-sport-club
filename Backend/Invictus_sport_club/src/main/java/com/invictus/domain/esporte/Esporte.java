@@ -20,5 +20,6 @@ public class Esporte {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEsporte;
 	private String descricao;
+	private boolean ativo;
 	
 }

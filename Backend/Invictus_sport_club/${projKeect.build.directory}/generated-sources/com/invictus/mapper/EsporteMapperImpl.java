@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-29T20:07:54-0400",
+    date = "2024-08-04T21:48:33-0400",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.37.0.v20240215-1558, environment: Java 20 (Oracle Corporation)"
 )
 @Component
@@ -22,6 +22,7 @@ public class EsporteMapperImpl implements EsporteMapper {
 
         Esporte esporte = new Esporte();
 
+        esporte.setAtivo( request.isAtivo() );
         esporte.setDescricao( request.getDescricao() );
 
         return esporte;
@@ -35,6 +36,7 @@ public class EsporteMapperImpl implements EsporteMapper {
 
         EsporteResponse esporteResponse = new EsporteResponse();
 
+        esporteResponse.setAtivo( esporte.isAtivo() );
         esporteResponse.setDescricao( esporte.getDescricao() );
         esporteResponse.setIdEsporte( esporte.getIdEsporte() );
 

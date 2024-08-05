@@ -21,5 +21,4 @@ public class TipoQuadra {
 	@Column(name = "id_tipo_quadra")
 	private Long idTipoQuadra;
 	private String descricao;
-	
 }

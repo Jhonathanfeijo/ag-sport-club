@@ -29,7 +29,7 @@ public class FormPagamentoController {
 
 	@Autowired
 	private FormPagamentoService formPagamentoService;
-	
+
 	@Transactional
 	@PostMapping
 	public ResponseEntity cadastrarFormaPagamento(@RequestBody FormPagamentoRequest request,
@@ -42,6 +42,12 @@ public class FormPagamentoController {
 	@GetMapping
 	public ResponseEntity listarFormasPagamento() {
 		List<FormPagamento> formPagamentoLista = formPagamentoService.listarFormasPagamento();
+		return ResponseEntity.ok(formPagamentoLista);
+	}
+
+	@GetMapping("/active")
+	public ResponseEntity listarFormasPagamentosAtivas() {
+		List<FormPagamento> formPagamentoLista = formPagamentoService.listarFormasPagamentoAtivas();
 		return ResponseEntity.ok(formPagamentoLista);
 	}
 

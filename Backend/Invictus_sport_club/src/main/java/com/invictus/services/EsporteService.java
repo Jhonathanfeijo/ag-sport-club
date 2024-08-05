@@ -3,8 +3,6 @@ package com.invictus.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.invictus.domain.esporte.Esporte;
@@ -55,6 +53,10 @@ public class EsporteService {
 	public void verificadorEsporteExiste(Long idEsporte) {
 		if (!esporteRepository.existsById(idEsporte))
 			throw new RuntimeException("Esporte não existe");
+	}
+
+	public List<Esporte> buscarEsportesAtivos() {
+		return esporteRepository.findAllByAtivoOrderByDescricao();
 	}
 
 }

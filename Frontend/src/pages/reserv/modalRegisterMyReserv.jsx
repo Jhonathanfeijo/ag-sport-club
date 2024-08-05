@@ -3,6 +3,7 @@ import { getUserLocalStorage } from "../../utils/userProvider";
 import { api } from "../../../services/api";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { motion } from 'framer-motion'
 
 const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyReservsOpen }) => {
 
@@ -11,6 +12,7 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
     const [payments, setPayments] = useState([]);
     const [statusDateAvailable, setStatusDateAvailable] = useState("quit");
     const [hoursAvailable, setHoursAvailable] = useState([]);
+
 
 
     const { register, handleSubmit } = useForm();
@@ -55,7 +57,7 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
             horarioInicial: data.horarioInicial,
             dataReserva: data.dataReserva
         }
-        
+
 
         console.log(reserv)
         const postData = async () => {
@@ -125,59 +127,66 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
     return (
         <>
             <div className="fixed top-0 left-0 h-screen w-screen bg-third/15 flex items-center justify-center">
-                <div className="bg-secundary rounded drop-shadow-xl shadow-lg p-4 sm:w-[400px] lg:w-[500px] font-bold">
-                    <h1 className="text-2xl my-2 text-left font-bold">Registrar reserva</h1>
-                    {isDataLoaded && (
-                        <>
-                            <form onSubmit={handleSubmit(postMyReserv)} className="flex flex-col">
-                                <label htmlFor="idQuadra">Quadra</label>
-                                <select {...register("idQuadra")} className="border rounded py-1" name="idQuadra" id="idQuadra">
-                                    <option value="">Selecione</option>
-                                    {courtList.map((court) => (
-                                        <option key={court.idQuadra} value={court.idQuadra}>
-                                            {`${court.locQuadra} - ${court.esporte.descricao} - R$ ${parseFloat(court.valorHora).toFixed(2)} /Hora`}
-                                        </option>
-                                    ))}
-                                </select>
-                                <label className="mt-2" htmlFor="idFormPagamento">Forma de pagamento</label>
-                                <select {...register("idFormPagamento")} className="border rounded py-1" name="idFormPagamento" id="idFormPagamento">
-                                    <option value="">Selecione</option>
-                                    {payments.map((payment, index) => (
-                                        <option key={index} value={payment.idFormPagamento}>
-                                            {payment.descricao}
-                                        </option>
-                                    ))}
-                                </select>
-                                <label className="mt-2" htmlFor="dataReserva">Data</label>
-                                <input onSelect={(e) => { handleDateChange(e) }} onBlur={(e) => { handleDateChange(e) }} onChange={(e) => { handleDateChange(e) }} {...register("dataReserva")} className="rounded border p-1" type="date" name="dataReserva" id="dataReserva" />
+                <motion.div
+                    initial={{ opacity: 0, x: -15 }}
+                    exit={{ opacity: 0, x: 15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <div className="bg-secundary rounded drop-shadow-xl shadow-lg p-4 sm:w-[400px] lg:w-[500px] font-bold">
+                        <h1 className="text-2xl my-2 text-left font-bold">Registrar reserva</h1>
+                        {isDataLoaded && (
+                            <>
+                                <form onSubmit={handleSubmit(postMyReserv)} className="flex flex-col">
+                                    <label htmlFor="idQuadra">Quadra</label>
+                                    <select {...register("idQuadra")} className="border rounded py-1" name="idQuadra" id="idQuadra">
+                                        <option value="">Selecione</option>
+                                        {courtList.map((court) => (
+                                            <option key={court.idQuadra} value={court.idQuadra}>
+                                                {`${court.locQuadra} - ${court.esporte.descricao} - R$ ${parseFloat(court.valorHora).toFixed(2)} /Hora`}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <label className="mt-2" htmlFor="idFormPagamento">Forma de pagamento</label>
+                                    <select {...register("idFormPagamento")} className="border rounded py-1" name="idFormPagamento" id="idFormPagamento">
+                                        <option value="">Selecione</option>
+                                        {payments.map((payment, index) => (
+                                            <option key={index} value={payment.idFormPagamento}>
+                                                {payment.descricao}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <label className="mt-2" htmlFor="dataReserva">Data</label>
+                                    <input onSelect={(e) => { handleDateChange(e) }} onBlur={(e) => { handleDateChange(e) }} onChange={(e) => { handleDateChange(e) }} {...register("dataReserva")} className="rounded border p-1" type="date" name="dataReserva" id="dataReserva" />
 
-                                {statusDateAvailable === "notFound" && (
-                                    <span>Nenhum disponível encontrado</span>
-                                )}
-                                {statusDateAvailable === "loading" && (
-                                    <span>Carregando horários...</span>
-                                )}
-                                {statusDateAvailable === "available" && (
-                                    <>
-                                        <label className="font-bold mt-2" htmlFor="horarioReserva">Horários</label>
-                                        <select {...register("horarioInicial")} className="border rounded p-1" name="horarioInicial" id="horarioInicial">
-                                            <option value="">Selecione</option>
-                                            {hoursAvailable.map((hour, index) => (
-                                                <option key={index} value={hour}>
-                                                    {`${hour}:00 - ${hour + 1}:00`}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </>
-                                )}
-                                <div className="self-end flex flex-row gap-2 my-3 font-medium">
-                                    <button type="button" onClick={() => setIsModalRegisterMyReservsOpen(false)} className="bg-secundary px-2 py-1 rounded border text-primary">Cancelar</button>
-                                    <button type="submit" className="bg-primary text-secundary rounded px-2 py-1">Registrar</button>
-                                </div>
-                            </form>
-                        </>
-                    )}
-                </div>
+                                    {statusDateAvailable === "notFound" && (
+                                        <span>Nenhum disponível encontrado</span>
+                                    )}
+                                    {statusDateAvailable === "loading" && (
+                                        <span>Carregando horários...</span>
+                                    )}
+                                    {statusDateAvailable === "available" && (
+                                        <>
+                                            <label className="font-bold mt-2" htmlFor="horarioReserva">Horários</label>
+                                            <select {...register("horarioInicial")} className="border rounded p-1" name="horarioInicial" id="horarioInicial">
+                                                <option value="">Selecione</option>
+                                                {hoursAvailable.map((hour, index) => (
+                                                    <option key={index} value={hour}>
+                                                        {`${hour}:00 - ${hour + 1}:00`}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </>
+                                    )}
+                                    <div className="self-end flex flex-row gap-2 my-3 font-medium">
+                                        <button type="button" onClick={() => setIsModalRegisterMyReservsOpen(false)} className="bg-secundary px-2 py-1 rounded border text-primary">Cancelar</button>
+                                        <button type="submit" className="bg-primary text-secundary rounded px-2 py-1">Registrar</button>
+                                    </div>
+                                </form>
+                            </>
+                        )}
+                    </div>
+                </motion.div>
             </div>
         </>
     );

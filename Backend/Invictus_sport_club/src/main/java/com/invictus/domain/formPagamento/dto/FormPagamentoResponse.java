@@ -6,5 +6,5 @@ import lombok.Data;
 public class FormPagamentoResponse {
 	private Long idFormPagamento;
 	private String descricao;
-
+	private boolean ativo;
 }

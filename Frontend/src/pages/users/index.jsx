@@ -1,9 +1,7 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import * as yup from 'yup';
 import { api } from '../../../services/api';
 
 import { getUserLocalStorage, useUser } from '../../utils/userProvider';
@@ -143,7 +141,7 @@ const Users = () => {
         </div>
       </motion.div>
       {isModalResetPasswordOpen && (
-        <ModalResetPasswordUser></ModalResetPasswordUser>
+        <ModalResetPasswordUser setIsModalRessetPasswordUserOpen={setIsModalResetPasswordOpen}></ModalResetPasswordUser>
       )}
     </>
   );

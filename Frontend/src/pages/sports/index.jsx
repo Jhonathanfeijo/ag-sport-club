@@ -8,11 +8,7 @@ import { getUserLocalStorage } from '../../utils/userProvider';
 const Sports = () => {
   const [sportList, setSportList] = useState([]);
   const [statusDataSports, setStatusDataSportes] = useState('loading');
-  const [isModalAddSportOpen, setIsModalAddSportOpen] = useState(false);
-  const [isModalDeleteSportOpen, setIsModalDeleteSportOpen] = useState(false);
-  const [sportIdToDelete, setSporteIdToDelete] = useState(null);
-  const [sportToEdit, setSportToEdit] = useState();
-  const [isModalEditSportOpen, setIsModalEditSportOpen] = useState(false);
+
   useEffect(() => {
     const user = getUserLocalStorage();
     const headers = {
@@ -21,7 +17,7 @@ const Sports = () => {
     };
     const fetchData = async () => {
       await api
-        .get('esporte', headers)
+        .get('esporte/active', headers)
         .then(json => {
           setSportList(json.data);
           setStatusDataSportes('loaded');
@@ -34,10 +30,7 @@ const Sports = () => {
     fetchData();
   }, [sportList]);
 
-  const deleteSport = idSport => {
-    setSporteIdToDelete(idSport);
-    setIsModalDeleteSportOpen(true);
-  };
+
 
   return (
     <motion.div
@@ -51,14 +44,14 @@ const Sports = () => {
         <div className='flex flex-col'>
           <h1 className='text-4xl font-bold'>Esportes</h1>
         </div>
-        <div className='flex flex-col items-center my-8 lg:my-10 w-full lg:w-[850px] px-2'>
+        <div className='flex flex-col items-center my-8 lg:my-10 w-full lg:w-auto lg:max-w-[850px] px-2'>
           {statusDataSports === 'loaded' && (
             <>{sportList.length === 0 && (
               <>
                 <h2 className='text-lg md:text-3xl font-medium'>Não há esportes cadastrados</h2>
               </>)}
               {sportList.length > 0 && (<>
-                <div className='w-[300px]  max-w-full lg:w-full max-h-[350px] overflow-auto md:max-h-[500px] grid grid-cols-2 lg:grid-cols-4 lg:flex-wrap items-center justify-center gap-2 '>
+                <div className={`max-w-full lg:w-full max-h-[450px] overflow-auto md:max-h-[500px] grid ${ sportList.length === 1?"grid-cols-1" :"max-[300px]:grid-cols-1 grid-cols-2 lg:grid-cols-4"} lg:flex-wrap  lg:flex-col items-center justify-center gap-2 `}>
                   {sportList.map(sport => {
                     return (
                       <div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-pointer duration-200 hover:opacity-80 my-1'>

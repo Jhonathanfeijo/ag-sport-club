@@ -11,5 +11,5 @@ public class QuadraRequest {
 	private Long idTipoQuadra;
 	private String locQuadra;
 	private BigDecimal valorHora;
-	
+	private Boolean ativo;
 }

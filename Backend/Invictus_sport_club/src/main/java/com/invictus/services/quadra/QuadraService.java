@@ -35,7 +35,7 @@ public class QuadraService {
 		Esporte esporte = esporteService.buscarEsportePorId(request.getIdEsporte());
 		TipoQuadra tipoQuadra = tipoQuadraService.buscarTipoQuadraPorId(request.getIdTipoQuadra());
 
-		Quadra quadra = new Quadra(null, tipoQuadra, esporte, request.getLocQuadra(), request.getValorHora());
+		Quadra quadra = new Quadra(null, tipoQuadra, esporte, request.getLocQuadra(), request.getValorHora(), request.getAtivo());
 
 		return quadraRepository.save(quadra);
 
@@ -61,7 +61,7 @@ public class QuadraService {
 		Esporte esporte = esporteService.buscarEsportePorId(request.getIdEsporte());
 		TipoQuadra tipoQuadra = tipoQuadraService.buscarTipoQuadraPorId(request.getIdTipoQuadra());
 
-		Quadra quadra = new Quadra(idQuadra, tipoQuadra, esporte, request.getLocQuadra(), request.getValorHora());
+		Quadra quadra = new Quadra(idQuadra, tipoQuadra, esporte, request.getLocQuadra(), request.getValorHora(), request.getAtivo());
 		return quadraRepository.save(quadra);
 
 	}

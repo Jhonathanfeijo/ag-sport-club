@@ -1,4 +1,4 @@
-const ModalResetPasswordUser = () => {
+const ModalResetPasswordUser = ({ setIsModalRessetPasswordUserOpen }) => {
   return (
     <>
       <div className='h-screen w-screen fixed top-0 left-0 bg-third/15 z-50 flex justify-center items-center'>
@@ -25,7 +25,7 @@ const ModalResetPasswordUser = () => {
                 <input className='p-1 border rounded' type='password' />
               </div>
               <div className='w-full flex flex-row items-end gap-2 my-10'>
-                <button
+                <button onClick={() => setIsModalRessetPasswordUserOpen(false)}
                   type='button'
                   className='flex-1 px-2 py-1 font-medium rounded bg-primary text-secundary'
                 >

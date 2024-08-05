@@ -48,6 +48,13 @@ const ModalEditSport = ({ sportToEdit, sportList, setSportList, setIsModalEditSp
                             className="px-2 border rounded py-1"
                             type="text"
                         />
+                        <div className="flex flex-row items-center gap-3 my-3">
+                            <label className="font-bold" htmlFor="ativo">Ativo</label>
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input name="ativo" id="ativo" {...register("ativo")} type="checkbox" onChange={() => setSportToEdit((prev) => { return { ...prev, ativo: !prev.ativo } })} value={sportToEdit.ativo} class="sr-only peer" checked={sportToEdit.ativo} />
+                                <div class="relative w-11 h-6 bg-third/20 rounded-full peer peer-focus: peer-focus: dark:peer-focus:ring-primary dark:bg-third/40 peer-checked:after:-translate-x-full rtl:peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:end-[2px] after:bg-secundary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary/90"></div>
+                            </label>
+                        </div>
                         <div className="flex flex-row gap-2 font-medium self-end">
                             <button onClick={() => setIsModalEditSportOpen(false)} type="button" className=" border text-primary  border-primary rounded px-1 py-1 my-3">Cancelar</button>
                             <button type="submit" className=" bg-primary text-secundary rounded px-4 py-1 my-3">Editar</button>

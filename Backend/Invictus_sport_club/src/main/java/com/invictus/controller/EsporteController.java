@@ -1,6 +1,6 @@
 package com.invictus.controller;
 
-import java.net.URI; 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +47,12 @@ public class EsporteController {
 	@GetMapping
 	public ResponseEntity obterEsportes() {
 		List<Esporte> esportes = esporteService.listarEsportes();
+		return ResponseEntity.ok(esportes);
+	}
+
+	@GetMapping("/active")
+	public ResponseEntity obterEsportesAtivo() {
+		List<Esporte> esportes = esporteService.buscarEsportesAtivos();
 		return ResponseEntity.ok(esportes);
 	}
 

@@ -32,7 +32,10 @@ public class FormPagamentoService {
 	}
 
 	public List<FormPagamento> listarFormasPagamento() {
-		return formPagamentoRepository.findAll();
+		return formPagamentoRepository.findAllOrderByDescricao();
+	}
+	public List<FormPagamento> listarFormasPagamentoAtivas() {
+		return formPagamentoRepository.findAllByAtivoOrderByDescricao();
 	}
 
 	public FormPagamento buscarFormaPagamentoPorId(Long idFormPagamento) {

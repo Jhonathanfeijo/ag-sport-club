@@ -22,31 +22,31 @@ const Header = ({ nivel_permissao }) => {
             <header className="max-w-full top-0 sticky z-10 left-0 py-2 flex lg:w-[220px] lg:flex lg:max-w-[25%] w-full lg:h-screen bg-principal lg:flex-col items-center lg:items-center px-2 lg:px-0 text-xl justify-between shadow-xl drop-shadow-lg">
                 <nav className='w-full flex flex-wrap lg:flex-col items-baseline gap-2.5'>
                     <img className='w-48 mt-12 mb-10 self-center hidden lg:block lg:px-2' src={logo} alt="" />
-                    <NavLink onClick={() => setOption('begin')} className='flex flex-row items-center lg:px-2 lg:w-full gap-5 hover:opacity-80 transition-opacity duration-3000' to={'/home'}>
+                    <NavLink onClick={() => setOption('begin')} className='flex flex-row items-center lg:px-2 lg:w-full gap-2 hover:opacity-80 transition-opacity duration-3000' to={'/home'}>
                         <img className='w-8 h-8' src={logoHome} alt="" />
                         <p className={`text-secundary duration-300 hidden lg:block`} href="">Inicio</p>
                     </NavLink>
-                    <NavLink onClick={() => setOption('myProfile')} className='flex flex-row items-center   gap-5 lg:w-full lg:px-2 hover:opacity-80 transition-opacity duration-3000' to={'/users'}>
+                    <NavLink onClick={() => setOption('myProfile')} className='flex flex-row items-center   gap-2 lg:w-full lg:px-2 hover:opacity-80 transition-opacity duration-3000' to={'/users'}>
                         <img className='w-8 h-8' src={iconUser} alt="" />
                         <p className={` text-secundary duration-300 hidden lg:block`} href="">Meu perfil</p>
                     </NavLink>
-                    <NavLink onClick={() => setOption('myReservs')} className='flex flex-row items-center   gap-5 lg:w-full lg:px-2 hover:opacity-80 transition-opacity duration-3000' to={'/reservas'}>
+                    <NavLink onClick={() => setOption('myReservs')} className='flex flex-row items-center   gap-2 lg:w-full lg:px-2 hover:opacity-80 transition-opacity duration-3000' to={'/reservas'}>
                         <img className='w-8 h-8' src={iconReserv} alt="" />
                         <p className={` text-secundary duration-300 hidden lg:block`}  href="">Minhas Reservas</p>
                     </NavLink>
-                    <NavLink onClick={() => setOption('sports')} className={`flex flex-row items-center lg:w-full lg:px-2  gap-5 hover:opacity-80 transition-opacity duration-3000'`} to={'/sports'}>
+                    <NavLink onClick={() => setOption('sports')} className={`flex flex-row items-center lg:w-full lg:px-2 gap-2 hover:opacity-80 transition-opacity duration-3000'`} to={'/sports'}>
                         <img className='w-8 h-8' src={iconMedal} alt="" />
                         <p className={` text-secundary duration-300 hidden lg:block`}href="">Esportes</p>
                     </NavLink>
-                    <NavLink onClick={() => setOption('courts')} className='flex flex-row items-center   gap-5 lg:w-full lg:px-2 transition-opacity duration-3000' to={'/courts'}>
+                    <NavLink onClick={() => setOption('courts')} className='flex flex-row items-center gap-2 lg:w-full lg:px-2 transition-opacity duration-3000' to={'/courts'}>
                         <img className='w-8 h-8' src={iconRectangle} alt="" />
                         <p className={` text-secundary duration-300 hidden lg:block`} href="">Quadras</p>
                     </NavLink>
                     {nivel_permissao === "ADMIN" && (
                         <>
-                            <NavLink onClick={() => setOption('admin')} className='flex flex-row items-center   gap-5 lg:w-full lg:px-2 hover:opacity-80 transition-opacity duration-3000' to={'/config'}>
+                            <NavLink onClick={() => setOption('admin')} className='flex flex-row items-center   gap-2 lg:w-full lg:px-2 hover:opacity-80 transition-opacity duration-3000' to={'/config'}>
                                 <img className='w-8 h-8' src={config} alt="" />
-                                <p className={` text-secundary duration-300 hidden lg:block`} href="">Ajustes</p>
+                                <p className={` text-secundary duration-300 hidden lg:block`} href="">Administrador</p>
                             </NavLink>
 
                         </>

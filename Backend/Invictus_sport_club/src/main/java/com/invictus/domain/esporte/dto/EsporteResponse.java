@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class EsporteResponse {
 	private Long idEsporte;
+	private boolean ativo;
 	private String descricao;
 	
 }

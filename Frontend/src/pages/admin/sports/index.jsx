@@ -16,6 +16,7 @@ const SportsAdmin = () => {
   const [isModalEditSportOpen, setIsModalEditSportOpen] = useState(false);
 
   useEffect(() => {
+    console.log('a')
     const user = getUserLocalStorage();
     const headers = {
       'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ const SportsAdmin = () => {
         });
     };
     fetchData();
-  }, [sportList]);
+  }, []);
 
   const deleteSport = idSport => {
     setSporteIdToDelete(idSport);
@@ -55,7 +56,7 @@ const SportsAdmin = () => {
             <>
               {sportList.length === 0 && (
                 <>
-                  <h2 className='text-lg md:text-2xl font-medium mb-5'>Não há esportes cadastrados</h2>
+                  <h2 className='text-lg md:text-2xl font-medium mb-3'>Não há esportes cadastrados</h2>
                 </>
               )}
               {sportList.length > 0 && (
@@ -66,6 +67,9 @@ const SportsAdmin = () => {
                         <tr className='bg-primary sticky text-left'>
                           <th className='pl-2 py-2 sticky rounded-bl text-secundary '>
                             Nome
+                          </th>
+                          <th className='pl-2 py-2 sticky text-secundary '>
+                            Ativo
                           </th>
                           <th className='pl-2 py-2 sticky rounded-br text-secundary '></th>
                         </tr>
@@ -80,6 +84,9 @@ const SportsAdmin = () => {
                             >
                               <td className='pl-2 py-2 text-left'>
                                 {sport.descricao}
+                              </td>
+                              <td className={`pl-2 py-2 text-left ${!sport.ativo? "text-danger/80":""}`}>
+                                {sport.ativo?"Ativo":"Inativo"}
                               </td>
                               <td className='flex py-1 flex-row items-center justify-end px-2 gap-2 text-secundary font-normal'>
                                 <button
