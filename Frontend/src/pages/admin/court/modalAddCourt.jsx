@@ -57,14 +57,15 @@ const ModalAddCourt = ({ setIsModalAddCourtOpen, courtList, setCourtList }) => {
           setIsModalAddCourtOpen(false)
         })
         .catch((error) => {
-          if(error.response){
+          if (error.response) {
             toast.update(toastId,
-              {render:error.response.data.message,
-                type:"error",
-                isLoading:false,
-                autoClose:2500,
-                style:{
-                  fontWeight:"bold"
+              {
+                render: error.response.data.message,
+                type: "error",
+                isLoading: false,
+                autoClose: 2500,
+                style: {
+                  fontWeight: "bold"
                 }
               }
             )
@@ -94,6 +95,7 @@ const ModalAddCourt = ({ setIsModalAddCourtOpen, courtList, setCourtList }) => {
                 <input {...register("valorHora")} name="valorHora" id="valorHora" className="border rounded px-1 py-1 w-full " type="number" />
               </div>
             </div>
+            <div className="w-full"> 
             <div className="flex w-full flex-row items-end gap-2">
               <div className="flex flex-col items-start flex-1 mt-2">
                 <label className="font-bold" htmlFor="">Tipo da quadra</label>
@@ -112,6 +114,14 @@ const ModalAddCourt = ({ setIsModalAddCourtOpen, courtList, setCourtList }) => {
                     return <option key={index} value={sport.idEsporte}>{sport.descricao}</option>
                   })}
                 </select>
+              </div>
+            </div>
+              <div className="flex flex-row items-center gap-3 my-3">
+                <label className="font-bold" htmlFor="ativo">Ativo</label>
+                <label class="inline-flex items-center cursor-pointer">
+                  <input name="ativo" id="ativo" {...register("ativo")} type="checkbox" class="sr-only peer" />
+                  <div class="relative w-11 h-6 bg-third/20 rounded-full peer peer-focus: peer-focus: dark:peer-focus:ring-primary dark:bg-third/40 peer-checked:after:-translate-x-full rtl:peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:end-[2px] after:bg-secundary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary/90"></div>
+                </label>
               </div>
             </div>
             <div className="flex flex-row flex-wrap self-end items-end gap-2 my-5">

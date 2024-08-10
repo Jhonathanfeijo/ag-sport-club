@@ -58,10 +58,11 @@ const Courts = ({ editable }) => {
                         <th className='px-2 sticky py-2 rounded-bl'>
                           Descrição
                         </th>
-                        <th className='px-2 sticky py-2'>Esporte</th>
-                        <th className='px-2 sticky py-2'>Tipo</th>
-                        <th className='px-2 sticky py-2'>Valor / Hora</th>
-                        <th className='px-2 sticky py-2 rounded-br'></th>
+                        <th className='px-2 py-2'>Esporte</th>
+                        <th className='px-2 py-2'>Tipo</th>
+                        <th className='px-2 py-2'>Valor / Hora</th>
+                        <th className='px-2 py-2'>Status</th>
+                        <th className='px-2 py-2 rounded-br'></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -81,6 +82,9 @@ const Courts = ({ editable }) => {
                           </td>
                           <td className='py-2 px-2'>
                             {`R$ ${parseFloat(court.valorHora).toFixed(2)}`}
+                          </td>
+                          <td className={`py-2 px-2 ${!court.ativo?"text-danger/70":""}`}>
+                            {court.ativo?"Ativo":"Inativo"}
                           </td>
                           <td className='flex flex-row items-center py-1 justify-end text-secundary px-2 gap-2 font-normal'>
                             <button

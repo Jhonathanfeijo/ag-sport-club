@@ -101,7 +101,7 @@ const Reserv = () => {
           )}
           <button
             onClick={() => setIsModalRegisterMyReservsOpen(true)}
-            className='w-[95%] md:w-full text-secundary rounded bg-primary py-2 text-lg my-2'
+            className={`w-[95%] ${myReservs.length === 0? "md:w-[400px]":"md:w-full"} text-secundary rounded bg-primary py-2 text-lg my-2`}
           >
             Fazer reserva
           </button>
