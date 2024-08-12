@@ -8,7 +8,7 @@ import ModalEditCourt from './modalEditCourt';
 
 const Courts = ({ editable }) => {
   const [courtList, setCourtList] = useState([]);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [statusDataLoading, setStatusDataLoading] = useState();
   const [isModalAddCourtOpen, setIsModalAddCourtOpen] = useState(false);
   const [isModalDeleteCourtOpen, setIsModalDeleteCourtOpen] = useState(false);
   const [idCourtDelete, setIdCourtDelete] = useState();
@@ -28,11 +28,12 @@ const Courts = ({ editable }) => {
         .then(json => {
           console.log(json);
           setCourtList(json.data);
+          setStatusDataLoading('loaded');
         })
         .catch(error => {
           console.log(error);
+          setStatusDataLoading('failed')
         });
-      setIsDataLoaded(true);
     };
 
     fetchData();
@@ -47,12 +48,12 @@ const Courts = ({ editable }) => {
       transition={{ duration: 0.3 }}
     >
       <div className='w-full'>
-        {isDataLoaded && (
+        {statusDataLoading === 'loaded' && (
           <>
             {courtList.length > 0 ? (
               <>
-                <div className='table-container max-h-[500px] overflow-auto w-full'>
-                  <table className='w-full mt-3 mb-2 shadow-lg drop-shadow-lg'>
+                <div className='table-container max-h-[500px] overflow-auto w-full shadow-lg drop-shadow-lg '>
+                  <table className='w-full mt-3 mb-2 '>
                     <thead className='sticky z-0'>
                       <tr className='bg-primary sticky text-secundary text-left'>
                         <th className='px-2 sticky py-2 rounded-bl'>
@@ -103,7 +104,7 @@ const Courts = ({ editable }) => {
                               }}
                               className='bg-danger/70 rounded py-1 px-1'
                             >
-                              Deletar
+                              Excluir
                             </button>
                           </td>
                         </tr>
@@ -121,12 +122,15 @@ const Courts = ({ editable }) => {
             )}
             <button
               onClick={() => setIsModalAddCourtOpen(true)}
-              className='w-full py-1.5 font-medium text-lg md:text-xl text-secundary bg-primary rounded'
+              className='w-full py-1.5 my-3 font-medium text-lg md:text-xl text-secundary bg-primary rounded'
             >
               Adicionar quadra
             </button>
           </>
         )}
+            {statusDataLoading === 'failed' && (
+            <h2 className='text-xl font-bold my-2 text-center'>Estamos tendo problemas internos.<br/> Por favor, tente novamente mais tarde</h2>
+          )}
       </div>
 
       {isModalAddCourtOpen && (

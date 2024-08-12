@@ -43,6 +43,11 @@ public class QuadraController {
 		List<Quadra> quadras = quadraService.obterQuadras();
 		return ResponseEntity.ok(quadras);
 	}
+	@GetMapping("/active")
+	public ResponseEntity obterQuadrasAtivas() {
+		List<Quadra> quadras = quadraService.obterQuadrasAtivas();
+		return ResponseEntity.ok(quadras);
+	}
 
 	@GetMapping("/bySport/{id}")
 	public ResponseEntity obterQuadrasPorIdEsporte(@PathVariable("id") Long idEsporte) {
@@ -63,6 +68,7 @@ public class QuadraController {
 		Quadra quadra = quadraService.editarQuadraPorId(idQuadra, quadraRequest);
 		return ResponseEntity.ok(quadra);
 	}
+
 
 	
 	@Transactional

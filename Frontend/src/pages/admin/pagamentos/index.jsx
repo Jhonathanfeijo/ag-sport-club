@@ -55,7 +55,7 @@ const FormasPagamento = () => {
             )}
             {paymentTypes.length > 0 && (
               <>
-                <div className='table-container max-w-[100%] max-h-[500px] my-3 w-full lg:items-start overflow-auto flex flex-col items-center'>
+                <div className='table-container max-w-[100%] max-h-[500px] my-3 w-full lg:items-start overflow-auto flex flex-col items-center shadow-lg drop-shadow'>
                   <table className='shadow-lg drop-shadow-lg w-full'>
                     <thead className='font-bold sticky'>
                       <tr className='bg-primary sticky text-secundary'>
@@ -100,7 +100,7 @@ const FormasPagamento = () => {
                                 }}
                                 className='bg-danger/70 text-secundary px-1 rounded py-1'
                               >
-                                Deletar
+                                Excluir
                               </button>
                             </td>
                           </tr>
@@ -109,17 +109,20 @@ const FormasPagamento = () => {
                     </tbody>
                   </table>
                 </div>
+                <button
+                  type='button'
+                  onClick={() => setIsModalAddPaymentTypeOpen(true)}
+                  className='bg-primary text-secundary px-2 py-1.5 my-2 w-full rounded font-medium text-lg lg:text-xl'
+                >
+                  Adicionar forma de pagamento
+                </button>
               </>
             )}
           </>
         )}
-        <button
-          type='button'
-          onClick={() => setIsModalAddPaymentTypeOpen(true)}
-          className='bg-primary text-secundary px-2 py-1.5 mb-2 w-full rounded font-medium text-lg lg:text-xl'
-        >
-          Adicionar forma de pagamento
-        </button>
+        {statusDataLoading === 'failed' && (
+          <h2 className='text-xl font-bold my-2'>Estamos tendo problemas internos.<br /> Por favor, tente novamente mais tarde.</h2>
+        )}
       </div>
       {isModalAddPaymentTypeOpen && (
         <ModalAddPaymentType

@@ -96,7 +96,7 @@ const TiposQuadras = () => {
                                 }}
                                 className='bg-danger/70 text-secundary px-1 rounded py-1'
                               >
-                                Deletar
+                                Excluir
                               </button>
                             </td>
                           </tr>
@@ -107,15 +107,18 @@ const TiposQuadras = () => {
                 </div>
               </>
             )}
+            <button
+              type='button'
+              onClick={() => setIsModalAddTipoQuadraOpen(true)}
+              className='bg-primary w-full text-secundary px-2 py-1.5 mb-2 rounded font-medium text-lg lg:text-xl'
+            >
+              Adicionar tipo de quadra
+            </button>
           </>
         )}
-        <button
-          type='button'
-          onClick={() => setIsModalAddTipoQuadraOpen(true)}
-          className='bg-primary w-full text-secundary px-2 py-1.5 mb-2 rounded font-medium text-lg lg:text-xl'
-        >
-          Adicionar tipo de quadra
-        </button>
+            {statusDataLoading === 'failed' && (
+            <h2 className='text-xl font-bold my-2'>Estamos tendo problemas internos.<br/> Por favor, tente novamente mais tarde</h2>
+          )}
       </div>
       {isModalAddTipoQuadraOpen && (
         <ModalAddTipoQuadra

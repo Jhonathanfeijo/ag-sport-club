@@ -24,9 +24,9 @@ public interface QuadraRepository extends JpaRepository<Quadra, Long> {
 	
 	//create view v_obter_quadra_ordem_alfabetica as select q.id_quadra, q.id_tipo_quadra, q.id_esporte, q.loc_quadra, q.valor_hora, q.ativo from quadra q order by q.loc_quadra
 	@Query(value = "select * from v_obter_quadra_ordem_alfabetica ", nativeQuery = true)
-	boolean findAllOrderByLocDescricao();
+	List<Quadra> findAllOrderByLocDescricao();
 	//create view v_obter_quadras_ativas_ordem_alfabetica as select q.id_quadra, q.id_tipo_quadra, q.id_esporte, q.loc_quadra, q.valor_hora, q.ativo from quadra q where q.ativo = true order by q.loc_quadra
 	@Query(value = "select * from v_obter_quadras_ativas_ordem_alfabetica ", nativeQuery = true)
-	boolean findAllByAtivoOrderByLocDescricao();
+	List<Quadra> findAllByAtivoOrderByLocDescricao();
 
 }

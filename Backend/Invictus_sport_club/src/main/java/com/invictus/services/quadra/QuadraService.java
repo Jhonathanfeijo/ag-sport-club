@@ -42,7 +42,10 @@ public class QuadraService {
 	}
 
 	public List<Quadra> obterQuadras() {
-		return quadraRepository.findAll();
+		return quadraRepository.findAllOrderByLocDescricao();
+	}
+	public List<Quadra> obterQuadrasAtivas() {
+		return quadraRepository.findAllByAtivoOrderByLocDescricao();
 	}
 
 	public Quadra obterQuadraPorId(Long idQuadra) {

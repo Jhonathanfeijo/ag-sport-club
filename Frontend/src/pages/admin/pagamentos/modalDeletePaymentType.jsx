@@ -54,7 +54,7 @@ const ModalDeletePaymentType = ({ paymentTypeDeleteId, setIsModalDeletePaymentTy
                     <h1 className="font-bold text-lg mt-5">Você tem certeza que deseja apagar esse tipo de pagamento?</h1>
                     <div className="self-end flex flex-row gap-2 my-5">
                         <button onClick={() => setIsModalDeletePaymentTypeOpen(false)} className="bg-primary text-secundary rounded px-2 py-1">Cancelar</button>
-                        <button onClick={() => deletePaymentType()} className="bg-danger/70 text-secundary rounded px-2 py-1">Deletar</button>
+                        <button onClick={() => deletePaymentType()} className="bg-danger/70 text-secundary rounded px-2 py-1">Excluir</button>
                     </div>
                 </div>
             </div>

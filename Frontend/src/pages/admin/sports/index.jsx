@@ -105,7 +105,7 @@ const SportsAdmin = () => {
                                   }}
                                   className=' py-1 px-1 rounded bg-danger/70'
                                 >
-                                  Deletar
+                                  Excluir
                                 </button>
                               </td>
                             </tr>
@@ -123,6 +123,9 @@ const SportsAdmin = () => {
                 Adicionar esporte
               </button>
             </>
+          )}
+          {statusDataSports === 'failed' && (
+            <h2 className='text-xl font-bold my-2'>Estamos tendo problemas internos.<br/> Por favor, tente novamente mais tarde.</h2>
           )}
         </div>
       </div>

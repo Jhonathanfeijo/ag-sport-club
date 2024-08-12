@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.invictus.domain.formPagamento.FormPagamento;
 import com.invictus.domain.formPagamento.dto.FormPagamentoRequest;
 import com.invictus.mapper.FormPagamentoMapper;
 import com.invictus.repository.FormPagamentoRepository;
+import com.invictus.repository.ReservaRepository;
 import com.invictus.services.formPagamento.validadores.ValidadorFormPagamentoService;
 
 @Service
@@ -17,23 +17,27 @@ public class FormPagamentoService {
 
 	@Autowired
 	private FormPagamentoRepository formPagamentoRepository;
-	
+
 	@Autowired
 	private List<ValidadorFormPagamentoService> validadores;
-	
+
 	@Autowired
 	private FormPagamentoMapper formPagamentoMapper;
 
+	@Autowired
+	private ReservaRepository reservaRepository;
+
 	public FormPagamento cadastrarFormaPagamento(FormPagamentoRequest request) {
-		
+
 		validadores.forEach((v) -> v.validar(request));
 		FormPagamento formPagamento = formPagamentoMapper.FormPagamentoRequestToFormPagamento(request);
-		return formPagamentoRepository.save(formPagamento);
+		return formPagamentoRepository.saveFormPagamento(formPagamento.getDescricao(), formPagamento.isAtivo());
 	}
 
 	public List<FormPagamento> listarFormasPagamento() {
 		return formPagamentoRepository.findAllOrderByDescricao();
 	}
+
 	public List<FormPagamento> listarFormasPagamentoAtivas() {
 		return formPagamentoRepository.findAllByAtivoOrderByDescricao();
 	}
@@ -52,9 +56,12 @@ public class FormPagamentoService {
 
 	public void deletarFormaPagamentoPorId(Long idFormPagamento) {
 		verificadorFormaPagamento(idFormPagamento);
+		if (reservaRepository.existsByFormPagamento(idFormPagamento))
+			throw new RuntimeException(
+					"Não é possível deletar forma de pagamento, pois já possui reservas com essa forma de pagamento");
 		formPagamentoRepository.deleteById(idFormPagamento);
 	}
-	
+
 	private void verificadorFormaPagamento(Long idFormPagamento) {
 		if (!formPagamentoRepository.existsById(idFormPagamento))
 			throw new RuntimeException("Forma de pagamento não encontrada");

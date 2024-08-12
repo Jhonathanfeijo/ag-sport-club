@@ -51,11 +51,11 @@ const Courts = () => {
                                         </div>
                                     })}
                                 </div>
-                                    <div className="w-full">
+                                   {/* <div className="w-full">
                                         <Link to={"/reservas"}>
                                             <button className="w-full bg-primary text-secundary rounded py-2 lg:text-xl my-3 lg:my-10 text-lg">Fazer reserva</button>
                                         </Link>
-                                    </div>
+                                    </div>*/}
                                 </>
                             )}
                         </>

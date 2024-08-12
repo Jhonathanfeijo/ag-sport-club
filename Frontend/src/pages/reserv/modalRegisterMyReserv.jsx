@@ -28,8 +28,8 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
         const fetchData = async () => {
             try {
                 const [quadraResponse, formPagamentoResponse] = await Promise.all([
-                    api.get("quadra", { headers }),
-                    api.get("form_pagamento", { headers })
+                    api.get("quadra/active", { headers }),
+                    api.get("form_pagamento/active", { headers })
                 ]);
                 setCourtList(quadraResponse.data);
                 setPayments(formPagamentoResponse.data);
