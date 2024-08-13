@@ -31,7 +31,8 @@ public class Reserva {
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	@ManyToOne
+	@ManyToOne()
+	@JoinColumn(name = "id_quadra")
 	private Quadra quadra;
 	@ManyToOne
 	@JoinColumn(name = "id_form_pagamento")

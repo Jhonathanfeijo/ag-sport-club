@@ -30,8 +30,6 @@ const Sports = () => {
     fetchData();
   }, [sportList]);
 
-
-
   return (
     <motion.div
       style={{ width: '100%' }}
@@ -46,22 +44,40 @@ const Sports = () => {
         </div>
         <div className='flex flex-col items-center my-8 lg:my-10 w-full lg:w-auto lg:max-w-[850px] px-2'>
           {statusDataSports === 'loaded' && (
-            <>{sportList.length === 0 && (
-              <>
-                <h2 className='text-lg md:text-3xl font-medium'>Não há esportes cadastrados</h2>
-              </>)}
-              {sportList.length > 0 && (<>
-                <div className={`max-w-full lg:w-full max-h-[450px] overflow-auto md:max-h-[500px] grid ${ sportList.length === 1?"grid-cols-1" :"max-[300px]:grid-cols-1 grid-cols-2 lg:grid-cols-4"} lg:flex-wrap  lg:flex-col items-center justify-center gap-2 `}>
-                  {sportList.map(sport => {
-                    return (
-                      <div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-pointer duration-200 hover:opacity-80 my-1'>
-                        <span>{sport.descricao}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </>)}
+            <>
+              {sportList.length === 0 && (
+                <>
+                  <h2 className='text-lg md:text-3xl font-medium'>
+                    Não há esportes cadastrados
+                  </h2>
+                </>
+              )}
+              {sportList.length > 0 && (
+                <>
+                  <div
+                    className={`max-w-full lg:w-full max-h-[450px] overflow-auto md:max-h-[500px] grid ${
+                      sportList.length === 1
+                        ? 'grid-cols-1'
+                        : 'max-[300px]:grid-cols-1 grid-cols-2 lg:grid-cols-4'
+                    } lg:flex-wrap  lg:flex-col items-center justify-center gap-2 `}
+                  >
+                    {sportList.map(sport => {
+                      return (
+                        <div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-pointer duration-200 hover:opacity-80 my-1'>
+                          <span>{sport.descricao}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
             </>
+          )}
+          {statusDataSports === 'failed' && (
+            <h2 className='font-medium text-2xl'>
+              {' '}
+              Erro de sistema. Por favor, tente mais tarde.
+            </h2>
           )}
         </div>
       </div>

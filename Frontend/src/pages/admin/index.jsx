@@ -19,7 +19,7 @@ const AdminConfig = () => {
     >
       <div className='flex flex-col h-screen w-full items-center px-4'>
         <h1 className='text-primary text-4xl font-bold text-center lg-text-left md:mt-20'>
-          Ajustes
+          Configurações
         </h1>
         <div className='hidden mt-10 lg:grid lg:grid-flow-col lg:w-[720px] gap'>
           <div

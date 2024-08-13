@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { api } from '../../../services/api';
 
-import { getUserLocalStorage, useUser } from '../../utils/userProvider';
+import { getUserLocalStorage } from '../../utils/userProvider';
 import ModalResetPasswordUser from '../admin/user/modalResetPasswordUser';
 
 const Users = () => {
@@ -26,7 +26,7 @@ const Users = () => {
         .get(`usuario/${user.idUser}`, headers)
         .then(json => {
           console.log(json);
-          setUserData(json.data);
+          setUserData({ ...json.data });
           setIsDataLoaded(true);
         })
         .catch(error => {
@@ -59,11 +59,8 @@ const Users = () => {
                 </label>
                 <input
                   onChange={e =>
-                    setUserData({
-                      nome: e.target.value,
-                      cpf: prev.cpf,
-                      email: prev.cpf,
-                      login: prev,
+                    setUserData(prev => {
+                      return { ...prev, nome: e.target.value };
                     })
                   }
                   {...register('nome')}
@@ -93,6 +90,11 @@ const Users = () => {
                   Login
                 </label>
                 <input
+                  onChange={e =>
+                    setUserData(prev => {
+                      return { ...prev, login: e.target.value };
+                    })
+                  }
                   {...register('login')}
                   name='login'
                   id='login'
@@ -141,7 +143,9 @@ const Users = () => {
         </div>
       </motion.div>
       {isModalResetPasswordOpen && (
-        <ModalResetPasswordUser setIsModalRessetPasswordUserOpen={setIsModalResetPasswordOpen}></ModalResetPasswordUser>
+        <ModalResetPasswordUser
+          setIsModalRessetPasswordUserOpen={setIsModalResetPasswordOpen}
+        ></ModalResetPasswordUser>
       )}
     </>
   );
