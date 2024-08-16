@@ -26,7 +26,7 @@ const Users = () => {
         .get(`usuario/${user.idUser}`, headers)
         .then(json => {
           console.log(json);
-          setUserData({ ...json.data });
+          setUserData({ ...json }.data);
           setIsDataLoaded(true);
         })
         .catch(error => {

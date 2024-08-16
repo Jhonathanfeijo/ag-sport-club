@@ -51,7 +51,9 @@ const FormasPagamento = () => {
         {statusDataLoading === 'loaded' && (
           <>
             {paymentTypes.length === 0 && (
-              <h2 className='font-medium text-lg md:text-2xl mt-2 mb-5'>Não há formas de pagamento cadastradas</h2>
+              <h2 className='font-medium text-lg md:text-2xl mt-2 mb-5'>
+                Não há formas de pagamento cadastradas
+              </h2>
             )}
             {paymentTypes.length > 0 && (
               <>
@@ -71,15 +73,17 @@ const FormasPagamento = () => {
                         return (
                           <tr
                             key={index}
-                            className={`${index % 2 === 1 ? 'bg-primary/10' : ''
-                              } font-bold w-full`}
+                            className={`${
+                              index % 2 === 1 ? 'bg-primary/10' : ''
+                            } font-bold w-full`}
                           >
                             <td className='px-2 py-1 break-words'>
                               {paymentType.descricao}
                             </td>
                             <td
-                              className={`px-2 py-1 break-words ${paymentType.ativo ? '' : ' text-danger/80'
-                                }`}
+                              className={`px-2 py-1 break-words ${
+                                paymentType.ativo ? '' : ' text-danger/80'
+                              }`}
                             >
                               {paymentType.ativo ? 'Ativo' : 'Inativo'}
                             </td>
@@ -95,7 +99,9 @@ const FormasPagamento = () => {
                               </button>
                               <button
                                 onClick={() => {
-                                  setPaymentDeleteId(paymentType.idFormPagamento);
+                                  setPaymentDeleteId(
+                                    paymentType.idFormPagamento,
+                                  );
                                   setIsModalDeletePaymentTypeOpen(true);
                                 }}
                                 className='bg-danger/70 text-secundary px-1 rounded py-1'
@@ -121,7 +127,10 @@ const FormasPagamento = () => {
           </>
         )}
         {statusDataLoading === 'failed' && (
-          <h2 className='text-xl font-bold my-2'>Estamos tendo problemas internos.<br /> Por favor, tente novamente mais tarde.</h2>
+          <h2 className='text-xl font-bold my-4'>
+            Estamos tendo problemas internos.
+            <br /> Por favor, tente novamente mais tarde.
+          </h2>
         )}
       </div>
       {isModalAddPaymentTypeOpen && (

@@ -32,7 +32,7 @@ const Courts = ({ editable }) => {
         })
         .catch(error => {
           console.log(error);
-          setStatusDataLoading('failed')
+          setStatusDataLoading('failed');
         });
     };
 
@@ -41,7 +41,7 @@ const Courts = ({ editable }) => {
 
   return (
     <motion.div
-      style={{ width: '100%', height: '100vh',zIndex:0 }}
+      style={{ width: '100%', height: '100vh', zIndex: 0 }}
       initial={{ opacity: 0, x: -15 }}
       exit={{ opacity: 0, x: 15 }}
       animate={{ opacity: 1, x: 0 }}
@@ -84,8 +84,12 @@ const Courts = ({ editable }) => {
                           <td className='py-2 px-2'>
                             {`R$ ${parseFloat(court.valorHora).toFixed(2)}`}
                           </td>
-                          <td className={`py-2 px-2 ${!court.ativo?"text-danger/70":""}`}>
-                            {court.ativo?"Ativo":"Inativo"}
+                          <td
+                            className={`py-2 px-2 ${
+                              !court.ativo ? 'text-danger/70' : ''
+                            }`}
+                          >
+                            {court.ativo ? 'Ativo' : 'Inativo'}
                           </td>
                           <td className='flex flex-row items-center py-1 justify-end text-secundary px-2 gap-2 font-normal'>
                             <button
@@ -128,9 +132,12 @@ const Courts = ({ editable }) => {
             </button>
           </>
         )}
-            {statusDataLoading === 'failed' && (
-            <h2 className='text-xl font-bold my-2 text-center'>Estamos tendo problemas internos.<br/> Por favor, tente novamente mais tarde</h2>
-          )}
+        {statusDataLoading === 'failed' && (
+          <h2 className='text-xl font-bold my-4 text-center'>
+            Estamos tendo problemas internos.
+            <br /> Por favor, tente novamente mais tarde
+          </h2>
+        )}
       </div>
 
       {isModalAddCourtOpen && (

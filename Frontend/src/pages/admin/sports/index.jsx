@@ -16,7 +16,7 @@ const SportsAdmin = () => {
   const [isModalEditSportOpen, setIsModalEditSportOpen] = useState(false);
 
   useEffect(() => {
-    console.log('a')
+    console.log('a');
     const user = getUserLocalStorage();
     const headers = {
       'Content-Type': 'application/json',
@@ -56,7 +56,9 @@ const SportsAdmin = () => {
             <>
               {sportList.length === 0 && (
                 <>
-                  <h2 className='text-lg md:text-2xl font-medium mb-3'>Não há esportes cadastrados</h2>
+                  <h2 className='text-lg md:text-2xl font-medium mb-3'>
+                    Não há esportes cadastrados
+                  </h2>
                 </>
               )}
               {sportList.length > 0 && (
@@ -79,14 +81,19 @@ const SportsAdmin = () => {
                           return (
                             <tr
                               key={index}
-                              className={`${index % 2 !== 0 ? 'bg-primary/15' : ''
-                                } font-bold`}
+                              className={`${
+                                index % 2 !== 0 ? 'bg-primary/15' : ''
+                              } font-bold`}
                             >
                               <td className='pl-2 py-2 text-left'>
                                 {sport.descricao}
                               </td>
-                              <td className={`pl-2 py-2 text-left ${!sport.ativo? "text-danger/80":""}`}>
-                                {sport.ativo?"Ativo":"Inativo"}
+                              <td
+                                className={`pl-2 py-2 text-left ${
+                                  !sport.ativo ? 'text-danger/80' : ''
+                                }`}
+                              >
+                                {sport.ativo ? 'Ativo' : 'Inativo'}
                               </td>
                               <td className='flex py-1 flex-row items-center justify-end px-2 gap-2 text-secundary font-normal'>
                                 <button
@@ -125,7 +132,10 @@ const SportsAdmin = () => {
             </>
           )}
           {statusDataSports === 'failed' && (
-            <h2 className='text-xl font-bold my-2'>Estamos tendo problemas internos.<br/> Por favor, tente novamente mais tarde.</h2>
+            <h2 className='text-xl font-bold my-2'>
+              Estamos tendo problemas internos.
+              <br /> Por favor, tente novamente mais tarde.
+            </h2>
           )}
         </div>
       </div>
