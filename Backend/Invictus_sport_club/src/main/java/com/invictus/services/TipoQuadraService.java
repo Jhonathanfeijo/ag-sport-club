@@ -23,7 +23,7 @@ public class TipoQuadraService {
 	}
 
 	public List<TipoQuadra> listarTiposQuadra() {
-		return tipoQuadraRepository.findAll();
+		return tipoQuadraRepository.findAllOrderByDescricao();
 	}
 
 	public TipoQuadra buscarTipoQuadraPorId(Long idTipoQuadra) {

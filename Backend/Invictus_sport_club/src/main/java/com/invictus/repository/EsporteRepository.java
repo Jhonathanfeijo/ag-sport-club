@@ -35,7 +35,7 @@ public interface EsporteRepository extends JpaRepository<Esporte, Long> {
 	@Query(value = "select * from v_esportes_ativos_ordem_alfabetica", nativeQuery = true)
 	List<Esporte> findAllByAtivoOrderByDescricao();
 
-	@Query(value = "insert into esporte( descricao, ativo) values (:descricao, :ativo) returning id_esporte, descricao, ativo", nativeQuery = true)
+	@Query(value = "insert into esporte(descricao, ativo) values (:descricao, :ativo) returning id_esporte, descricao, ativo", nativeQuery = true)
 	Esporte saveEsporte(@Param("descricao") String descricao,
 			@Param("ativo") boolean ativo);
 

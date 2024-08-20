@@ -46,7 +46,7 @@ const Header = ({ nivel_permissao }) => {
                         <>
                             <NavLink onClick={() => setOption('admin')} className='flex flex-row items-center   gap-2 lg:w-full lg:px-2 hover:opacity-80 transition-opacity duration-3000' to={'/config'}>
                                 <img className='w-8 h-8' src={config} alt="" />
-                                <p className={` text-secundary duration-300 hidden lg:block`} href="">Administrador</p>
+                                <p className={` text-secundary duration-300 hidden lg:block`} href="">Configurações</p>
                             </NavLink>
 
                         </>

@@ -73,17 +73,15 @@ const FormasPagamento = () => {
                         return (
                           <tr
                             key={index}
-                            className={`${
-                              index % 2 === 1 ? 'bg-primary/10' : ''
-                            } font-bold w-full`}
+                            className={`${index % 2 === 1 ? 'bg-primary/10' : ''
+                              } font-bold w-full`}
                           >
                             <td className='px-2 py-1 break-words'>
                               {paymentType.descricao}
                             </td>
                             <td
-                              className={`px-2 py-1 break-words ${
-                                paymentType.ativo ? '' : ' text-danger/80'
-                              }`}
+                              className={`px-2 py-1 break-words ${paymentType.ativo ? '' : ' text-danger/80'
+                                }`}
                             >
                               {paymentType.ativo ? 'Ativo' : 'Inativo'}
                             </td>
@@ -115,15 +113,15 @@ const FormasPagamento = () => {
                     </tbody>
                   </table>
                 </div>
-                <button
-                  type='button'
-                  onClick={() => setIsModalAddPaymentTypeOpen(true)}
-                  className='bg-primary text-secundary px-2 py-1.5 my-2 w-full rounded font-medium text-lg lg:text-xl'
-                >
-                  Adicionar forma de pagamento
-                </button>
               </>
             )}
+            <button
+              type='button'
+              onClick={() => setIsModalAddPaymentTypeOpen(true)}
+              className='bg-primary text-secundary px-2 py-1.5 my-2 w-full rounded font-medium text-lg lg:text-xl'
+            >
+              Adicionar forma de pagamento
+            </button>
           </>
         )}
         {statusDataLoading === 'failed' && (

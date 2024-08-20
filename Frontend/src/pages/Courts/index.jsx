@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { api } from '../../../services/api';
 import { getUserLocalStorage } from '../../utils/userProvider';
 const Courts = () => {
@@ -16,11 +15,11 @@ const Courts = () => {
     console.log(headers);
     const fetchData = async () => {
       await api
-        .get('quadra', headers)
+        .get('quadra/active', headers)
         .then(json => {
           console.log(json);
           setQuadraList(json.data);
-          setIsDataLoadered('loaded');
+          setStatusDataCourt('loaded')
         })
         .catch(() => {
           setStatusDataCourt('failed');

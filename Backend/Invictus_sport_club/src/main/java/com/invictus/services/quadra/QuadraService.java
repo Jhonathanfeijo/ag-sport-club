@@ -32,12 +32,7 @@ public class QuadraService {
 
 		validadores.forEach((v) -> v.validar(request));
 
-		Esporte esporte = esporteService.buscarEsportePorId(request.getIdEsporte());
-		TipoQuadra tipoQuadra = tipoQuadraService.buscarTipoQuadraPorId(request.getIdTipoQuadra());
-
-		Quadra quadra = new Quadra(null, tipoQuadra, esporte, request.getLocQuadra(), request.getValorHora(), request.getAtivo());
-
-		return quadraRepository.save(quadra);
+		return quadraRepository.save(request.getIdEsporte(), request.getIdTipoQuadra(), request.getAtivo(), request.getLocQuadra(), request.getValorHora());
 
 	}
 

@@ -12,7 +12,6 @@ const ModalEditCourt = ({ courtToEdit, setCourtToEdit, setIsModalEditCourtOpen, 
 
 
 
-    console.log(courtToEdit)
 
     const { register, handleSubmit } = useForm();
 
@@ -145,6 +144,13 @@ const ModalEditCourt = ({ courtToEdit, setCourtToEdit, setIsModalEditCourtOpen, 
                                 ))}
                             </select>
                         </div>
+                    </div>
+                    <div className="flex flex-row items-center gap-3 my-3">
+                        <label className="font-bold" htmlFor="ativo">Ativo</label>
+                        <label class="inline-flex items-center cursor-pointer">
+                            <input name="ativo" id="ativo" {...register("ativo")} type="checkbox" onChange={() => setCourtToEdit((prev) => { return { ...prev, ativo: !prev.ativo } })} value={courtToEdit.ativo} class="sr-only peer" checked={courtToEdit.ativo} />
+                            <div class="relative w-11 h-6 bg-third/20 rounded-full peer peer-focus: peer-focus: dark:peer-focus:ring-primary dark:bg-third/40 peer-checked:after:-translate-x-full rtl:peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:end-[2px] after:bg-secundary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary/90"></div>
+                        </label>
                     </div>
                     <div className="flex flex-row self-end items-end gap-2 my-6">
                         <button type="button" onClick={() => setIsModalEditCourtOpen(false)} className="bg-secundary border rounded lg:flex-none px-2 py-1 flex-1">Cancelar</button>
