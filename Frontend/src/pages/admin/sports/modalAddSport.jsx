@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { render } from "react-dom";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 
@@ -14,6 +13,7 @@ const ModalAddSport = ({ setIsModalAddSportOpen, sportList, setSportList }) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${user.token.replace('"', "").replace('"', "")}`,
     };
+    console.log(data)
     const fetchData = async () => {
       const toastId = toast.loading("Salvando esporte");
       await api.post('esporte', data, { headers }).then((json) => {
@@ -29,7 +29,8 @@ const ModalAddSport = ({ setIsModalAddSportOpen, sportList, setSportList }) => {
         })
         let sportListAux = [...sportList, {
           idEsporte: json.data.idEsporte,
-          descricao: json.data.descricao
+          descricao: json.data.descricao,
+          ativo: json.data.ativo
         }]
         setSportList(sportListAux)
         setIsModalAddSportOpen(false);

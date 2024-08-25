@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-19T18:55:55-0400",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.38.0.v20240524-2033, environment: Java 21.0.3 (Eclipse Adoptium)"
+    date = "2024-08-23T20:30:34-0400",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22.0.2 (Arch Linux)"
 )
 @Component
 public class FormPagamentoMapperImpl implements FormPagamentoMapper {
@@ -21,8 +21,8 @@ public class FormPagamentoMapperImpl implements FormPagamentoMapper {
 
         FormPagamento formPagamento = new FormPagamento();
 
-        formPagamento.setAtivo( request.isAtivo() );
         formPagamento.setDescricao( request.getDescricao() );
+        formPagamento.setAtivo( request.isAtivo() );
 
         return formPagamento;
     }

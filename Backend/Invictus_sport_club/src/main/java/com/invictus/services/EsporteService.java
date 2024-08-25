@@ -1,7 +1,9 @@
 package com.invictus.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.invictus.domain.esporte.EsportesJogadosResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +46,8 @@ public class EsporteService {
 
 	public Esporte editarEsporte(Long idEsporte, EsporteRequest request) {
 		verificadorEsporteExiste(idEsporte);
-
+		if(esporteRepository.existsByDescricaoAndIdEsporte(request.getDescricao(), idEsporte))
+			throw new RuntimeException("Ja existe um esporte com essa descricao");
 		Esporte esporte = esporteMapper.esporteRequestToEsporte(request);
 		esporte.setIdEsporte(idEsporte);
 		return esporteRepository.save(esporte);
@@ -64,6 +67,16 @@ public class EsporteService {
 
 	public List<Esporte> buscarEsportesAtivos() {
 		return esporteRepository.findAllByAtivoOrderByDescricao();
+	}
+	
+	public List<EsportesJogadosResponse> obterEsportesMaisJogadosPorUsuario(Long idUsuario) {
+		List<Object[]> results = esporteRepository.sportsMoreReservedByUserId(idUsuario);
+		return results.stream()
+				.map(result -> new EsportesJogadosResponse(
+						((Number) result[0]).longValue(), // Convert COUNT(*) to Long
+						(String) result[1]                // Convert descricao to String
+				))
+				.collect(Collectors.toList());
 	}
 
 }

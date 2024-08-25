@@ -3,6 +3,7 @@ package com.invictus.controller;
 import java.net.URI;
 import java.util.List;
 
+import com.invictus.domain.esporte.EsportesJogadosResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -65,7 +66,6 @@ public class EsporteController {
 	@Transactional
 	@DeleteMapping("/{id}")
 	public ResponseEntity deletarEsportePorId(@PathVariable("id") Long idEsporte) {
-		System.out.println("aqui");
 		esporteService.deletarEsporte(idEsporte);
 		return ResponseEntity.noContent().build();
 	}
@@ -76,6 +76,12 @@ public class EsporteController {
 		Esporte esporte = esporteService.editarEsporte(idEsporte, request);
 		EsporteResponse response = esporteMapper.esporteToEsporteResponse(esporte);
 		return ResponseEntity.ok(esporte);
+	}
+
+	@GetMapping("/byUser/{id}/popular")
+	public ResponseEntity obterEsportesPopulares(@PathVariable("id") Long idUsuario) {
+		List<EsportesJogadosResponse> esportes =  esporteService.obterEsportesMaisJogadosPorUsuario(idUsuario);
+		return ResponseEntity.ok(esportes);
 	}
 
 }

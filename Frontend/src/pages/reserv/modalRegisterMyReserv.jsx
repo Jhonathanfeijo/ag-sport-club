@@ -5,14 +5,14 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { motion } from 'framer-motion'
 
-const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyReservsOpen }) => {
+const ModalRegisterMyReserv = ({render, setRender, setMyReservs, myReservs, setIsModalRegisterMyReservsOpen }) => {
 
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const [courtList, setCourtList] = useState([]);
     const [payments, setPayments] = useState([]);
     const [statusDateAvailable, setStatusDateAvailable] = useState("quit");
     const [hoursAvailable, setHoursAvailable] = useState([]);
-
+    const [reservToRegister,  setReservToRegister] = useState([])
 
 
     const { register, handleSubmit } = useForm();
@@ -79,6 +79,7 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
                             fontWeight: "bold"
                         }
                     })
+                    setRender(render => render+1);
                 })
                 .catch((error) => {
                     if (error.response) {
@@ -99,7 +100,6 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
     };
 
     const verifyReservsAvailableByDay = async (data) => {
-        console.log('aq')
         const user = getUserLocalStorage();
         const headers = {
             "Content-Type": 'application/json',
@@ -139,7 +139,7 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
                             <>
                                 <form onSubmit={handleSubmit(postMyReserv)} className="flex flex-col">
                                     <label htmlFor="idQuadra">Quadra</label>
-                                    <select {...register("idQuadra")} className="border rounded py-1" name="idQuadra" id="idQuadra">
+                                    <select {...register("idQuadra")} className="border rounded px-1" name="idQuadra" id="idQuadra">
                                         <option value="">Selecione</option>
                                         {courtList.map((court) => (
                                             <option key={court.idQuadra} value={court.idQuadra}>
@@ -148,7 +148,7 @@ const ModalRegisterMyReserv = ({ setMyReservs, myReservs, setIsModalRegisterMyRe
                                         ))}
                                     </select>
                                     <label className="mt-2" htmlFor="idFormPagamento">Forma de pagamento</label>
-                                    <select {...register("idFormPagamento")} className="border rounded py-1" name="idFormPagamento" id="idFormPagamento">
+                                    <select {...register("idFormPagamento")} className="border rounded px-1" name="idFormPagamento" id="idFormPagamento">
                                         <option value="">Selecione</option>
                                         {payments.map((payment, index) => (
                                             <option key={index} value={payment.idFormPagamento}>

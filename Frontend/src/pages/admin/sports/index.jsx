@@ -86,7 +86,7 @@ const SportsAdmin = () => {
                               } font-bold`}
                             >
                               <td className='pl-2 py-2 text-left'>
-                                {sport.descricao}
+                                {sport.descricao.toUpperCase()}
                               </td>
                               <td
                                 className={`pl-2 py-2 text-left ${

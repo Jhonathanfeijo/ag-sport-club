@@ -1,9 +1,6 @@
 package com.invictus.domain.esporte;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,6 +11,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SqlResultSetMapping(
+		name = "EsportesJogadosMapping",
+		classes = @ConstructorResult(
+				targetClass = EsportesJogadosResponse.class,
+				columns = {
+						@ColumnResult(name = "quantidade", type = Long.class),
+						@ColumnResult(name = "descricao", type = String.class)
+				}
+		)
+)
 public class Esporte {
 
 	@Id

@@ -74,4 +74,7 @@ public class QuadraService {
 			throw new RuntimeException("Quadra não foi encontrada");
 	}
 
+    public List<String> obterUltimasQuadrasReservadas(Long idUsuario) {
+		return quadraRepository.lastQuadrasReserved(idUsuario);
+    }
 }

@@ -54,4 +54,7 @@ public interface QuadraRepository extends JpaRepository<Quadra, Long> {
 	@Query(value = "delete from quadra where id_quadra = :idQuadra", nativeQuery = true)
 	void deleteById(@Param("idQuadra") Long idQuadra);
 
+	@Query(value = "select q.loc_quadra from quadra q inner join reserva r on r.id_quadra = q.id_quadra inner join usuario u on u.id_usuario = r.id_usuario where upper( r.status) <> upper('cancelado') and u.id_usuario = :idUsuario order by r.data desc limit 3", nativeQuery = true)
+	List<String> lastQuadrasReserved(@Param("idUsuario") Long idUsuario);
+
 }

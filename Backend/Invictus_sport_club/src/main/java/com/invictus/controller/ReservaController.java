@@ -1,35 +1,22 @@
 package com.invictus.controller;
 
-import java.net.URI;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.invictus.domain.reserva.*;
+import com.invictus.mapper.ReservaMapper;
+import com.invictus.services.ReservaService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.invictus.domain.reserva.Reserva;
-import com.invictus.domain.reserva.ReservaRequestDTO;
-import com.invictus.domain.reserva.ReservaRequestStatusUpdate;
-import com.invictus.domain.reserva.ReservaResponseDto;
-import com.invictus.mapper.ReservaMapper;
-import com.invictus.services.ReservaService;
-
-import jakarta.transaction.Transactional;
+import java.net.URI;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/reserva")
@@ -86,5 +73,11 @@ public class ReservaController {
 		System.out.println(request.getStatusReserva());
 		Reserva reserva = reservaService.atualizarReserva(idQuadra, request.getStatusReserva());
 		return ResponseEntity.ok(reserva);
+	}
+
+	@GetMapping("/byUser/{id}/near")
+	public ResponseEntity obterReservasProximasPorUsuarioId (@PathVariable("id") Long idUsuario){
+		List<ReservaNearResponse> reservas = reservaService.obterReservasProximasUsuario(idUsuario);
+		return ResponseEntity.ok(reservas);
 	}
 }

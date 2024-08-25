@@ -8,6 +8,7 @@ import { getUserLocalStorage } from '../../utils/userProvider';
 const Sports = () => {
   const [sportList, setSportList] = useState([]);
   const [statusDataSports, setStatusDataSportes] = useState('loading');
+  
 
   useEffect(() => {
     const user = getUserLocalStorage();
@@ -28,7 +29,7 @@ const Sports = () => {
         });
     };
     fetchData();
-  }, [sportList]);
+  }, []);
 
   return (
     <motion.div
@@ -64,7 +65,7 @@ const Sports = () => {
                     {sportList.map(sport => {
                       return (
                         <div className='bg-primary lg:w-[190px] rounded text-secundary text-lg lg:text-xl p-4 text-center flex items-center justify-center hover:cursor-pointer duration-200 hover:opacity-80 my-1'>
-                          <span>{sport.descricao}</span>
+                          <span>{sport.descricao.toUpperCase()}</span>
                         </div>
                       );
                     })}

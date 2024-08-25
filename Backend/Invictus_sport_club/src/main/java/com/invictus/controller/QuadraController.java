@@ -77,5 +77,10 @@ public class QuadraController {
 		quadraService.deletarQuadraPorId(idQuadra);
 		return ResponseEntity.noContent().build();
 	}
+	@GetMapping("/byUser/{id}/recent")
+	public ResponseEntity obterQuadrasReservadasRecentemente(@PathVariable("id") Long idUsuario){
+		List<String> quadras = quadraService.obterUltimasQuadrasReservadas(idUsuario);
+		return ResponseEntity.ok(quadras);
+	}
 
 }

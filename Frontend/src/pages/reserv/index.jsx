@@ -13,7 +13,13 @@ const Reserv = () => {
   const [isModalSeeMoreAboutReservOpen, setIsModalSeeMoreAboutReservOpen] =
     useState(false);
   const [reservToSee, setReservToSee] = useState();
-
+  const [myReservsFIlter, setMyReservsFilter] = useState();
+  const [render, setRender] = useState(0);
+  const [filters, setFilters] = useState({
+    data : '',
+    quadra:'',
+    status:''
+  });
   useEffect(() => {
     const user = getUserLocalStorage();
     const headers = {
@@ -26,11 +32,15 @@ const Reserv = () => {
       await api.get(`reserva/byUser/${user.idUser}`, headers).then(json => {
         console.log(json);
         setMyReservs(json.data);
+        setMyReservsFilter(json.data)
         setIsDataLoaded(true);
       });
     };
     fetchData();
-  }, []);
+  }, [render]);
+
+
+  
 
   return (
     <motion.div
@@ -41,10 +51,60 @@ const Reserv = () => {
       transition={{ duration: 0.3 }}
     >
       <div className='w-full h-screen flex justify-center items-center text-primary'>
-        <main className=' md:pt-20 w-full md:w-[700px] lg:w-[750px] max-w-full h-full flex flex-col items-center'>
+        <main className='md:pt-20 w-full md:w-[700px] lg:w-[750px] max-w-full h-full flex flex-col items-center'>
           <h1 className='font-bold text-4xl text-center'>Minhas reservas</h1>
           {isDataLoaded && isDataLoaded === true && myReservs.length > 0 && (
             <>
+              <div className="flex flex-row w-full mt-5 flex-wrap gap-2">
+                <div className="flex flex-col">
+                  <label className='font-bold' htmlFor="">Data</label>
+                  <input
+                    value={filters.data}
+                    onChange={(e) => {
+                      setFilters((prev) => ({ ...prev, data: e.target.value }));
+                      handleFilterReservs();
+                    }}
+                    className='rounded p-1 border'
+                    type="date"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label className='font-bold' htmlFor="">Quadra</label>
+                  <select
+                    value={filters.quadra}
+                    onChange={(e) => {
+                      setFilters((prev) => ({ ...prev, quadra: e.target.value }));
+                      handleFilterReservs();
+                    }}
+                    className='rounded border p-1'
+                    name=""
+                    id=""
+                  >
+                    {/* Adicione opções de quadra aqui */}
+                    <option value="">Todas</option>
+                    <option value="quadra1">Quadra 1</option>
+                    <option value="quadra2">Quadra 2</option>
+                  </select>
+                </div>
+                <div className="flex flex-col">
+                  <label className='font-bold' htmlFor="">Status</label>
+                  <select
+                    value={filters.status}
+                    onChange={(e) => {
+                      setFilters((prev) => ({ ...prev, status: e.target.value }));
+                      handleFilterReservs();
+                    }}
+                    className='rounded border p-1'
+                    name=""
+                    id=""
+                  >
+                    <option value="">Todos</option>
+                    <option value="cancelado">Cancelado</option>
+                    <option value="pago">Pago</option>
+                    <option value="pendente">Pendente</option>
+                  </select>
+                </div>
+              </div>
               <div className='table-container w-[95%] max-w-[95%] md:max-w-full max-h-[400px] md:w-full mt-4 overflow-auto drop-shadow-xl shadow-lg'>
                 <table className='w-full'>
                   <thead className='sticky top-0 left-0'>
@@ -58,7 +118,7 @@ const Reserv = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {myReservs.map((myReserv, index) => {
+                    {myReservsFIlter.map((myReserv, index) => {
                       return (
                         <tr
                           className={`${index % 2 === 1 ? 'bg-primary/10' : ''
@@ -87,7 +147,6 @@ const Reserv = () => {
                               Ver mais
                             </button>
                           </td>
-
                         </tr>
                       );
                     })}
@@ -101,7 +160,7 @@ const Reserv = () => {
           )}
           <button
             onClick={() => setIsModalRegisterMyReservsOpen(true)}
-            className={`w-[95%] ${myReservs.length === 0? "md:w-[400px]":"md:w-full"} text-secundary rounded bg-primary py-2 text-lg my-2`}
+            className={`w-[95%] ${myReservs.length === 0 ? "md:w-[400px]" : "md:w-full"} text-secundary rounded bg-primary py-2 text-lg my-2`}
           >
             Fazer reserva
           </button>
@@ -109,6 +168,8 @@ const Reserv = () => {
       </div>
       {isModalRegisterMyReservsOpen && (
         <ModalRegisterMyReserv
+          render={render}
+          setRender={setRender}
           setMyReservs={setMyReservs}
           myReservs={myReservs}
           setIsModalRegisterMyReservsOpen={setIsModalRegisterMyReservsOpen}
@@ -124,6 +185,7 @@ const Reserv = () => {
       )}
     </motion.div>
   );
+  
 };
 
 export default Reserv;
