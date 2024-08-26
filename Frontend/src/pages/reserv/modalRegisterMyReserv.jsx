@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { motion } from 'framer-motion'
 
-const ModalRegisterMyReserv = ({render, setRender, setMyReservs, myReservs, setIsModalRegisterMyReservsOpen }) => {
+const ModalRegisterMyReserv = ({setRender, setMyReservs, myReservs, setIsModalRegisterMyReservsOpen }) => {
 
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const [courtList, setCourtList] = useState([]);
@@ -28,7 +28,7 @@ const ModalRegisterMyReserv = ({render, setRender, setMyReservs, myReservs, setI
         const fetchData = async () => {
             try {
                 const [quadraResponse, formPagamentoResponse] = await Promise.all([
-                    api.get("quadra/active", { headers }),
+                    api.get("quadra/all/available", { headers }),
                     api.get("form_pagamento/active", { headers })
                 ]);
                 setCourtList(quadraResponse.data);
@@ -59,7 +59,6 @@ const ModalRegisterMyReserv = ({render, setRender, setMyReservs, myReservs, setI
         }
 
 
-        console.log(reserv)
         const postData = async () => {
             const toastId = toast.loading("Registrando reserva", { isLoading: true })
             await api.post("reserva", reserv, headers)
@@ -79,7 +78,7 @@ const ModalRegisterMyReserv = ({render, setRender, setMyReservs, myReservs, setI
                             fontWeight: "bold"
                         }
                     })
-                    setRender(render => render+1);
+                    setRender((prev) => prev + 1);
                 })
                 .catch((error) => {
                     if (error.response) {
@@ -139,7 +138,7 @@ const ModalRegisterMyReserv = ({render, setRender, setMyReservs, myReservs, setI
                             <>
                                 <form onSubmit={handleSubmit(postMyReserv)} className="flex flex-col">
                                     <label htmlFor="idQuadra">Quadra</label>
-                                    <select {...register("idQuadra")} className="border rounded px-1" name="idQuadra" id="idQuadra">
+                                    <select {...register("idQuadra")} className="border rounded p-1" name="idQuadra" id="idQuadra">
                                         <option value="">Selecione</option>
                                         {courtList.map((court) => (
                                             <option key={court.idQuadra} value={court.idQuadra}>
@@ -148,7 +147,7 @@ const ModalRegisterMyReserv = ({render, setRender, setMyReservs, myReservs, setI
                                         ))}
                                     </select>
                                     <label className="mt-2" htmlFor="idFormPagamento">Forma de pagamento</label>
-                                    <select {...register("idFormPagamento")} className="border rounded px-1" name="idFormPagamento" id="idFormPagamento">
+                                    <select {...register("idFormPagamento")} className="border rounded p-1" name="idFormPagamento" id="idFormPagamento">
                                         <option value="">Selecione</option>
                                         {payments.map((payment, index) => (
                                             <option key={index} value={payment.idFormPagamento}>

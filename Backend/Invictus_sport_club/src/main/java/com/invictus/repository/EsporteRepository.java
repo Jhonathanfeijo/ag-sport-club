@@ -50,5 +50,7 @@ public interface EsporteRepository extends JpaRepository<Esporte, Long> {
 	@Query(value = "SELECT COUNT(*) AS quantidade, e.descricao " + "FROM reserva r " + "INNER JOIN quadra q ON q.id_quadra = r.id_quadra " + "INNER JOIN esporte e ON e.id_esporte = q.id_esporte " + "WHERE r.id_usuario = :idUsuario " + "GROUP BY e.id_esporte " + "ORDER BY e.id_esporte DESC " + "LIMIT 3", nativeQuery = true)
 	List<Object[]> sportsMoreReservedByUserId(@Param("idUsuario") Long idUsuario);
 
+	@Query(value = "update esporte set descricao = :descricao, ativo = :ativo where id_esporte = :id returning id_esporte, descricao, ativo", nativeQuery = true)
+	public Esporte updateById(@Param("id") Long idEsporte, @Param("ativo") boolean ativo, @Param("descricao") String descricao);
 
 }

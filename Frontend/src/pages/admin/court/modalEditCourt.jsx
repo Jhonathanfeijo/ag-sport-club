@@ -4,7 +4,7 @@ import { api } from "../../../../services/api";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-const ModalEditCourt = ({ courtToEdit, setCourtToEdit, setIsModalEditCourtOpen, setCourtList, courtList }) => {
+const ModalEditCourt = ({ courtToEdit, setCourtToEdit, setIsModalEditCourtOpen, setCourtList, courtList, setRender }) => {
 
     const [sportList, setSportList] = useState([]);
     const [tipoQuadraList, setTipoQuadraList] = useState([])
@@ -38,6 +38,7 @@ const ModalEditCourt = ({ courtToEdit, setCourtToEdit, setIsModalEditCourtOpen, 
 
                 })
                 setIsModalEditCourtOpen(false)
+                setRender((prev) => prev +1);
             })
                 .catch((error) => {
                     if (error.response) {

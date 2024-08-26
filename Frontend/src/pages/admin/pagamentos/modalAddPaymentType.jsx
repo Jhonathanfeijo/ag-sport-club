@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 
-const ModalAddPaymentType = ({ paymentTypes, setPaymentTypes, setIsModalAddPaymentTypeOpen }) => {
+const ModalAddPaymentType = ({ paymentTypes, setPaymentTypes, setIsModalAddPaymentTypeOpen, setRender }) => {
 
     const { register, handleSubmit } = useForm();
 
@@ -31,6 +31,7 @@ const ModalAddPaymentType = ({ paymentTypes, setPaymentTypes, setIsModalAddPayme
                 paymentTypesAux.push(json.data);
                 setPaymentTypes(paymentTypesAux)
                 setIsModalAddPaymentTypeOpen(false);
+                setRender((prev) => prev +1);
 
             }).catch((error) => {
                 if (error.response) {

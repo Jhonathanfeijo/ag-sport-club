@@ -17,6 +17,9 @@ const FormasPagamento = () => {
   const [paymentTypeToEdit, setPaymentTypeToEdit] = useState();
   const [isModalEditPaymentTypeOpen, setIsModalEditPaymentTypeOpen] =
     useState();
+  const [render, setRender] = useState(0);
+
+
   useEffect(() => {
     const user = getUserLocalStorage();
     const headers = {
@@ -37,7 +40,7 @@ const FormasPagamento = () => {
         });
     };
     fetchData();
-  }, []);
+  }, [render]);
 
   return (
     <motion.div
@@ -77,7 +80,7 @@ const FormasPagamento = () => {
                               } font-bold w-full`}
                           >
                             <td className='px-2 py-1 break-words'>
-                              {paymentType.descricao}
+                              {paymentType.descricao.toUpperCase()}
                             </td>
                             <td
                               className={`px-2 py-1 break-words ${paymentType.ativo ? '' : ' text-danger/80'
@@ -133,6 +136,7 @@ const FormasPagamento = () => {
       </div>
       {isModalAddPaymentTypeOpen && (
         <ModalAddPaymentType
+          setRender={setRender}
           setIsModalAddPaymentTypeOpen={setIsModalAddPaymentTypeOpen}
           paymentTypes={paymentTypes}
           setPaymentTypes={setPaymentTypes}
@@ -140,6 +144,7 @@ const FormasPagamento = () => {
       )}
       {isModalDeletePaymentTypeOpen && (
         <ModalDeletePaymentType
+          setRender={setRender}
           paymentTypeDeleteId={paymentDeleteId}
           paymentTypes={paymentTypes}
           setIsModalDeletePaymentTypeOpen={setIsModalDeletePaymentTypeOpen}
@@ -148,6 +153,7 @@ const FormasPagamento = () => {
       )}
       {isModalEditPaymentTypeOpen && (
         <ModalEditPaymentType
+          setRender={setRender}
           paymentTypeToEdit={paymentTypeToEdit}
           setIsModalEditPaymentTypeOpen={setIsModalEditPaymentTypeOpen}
           setPaymentTypes={setPaymentTypes}

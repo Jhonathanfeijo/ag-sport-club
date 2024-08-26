@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 
-const ModalEditTipoQuadra = ({ tipoQuadraToEdit, setTipoQuadraToEdit, setIsModalEditTipoQuadraOpen, tiposQuadra, setTiposQuadra }) => {
+const ModalEditTipoQuadra = ({ tipoQuadraToEdit, setTipoQuadraToEdit, setIsModalEditTipoQuadraOpen, tiposQuadra, setTiposQuadra, setRender }) => {
 
     const { register, handleSubmit } = useForm();
 
@@ -26,6 +26,7 @@ const ModalEditTipoQuadra = ({ tipoQuadraToEdit, setTipoQuadraToEdit, setIsModal
                     tiposQuadraAux.push(json.data);
                     setTiposQuadra(tiposQuadraAux);
                     setIsModalEditTipoQuadraOpen(false);
+                    setRender((prev) => prev + 1);
                 }).catch((error) => {
                     console.log(error)
                     toast.update(toastId, { render: 'Algo deu errado', type: "error", theme: "colored", isLoading: false, autoClose: 2500 });

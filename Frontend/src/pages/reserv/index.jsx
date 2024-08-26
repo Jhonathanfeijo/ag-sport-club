@@ -16,9 +16,9 @@ const Reserv = () => {
   const [myReservsFIlter, setMyReservsFilter] = useState();
   const [render, setRender] = useState(0);
   const [filters, setFilters] = useState({
-    data : '',
-    quadra:'',
-    status:''
+    data: '',
+    quadra: '',
+    status: ''
   });
   useEffect(() => {
     const user = getUserLocalStorage();
@@ -40,7 +40,7 @@ const Reserv = () => {
   }, [render]);
 
 
-  
+
 
   return (
     <motion.div
@@ -126,8 +126,7 @@ const Reserv = () => {
                           key={index}
                         >
                           <td className='py-2 px-2'>{myReserv.dataLocacao}</td>
-                          <td className='py-2 px-2'>{`${myReserv.horarioInicial
-                            }:00 - ${myReserv.horarioInicial + 1}:00`}</td>
+                          <td className='py-2 px-2'>{`${myReserv.horarioInicial < 10? `0${myReserv.horarioInicial}`:`${myReserv.horarioInicial}`}:00 - ${myReserv.horarioInicial + 1 < 10? `0${myReserv.horarioInicial+1}`:`${myReserv.horarioInicial+1}`}:00`}</td>
                           <td className='py-2 px-2'>{myReserv.quadraLoc}</td>
                           <td className='py-2 px-2 max-[800px]:hidden'>{`R$ ${parseFloat(
                             myReserv.valorReserva,
@@ -168,7 +167,6 @@ const Reserv = () => {
       </div>
       {isModalRegisterMyReservsOpen && (
         <ModalRegisterMyReserv
-          render={render}
           setRender={setRender}
           setMyReservs={setMyReservs}
           myReservs={myReservs}
@@ -177,6 +175,7 @@ const Reserv = () => {
       )}
       {isModalSeeMoreAboutReservOpen && (
         <ModalSeeMoreAboutReserv
+          setRender={setRender}
           setMyReservs={setMyReservs}
           myReservs={myReservs}
           reserv={reservToSee}
@@ -185,7 +184,7 @@ const Reserv = () => {
       )}
     </motion.div>
   );
-  
+
 };
 
 export default Reserv;

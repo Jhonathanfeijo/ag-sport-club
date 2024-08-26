@@ -83,4 +83,10 @@ public class QuadraController {
 		return ResponseEntity.ok(quadras);
 	}
 
+	@GetMapping("/all/available")
+	public ResponseEntity obterQuadrasDisponiveisParaLocacao(){
+		List<Quadra> quadras = quadraService.obterQuadrasDisponiveisParaLocacao();
+		return ResponseEntity.ok(quadras);
+	}
+
 }

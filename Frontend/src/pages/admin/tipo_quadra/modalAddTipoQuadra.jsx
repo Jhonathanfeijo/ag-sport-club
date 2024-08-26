@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 
-const ModalAddTipoQuadra = ({ tiposQuadra, setTiposQuadra, setIsModalAddTipoQuadraOpen }) => {
+const ModalAddTipoQuadra = ({ tiposQuadra, setTiposQuadra, setIsModalAddTipoQuadraOpen, setRender }) => {
 
     const { register, handleSubmit } = useForm();
 
@@ -31,10 +31,10 @@ const ModalAddTipoQuadra = ({ tiposQuadra, setTiposQuadra, setIsModalAddTipoQuad
                 tiposQuadraAux.push(json.data);
                 setTiposQuadra(tiposQuadraAux)
                 setIsModalAddTipoQuadraOpen(false);
-
+                setRender((prev) => prev + 1);
             }).catch((error) => {
                 console.log(error);
-                if(error.response){
+                if (error.response) {
 
                     toast.update(toastId, { render: error.response.data.message, isLoading: false, autoClose: 2500, type: "error" })
                 }

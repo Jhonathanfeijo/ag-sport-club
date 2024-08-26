@@ -4,7 +4,7 @@ import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 import { toast } from "react-toastify";
 
-const ModalAddCourt = ({ setIsModalAddCourtOpen, courtList, setCourtList }) => {
+const ModalAddCourt = ({ setIsModalAddCourtOpen, courtList, setCourtList, setRender }) => {
 
   const [sportList, setSportList] = useState([]);
   const [tipoQuadraList, setTipoQuadraList] = useState([])
@@ -55,6 +55,7 @@ const ModalAddCourt = ({ setIsModalAddCourtOpen, courtList, setCourtList }) => {
           courtListAux.push(json.data)
           setCourtList(courtListAux)
           setIsModalAddCourtOpen(false)
+          setRender((prev) => prev + 1);
         })
         .catch((error) => {
           if (error.response) {
@@ -95,27 +96,27 @@ const ModalAddCourt = ({ setIsModalAddCourtOpen, courtList, setCourtList }) => {
                 <input {...register("valorHora")} name="valorHora" id="valorHora" className="border rounded px-1 py-1 w-full " type="number" />
               </div>
             </div>
-            <div className="w-full"> 
-            <div className="flex w-full flex-row items-end gap-2">
-              <div className="flex flex-col items-start flex-1 mt-2">
-                <label className="font-bold" htmlFor="">Tipo da quadra</label>
-                <select {...register("idTipoQuadra")} className="border rounded bg-secundary w-full py-1" name="idTipoQuadra" id="idTipoQuadra">
-                  <option value={""}>Selecione</option>
-                  {tipoQuadraList.map((tipoQuadra, index) => {
-                    return <option key={index} value={tipoQuadra.idTipoQuadra}>{tipoQuadra.descricao}</option>
-                  })}
-                </select>
+            <div className="w-full">
+              <div className="flex w-full flex-row items-end gap-2">
+                <div className="flex flex-col items-start flex-1 mt-2">
+                  <label className="font-bold" htmlFor="">Tipo da quadra</label>
+                  <select {...register("idTipoQuadra")} className="border rounded bg-secundary w-full py-1" name="idTipoQuadra" id="idTipoQuadra">
+                    <option value={""}>Selecione</option>
+                    {tipoQuadraList.map((tipoQuadra, index) => {
+                      return <option key={index} value={tipoQuadra.idTipoQuadra}>{tipoQuadra.descricao}</option>
+                    })}
+                  </select>
+                </div>
+                <div className="flex flex-col items-start flex-1">
+                  <label className="font-bold" htmlFor="">Esporte</label>
+                  <select {...register("idEsporte")} className="border rounded bg-secundary w-full py-1" name="idEsporte" id="idEsporte">
+                    <option value={""}>Selecione</option>
+                    {sportList.map((sport, index) => {
+                      return <option key={index} value={sport.idEsporte}>{sport.descricao}</option>
+                    })}
+                  </select>
+                </div>
               </div>
-              <div className="flex flex-col items-start flex-1">
-                <label className="font-bold" htmlFor="">Esporte</label>
-                <select {...register("idEsporte")} className="border rounded bg-secundary w-full py-1" name="idEsporte" id="idEsporte">
-                  <option value={""}>Selecione</option>
-                  {sportList.map((sport, index) => {
-                    return <option key={index} value={sport.idEsporte}>{sport.descricao}</option>
-                  })}
-                </select>
-              </div>
-            </div>
               <div className="flex flex-row items-center gap-3 my-3">
                 <label className="font-bold" htmlFor="ativo">Ativo</label>
                 <label class="inline-flex items-center cursor-pointer">

@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 
-const ModalDeleteTipoQuadra = ({tipoQuadraDeleteId, setIsModalDeleteTipoQuadraOpen, tiposQuadra, setTiposQuadra}) => {
+const ModalDeleteTipoQuadra = ({tipoQuadraDeleteId, setIsModalDeleteTipoQuadraOpen, tiposQuadra, setTiposQuadra, setRender}) => {
 
 
 
@@ -30,6 +30,7 @@ const ModalDeleteTipoQuadra = ({tipoQuadraDeleteId, setIsModalDeleteTipoQuadraOp
                 tiposQuadraAux = tiposQuadraAux.filter((tipoQuadraAux) => tipoQuadraAux.idTipoQuadra != tipoQuadraDeleteId);
                 setTiposQuadra(tiposQuadraAux);
                 setIsModalDeleteTipoQuadraOpen(false)
+                setRender((prev) => prev + 1);
             }).catch((error) => {
                 toast.update(toastId, {
                     render: error.response.data.message,

@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 
-const ModalDeletePaymentType = ({ paymentTypeDeleteId, setIsModalDeletePaymentTypeOpen, paymentTypes, setPaymentTypes }) => {
+const ModalDeletePaymentType = ({ paymentTypeDeleteId, setIsModalDeletePaymentTypeOpen, paymentTypes, setPaymentTypes, setRender }) => {
 
 
 
@@ -30,6 +30,7 @@ const ModalDeletePaymentType = ({ paymentTypeDeleteId, setIsModalDeletePaymentTy
                 paymentTypesAux = paymentTypesAux.filter((paymentType) => paymentType.idFormPagamento != paymentTypeDeleteId);
                 setPaymentTypes(paymentTypesAux);
                 setIsModalDeletePaymentTypeOpen(false)
+                setRender((prev) => prev + 1);
             }).catch((error) => {
                 if (error.response) {
 

@@ -16,6 +16,8 @@ const TiposQuadras = () => {
   const [tipoQuadraDeleteId, setTipoQuadraDeleteId] = useState();
   const [tipoQuadraToEdit, setTipoQuadraToEdit] = useState();
   const [isModalEditTipoQuadraOpen, setIsModalEditTipoQuadraOpen] = useState();
+  const [render, setRender] = useState(0);
+
   useEffect(() => {
     const user = getUserLocalStorage();
     const headers = {
@@ -36,7 +38,7 @@ const TiposQuadras = () => {
         });
     };
     fetchData();
-  }, []);
+  }, [render]);
 
   return (
     <motion.div
@@ -77,7 +79,7 @@ const TiposQuadras = () => {
                               } font-bold w-full`}
                           >
                             <td className='px-2 py-2 break-words max-w-[200px]'>
-                              {tipoQuadra.descricao}
+                              {tipoQuadra.descricao.toUpperCase()}
                             </td>
                             <td className='px-2 py-1 font-normal break-words flex flex-row justify-end gap-2'>
                               <button
@@ -116,12 +118,13 @@ const TiposQuadras = () => {
             </button>
           </>
         )}
-            {statusDataLoading === 'failed' && (
-            <h2 className='text-xl font-bold my-2'>Estamos tendo problemas internos.<br/> Por favor, tente novamente mais tarde</h2>
-          )}
+        {statusDataLoading === 'failed' && (
+          <h2 className='text-xl font-bold my-2'>Estamos tendo problemas internos.<br /> Por favor, tente novamente mais tarde</h2>
+        )}
       </div>
       {isModalAddTipoQuadraOpen && (
         <ModalAddTipoQuadra
+          setRender={setRender}
           setIsModalAddTipoQuadraOpen={setIsModalAddTipoQuadraOpen}
           tiposQuadra={tiposQuadra}
           setTiposQuadra={setTiposQuadra}
@@ -129,6 +132,7 @@ const TiposQuadras = () => {
       )}
       {isModalDeleteTipoQuadraOpen && (
         <ModalDeleteTipoQuadra
+          setRender={setRender}
           tipoQuadraDeleteId={tipoQuadraDeleteId}
           tiposQuadra={tiposQuadra}
           setIsModalDeleteTipoQuadraOpen={setIsModalDeleteTipoQuadraOpen}
@@ -137,6 +141,7 @@ const TiposQuadras = () => {
       )}
       {isModalEditTipoQuadraOpen && (
         <ModalEditTipoQuadra
+          setRender={setRender}
           tipoQuadraToEdit={tipoQuadraToEdit}
           tiposQuadra={tiposQuadra}
           setIsModalEditTipoQuadraOpen={setIsModalEditTipoQuadraOpen}

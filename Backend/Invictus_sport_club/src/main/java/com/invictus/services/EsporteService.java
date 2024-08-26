@@ -48,9 +48,7 @@ public class EsporteService {
 		verificadorEsporteExiste(idEsporte);
 		if(esporteRepository.existsByDescricaoAndIdEsporte(request.getDescricao(), idEsporte))
 			throw new RuntimeException("Ja existe um esporte com essa descricao");
-		Esporte esporte = esporteMapper.esporteRequestToEsporte(request);
-		esporte.setIdEsporte(idEsporte);
-		return esporteRepository.save(esporte);
+		return esporteRepository.updateById(idEsporte, request.isAtivo(),request.getDescricao());
 	}
 
 	public void deletarEsporte(Long idEsporte) {

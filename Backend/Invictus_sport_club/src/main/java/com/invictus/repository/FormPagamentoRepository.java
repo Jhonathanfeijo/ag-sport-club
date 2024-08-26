@@ -11,10 +11,10 @@ import com.invictus.domain.formPagamento.FormPagamento;
 
 public interface FormPagamentoRepository extends JpaRepository<FormPagamento, Long> {
 
-	@Query(value = "select exists (select 1 from form_pagamento f where UPPER(f.descricao) = UPPER(:descricao) as form_pagamento_existe", nativeQuery = true)
+	@Query(value = "select exists (select 1 from form_pagamento f where UPPER(f.descricao) = UPPER(:descricao)) as form_pagamento_existe", nativeQuery = true)
 	boolean existsByDescricao(String descricao);
 
-	@Query(value = "select exists (select 1 from form_pagamento f where UPPER(f.descricao) = UPPER(:descricao) as form_pagamento_existe and f.id_form_pagamento != :idFormPagamento", nativeQuery = true)
+	@Query(value = "select exists (select 1 from form_pagamento f where UPPER(f.descricao) = UPPER(:descricao)) as form_pagamento_existe and f.id_form_pagamento != :idFormPagamento", nativeQuery = true)
 	boolean existsByDescricaoAndId(@Param("descricao") String descricao, @Param("idFormPagamento") Long id);
 	// create view v_form_pagamento_ordem_alfabetica as select f.id_form_pagamento,
 	// f.descricao, f.ativo from form_pagamento f order by f.descricao;

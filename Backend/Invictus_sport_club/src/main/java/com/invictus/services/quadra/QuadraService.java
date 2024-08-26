@@ -77,4 +77,8 @@ public class QuadraService {
     public List<String> obterUltimasQuadrasReservadas(Long idUsuario) {
 		return quadraRepository.lastQuadrasReserved(idUsuario);
     }
+
+	public List<Quadra> obterQuadrasDisponiveisParaLocacao() {
+		return quadraRepository.findAllAvailableQuadras();
+	}
 }

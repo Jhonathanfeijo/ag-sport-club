@@ -14,6 +14,7 @@ const Courts = ({ editable }) => {
   const [idCourtDelete, setIdCourtDelete] = useState();
   const [courtToEdit, setCourtToEdit] = useState();
   const [isModalEditCourtOpen, setIsModalEditCourtOpen] = useState(false);
+  const [render, setRender] = useState(1)
 
   useEffect(() => {
     const user = getUserLocalStorage();
@@ -37,7 +38,7 @@ const Courts = ({ editable }) => {
     };
 
     fetchData();
-  }, []);
+  }, [render]);
 
   return (
     <motion.div
@@ -74,7 +75,7 @@ const Courts = ({ editable }) => {
                           } font-bold`}
                           key={index}
                         >
-                          <td className='py-2 px-2'>{court.locQuadra}</td>
+                          <td className='py-2 px-2'>{court.locQuadra.toUpperCase()}</td>
                           <td className='py-2 px-2'>
                             {court.esporte.descricao}
                           </td>
@@ -142,6 +143,7 @@ const Courts = ({ editable }) => {
 
       {isModalAddCourtOpen && (
         <ModalAddCourt
+          setRender = {setRender}
           setIsModalAddCourtOpen={setIsModalAddCourtOpen}
           setCourtList={setCourtList}
           courtList={courtList}
@@ -150,6 +152,7 @@ const Courts = ({ editable }) => {
 
       {isModalDeleteCourtOpen && (
         <ModalDeleteCourt
+        setRender = {setRender}
           idCourtDelete={idCourtDelete}
           setIsModalDeleteCourtOpen={setIsModalDeleteCourtOpen}
           setCourtList={setCourtList}
@@ -159,6 +162,7 @@ const Courts = ({ editable }) => {
 
       {isModalEditCourtOpen && (
         <ModalEditCourt
+        setRender = {setRender}
           setIsModalEditCourtOpen={setIsModalEditCourtOpen}
           setCourtList={setCourtList}
           courtList={courtList}

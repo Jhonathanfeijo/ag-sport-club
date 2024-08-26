@@ -19,7 +19,7 @@ public interface QuadraRepository extends JpaRepository<Quadra, Long> {
 			@Param("ativo") boolean ativo, @Param("loc_quadra") String locQuadra,
 			@Param("valorHora") BigDecimal valorHora);
 
-	@Query(value = "select exists (select 1 from quadra q where q.loc_quadra = :locQuadra) as quadra_existe", nativeQuery = true)
+	@Query(value = "select exists (select 1 from quadra q where upper(q.loc_quadra) = upper(:locQuadra)) as quadra_existe", nativeQuery = true)
 	public boolean existsByLocQuadra(@Param("locQuadra") String locQuadra);
 
 	@Query(value = "select q.id_quadra, q.id_tipo_quadra, q.id_esporte, q.loc_quadra, q.valor_hora, q.ativo from quadra q where q.id_esporte = :idEsporte order by q.loc_quadra", nativeQuery = true)
@@ -56,5 +56,21 @@ public interface QuadraRepository extends JpaRepository<Quadra, Long> {
 
 	@Query(value = "select q.loc_quadra from quadra q inner join reserva r on r.id_quadra = q.id_quadra inner join usuario u on u.id_usuario = r.id_usuario where upper( r.status) <> upper('cancelado') and u.id_usuario = :idUsuario order by r.data desc limit 3", nativeQuery = true)
 	List<String> lastQuadrasReserved(@Param("idUsuario") Long idUsuario);
+
+	//create view v_obter_quadras_disponiveis_para_locacao as
+	//select q.id_quadra,
+	//	   q.loc_quadra,
+	//	   q.id_esporte,
+	//	   q.id_tipo_quadra,
+	//	   q.valor_hora,
+	//	   q.ativo
+	//from quadra q
+	//inner join esporte e
+	//	on e.id_esporte = q.id_esporte
+	//where e.ativo = true
+	//	and q.ativo = true
+	//order by q.loc_quadra asc;
+	@Query(value = "select * from v_obter_quadras_disponiveis_para_locacao;", nativeQuery = true)
+	List<Quadra> findAllAvailableQuadras();
 
 }
