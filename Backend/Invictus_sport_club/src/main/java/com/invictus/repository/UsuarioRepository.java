@@ -18,6 +18,15 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	@Query(nativeQuery = true, value = "select u.id_usuario, u.nome, u.cpf, u.email, u.login, u.senha, u.nivel_permissao from usuario u where u.login =:login")
 	Usuario findUsuarioByLogin(@Param("login") String login);
 
+	@Query(value = "insert into usuario "
+			+ "(nome, cpf, email, login, senha, nivel_permissao)"
+			+ " values( :nome, :cpf, :email, :login, :senha, :nivel_permissao)"
+			+ " returning id_usuario, nome, cpf, email, login, senha, nivel_permissao",
+			nativeQuery = true)
+	public Usuario save(@Param("nome") String nome, @Param("cpf") String cpf, @Param("email") String email,
+			@Param("login") String login, @Param("senha") String senha,
+			@Param("nivel_permissao") String nivel_permissao);
+
 	@Query("select u.nome, u.cpf, u.email, u.email, u.idUsuario from Usuario u order by u.nome asc")
 	Page<Usuario> findAllOrderedByNome(Pageable paginacao);
 }

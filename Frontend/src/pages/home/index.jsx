@@ -77,7 +77,7 @@ const Home = () => {
             </div>
           )}
           {(!nearReservs || nearReservs.length === 0) && (<>
-            <h2 className='text-2xl font-medium my-1'>Você nao possui reservas proximas</h2>
+            <h2 className='text-2xl font-medium my-1'>Você nao possui reservas próximas</h2>
           </>)}
           <Link to={'/reservas'}>
             <button className='bg-primary rounded px-2 text-secundary py-2 text-lg md:text-xl font-medium w-full'>Ir para o menu de reservas</button>
@@ -143,7 +143,7 @@ const Home = () => {
               </motion.div>
             )}
             {(!sports || sports.length === 0) && (
-              <h2 className='text-xl font-bold self-center'>Nenhuma reserva foi feita ate o momento</h2>
+              <h2 className='text-xl font-bold self-center'>Nenhuma reserva foi feita até o momento</h2>
             )}
           </div>
         </section>

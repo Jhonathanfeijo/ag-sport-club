@@ -26,7 +26,7 @@ public class AuthorizationService implements UserDetailsService, AuthenticationM
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return usuarioRepository.findByLogin(username);
+		return usuarioRepository.findUsuarioByLogin(username);
 	}
 
 	public boolean existeLogin(String login) {
@@ -44,17 +44,7 @@ public class AuthorizationService implements UserDetailsService, AuthenticationM
 
 		return usuario;
 	}
-
-	public Usuario cadastrarUsuario(RegistroUsuarioDTO usuarioDto) {
-		if (existeLogin(usuarioDto.getLogin()))
-			return null;
-		
-		String senhaEncriptografada = passwordEncoder.encode(usuarioDto.getSenha());
-		usuarioDto.setSenha(senhaEncriptografada);
-		Usuario usuario = new Usuario(usuarioDto);
-		return usuarioRepository.save(usuario);
-	}
-
+	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		UserDetails usuario = loadUserByUsername(authentication.getName());
@@ -65,5 +55,14 @@ public class AuthorizationService implements UserDetailsService, AuthenticationM
 		return authentication;
 	}
 	
+	public Usuario cadastrarUsuario(RegistroUsuarioDTO usuarioDto) {
+		if (existeLogin(usuarioDto.getLogin()))
+			return null;
+		
+		String senhaEncriptografada = passwordEncoder.encode(usuarioDto.getSenha());
+		usuarioDto.setSenha(senhaEncriptografada);
+		return usuarioRepository.save(usuarioDto.getNome(), usuarioDto.getCpf(),
+				usuarioDto.getEmail(), usuarioDto.getLogin(), usuarioDto.getSenha(), "USER");
+	}
 
 }
