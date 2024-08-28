@@ -1,7 +1,7 @@
 package com.invictus.repository;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,5 +28,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 			@Param("nivel_permissao") String nivel_permissao);
 
 	@Query("select u.nome, u.cpf, u.email, u.email, u.idUsuario from Usuario u order by u.nome asc")
-	Page<Usuario> findAllOrderedByNome(Pageable paginacao);
+	List<Usuario> findAllOrderedByNome();
 }

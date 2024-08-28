@@ -1,7 +1,8 @@
 package com.invictus.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +27,8 @@ public class UsuarioService {
 		return usuario;
 	}
 
-	public Page<Usuario> obterTodosUsuarios(@PageableDefault Pageable paginacao) {
-		return usuarioRepository.findAll(paginacao);
+	public List<Usuario> obterTodosUsuarios() {
+		return usuarioRepository.findAllOrderedByNome();
 	}
 
 	public void resetPassword(RequestResetUserPassword request) {

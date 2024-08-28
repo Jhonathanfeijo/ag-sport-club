@@ -26,7 +26,12 @@ const Users = () => {
         .get(`usuario/${user.idUser}`, headers)
         .then(json => {
           console.log(json);
-          setUserData({ ...json }.data);
+          setUserData({
+            nome:json.data.nome,
+            cpf: json.data.cpf,
+            email:json.data.email,
+            login:json.data.login
+          });
           setIsDataLoaded(true);
         })
         .catch(error => {
@@ -58,10 +63,11 @@ const Users = () => {
                   Nome
                 </label>
                 <input
-                  onChange={e =>
+                  onChange={(e) =>{
+                    console.log(userData.nome)
                     setUserData(prev => {
                       return { ...prev, nome: e.target.value };
-                    })
+                    })}
                   }
                   {...register('nome')}
                   name='nome'
@@ -69,6 +75,7 @@ const Users = () => {
                   className='border  md:w-[300px] py-1 roundex px-2 rounded'
                   value={userData.nome}
                   htmlFor=''
+                  type='text'
                 ></input>
               </div>
               <div className='flex flex-col w-[290px] md:w-auto '>
@@ -90,7 +97,7 @@ const Users = () => {
                   Login
                 </label>
                 <input
-                  onChange={e =>
+                  onChange={(e) =>
                     setUserData(prev => {
                       return { ...prev, login: e.target.value };
                     })

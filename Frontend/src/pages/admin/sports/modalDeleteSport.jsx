@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 
-const ModalDeleteSport = ({ setIsModalDeleteSportOpen, idSport, sportList, setSportList }) => {
+const ModalDeleteSport = ({ setIsModalDeleteSportOpen, idSport, sportList, setSportList, setRender }) => {
 
     const deleteSport = (idSport) => {
         const user = getUserLocalStorage();
@@ -12,7 +12,7 @@ const ModalDeleteSport = ({ setIsModalDeleteSportOpen, idSport, sportList, setSp
         };
         const fetchData = async () => {
             const toastId = toast.loading("Excluindo esporte");
-            await api.delete(`esporte/${idSport}`, {headers }).then(() => {
+            await api.delete(`esporte/${idSport}`, { headers }).then(() => {
                 toast.update(toastId, {
                     render: "Esporte deletado com sucesso",
                     type: "success",
@@ -27,7 +27,8 @@ const ModalDeleteSport = ({ setIsModalDeleteSportOpen, idSport, sportList, setSp
                 let sportListAux = [...sportList];
                 sportListAux = sportListAux.filter((sport) => sport.idEsporte != idSport);
                 setSportList(sportListAux);
-                setIsModalDeleteSportOpen(false)
+                setIsModalDeleteSportOpen(false);
+                setRender((prev) => prev + 1);
             }).catch((error) => {
                 toast.update(toastId, {
                     render: error.response.data.message,

@@ -15,7 +15,6 @@ const ModalAddTipoQuadra = ({ tiposQuadra, setTiposQuadra, setIsModalAddTipoQuad
             Authorization: `Bearer ${user.token.replace('"', "").replace('"', "")}`,
         };
 
-        console.log(headers)
         let toastId = toast.loading("Adicionando tipo de quadra", { isLoading: true })
         const postData = async () => {
             await api.post('tipo_quadra', data, { headers }).then((json) => {

@@ -100,15 +100,15 @@ const Home = () => {
                     <caption className='text-left font-medium text-lg'>Esportes mais praticados</caption>
                     <thead className='rounded'>
                       <tr className='bg-primary text-secundary rounded'>
-                        <th className='p-1 rounded-l w-[150px]'>Nome</th>
-                        <th className='p-1 rounded-r w-[80px]'>Vezes</th>
+                        <th className='py-1 px-2 rounded-l w-[150px]'>Nome</th>
+                        <th className='py-1 px-2 rounded-r w-[80px]'>Vezes</th>
                       </tr>
                     </thead>
                     <tbody className='font-medium'>
                       {sports.map((sport, index) => {
                         return (<tr key={index}>
-                          <td className='p-1 w-[150px]'>{sport.descricao}</td>
-                          <td className='p-1 w-[80px]'>{sport.quantidade}</td>
+                          <td className='py-1 px-2 w-[150px]'>{sport.descricao}</td>
+                          <td className='py-1 px-2 w-[80px]'>{sport.quantidade}</td>
                         </tr>)
                       })}
                     </tbody>
@@ -134,7 +134,7 @@ const Home = () => {
                     <tbody className='font-medium'>
                       {quadras.map((quadra, index) => {
                         return (<tr key={index}>
-                          <td className='p-1 w-[200px]'>{quadra}</td>
+                          <td className='px-2 py-1 w-[200px]'>{quadra}</td>
                         </tr>)
                       })}
                     </tbody>

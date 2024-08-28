@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 
-const ModalEditSport = ({ sportToEdit, sportList, setSportList, setIsModalEditSportOpen, setSportToEdit }) => {
+const ModalEditSport = ({ sportToEdit, sportList, setSportList, setIsModalEditSportOpen, setSportToEdit, setRender }) => {
     const { register, handleSubmit } = useForm();
     const editSport = (data) => {
         const user = getUserLocalStorage();
@@ -22,6 +22,7 @@ const ModalEditSport = ({ sportToEdit, sportList, setSportList, setIsModalEditSp
                     sportsAux.push(json.data);
                     setSportList(sportsAux);
                     setIsModalEditSportOpen(false);
+                    setRender((prev) => prev + 1);
                 }).catch(() => {
                     toast.update(toastId, { render: 'Algo deu errado', type: "error", theme: "colored", isLoading: false, autoClose: 2500 });
                 });

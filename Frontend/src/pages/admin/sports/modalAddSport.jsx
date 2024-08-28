@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { api } from "../../../../services/api";
 import { getUserLocalStorage } from "../../../utils/userProvider";
 
-const ModalAddSport = ({ setIsModalAddSportOpen, sportList, setSportList }) => {
+const ModalAddSport = ({ setIsModalAddSportOpen, sportList, setSportList, setRender }) => {
 
   const { register, handleSubmit } = useForm();
 
@@ -34,6 +34,7 @@ const ModalAddSport = ({ setIsModalAddSportOpen, sportList, setSportList }) => {
         }]
         setSportList(sportListAux)
         setIsModalAddSportOpen(false);
+        setRender((prev => prev + 1));
       }).catch((error) => {
         if (error.response) {
 

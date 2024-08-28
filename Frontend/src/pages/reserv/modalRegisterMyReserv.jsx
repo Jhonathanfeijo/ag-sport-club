@@ -5,14 +5,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { motion } from 'framer-motion'
 
-const ModalRegisterMyReserv = ({setRender, setMyReservs, myReservs, setIsModalRegisterMyReservsOpen }) => {
+const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalRegisterMyReservsOpen }) => {
 
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const [courtList, setCourtList] = useState([]);
     const [payments, setPayments] = useState([]);
     const [statusDateAvailable, setStatusDateAvailable] = useState("quit");
     const [hoursAvailable, setHoursAvailable] = useState([]);
-    const [reservToRegister,  setReservToRegister] = useState([])
 
 
     const { register, handleSubmit } = useForm();
@@ -43,13 +42,29 @@ const ModalRegisterMyReserv = ({setRender, setMyReservs, myReservs, setIsModalRe
     }, []);
 
     const postMyReserv = (data) => {
-        console.log(data);
         const user = getUserLocalStorage();
         const headers = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user.token.replace('"', '').replace('"', '')}`
         };
-
+        console.log(data)
+        if (!data.idQuadra || !data.idFormPagamento || !data.horarioInicial || !data.dataReserva) {
+            toast.error('Preencha todas as informações', {
+                style: { fontWeight: 'bold' },
+                autoClose: 2500,
+                isLoading: false,
+            })
+            return;
+        }
+        const dataAtual = new Date();
+        if (new Date(data.dataReserva) < dataAtual) {
+            toast.error("Não pode adicionar datas passadas", {
+                style: { fontWeight: 'bold' },
+                autoClose: 2500,
+                isLoading: false,
+            });
+            return;
+        }
         const reserv = {
             idUsuario: user.idUser,
             idQuadra: data.idQuadra,

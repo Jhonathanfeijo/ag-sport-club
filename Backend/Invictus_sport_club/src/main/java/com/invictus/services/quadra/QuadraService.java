@@ -32,13 +32,15 @@ public class QuadraService {
 
 		validadores.forEach((v) -> v.validar(request));
 
-		return quadraRepository.save(request.getIdEsporte(), request.getIdTipoQuadra(), request.getAtivo(), request.getLocQuadra(), request.getValorHora());
+		return quadraRepository.save(request.getIdEsporte(), request.getIdTipoQuadra(), request.getAtivo(),
+				request.getLocQuadra(), request.getValorHora());
 
 	}
 
 	public List<Quadra> obterQuadras() {
 		return quadraRepository.findAllOrderByLocDescricao();
 	}
+
 	public List<Quadra> obterQuadrasAtivas() {
 		return quadraRepository.findAllByAtivoOrderByLocDescricao();
 	}
@@ -55,11 +57,11 @@ public class QuadraService {
 	public Quadra editarQuadraPorId(Long idQuadra, QuadraRequest request) {
 
 		verificaQuadraExiste(idQuadra);
-
 		Esporte esporte = esporteService.buscarEsportePorId(request.getIdEsporte());
 		TipoQuadra tipoQuadra = tipoQuadraService.buscarTipoQuadraPorId(request.getIdTipoQuadra());
 
-		Quadra quadra = new Quadra(idQuadra, tipoQuadra, esporte, request.getLocQuadra(), request.getValorHora(), request.getAtivo());
+		Quadra quadra = new Quadra(idQuadra, tipoQuadra, esporte, request.getLocQuadra(), request.getValorHora(),
+				request.getAtivo());
 		return quadraRepository.save(quadra);
 
 	}
@@ -74,9 +76,9 @@ public class QuadraService {
 			throw new RuntimeException("Quadra não foi encontrada");
 	}
 
-    public List<String> obterUltimasQuadrasReservadas(Long idUsuario) {
+	public List<String> obterUltimasQuadrasReservadas(Long idUsuario) {
 		return quadraRepository.lastQuadrasReserved(idUsuario);
-    }
+	}
 
 	public List<Quadra> obterQuadrasDisponiveisParaLocacao() {
 		return quadraRepository.findAllAvailableQuadras();

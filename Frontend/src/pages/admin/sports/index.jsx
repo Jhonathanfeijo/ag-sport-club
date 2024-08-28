@@ -7,6 +7,7 @@ import ModalDeleteSport from './modalDeleteSport';
 import ModalEditSport from './modalEditSport';
 
 const SportsAdmin = () => {
+  const [render, setRender] = useState(1);
   const [sportList, setSportList] = useState([]);
   const [statusDataSports, setStatusDataSportes] = useState('loading');
   const [isModalAddSportOpen, setIsModalAddSportOpen] = useState(false);
@@ -37,7 +38,7 @@ const SportsAdmin = () => {
     fetchData();
   }, []);
 
-  const deleteSport = idSport => {
+  const setDeleteSport = idSport => {
     setSporteIdToDelete(idSport);
     setIsModalDeleteSportOpen(true);
   };
@@ -81,17 +82,15 @@ const SportsAdmin = () => {
                           return (
                             <tr
                               key={index}
-                              className={`${
-                                index % 2 !== 0 ? 'bg-primary/15' : ''
-                              } font-bold`}
+                              className={`${index % 2 !== 0 ? 'bg-primary/15' : ''
+                                } font-bold`}
                             >
                               <td className='pl-2 py-2 text-left'>
                                 {sport.descricao.toUpperCase()}
                               </td>
                               <td
-                                className={`pl-2 py-2 text-left ${
-                                  !sport.ativo ? 'text-danger/80' : ''
-                                }`}
+                                className={`pl-2 py-2 text-left ${!sport.ativo ? 'text-danger/80' : ''
+                                  }`}
                               >
                                 {sport.ativo ? 'Ativo' : 'Inativo'}
                               </td>
@@ -107,8 +106,7 @@ const SportsAdmin = () => {
                                 </button>
                                 <button
                                   onClick={() => {
-                                    setSporteIdToDelete(sport.idEsporte),
-                                      setIsModalDeleteSportOpen(true);
+                                    setDeleteSport(sport.idEsporte)
                                   }}
                                   className=' py-1 px-1 rounded bg-danger/70'
                                 >
@@ -141,6 +139,7 @@ const SportsAdmin = () => {
       </div>
       {isModalAddSportOpen && (
         <ModalAddSport
+          setRender={setRender}
           setSportList={setSportList}
           sportList={sportList}
           setIsModalAddSportOpen={setIsModalAddSportOpen}
@@ -148,6 +147,7 @@ const SportsAdmin = () => {
       )}
       {isModalDeleteSportOpen && (
         <ModalDeleteSport
+          setRender={setRender}
           sportList={sportList}
           setSportList={setSportList}
           setIsModalDeleteSportOpen={setIsModalDeleteSportOpen}
@@ -156,6 +156,7 @@ const SportsAdmin = () => {
       )}
       {isModalEditSportOpen && (
         <ModalEditSport
+          setRender={setRender}
           setIsModalEditSportOpen={setIsModalEditSportOpen}
           setSportList={setSportList}
           sportList={sportList}

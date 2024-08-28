@@ -49,7 +49,7 @@ public class FormPagamentoService {
 
 	public FormPagamento editarFormaPagamentoPorId(Long idFormPagamento, FormPagamentoRequest formPagamento) {
 		verificadorFormaPagamento(idFormPagamento);
-		if(formPagamentoRepository.existsByDescricao(formPagamento.getDescricao()))
+		if (formPagamentoRepository.existsByDescricaoAndId(formPagamento.getDescricao(), idFormPagamento))
 			throw new RuntimeException("Forma de pagamento ja existe");
 		FormPagamento form = formPagamentoMapper.FormPagamentoRequestToFormPagamento(formPagamento);
 		form.setIdFormPagamento(idFormPagamento);

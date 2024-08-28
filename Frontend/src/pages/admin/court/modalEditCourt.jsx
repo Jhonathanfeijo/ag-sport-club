@@ -8,15 +8,22 @@ const ModalEditCourt = ({ courtToEdit, setCourtToEdit, setIsModalEditCourtOpen, 
 
     const [sportList, setSportList] = useState([]);
     const [tipoQuadraList, setTipoQuadraList] = useState([])
-    const [isDataLoaded, setIsDataLoaded] = useState(false);
-
 
 
 
     const { register, handleSubmit } = useForm();
 
     const editCourt = (data) => {
+        console.log(courtToEdit)
         console.log(data)
+        if (!data.idEsporte) {
+            data.idEsporte = courtToEdit.esporte.idEsporte
+        }
+        console.log(data)
+        if (!data.idTipoQuadra) {
+            data.idTipoQuadra = courtToEdit.tipoQuadra.idTipoQuadra;
+        }
+
         const user = getUserLocalStorage();
         const headers = {
             "Content-Type": "application/json",
@@ -38,7 +45,7 @@ const ModalEditCourt = ({ courtToEdit, setCourtToEdit, setIsModalEditCourtOpen, 
 
                 })
                 setIsModalEditCourtOpen(false)
-                setRender((prev) => prev +1);
+                setRender((prev) => prev + 1);
             })
                 .catch((error) => {
                     if (error.response) {
@@ -74,7 +81,6 @@ const ModalEditCourt = ({ courtToEdit, setCourtToEdit, setIsModalEditCourtOpen, 
             }).catch((error) => {
                 console.log(error);
             })
-            setIsDataLoaded(true)
         }
         fetchData();
     }, [])
