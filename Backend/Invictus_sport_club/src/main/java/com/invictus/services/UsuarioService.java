@@ -2,6 +2,8 @@ package com.invictus.services;
 
 import java.util.List;
 
+import com.invictus.domain.usuario.UsuarioUpdateDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -43,4 +45,19 @@ public class UsuarioService {
 		usuario.setSenha(senhaCriptografada);
 
 	}
+
+    public void atualizarUsuarioPorId(UsuarioUpdateDto usuarioUpdateDto, Long idUsuario) {
+
+		if(!usuarioRepository.existsById(idUsuario))
+			throw new RuntimeException("Usuario nao encontrado");
+		if(usuarioRepository.existsByLoginAndNotIdUsuario(usuarioUpdateDto.getLogin(), idUsuario))
+			throw new RuntimeException("Ja existe usuario com esse login");
+		Usuario usuario = usuarioRepository.findByIdUsuario(idUsuario);
+		usuario.setLogin(usuarioUpdateDto.getLogin());
+		usuario.setNome(usuarioUpdateDto.getNome());
+		usuario.setCpf(usuarioUpdateDto.getCpf());
+		if(usuarioUpdateDto.getNivelPermissao() != null )
+			usuario.setNivelPermissao(usuarioUpdateDto.getNivelPermissao());
+		usuarioRepository.save(usuario);
+    }
 }

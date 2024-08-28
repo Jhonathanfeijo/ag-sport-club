@@ -29,4 +29,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	@Query("select u.nome, u.cpf, u.email, u.email, u.idUsuario from Usuario u order by u.nome asc")
 	List<Usuario> findAllOrderedByNome();
+
+	@Query(nativeQuery = true, value = "select exists (select 1 from usuario u where u.login = :login and u.id_usuario <> :idUsuario) as existe_usuario")
+	boolean existsByLoginAndNotIdUsuario(@Param("login") String login, @Param("idUsuario") Long idUsuario);
+
+	@Query(nativeQuery = true, value = "select u.id_usuario, u.nome, u.email, u.senha, u.nivel_permissao, u.login from usuario u where u.id_usuario = :idUsuario")
+	public Usuario findByIdUsuario(@Param("idUsuario") Long idUsuario);
 }

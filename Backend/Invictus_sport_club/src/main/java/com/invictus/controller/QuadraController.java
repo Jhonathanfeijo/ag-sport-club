@@ -69,8 +69,6 @@ public class QuadraController {
 		return ResponseEntity.ok(quadra);
 	}
 
-
-	
 	@Transactional
 	@DeleteMapping("/{id}")
 	public ResponseEntity deleteById(@PathVariable("id") Long idQuadra) {

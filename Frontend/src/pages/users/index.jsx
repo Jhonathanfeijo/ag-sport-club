@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import { api } from '../../../services/api';
 
 import { getUserLocalStorage } from '../../utils/userProvider';
 import ModalResetPasswordUser from '../admin/user/modalResetPasswordUser';
+import ModalConfirmEditMyProfile from './modalConfirmEditMyProfile';
 
 const Users = () => {
   const [isDataLoaded, setIsDataLoaded] = useState();
   const [userData, setUserData] = useState();
   const [isModalResetPasswordOpen, setIsModalResetPasswordOpen] = useState();
-  const { register, handleSubmit } = useForm();
+  const [render, setRender] = useState(1);
+  const [isModalConfirmEditMyProfileOpen, setIsModalConfirmEditMyProfileOpen] = useState(false);
 
   useEffect(() => {
     const user = getUserLocalStorage();
@@ -39,7 +39,7 @@ const Users = () => {
         });
     };
     fetchData();
-  }, []);
+  }, [render]);
 
   const editUser = data => {};
   return (
@@ -55,7 +55,7 @@ const Users = () => {
           <h2 className='text-4xl font-bold md:mb-10'>Meu perfil</h2>
           {isDataLoaded && isDataLoaded === true && (
             <form
-              onSubmit={handleSubmit(editUser)}
+              onSubmit={() => {editUser}}
               className='w-[290px] max-w-full md:w-[750px] flex flex-row flex-wrap gap-3 items-end justify-center lg:justify-start'
             >
               <div className='flex flex-col w-[290px] md:w-auto '>
@@ -64,12 +64,10 @@ const Users = () => {
                 </label>
                 <input
                   onChange={(e) =>{
-                    console.log(userData.nome)
                     setUserData(prev => {
                       return { ...prev, nome: e.target.value };
                     })}
                   }
-                  {...register('nome')}
                   name='nome'
                   id='nome'
                   className='border  md:w-[300px] py-1 roundex px-2 rounded'
@@ -84,7 +82,6 @@ const Users = () => {
                 </label>
                 <input
                   disabled
-                  {...register('cpf')}
                   name='cpf'
                   id='cpf'
                   className='border py-1 roundex px-2 rounded md:w-[150px]'
@@ -102,7 +99,6 @@ const Users = () => {
                       return { ...prev, login: e.target.value };
                     })
                   }
-                  {...register('login')}
                   name='login'
                   id='login'
                   className='border py-1 roundex px-2 rounded md:w-[250px]'
@@ -110,21 +106,8 @@ const Users = () => {
                   htmlFor=''
                 ></input>
               </div>
-              <div className='flex flex-col w-[290px] md:w-auto '>
-                <label className='font-bold' htmlFor=''>
-                  Email
-                </label>
-                <input
-                  {...register('email')}
-                  name='email'
-                  id='email'
-                  className='border py-1 roundex px-2 rounded  md:w-[300px]'
-                  value={userData.email}
-                  htmlFor=''
-                ></input>
-              </div>
               <div className='flex justify-center items-center'>
-                <button className='bg-primary px-3 py-1 rounded text-secundary w-full lg:w-auto'>
+                <button type='button' onClick={() => setIsModalConfirmEditMyProfileOpen(true)} className='bg-primary px-3 py-1 rounded text-secundary w-full lg:w-auto'>
                   Gravar
                 </button>
               </div>
@@ -154,6 +137,7 @@ const Users = () => {
           setIsModalRessetPasswordUserOpen={setIsModalResetPasswordOpen}
         ></ModalResetPasswordUser>
       )}
+      {isModalConfirmEditMyProfileOpen && <ModalConfirmEditMyProfile setRender={setRender} setIsModalConfirmEditMyProfileOpen={setIsModalConfirmEditMyProfileOpen} userInfo={userData}></ModalConfirmEditMyProfile>}
     </>
   );
 };
