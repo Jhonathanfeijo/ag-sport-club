@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
 import { api } from '../../../../services/api';
 import { getUserLocalStorage } from '../../../utils/userProvider';
+import { motion } from 'framer-motion';
+import ModalUserInfo from './modalUserInfo';
+import { capitalizeFirstLetter } from '../../../utils/capitalizeFirstLetter';
+
 
 const Users = ({ type }) => {
-  const [user, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [statusData, setStatusData] = useState();
+  const [userToSee, setUserToSee] = useState();
+  const [isModalToSeeMoreAboutUserOpen, setIsModalToSeeMoreAboutUserOpen] = useState(false);
+  const [render, setRender] = useState();
 
   useEffect(() => {
     setStatusData('loading');
@@ -16,82 +23,119 @@ const Users = ({ type }) => {
 
     const fetchData = async () => {
       await api
-        .get('user/', headers)
+        .get('usuario/all', headers)
         .then(json => {
+          console.log(json)
           setUsers(json.data);
-          setIsDataLoaded(true);
+          setStatusData('loaded');
         })
         .catch(error => {
-          console.log(error);
+          setStatusData('failed')
         });
     };
     fetchData();
-  });
+  }, [render]);
 
   return (
     <>
-      <div className='px-2 w-[350px] max-w-full lg:w-full flex flex-col items-center '>
-        <div className='mt-10 w-full sm:w-[600px] lg:w-[750px] flex flex-col items-center'>
-          {statusData === 'loaded' && (
-            <>
-              {type === 'admin' && (
-                <>
-                  <div className='container-table overflow-auto w-full max-h-[500px] max-w-full flex flex-col items-center'>
-                    <table className='border-collapse w-full max-w-full table-auto shadow-lg drop-shadow-lg font-bold '>
-                      <thead>
-                        <tr className='bg-primary text-secundary'>
-                          <td className='pl-2 py-2 font-medium text-left rounded-bl'>
-                            Nome
-                          </td>
-                          <td className='pl-2 py-2 font-medium text-left'>
-                            CPF
-                          </td>
-                          <td className='pl-2 py-2 font-medium pr-2 text-left rounded-br'>
-                            login
-                          </td>
-                          <td className='pl-2 py-2 font-medium pr-2 text-left rounded-br'></td>
-                        </tr>
-                      </thead>
-                      <tbody className=''>
-                        {quadraList.map((quadra, index) => {
-                          return (
-                            <tr
-                              className={`${
-                                index % 2 === 1 ? 'bg-primary/10' : ''
-                              } text-primary`}
-                              key={index}
-                            >
-                              <td className='pl-2 py-2 pr-5 text-left'>
-                                {quadra.locQuadra}
-                              </td>
-                              <td className='pl-2 py-2 pr-5 text-left'>
-                                {quadra.tipoQuadra.descricao}
-                              </td>
-                              <td className='pl-2 py-2 pr-5 text-left'>
-                                {quadra.esporte.descricao}
-                              </td>
-                              <td className='pl-2 py-2 pr-5 text-left'>{`R$ ${parseFloat(
-                                quadra.valorHora,
-                              ).toFixed(2)}`}</td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                    <div className='w-full'>
-                      <Link to={'/reservas'}>
-                        <button className='w-full bg-primary text-secundary rounded py-1 lg:text-xl my-2 lg:my-4 text-lg'>
-                          Fazer reserva
-                        </button>
-                      </Link>
+      <motion.div
+        style={{ width: '100%', height: '100vh' }}
+        initial={{ opacity: 0, x: -15 }}
+        exit={{ opacity: 0, x: 15 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className='flex flex-col items-center w-full max-w-full'>
+          <div className='flex flex-col items-center my-2 w-full'>
+            {statusData === "loaded" && (
+              <>
+                {users.length === 0 && (
+                  <>
+                    <h2 className='text-lg md:text-2xl font-medium mb-3'>
+                      Não há usuarios cadastrados
+                    </h2>
+                  </>
+                )}
+                {users.length > 0 && (
+                  <>
+                    <div className='table-container overflow-auto max-h-[500px] w-full'>
+                      <table className='my-1 w-full border-collapse shadow-lg drop-shadow-lg mb-2'>
+                        <thead className='sticky'>
+                          <tr className='bg-primary sticky text-left'>
+                            <th className='pl-2 py-2 sticky rounded-bl text-secundary '>
+                              Nome
+                            </th>
+                            <th className='pl-2 py-2 sticky text-secundary '>
+                              CPF
+                            </th>
+                            <th className='pl-2 py-2 sticky text-secundary '>
+                              Login
+                            </th>
+                            <th className='pl-2 py-2 sticky rounded-br text-secundary '></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {users.map((user, index) => {
+                            return (
+                              <tr
+                                key={index}
+                                className={`${index % 2 !== 0 ? 'bg-primary/15' : ''
+                                  } font-bold`}
+                              >
+                                <td className='pl-2 py-2 text-left'>
+                                  {capitalizeFirstLetter(user.nome)}
+                                </td>
+                                <td
+                                  className={`pl-2 py-2 text-left `}
+                                >
+                                  {user.cpf}
+                                </td>
+                                <td
+                                  className={`pl-2 py-2 text-left `}
+                                >
+                                  {user.login}
+                                </td>
+                                <td className='flex py-1 flex-row items-center justify-end px-2 gap-2 text-secundary font-normal'>
+                                  <button
+                                    onClick={() => {
+                                      setIsModalToSeeMoreAboutUserOpen(true);
+                                      setUserToSee(user);
+                                    }}
+                                    className='font-medium text-lg py-1 px-1 rounded bg-primary text-secundary'
+                                  >
+                                    Ver mais
+                                  </button>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
                     </div>
-                  </div>
-                </>
-              )}
-            </>
-          )}
+                  </>
+                )}
+                {/*
+  <button
+                onClick={() => setIsModalAddSportOpen(true)}
+                className='px-2 py-1.5 w-full bg-primary text-lg lg:text-xl font-medium  mt-2 text-secundary rounded'
+              >
+                Adicionar usuario
+              </button>
+              */}
+
+              </>
+            )}
+            {statusData === 'failed' && (
+              <h2 className='text-xl font-bold my-2'>
+                Estamos tendo problemas internos.
+                <br /> Por favor, tente novamente mais tarde.
+              </h2>
+            )}
+          </div>
         </div>
-      </div>
+        {isModalToSeeMoreAboutUserOpen &&
+          <ModalUserInfo setIsModalUserInfoOpen={setIsModalToSeeMoreAboutUserOpen} setRender={setRender} userInfo={userToSee}></ModalUserInfo>}
+      </motion.div>
     </>
   );
 };

@@ -31,7 +31,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity obterTodosUsuarios(@PageableDefault Pageable paginacao) {
+    public ResponseEntity obterTodosUsuarios() {
 
         List<Usuario> usuarios = usuarioService.obterTodosUsuarios();
 

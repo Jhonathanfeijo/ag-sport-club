@@ -4,6 +4,7 @@ import { api } from '../../../services/api';
 import { getUserLocalStorage } from '../../utils/userProvider';
 import ModalRegisterMyReserv from './modalRegisterMyReserv';
 import ModalSeeMoreAboutReserv from './modalSeeMoreAboutReserv';
+import formatDate from '../../utils/formatDate/formatDate';
 
 const Reserv = () => {
   const [myReservs, setMyReservs] = useState([]);
@@ -20,17 +21,18 @@ const Reserv = () => {
     quadra: '',
     status: ''
   });
+  const [quadras, setQuadras] = useState();
+
   useEffect(() => {
     const user = getUserLocalStorage();
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${user.token.replace('"', '').replace('"', '')}`,
     };
-    console.log(user);
 
     const fetchData = async () => {
       await api.get(`reserva/byUser/${user.idUser}`, headers).then(json => {
-        console.log(json);
+        setQuadras(getAllQuadras(json.data))
         setMyReservs(json.data);
         setMyReservsFilter(json.data)
         setIsDataLoaded(true);
@@ -39,8 +41,28 @@ const Reserv = () => {
     fetchData();
   }, [render]);
 
+  const handleFilterReservs = (typeFilter, filterValue) => {
+    let auxFilter = {
+      data: typeFilter === 'data' ? filterValue : filters.data,
+      status: typeFilter === 'status' ? filterValue : filters.status,
+      quadra: typeFilter === 'quadra' ? filterValue : filters.quadra
+    }
+    const auxDataFiltered = [...myReservs].filter((reserv) => {
+      return ((auxFilter.data === '' ? true : reserv.dataLocacao === formatDate( auxFilter.data)) && (auxFilter.status === '' ? true : auxFilter.status.toUpperCase() === reserv.status.toUpperCase()) && (auxFilter.quadra === '' ? true : auxFilter.quadra.toUpperCase() === reserv.quadraLoc.toUpperCase()));
+    })
+    setFilters(auxFilter)
+    setMyReservsFilter(auxDataFiltered);
+  }
 
-
+  const getAllQuadras = (reservs) => {
+    let quadrasSet = new Set();
+    reservs.map((reserv) => {
+      if (!quadrasSet.has(reserv.quadraLoc))
+        quadrasSet.add(reserv.quadraLoc)
+    })
+    const quadras = [...quadrasSet];
+    return quadras;
+  }
 
   return (
     <motion.div
@@ -62,7 +84,7 @@ const Reserv = () => {
                     value={filters.data}
                     onChange={(e) => {
                       setFilters((prev) => ({ ...prev, data: e.target.value }));
-                      handleFilterReservs();
+                      handleFilterReservs('data', e.target.value);
                     }}
                     className='rounded p-1 border'
                     type="date"
@@ -74,7 +96,7 @@ const Reserv = () => {
                     value={filters.quadra}
                     onChange={(e) => {
                       setFilters((prev) => ({ ...prev, quadra: e.target.value }));
-                      handleFilterReservs();
+                      handleFilterReservs('quadra', e.target.value);
                     }}
                     className='rounded border p-1'
                     name=""
@@ -82,8 +104,9 @@ const Reserv = () => {
                   >
                     {/* Adicione opções de quadra aqui */}
                     <option value="">Todas</option>
-                    <option value="quadra1">Quadra 1</option>
-                    <option value="quadra2">Quadra 2</option>
+                    {quadras.map((quadra, index) => {
+                      return <option value={quadra} key={index}>{quadra}</option>
+                    })}
                   </select>
                 </div>
                 <div className="flex flex-col">
@@ -91,8 +114,7 @@ const Reserv = () => {
                   <select
                     value={filters.status}
                     onChange={(e) => {
-                      setFilters((prev) => ({ ...prev, status: e.target.value }));
-                      handleFilterReservs();
+                      handleFilterReservs('status', e.target.value);
                     }}
                     className='rounded border p-1'
                     name=""
@@ -126,7 +148,7 @@ const Reserv = () => {
                           key={index}
                         >
                           <td className='py-2 px-2'>{myReserv.dataLocacao}</td>
-                          <td className='py-2 px-2'>{`${myReserv.horarioInicial < 10? `0${myReserv.horarioInicial}`:`${myReserv.horarioInicial}`}:00 - ${myReserv.horarioInicial + 1 < 10? `0${myReserv.horarioInicial+1}`:`${myReserv.horarioInicial+1}`}:00`}</td>
+                          <td className='py-2 px-2'>{`${myReserv.horarioInicial < 10 ? `0${myReserv.horarioInicial}` : `${myReserv.horarioInicial}`}:00 - ${myReserv.horarioInicial + 1 < 10 ? `0${myReserv.horarioInicial + 1}` : `${myReserv.horarioInicial + 1}`}:00`}</td>
                           <td className='py-2 px-2'>{myReserv.quadraLoc}</td>
                           <td className='py-2 px-2 max-[800px]:hidden'>{`R$ ${parseFloat(
                             myReserv.valorReserva,

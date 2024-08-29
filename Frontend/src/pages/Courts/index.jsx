@@ -62,9 +62,9 @@ const Courts = () => {
               )}
               {quadraList.length > 0 && (
                 <>
-                  <div className='self-start w-full md:w-auto mb-3 flex flex-row justify-between items-center rounded border'>
-                    <input onChange={(e) => handleFilter(e.target.value)} placeholder='Digite a quadra' className=' rounded  p-1' type="text" />
-                    <div className='px-2 opacity-30'>
+                  <div className='self-start w-full md:w-auto mb-5 flex flex-row justify-between items-center rounded shadow-lg drop-shadow bg-secundary'>
+                    <input onChange={(e) => handleFilter(e.target.value)} placeholder='Digite a quadra' className=' p-2 text-lg font-medium' type="text" />
+                    <div className='px-2 opacity-100 text-third/30'>
                       <Search width={'20px'}></Search>
                     </div>
                   </div>
@@ -73,7 +73,7 @@ const Courts = () => {
                       return (
                         <div
                           className={
-                            'text-secundary bg-primary rounded flex flex-col items-center justify-center hover:opacity-80 duration-200 hover:cursor-default py-6'
+                            'text-secundary bg-primary rounded flex flex-col items-center justify-center hover:opacity-80 duration-200 py-6 hover:cursor-pointer'
                           }
                           key={index}
                         >

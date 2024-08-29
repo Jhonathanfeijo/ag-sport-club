@@ -11,7 +11,7 @@ const ModalDeleteCourt = ({ setIsModalDeleteCourtOpen, idCourtDelete, courtList,
             "Content-Type": "applcation/json",
             Authorization: `Bearer ${user.token.replace('"', '').replace('"', '')}`
         }
-        const toastId = toast.loading("Deletando quadra", { isLoading: true })
+        const toastId = toast.loading("Excluindo quadra", { isLoading: true })
         const fetchData = async () => {
             await api.delete(`quadra/${idCourtDelete}`, headers)
                 .then((json) => {

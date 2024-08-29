@@ -5,6 +5,7 @@ import FormasPagamento from './pagamentos';
 import SportsAdmin from './sports';
 import TiposQuadras from './tipo_quadra';
 import Users from './user';
+import Reservs from './reservs/reservs';
 
 const AdminConfig = () => {
   const [option, setOption] = useState('');
@@ -105,6 +106,7 @@ const AdminConfig = () => {
           {option === 'tipos_quadra' && <TiposQuadras></TiposQuadras>}
           {option === 'esportes' && <SportsAdmin></SportsAdmin>}
           {option === 'quadras' && <Courts editable={true}></Courts>}
+          {option === 'reservas' && <Reservs/>}
           {option === 'usuarios' && <Users type={'admin'}></Users>}
         </div>
       </div>

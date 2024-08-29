@@ -17,47 +17,47 @@ import com.invictus.repository.UsuarioRepository;
 @Service
 public class UsuarioService {
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-	@Autowired
-	private PasswordEncoder encoder;
+    @Autowired
+    private PasswordEncoder encoder;
 
-	public Usuario obterUsuario(Long idUsuario) {
-		Usuario usuario = usuarioRepository.findById(idUsuario)
-				.orElseThrow(() -> new RuntimeException("Usuário não existe"));
-		return usuario;
-	}
+    public Usuario obterUsuario(Long idUsuario) {
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuário não existe"));
+        return usuario;
+    }
 
-	public List<Usuario> obterTodosUsuarios() {
-		return usuarioRepository.findAllOrderedByNome();
-	}
+    public List<Usuario> obterTodosUsuarios() {
+        return usuarioRepository.findAllOrderedByNome();
+    }
 
-	public void resetPassword(RequestResetUserPassword request) {
+    public void resetPassword(RequestResetUserPassword request) {
 
-		if (!usuarioRepository.existsById(request.getIdUsuario()))
-			throw new RuntimeException("Usuário não encontrado");
+        if (!usuarioRepository.existsById(request.getIdUsuario()))
+            throw new RuntimeException("Usuário não encontrado");
 
-		Usuario usuario = usuarioRepository.getReferenceById(request.getIdUsuario());
-		if (!encoder.matches(request.getSenhaAtual(), usuario.getSenha()))
-			throw new RuntimeException("Senha atual não confere");
-		String senhaCriptografada = encoder.encode(request.getSenhaNova());
-		usuario.setSenha(senhaCriptografada);
+        Usuario usuario = usuarioRepository.getReferenceById(request.getIdUsuario());
+        if (!encoder.matches(request.getSenhaAtual(), usuario.getSenha()))
+            throw new RuntimeException("Senha atual não confere");
+        String senhaCriptografada = encoder.encode(request.getSenhaNova());
+        usuario.setSenha(senhaCriptografada);
 
-	}
+    }
 
     public void atualizarUsuarioPorId(UsuarioUpdateDto usuarioUpdateDto, Long idUsuario) {
 
-		if(!usuarioRepository.existsById(idUsuario))
-			throw new RuntimeException("Usuario nao encontrado");
-		if(usuarioRepository.existsByLoginAndNotIdUsuario(usuarioUpdateDto.getLogin(), idUsuario))
-			throw new RuntimeException("Ja existe usuario com esse login");
-		Usuario usuario = usuarioRepository.findByIdUsuario(idUsuario);
-		usuario.setLogin(usuarioUpdateDto.getLogin());
-		usuario.setNome(usuarioUpdateDto.getNome());
-		usuario.setCpf(usuarioUpdateDto.getCpf());
-		if(usuarioUpdateDto.getNivelPermissao() != null )
-			usuario.setNivelPermissao(usuarioUpdateDto.getNivelPermissao());
-		usuarioRepository.save(usuario);
+        if (!usuarioRepository.existsById(idUsuario))
+            throw new RuntimeException("Usuario nao encontrado");
+        if (usuarioRepository.existsByLoginAndNotIdUsuario(usuarioUpdateDto.getLogin(), idUsuario))
+            throw new RuntimeException("Ja existe usuario com esse login");
+        Usuario usuario = usuarioRepository.findByIdUsuario(idUsuario);
+        usuario.setLogin(usuarioUpdateDto.getLogin());
+        usuario.setNome(usuarioUpdateDto.getNome());
+        usuario.setCpf(usuarioUpdateDto.getCpf());
+        if (usuarioUpdateDto.getNivelPermissao() != null)
+            usuario.setNivelPermissao(usuarioUpdateDto.getNivelPermissao());
+        usuarioRepository.save(usuario);
     }
 }

@@ -53,7 +53,7 @@ export const UserProvider = ({ children }) => {
       }
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 400)
-        toast.error('Login ou senha inválido');
+        toast.error('Credenciais inválidas');
       if (error.response.status === 500) toast.error('Opa, algo deu errado!');
     }
   };

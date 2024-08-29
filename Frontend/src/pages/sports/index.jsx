@@ -58,10 +58,10 @@ const Sports = () => {
         <div className='flex flex-col items-center my-8 lg:my-10 w-full lg:w-[850px] lg:max-w-[850px] px-2'>
           {statusDataSports === 'loaded' && (
             <>
-              <div className='self-center lg:self-start mb-3 flex flex-row justify-between items-center rounded border'>
-                <input onChange={(e) => handleFilter(e.target.value)} placeholder='Digite o nome do esporte' className=' rounded  p-1' type="text" />
-                <div className='px-2 opacity-30'>
-                  <Search width={'20px'}></Search>
+              <div className='self-center lg:self-start  flex flex-row justify-between items-center rounded shadow-lg drop-shadow-lg bg-secundary mb-5'>
+                <input onChange={(e) => handleFilter(e.target.value)} placeholder='Digite o nome do esporte' className=' rounded  p-2 text-lg font-medium' type="text" />
+                <div className='px-2 opacity-100 text-third/40'>
+                  <Search width={'18px'}></Search>
                 </div>
               </div>
               {sportList.length === 0 && (

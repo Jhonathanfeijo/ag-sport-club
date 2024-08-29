@@ -40,7 +40,7 @@ const Home = () => {
 
   return (
     <motion.div
-      style={{ width: '100%', height: '100vh' }}
+      style={{ width: '100%'}}
       initial={{ opacity: 0, x: -15 }}
       exit={{ opacity: 0, x: 15 }}
       animate={{ opacity: 1, x: 0 }}
@@ -95,8 +95,8 @@ const Home = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className='h-[170px] shadow-lg'>
-                  <table className='py-1 max-h-full'>
+                <div className='h-[180px] shadow-lg drop-shadow-lg rounded'>
+                  <table className='text-lg py-1 max-h-full w-[230px] rounded-lg'>
                     <caption className='text-left font-medium text-lg'>Esportes mais praticados</caption>
                     <thead className='rounded'>
                       <tr className='bg-primary text-secundary rounded'>
@@ -123,15 +123,15 @@ const Home = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className='h-[170px] shadow-lg'>
-                  <table className='py-1'>
+                <div className='h-[180px] shadow-lg'>
+                  <table className='py-1 max-h-full w-[230px] rounded-lg'>
                     <caption className='text-left font-medium text-lg'>Quadras recentes</caption>
-                    <thead className='rounded bg-primary'>
+                    <thead className='rounded bg-primary text-lg'>
                       <tr className='bg-primary text-secundary rounded'>
                         <th className='p-1 rounded bg-primary w-[200px]'>Nome da quadra</th>
                       </tr>
                     </thead>
-                    <tbody className='font-medium'>
+                    <tbody className='font-medium text-lg'>
                       {quadras.map((quadra, index) => {
                         return (<tr key={index}>
                           <td className='px-2 py-1 w-[200px]'>{quadra}</td>

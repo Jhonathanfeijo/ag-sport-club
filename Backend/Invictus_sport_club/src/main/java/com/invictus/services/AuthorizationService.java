@@ -41,7 +41,7 @@ public class AuthorizationService implements UserDetailsService, AuthenticationM
 			return null;
 
 		Usuario usuario = usuarioRepository.findUsuarioByLogin(auth.getName());
-
+		System.out.println(usuario.getSenha());
 		return usuario;
 	}
 	

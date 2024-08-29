@@ -25,7 +25,7 @@ const Courts = ({ editable }) => {
 
     const fetchData = async () => {
       await api
-        .get('quadra', { headers })
+        .get('quadra',  headers )
         .then(json => {
           console.log(json);
           setCourtList(json.data);
