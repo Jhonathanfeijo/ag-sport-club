@@ -1,16 +1,16 @@
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { api } from '../../../../services/api';
-import { getUserLocalStorage } from '../../../utils/userProvider';
-import { motion } from 'framer-motion';
-import ModalUserInfo from './modalUserInfo';
 import { capitalizeFirstLetter } from '../../../utils/capitalizeFirstLetter';
-
+import { getUserLocalStorage } from '../../../utils/userProvider';
+import ModalUserInfo from './modalUserInfo';
 
 const Users = ({ type }) => {
   const [users, setUsers] = useState([]);
   const [statusData, setStatusData] = useState();
   const [userToSee, setUserToSee] = useState();
-  const [isModalToSeeMoreAboutUserOpen, setIsModalToSeeMoreAboutUserOpen] = useState(false);
+  const [isModalToSeeMoreAboutUserOpen, setIsModalToSeeMoreAboutUserOpen] =
+    useState(false);
   const [render, setRender] = useState();
 
   useEffect(() => {
@@ -25,12 +25,12 @@ const Users = ({ type }) => {
       await api
         .get('usuario/all', headers)
         .then(json => {
-          console.log(json)
+          console.log(json);
           setUsers(json.data);
           setStatusData('loaded');
         })
         .catch(error => {
-          setStatusData('failed')
+          setStatusData('failed');
         });
     };
     fetchData();
@@ -39,7 +39,7 @@ const Users = ({ type }) => {
   return (
     <>
       <motion.div
-        style={{ width: '100%', height: '100vh' }}
+        style={{ width: '100%' }}
         initial={{ opacity: 0, x: -15 }}
         exit={{ opacity: 0, x: 15 }}
         animate={{ opacity: 1, x: 0 }}
@@ -47,7 +47,7 @@ const Users = ({ type }) => {
       >
         <div className='flex flex-col items-center w-full max-w-full'>
           <div className='flex flex-col items-center my-2 w-full'>
-            {statusData === "loaded" && (
+            {statusData === 'loaded' && (
               <>
                 {users.length === 0 && (
                   <>
@@ -79,20 +79,17 @@ const Users = ({ type }) => {
                             return (
                               <tr
                                 key={index}
-                                className={`${index % 2 !== 0 ? 'bg-primary/15' : ''
-                                  } font-bold`}
+                                className={`${
+                                  index % 2 !== 0 ? 'bg-primary/15' : ''
+                                } font-bold`}
                               >
                                 <td className='pl-2 py-2 text-left'>
                                   {capitalizeFirstLetter(user.nome)}
                                 </td>
-                                <td
-                                  className={`pl-2 py-2 text-left `}
-                                >
+                                <td className={`pl-2 py-2 text-left `}>
                                   {user.cpf}
                                 </td>
-                                <td
-                                  className={`pl-2 py-2 text-left `}
-                                >
+                                <td className={`pl-2 py-2 text-left `}>
                                   {user.login}
                                 </td>
                                 <td className='flex py-1 flex-row items-center justify-end px-2 gap-2 text-secundary font-normal'>
@@ -122,7 +119,6 @@ const Users = ({ type }) => {
                 Adicionar usuario
               </button>
               */}
-
               </>
             )}
             {statusData === 'failed' && (
@@ -133,8 +129,13 @@ const Users = ({ type }) => {
             )}
           </div>
         </div>
-        {isModalToSeeMoreAboutUserOpen &&
-          <ModalUserInfo setIsModalUserInfoOpen={setIsModalToSeeMoreAboutUserOpen} setRender={setRender} userInfo={userToSee}></ModalUserInfo>}
+        {isModalToSeeMoreAboutUserOpen && (
+          <ModalUserInfo
+            setIsModalUserInfoOpen={setIsModalToSeeMoreAboutUserOpen}
+            setRender={setRender}
+            userInfo={userToSee}
+          ></ModalUserInfo>
+        )}
       </motion.div>
     </>
   );

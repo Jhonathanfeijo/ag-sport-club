@@ -13,7 +13,7 @@ const TiposQuadras = () => {
     useState(false);
   const [isModalDeleteTipoQuadraOpen, setIsModalDeleteTipoQuadraOpen] =
     useState(false);
-  const [tipoQuadraDeleteId, setTipoQuadraDeleteId] = useState();
+  const [tipoQuadraToDelete, setTipoQuadraToDelete] = useState();
   const [tipoQuadraToEdit, setTipoQuadraToEdit] = useState();
   const [isModalEditTipoQuadraOpen, setIsModalEditTipoQuadraOpen] = useState();
   const [render, setRender] = useState(0);
@@ -42,7 +42,7 @@ const TiposQuadras = () => {
 
   return (
     <motion.div
-      style={{ width: '100%', height: '100vh' }}
+      style={{ width: '100%' }}
       initial={{ opacity: 0, x: -15 }}
       exit={{ opacity: 0, x: 15 }}
       animate={{ opacity: 1, x: 0 }}
@@ -53,7 +53,9 @@ const TiposQuadras = () => {
           <>
             {tiposQuadra.length === 0 && (
               <>
-                <h2 className='text-lg lg:text-2xl font-medium mt-2 mb-5'>Não há tipos de quadra cadastrado</h2>
+                <h2 className='text-lg lg:text-2xl font-medium mt-2 mb-5'>
+                  Não há tipos de quadra cadastrado
+                </h2>
               </>
             )}
             {tiposQuadra.length > 0 && (
@@ -75,8 +77,9 @@ const TiposQuadras = () => {
                         return (
                           <tr
                             key={index}
-                            className={`${index % 2 === 1 ? 'bg-primary/15' : ''
-                              } font-bold w-full`}
+                            className={`${
+                              index % 2 === 1 ? 'bg-primary/15' : ''
+                            } font-bold w-full`}
                           >
                             <td className='px-2 py-2 break-words max-w-[200px]'>
                               {tipoQuadra.descricao.toUpperCase()}
@@ -87,16 +90,16 @@ const TiposQuadras = () => {
                                   setTipoQuadraToEdit({ ...tipoQuadra });
                                   setIsModalEditTipoQuadraOpen(true);
                                 }}
-                                className='bg-primary text-secundary px-2 py-1 rounded'
+                                className='bg-primary text-secundary font-medium px-2 py-1 rounded'
                               >
                                 Editar
                               </button>
                               <button
                                 onClick={() => {
-                                  setTipoQuadraDeleteId(tipoQuadra.idTipoQuadra);
+                                  setTipoQuadraToDelete(tipoQuadra);
                                   setIsModalDeleteTipoQuadraOpen(true);
                                 }}
-                                className='bg-danger/70 text-secundary px-1 rounded py-1'
+                                className='bg-danger/70 text-secundary font-medium px-1 rounded py-1'
                               >
                                 Excluir
                               </button>
@@ -119,7 +122,10 @@ const TiposQuadras = () => {
           </>
         )}
         {statusDataLoading === 'failed' && (
-          <h2 className='text-xl font-bold my-2'>Estamos tendo problemas internos.<br /> Por favor, tente novamente mais tarde</h2>
+          <h2 className='text-xl font-bold my-2'>
+            Estamos tendo problemas internos.
+            <br /> Por favor, tente novamente mais tarde
+          </h2>
         )}
       </div>
       {isModalAddTipoQuadraOpen && (
@@ -133,7 +139,7 @@ const TiposQuadras = () => {
       {isModalDeleteTipoQuadraOpen && (
         <ModalDeleteTipoQuadra
           setRender={setRender}
-          tipoQuadraDeleteId={tipoQuadraDeleteId}
+          tipoQuadraToDelete={tipoQuadraToDelete}
           tiposQuadra={tiposQuadra}
           setIsModalDeleteTipoQuadraOpen={setIsModalDeleteTipoQuadraOpen}
           setTiposQuadra={setTiposQuadra}

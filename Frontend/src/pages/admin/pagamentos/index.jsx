@@ -13,12 +13,11 @@ const FormasPagamento = () => {
     useState(false);
   const [isModalDeletePaymentTypeOpen, setIsModalDeletePaymentTypeOpen] =
     useState(false);
-  const [paymentDeleteId, setPaymentDeleteId] = useState();
+  const [paymentToDelete, setPaymentToDelete] = useState();
   const [paymentTypeToEdit, setPaymentTypeToEdit] = useState();
   const [isModalEditPaymentTypeOpen, setIsModalEditPaymentTypeOpen] =
     useState();
   const [render, setRender] = useState(0);
-
 
   useEffect(() => {
     const user = getUserLocalStorage();
@@ -44,7 +43,7 @@ const FormasPagamento = () => {
 
   return (
     <motion.div
-      style={{ width: '100%', height: '100vh' }}
+      style={{ width: '100%' }}
       initial={{ opacity: 0, x: -5 }}
       exit={{ opacity: 0, x: 5 }}
       animate={{ opacity: 1, x: 0 }}
@@ -76,15 +75,17 @@ const FormasPagamento = () => {
                         return (
                           <tr
                             key={index}
-                            className={`${index % 2 === 1 ? 'bg-primary/10' : ''
-                              } font-bold w-full`}
+                            className={`${
+                              index % 2 === 1 ? 'bg-primary/10' : ''
+                            } font-bold w-full`}
                           >
                             <td className='px-2 py-1 break-words'>
                               {paymentType.descricao.toUpperCase()}
                             </td>
                             <td
-                              className={`px-2 py-1 break-words ${paymentType.ativo ? '' : ' text-danger/80'
-                                }`}
+                              className={`px-2 py-1 break-words ${
+                                paymentType.ativo ? '' : ' text-danger/80'
+                              }`}
                             >
                               {paymentType.ativo ? 'Ativo' : 'Inativo'}
                             </td>
@@ -100,9 +101,7 @@ const FormasPagamento = () => {
                               </button>
                               <button
                                 onClick={() => {
-                                  setPaymentDeleteId(
-                                    paymentType.idFormPagamento,
-                                  );
+                                  setPaymentToDelete(paymentType);
                                   setIsModalDeletePaymentTypeOpen(true);
                                 }}
                                 className='bg-danger/70 text-secundary px-1 rounded py-1'
@@ -145,7 +144,7 @@ const FormasPagamento = () => {
       {isModalDeletePaymentTypeOpen && (
         <ModalDeletePaymentType
           setRender={setRender}
-          paymentTypeDeleteId={paymentDeleteId}
+          paymentToDelete={paymentToDelete}
           paymentTypes={paymentTypes}
           setIsModalDeletePaymentTypeOpen={setIsModalDeletePaymentTypeOpen}
           setPaymentTypes={setPaymentTypes}

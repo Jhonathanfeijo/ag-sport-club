@@ -12,7 +12,7 @@ const SportsAdmin = () => {
   const [statusDataSports, setStatusDataSportes] = useState('loading');
   const [isModalAddSportOpen, setIsModalAddSportOpen] = useState(false);
   const [isModalDeleteSportOpen, setIsModalDeleteSportOpen] = useState(false);
-  const [sportIdToDelete, setSporteIdToDelete] = useState(null);
+  const [sportToDelete, setSporteIdToDelete] = useState(null);
   const [sportToEdit, setSportToEdit] = useState();
   const [isModalEditSportOpen, setIsModalEditSportOpen] = useState(false);
 
@@ -45,7 +45,7 @@ const SportsAdmin = () => {
 
   return (
     <motion.div
-      style={{ width: '100%', height: '100vh' }}
+      style={{ width: '100%' }}
       initial={{ opacity: 0, x: -15 }}
       exit={{ opacity: 0, x: 15 }}
       animate={{ opacity: 1, x: 0 }}
@@ -82,15 +82,17 @@ const SportsAdmin = () => {
                           return (
                             <tr
                               key={index}
-                              className={`${index % 2 !== 0 ? 'bg-primary/15' : ''
-                                } font-bold`}
+                              className={`${
+                                index % 2 !== 0 ? 'bg-primary/15' : ''
+                              } font-bold`}
                             >
                               <td className='pl-2 py-2 text-left'>
                                 {sport.descricao.toUpperCase()}
                               </td>
                               <td
-                                className={`pl-2 py-2 text-left ${!sport.ativo ? 'text-danger/80' : ''
-                                  }`}
+                                className={`pl-2 py-2 text-left ${
+                                  !sport.ativo ? 'text-danger/80' : ''
+                                }`}
                               >
                                 {sport.ativo ? 'Ativo' : 'Inativo'}
                               </td>
@@ -100,15 +102,15 @@ const SportsAdmin = () => {
                                     setSportToEdit(sport),
                                       setIsModalEditSportOpen(true);
                                   }}
-                                  className=' py-1 px-2 rounded bg-primary'
+                                  className=' py-1 px-2 rounded bg-primary text-medium'
                                 >
                                   Editar
                                 </button>
                                 <button
                                   onClick={() => {
-                                    setDeleteSport(sport.idEsporte)
+                                    setDeleteSport(sport);
                                   }}
-                                  className=' py-1 px-1 rounded bg-danger/70'
+                                  className=' py-1 px-1 rounded bg-danger/70 text-medium'
                                 >
                                   Excluir
                                 </button>
@@ -151,7 +153,7 @@ const SportsAdmin = () => {
           sportList={sportList}
           setSportList={setSportList}
           setIsModalDeleteSportOpen={setIsModalDeleteSportOpen}
-          idSport={sportIdToDelete}
+          sportToDelete={sportToDelete}
         ></ModalDeleteSport>
       )}
       {isModalEditSportOpen && (
