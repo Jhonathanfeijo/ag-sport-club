@@ -11,7 +11,7 @@ const Courts = ({ editable }) => {
   const [statusDataLoading, setStatusDataLoading] = useState();
   const [isModalAddCourtOpen, setIsModalAddCourtOpen] = useState(false);
   const [isModalDeleteCourtOpen, setIsModalDeleteCourtOpen] = useState(false);
-  const [idCourtDelete, setIdCourtDelete] = useState();
+  const [courtToDelete, setCourtToDelete] = useState();
   const [courtToEdit, setCourtToEdit] = useState();
   const [isModalEditCourtOpen, setIsModalEditCourtOpen] = useState(false);
   const [render, setRender] = useState(1);
@@ -97,7 +97,7 @@ const Courts = ({ editable }) => {
                           <td className='flex flex-row items-center py-1 justify-end text-secundary px-2 gap-2 font-normal'>
                             <button
                               onClick={() => {
-                                setCourtToEdit({ ...court });
+                                setCourtToEdit(court)
                                 setIsModalEditCourtOpen(true);
                               }}
                               className='bg-primary rounded py-1 px-2'
@@ -106,7 +106,7 @@ const Courts = ({ editable }) => {
                             </button>
                             <button
                               onClick={() => {
-                                setIdCourtDelete(court.idQuadra);
+                                setCourtToDelete(court);
                                 setIsModalDeleteCourtOpen(true);
                               }}
                               className='bg-danger/70 rounded py-1 px-1'
@@ -155,7 +155,7 @@ const Courts = ({ editable }) => {
       {isModalDeleteCourtOpen && (
         <ModalDeleteCourt
           setRender={setRender}
-          idCourtDelete={idCourtDelete}
+          courtToDelete={courtToDelete}
           setIsModalDeleteCourtOpen={setIsModalDeleteCourtOpen}
           setCourtList={setCourtList}
           courtList={courtList}

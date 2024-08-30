@@ -110,4 +110,7 @@ public class ReservaService {
         return reservasProximas;
     }
 
+    public boolean existeReservaComQuadra(Long idQuadra){
+        return reservaRepository.existsByQuadraId(idQuadra);
+    }
 }

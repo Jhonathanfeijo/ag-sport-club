@@ -29,7 +29,7 @@ const ModalEditCourt = ({
       !data.locQuadra ||
       !data.idEsporte ||
       !data.idTipoQuadra ||
-      !data.valor
+      !data.valorHora
     ) {
       toast.error('Todas as informações devem ser preenchidas', {
         style: { fontWeight: 'bold' },
