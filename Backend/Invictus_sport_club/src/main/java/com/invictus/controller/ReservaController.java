@@ -4,6 +4,7 @@ import com.invictus.domain.reserva.*;
 import com.invictus.mapper.ReservaMapper;
 import com.invictus.services.ReservaService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,7 +55,7 @@ public class ReservaController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity registrarReserva(@RequestBody ReservaRequestDTO request, UriComponentsBuilder builder) {
+    public ResponseEntity registrarReserva(@Valid @RequestBody ReservaRequestDTO request, UriComponentsBuilder builder) {
         Reserva reserva = reservaService.registrarReserva(request);
         URI uri = builder.path("/{id}").buildAndExpand(reserva.getIdReserva()).toUri();
         ReservaResponseDto response = reservaMapper.reservaToReservaResponseDto(reserva);
@@ -70,7 +71,7 @@ public class ReservaController {
 
     @Transactional
     @PutMapping("/status/{id}")
-    public ResponseEntity atualizarReserva(@PathVariable("id") Long idQuadra, @RequestBody ReservaRequestStatusUpdate request) {
+    public ResponseEntity atualizarReserva(@PathVariable("id") Long idQuadra, @Valid @RequestBody ReservaRequestStatusUpdate request) {
         System.out.println(request.getStatusReserva());
         Reserva reserva = reservaService.atualizarReserva(idQuadra, request.getStatusReserva());
         return ResponseEntity.ok(reserva);

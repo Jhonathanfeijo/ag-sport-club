@@ -3,6 +3,7 @@ package com.invictus.controller;
 import java.net.URI;
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,7 +33,7 @@ public class QuadraController {
 
 	@Transactional
 	@PostMapping
-	public ResponseEntity cadastrarQuadra(@RequestBody QuadraRequest request, UriComponentsBuilder builder) {
+	public ResponseEntity cadastrarQuadra(@Valid @RequestBody QuadraRequest request, UriComponentsBuilder builder) {
 		Quadra quadra = quadraService.registrarQuadra(request);
 		URI uri = builder.path("/quadra/{id}").buildAndExpand(quadra.getIdQuadra()).toUri();
 		return ResponseEntity.created(uri).body(quadra);
@@ -64,7 +65,7 @@ public class QuadraController {
 	@Transactional
 	@PutMapping("/{id}")
 	public ResponseEntity editarQuadraPorId(@PathVariable("id") Long idQuadra,
-			@RequestBody QuadraRequest quadraRequest) {
+			@Valid @RequestBody QuadraRequest quadraRequest) {
 		Quadra quadra = quadraService.editarQuadraPorId(idQuadra, quadraRequest);
 		return ResponseEntity.ok(quadra);
 	}

@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-26T18:48:35-0400",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.38.0.v20240524-2033, environment: Java 21.0.3 (Eclipse Adoptium)"
+    date = "2024-09-01T22:33:41-0400",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.4 (Ubuntu)"
 )
 @Component
 public class ReservaMapperImpl implements ReservaMapper {
@@ -31,11 +31,11 @@ public class ReservaMapperImpl implements ReservaMapper {
         LocalDate dataLocacao = null;
         int horarioInicial = 0;
         String tipoQuadra = null;
-        String esporteReserva = null;
         Long idReserva = null;
         LocalDateTime realizacaoReserva = null;
-        String status = null;
         BigDecimal valorReserva = null;
+        String esporteReserva = null;
+        String status = null;
 
         nomeUsuario = reservaUsuarioNome( reserva );
         cpfUsuario = reservaUsuarioCpf( reserva );
@@ -43,11 +43,11 @@ public class ReservaMapperImpl implements ReservaMapper {
         dataLocacao = reserva.getData();
         horarioInicial = reserva.getHorarioInicial();
         tipoQuadra = reservaQuadraTipoQuadraDescricao( reserva );
-        esporteReserva = reserva.getEsporteReserva();
         idReserva = reserva.getIdReserva();
         realizacaoReserva = reserva.getRealizacaoReserva();
-        status = reserva.getStatus();
         valorReserva = reserva.getValorReserva();
+        esporteReserva = reserva.getEsporteReserva();
+        status = reserva.getStatus();
 
         ReservaResponseDto reservaResponseDto = new ReservaResponseDto( nomeUsuario, cpfUsuario, idReserva, quadraLoc, dataLocacao, realizacaoReserva, valorReserva, esporteReserva, horarioInicial, status, tipoQuadra );
 

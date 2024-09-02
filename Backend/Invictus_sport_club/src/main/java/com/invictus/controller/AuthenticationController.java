@@ -1,5 +1,6 @@
 package com.invictus.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -45,7 +46,7 @@ public class AuthenticationController {
 
 	@Transactional
 	@PostMapping("/register")
-	public ResponseEntity cadastrar(@RequestBody RegistroUsuarioDTO usuarioRegister) {
+	public ResponseEntity cadastrar(@Valid @RequestBody RegistroUsuarioDTO usuarioRegister) {
 
 		Usuario usuario = authService.cadastrarUsuario(usuarioRegister);
 		if (usuario == null)

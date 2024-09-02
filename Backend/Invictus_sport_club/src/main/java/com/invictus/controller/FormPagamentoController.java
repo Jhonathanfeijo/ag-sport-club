@@ -3,6 +3,7 @@ package com.invictus.controller;
 import java.net.URI;
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,7 +33,7 @@ public class FormPagamentoController {
 
 	@Transactional
 	@PostMapping
-	public ResponseEntity cadastrarFormaPagamento(@RequestBody FormPagamentoRequest request,
+	public ResponseEntity cadastrarFormaPagamento(@Valid @RequestBody FormPagamentoRequest request,
 			UriComponentsBuilder builder) {
 		FormPagamento formPagamento = formPagamentoService.cadastrarFormaPagamento(request);
 		URI uri = builder.path("/{id}").buildAndExpand(formPagamento.getIdFormPagamento()).toUri();
@@ -59,7 +60,7 @@ public class FormPagamentoController {
 
 	@Transactional
 	@PutMapping("/{id}")
-	public ResponseEntity editarFormaPagamentoPorId(@RequestBody FormPagamentoRequest formPagamento,
+	public ResponseEntity editarFormaPagamentoPorId(@Valid @RequestBody FormPagamentoRequest formPagamento,
 			@PathVariable("id") Long idFormPagamento) {
 		FormPagamento form = formPagamentoService.editarFormaPagamentoPorId(idFormPagamento, formPagamento);
 		return ResponseEntity.ok(form);

@@ -4,6 +4,7 @@ import { api } from "../../../services/api";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { motion } from 'framer-motion'
+import { normalizaDataParaInicioDoDia } from "../../utils/formatDate/formatDate";
 
 const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalRegisterMyReservsOpen }) => {
 
@@ -56,8 +57,13 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
             })
             return;
         }
-        const dataAtual = new Date();
-        if (new Date(data.dataReserva) < dataAtual) {
+
+        const dataAtual = normalizaDataParaInicioDoDia(new Date());
+        const dataReserva = data.dataReserva;
+        console.log(dataAtual);
+        console.log(data.dataReserva)
+
+        if (dataReserva < dataAtual) {
             toast.error("Não pode adicionar datas passadas", {
                 style: { fontWeight: 'bold' },
                 autoClose: 2500,

@@ -3,6 +3,9 @@ package com.invictus.domain.usuario;
 import java.util.Collection;
 import java.util.List;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,12 +39,18 @@ public class Usuario implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
 	private Long idUsuario;
+	@NotBlank(message = "O nome deve ser preenchido")
 	@Column(name = "nome")
 	private String nome;
+	@NotBlank(message = "O CPF deve ser peenchido")
+	@CPF
 	@Column(name = "cpf")
 	private String cpf;
+	@NotBlank(message = "O Login deve ser preenchido")
 	@Column(name = "login")
 	private String login;
+	@Email
+	@NotBlank(message = "O email deve ser preenchido")
 	@Column(name = "email")
 	private String email;
 	@Column(name = "senha")

@@ -4,9 +4,11 @@ import { api } from '../../../../services/api';
 import { capitalizeFirstLetter } from '../../../utils/capitalizeFirstLetter';
 import { getUserLocalStorage } from '../../../utils/userProvider';
 import ModalUserInfo from './modalUserInfo';
+import { Search } from 'lucide-react';
 
 const Users = ({ type }) => {
   const [users, setUsers] = useState([]);
+  const [usersFiltered, setUsersFiltered] = useState([]);
   const [statusData, setStatusData] = useState();
   const [userToSee, setUserToSee] = useState();
   const [isModalToSeeMoreAboutUserOpen, setIsModalToSeeMoreAboutUserOpen] =
@@ -27,6 +29,7 @@ const Users = ({ type }) => {
         .then(json => {
           console.log(json);
           setUsers(json.data);
+          setUsersFiltered(json.data)
           setStatusData('loaded');
         })
         .catch(error => {
@@ -35,6 +38,15 @@ const Users = ({ type }) => {
     };
     fetchData();
   }, [render]);
+
+  const handleFilter = (filterValue) =>{
+    if(!filterValue || filterValue === ""){
+      setUsersFiltered([...users])
+      return;
+    }
+    const aux = [...users].filter((user) => user.nome.toUpperCase().includes(filterValue.toUpperCase()));
+    setUsersFiltered(aux);
+  }
 
   return (
     <>
@@ -58,6 +70,12 @@ const Users = ({ type }) => {
                 )}
                 {users.length > 0 && (
                   <>
+                    <div className='flex flex-row items-center self-start rounded-lg shadow-lg drop-shadow-lg mb-2'>
+                      <input onChange={(e) => handleFilter(e.target.value)} placeholder='Digite o nome' className='px-2 py-1.5' type="text" name="" id="" />
+                      <div className='text-third/30 bg-secundary py-1.5 px-2'>
+                        <Search width={'20px'}></Search>
+                      </div>
+                    </div>
                     <div className='table-container overflow-auto max-h-[500px] w-full'>
                       <table className='my-1 w-full border-collapse shadow-lg drop-shadow-lg mb-2'>
                         <thead className='sticky'>
@@ -75,13 +93,12 @@ const Users = ({ type }) => {
                           </tr>
                         </thead>
                         <tbody>
-                          {users.map((user, index) => {
+                          {usersFiltered.map((user, index) => {
                             return (
                               <tr
                                 key={index}
-                                className={`${
-                                  index % 2 !== 0 ? 'bg-primary/15' : ''
-                                } font-bold`}
+                                className={`${index % 2 !== 0 ? 'bg-primary/15' : ''
+                                  } font-bold`}
                               >
                                 <td className='pl-2 py-2 text-left'>
                                   {capitalizeFirstLetter(user.nome)}

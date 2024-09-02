@@ -5,6 +5,7 @@ import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import { getUserLocalStorage } from '../../utils/userProvider';
 import ModalResetPasswordUser from '../admin/user/modalResetPasswordUser';
 import ModalConfirmEditMyProfile from './modalConfirmEditMyProfile';
+import { toast } from 'react-toastify';
 
 const Users = () => {
   const [isDataLoaded, setIsDataLoaded] = useState();
@@ -114,7 +115,7 @@ const Users = () => {
                 <div className='flex  justify-center items-center'>
                   <button
                     type='button'
-                    onClick={() => setIsModalConfirmEditMyProfileOpen(true)}
+                    onClick={() => { if (!userData.login || !userData.nome) { toast.error("Não pode haver campos em branco", { isLoading: false, autoClose: 2500, style: { fontWeight: 'bold' } }); return; } setIsModalConfirmEditMyProfileOpen(true) }}
                     className='bg-primary px-3 py-1 text-lg font-medium w-full lg:w-auto rounded text-secundary '
                   >
                     Salvar

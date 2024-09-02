@@ -3,6 +3,7 @@ package com.invictus.controller;
 import java.net.URI;
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,7 +32,7 @@ public class TipoQuadraController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity cadastrarTipoQuadra(@RequestBody TipoQuadra tipoQuadra, UriComponentsBuilder builder) {
+	public ResponseEntity cadastrarTipoQuadra(@Valid @RequestBody TipoQuadra tipoQuadra, UriComponentsBuilder builder) {
 		tipoQuadra = tipoQuadraService.cadastrarTipoQuadra(tipoQuadra);
 		URI uri = builder.path("/{id}").buildAndExpand(tipoQuadra.getIdTipoQuadra()).toUri();
 		return ResponseEntity.created(uri).body(tipoQuadra);
@@ -59,7 +60,7 @@ public class TipoQuadraController {
 	@Transactional
 	@PutMapping("/{id}")
 	public ResponseEntity editarTipoQuadraPorId(@PathVariable("id") Long idTipoQuadra,
-			@RequestBody TipoQuadra tipoQuadra) {
+			@Valid @RequestBody TipoQuadra tipoQuadra) {
 		tipoQuadra = tipoQuadraService.editarTipoQuadra(idTipoQuadra, tipoQuadra);
 		return ResponseEntity.ok(tipoQuadra);
 	}

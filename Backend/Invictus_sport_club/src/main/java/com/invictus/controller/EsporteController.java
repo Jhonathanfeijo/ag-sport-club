@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import com.invictus.domain.esporte.EsportesJogadosResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,7 +39,7 @@ public class EsporteController {
 
 	@Transactional
 	@PostMapping
-	public ResponseEntity cadastrarEsporte(@RequestBody EsporteRequest request, UriComponentsBuilder builder) {
+	public ResponseEntity cadastrarEsporte(@Valid @RequestBody EsporteRequest request, UriComponentsBuilder builder) {
 		Esporte esporte = esporteService.cadastrarEsporte(request);
 		URI uri = builder.path("/{id}").buildAndExpand(esporte.getIdEsporte()).toUri();
 		EsporteResponse response = esporteMapper.esporteToEsporteResponse(esporte);
@@ -72,7 +73,7 @@ public class EsporteController {
 
 	@Transactional
 	@PutMapping("/{id}")
-	public ResponseEntity editarEsportePorId(@PathVariable("id") Long idEsporte, @RequestBody EsporteRequest request) {
+	public ResponseEntity editarEsportePorId(@PathVariable("id") Long idEsporte, @Valid @RequestBody EsporteRequest request) {
 		Esporte esporte = esporteService.editarEsporte(idEsporte, request);
 		EsporteResponse response = esporteMapper.esporteToEsporteResponse(esporte);
 		return ResponseEntity.ok(esporte);
