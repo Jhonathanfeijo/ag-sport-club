@@ -64,7 +64,7 @@ const Sports = () => {
                     <input
                       onChange={e => handleFilter(e.target.value)}
                       placeholder='Digite o nome do esporte'
-                      className=' rounded  p-2 text-lg font-medium'
+                      className=' rounded input-no-focus  p-2 text-lg font-medium'
                       type='text'
                     />
                     <div className='px-2 opacity-100 text-third/40'>

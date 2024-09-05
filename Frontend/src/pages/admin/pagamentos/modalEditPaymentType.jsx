@@ -95,7 +95,7 @@ const ModalEditPaymentType = ({
                   descricao: newValue,
                 }));
               }}
-              value={paymentTypeToEdit.descricao}
+              value={paymentTypeToEdit.descricao.toUpperCase()}
               className='px-2 py-1 rounded border'
               type='text'
             />

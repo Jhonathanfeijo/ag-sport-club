@@ -71,7 +71,7 @@ const Users = ({ type }) => {
                 {users.length > 0 && (
                   <>
                     <div className='flex flex-row items-center self-start rounded-lg shadow-lg drop-shadow-lg mb-2'>
-                      <input onChange={(e) => handleFilter(e.target.value)} placeholder='Digite o nome' className='px-2 py-1.5' type="text" name="" id="" />
+                      <input onChange={(e) => handleFilter(e.target.value)} placeholder='Digite o nome' className='px-2 py-1.5 input-no-focus' type="text" name="" id="" />
                       <div className='text-third/30 bg-secundary py-1.5 px-2'>
                         <Search width={'20px'}></Search>
                       </div>

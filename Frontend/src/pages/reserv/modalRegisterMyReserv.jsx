@@ -71,6 +71,14 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
             });
             return;
         }
+        if (dataReserva === dataAtual) {
+            toast.error("A data selecionada precisa ser no mínimo um dia após o dia atual", {
+                style: { fontWeight: 'bold' },
+                autoClose: 2500,
+                isLoading: false,
+            });
+            return;
+        }
         const reserv = {
             idUsuario: user.idUser,
             idQuadra: data.idQuadra,
@@ -163,7 +171,7 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
                                         <option value="">Selecione</option>
                                         {courtList.map((court) => (
                                             <option key={court.idQuadra} value={court.idQuadra}>
-                                                {`${court.locQuadra} - ${court.esporte.descricao} - R$ ${parseFloat(court.valorHora).toFixed(2)} /Hora`}
+                                                {`${court.locQuadra.toUpperCase()} - ${court.esporte.descricao.toUpperCase()} - R$ ${parseFloat(court.valorHora).toFixed(2)} /Hora`}
                                             </option>
                                         ))}
                                     </select>
@@ -172,7 +180,7 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
                                         <option value="">Selecione</option>
                                         {payments.map((payment, index) => (
                                             <option key={index} value={payment.idFormPagamento}>
-                                                {payment.descricao}
+                                                {payment.descricao.toUpperCase()}
                                             </option>
                                         ))}
                                     </select>

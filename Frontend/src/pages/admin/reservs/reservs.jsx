@@ -101,7 +101,7 @@ const Reservs = ({ type }) => {
                                 <td
                                   className={`pl-2 py-2 text-left `}
                                 >
-                                  {reserv.quadraLoc}
+                                  {reserv.quadraLoc.toUpperCase()}
                                 </td>
                                 <td
                                   className={`pl-2 py-2 text-left `}

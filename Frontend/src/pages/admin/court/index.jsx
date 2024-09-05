@@ -79,10 +79,10 @@ const Courts = ({ editable }) => {
                             {court.locQuadra.toUpperCase()}
                           </td>
                           <td className='py-2 px-2'>
-                            {court.esporte.descricao}
+                            {court.esporte.descricao.toUpperCase()}
                           </td>
                           <td className='py-2 px-2'>
-                            {court.tipoQuadra.descricao}
+                            {court.tipoQuadra.descricao.toUpperCase()}
                           </td>
                           <td className='py-2 px-2'>
                             {`R$ ${parseFloat(court.valorHora).toFixed(2)}`}

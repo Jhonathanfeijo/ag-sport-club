@@ -181,7 +181,7 @@ const ModalEditCourt = ({
                     key={tipoQuadra.idTipoQuadra}
                     value={tipoQuadra.idTipoQuadra}
                   >
-                    {tipoQuadra.descricao}
+                    {tipoQuadra.descricao.toUpperCase()}
                   </option>
                 ))}
               </select>
@@ -204,7 +204,7 @@ const ModalEditCourt = ({
               >
                 {sportList.map(esporte => (
                   <option key={esporte.idEsporte} value={esporte.idEsporte}>
-                    {esporte.descricao}
+                    {esporte.descricao.toUpperCase()}
                   </option>
                 ))}
               </select>

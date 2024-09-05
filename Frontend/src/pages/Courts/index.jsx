@@ -63,7 +63,7 @@ const Courts = () => {
               {quadraList.length > 0 && (
                 <>
                   <div className='self-start w-full md:w-auto mb-5 flex flex-row justify-between items-center rounded shadow-lg drop-shadow bg-secundary'>
-                    <input onChange={(e) => handleFilter(e.target.value)} placeholder='Digite a quadra' className=' p-2 text-lg font-medium' type="text" />
+                    <input onChange={(e) => handleFilter(e.target.value)} placeholder='Digite a quadra' className=' p-2 text-lg font-medium input-no-focus' type="text" />
                     <div className='px-2 opacity-100 text-third/30'>
                       <Search width={'20px'}></Search>
                     </div>

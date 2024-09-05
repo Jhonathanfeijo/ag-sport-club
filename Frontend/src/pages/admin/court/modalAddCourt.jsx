@@ -148,7 +148,7 @@ const ModalAddCourt = ({
                     {tipoQuadraList.map((tipoQuadra, index) => {
                       return (
                         <option key={index} value={tipoQuadra.idTipoQuadra}>
-                          {tipoQuadra.descricao}
+                          {tipoQuadra.descricao.toUpperCase()}
                         </option>
                       );
                     })}
@@ -168,7 +168,7 @@ const ModalAddCourt = ({
                     {sportList.map((sport, index) => {
                       return (
                         <option key={index} value={sport.idEsporte}>
-                          {sport.descricao}
+                          {sport.descricao.toUpperCase()}
                         </option>
                       );
                     })}

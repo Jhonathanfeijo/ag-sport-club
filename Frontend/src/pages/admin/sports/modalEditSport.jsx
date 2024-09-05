@@ -74,7 +74,7 @@ const ModalEditSport = ({
               id='idEsporte'
               name='idEsporte'
               className='hidden'
-              value={sportToEdit.idEsporte}
+              value={sportToEdit.idEsporte.toUpperCase()}
               type='text'
             />
             <label className='font-bold' htmlFor='descricao'>

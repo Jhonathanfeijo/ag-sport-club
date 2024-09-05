@@ -23,11 +23,11 @@ const ModalInfoReserv = ({ reservInfo, setIsModalInfoOpen }) => {
                         </div>
                         <div className="flex flex-col flex-1">
                             <label className="font-bold" htmlFor="">Quadra</label>
-                            <input className="py-1 px-2 border rounded" value={reservInfo.quadraLoc} type="text" name="" id="" />
+                            <input className="py-1 px-2 border rounded" value={reservInfo.quadraLoc.toUpperCase()} type="text" name="" id="" />
                         </div>
                         <div className="flex flex-col flex-1">
                             <label className="font-bold" htmlFor="">Esporte</label>
-                            <input className="py-1 px-2 border rounded" value={reservInfo.esporteReserva} type="text" name="" id="" />
+                            <input className="py-1 px-2 border rounded" value={reservInfo.esporteReserva.toUpperCase()} type="text" name="" id="" />
                         </div>
                         <div className="flex flex-col flex-1">
                             <label className="font-bold" htmlFor="">Valor/Hora</label>
@@ -41,6 +41,12 @@ const ModalInfoReserv = ({ reservInfo, setIsModalInfoOpen }) => {
                             <div className="flex flex-col flex-1">
                                 <label className="font-bold" htmlFor="">Status</label>
                                 <input className="py-1 px-2 border rounded" value={reservInfo.status.toUpperCase()} type="text" name="" id="" />
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex flex-col flex-1">
+                                <label className="font-bold" htmlFor="">Locado por</label>
+                                <input className="py-1 px-2 border rounded" value={reservInfo.nomeUsuario.toUpperCase()} type="text" name="" id="" />
                             </div>
                         </div>
                         

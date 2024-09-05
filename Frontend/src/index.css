@@ -36,3 +36,8 @@ button:hover{
 table{
     border-collapse: collapse;
 }
+
+.input-no-focus:focus {
+    outline: none;
+    border: none;
+}

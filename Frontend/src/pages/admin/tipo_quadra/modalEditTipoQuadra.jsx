@@ -86,7 +86,7 @@ const ModalEditTipoQuadra = ({
                 const newValue = e.target.value;
                 setTipoQuadraToEdit(prev => ({ ...prev, descricao: newValue }));
               }}
-              value={tipoQuadraToEdit.descricao}
+              value={tipoQuadraToEdit.descricao.toUpperCase()}
               className='px-2 py-1 rounded border'
               type='text'
             />
