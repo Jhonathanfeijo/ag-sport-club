@@ -61,6 +61,9 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     @Query(nativeQuery = true, value = "select exists(select 1 from reserva r where r.data = :dataReserva and r.horario_inicial = :horarioInicial) as reserva_existe")
     boolean existsReservaByDataReservaAndHorarioInicial(@Param("dataReserva") LocalDate dataReserva, @Param("horarioInicial") int horarioInicial);
 
+    @Query(nativeQuery = true, value = "select exists(select 1 from reserva r inner join quadra q on q.id_quadra = r.id_quadra where r.data = :dataReserva and r.horario_inicial = :horarioInicial and q.id_quadra = :idQuadra) as reserva_existe")
+    boolean existsReservaByDataReservaAndHorarioInicialAndIdQuadra(@Param("dataReserva") LocalDate dataReserva, @Param("horarioInicial") int horarioInicial, @Param("idQuadra") Long idQuadra);
+
     @Modifying
     @Query(value = "update table reserva set status = 'CANCELADO' where upper(status) = 'pendente' and data < current_date ", nativeQuery = true)
     void cancelarReservasPendentesPassado();
