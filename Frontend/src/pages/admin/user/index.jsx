@@ -32,7 +32,7 @@ const Users = ({ type }) => {
           setUsersFiltered(json.data)
           setStatusData('loaded');
         })
-        .catch(error => {
+        .catch(() => {
           setStatusData('failed');
         });
     };
@@ -113,7 +113,7 @@ const Users = ({ type }) => {
                                   <button
                                     onClick={() => {
                                       setIsModalToSeeMoreAboutUserOpen(true);
-                                      setUserToSee(user);
+                                      setUserToSee({...user});
                                     }}
                                     className='font-medium text-lg py-1 px-1 rounded bg-primary text-secundary'
                                   >
@@ -148,9 +148,10 @@ const Users = ({ type }) => {
         </div>
         {isModalToSeeMoreAboutUserOpen && (
           <ModalUserInfo
+            setUserInfo={setUserToSee}
             setIsModalUserInfoOpen={setIsModalToSeeMoreAboutUserOpen}
             setRender={setRender}
-            userInfo={userToSee}
+            userInfo={{...userToSee}}
           ></ModalUserInfo>
         )}
       </motion.div>

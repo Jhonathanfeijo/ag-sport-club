@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,4 +49,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	public Usuario findByIdUsuario(@Param("idUsuario") Long idUsuario);
 	@Query(value = "select exists(select 1 from usuario u where u.cpf = :cpf) as existe_usuario", nativeQuery = true)
 	boolean existsByCpf(@NotBlank @Param("cpf") String cpf);
+
+	@Modifying
+	@Query(value = "update usuario set nivel_permissao = :nivelPermissao where id_usuario = :idUsuario", nativeQuery = true)
+	void updateNivelPermissaoByIdUsuario(@Param("nivelPermissao") String nivelPermissao, @Param("idUsuario") Long idUsuario);
 }

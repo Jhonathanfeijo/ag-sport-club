@@ -28,7 +28,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
                     " r.valor_reserva," +
                     " r.status " +
                     "from reserva r " +
-                    "where r.data = :dataReserva r.id_quadra = :idQuadra"
+                    "where r.data = :dataReserva and r.id_quadra = :idQuadra"
             , nativeQuery = true)
     List<Reserva> findAllByDataReservadaAndIdQuadra(@Param("dataReserva") LocalDate dataReserva, @Param("idQuadra") Long idQuadra);
 

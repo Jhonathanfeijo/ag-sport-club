@@ -60,4 +60,10 @@ public class UsuarioService {
             usuario.setNivelPermissao(usuarioUpdateDto.getNivelPermissao());
         usuarioRepository.save(usuario);
     }
+
+    public void alterUserRole(Long idUsuario, @Valid String role) {
+        if (!usuarioRepository.existsById(idUsuario))
+            throw new RuntimeException("Usuário não encontrado");
+        usuarioRepository.updateNivelPermissaoByIdUsuario(role, idUsuario);
+    }
 }

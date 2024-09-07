@@ -74,7 +74,7 @@ const ModalEditSport = ({
               id='idEsporte'
               name='idEsporte'
               className='hidden'
-              value={sportToEdit.idEsporte.toUpperCase()}
+              value={sportToEdit.idEsporte}
               type='text'
             />
             <label className='font-bold' htmlFor='descricao'>
@@ -98,7 +98,7 @@ const ModalEditSport = ({
               <label className='font-bold' htmlFor='ativo'>
                 Ativo
               </label>
-              <label class='inline-flex items-center cursor-pointer'>
+              <label className='inline-flex items-center cursor-pointer'>
                 <input
                   name='ativo'
                   id='ativo'
@@ -110,10 +110,10 @@ const ModalEditSport = ({
                     })
                   }
                   value={sportToEdit.ativo}
-                  class='sr-only peer'
+                  className='sr-only peer'
                   checked={sportToEdit.ativo}
                 />
-                <div class="relative w-11 h-6 bg-third/20 rounded-full peer peer-focus: peer-focus: dark:peer-focus:ring-primary dark:bg-third/40 peer-checked:after:-translate-x-full rtl:peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:end-[2px] after:bg-secundary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary/90"></div>
+                <div className="relative w-11 h-6 bg-third/20 rounded-full peer peer-focus: peer-focus: dark:peer-focus:ring-primary dark:bg-third/40 peer-checked:after:-translate-x-full rtl:peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:end-[2px] after:bg-secundary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary/90"></div>
               </label>
             </div>
             <div className='flex flex-row gap-2 font-medium self-end'>

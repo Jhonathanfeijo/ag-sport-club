@@ -92,7 +92,6 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
             dataReserva: reserv.dataReserva
         }
 
-
         const postData = async () => {
             const toastId = toast.loading("Registrando reserva", { isLoading: true })
             await api.post("reserva", reservJson, headers)

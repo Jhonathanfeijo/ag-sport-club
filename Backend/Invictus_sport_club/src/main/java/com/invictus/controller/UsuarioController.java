@@ -52,4 +52,11 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
+    @Transactional
+    @PutMapping("/alterrole/{id}")
+    public ResponseEntity updateRoleByUserId(@PathVariable("id") Long idUsuario, @Valid @RequestBody String role) {
+        usuarioService.alterUserRole(idUsuario, role);
+        return ResponseEntity.noContent().build();
+    }
+
 }
