@@ -68,23 +68,17 @@ export const UserProvider = ({ children }) => {
     // Declaração do timeoutId fora do bloco if
     let timeoutId;
 
-    const response = await api.post('/auth/register', {
+    await api.post('/auth/register', {
       nome: data.nome,
       cpf: data.cpf,
       email: data.email,
       login: data.login,
       senha: data.senha,
+    }).then(() => { toast.success("Usuário cadastrado com sucesso", { isLoading: false, autoClose: 2500, style: { fontWeight: 'bold' } }) }).catch((error) => {
+      if (error.response.data.errors && error.response.data.errors.length > 0) {
+        toast.error(error.response.data.errors[0].defaultMessage, { isLoading: false, autoClose: 2500, style: { fontWeight: 'bold' } })
+      }
     });
-
-    if (response.status === 200) {
-      setRegisterSuccess(true);
-      timeoutId = setTimeout(() => {
-        setRegisterSuccess(false);
-        navigate('/home');
-      }, 4000);
-    } else {
-      clearTimeout(timeoutId);
-    }
   };
 
   return (

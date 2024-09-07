@@ -17,9 +17,9 @@ import Courts from './pages/Courts'
 function App() {
   return (
     <div>
+      <ToastContainer autoClose={3000} />
       <BrowserRouter>
         <UserProvider>
-          <ToastContainer autoClose={3000} />
           <Routes>
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
@@ -29,7 +29,7 @@ function App() {
             <Route path="/users" element={<Layout children={<Users></Users>} />} />
             <Route path="/sports" element={<Layout children={<Sports />} />} />
             <Route path="/config" element={<Layout children={<AdminConfig />} />} />
-            <Route path="/courts" element={<Layout children={<Courts/>} />} />
+            <Route path="/courts" element={<Layout children={<Courts />} />} />
           </Routes>
         </UserProvider>
       </BrowserRouter>

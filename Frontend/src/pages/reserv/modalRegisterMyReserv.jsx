@@ -13,6 +13,12 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
     const [payments, setPayments] = useState([]);
     const [statusDateAvailable, setStatusDateAvailable] = useState("quit");
     const [hoursAvailable, setHoursAvailable] = useState([]);
+    const [reserv, setReserv] = useState({
+        idQuadra: "",
+        idFormPagamento: "",
+        dataReserva: "",
+        horarioInicial: ''
+    })
 
 
     const { register, handleSubmit } = useForm();
@@ -42,14 +48,13 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
         fetchData();
     }, []);
 
-    const postMyReserv = (data) => {
+    const postMyReserv = () => {
         const user = getUserLocalStorage();
         const headers = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user.token.replace('"', '').replace('"', '')}`
         };
-        console.log(data)
-        if (!data.idQuadra || !data.idFormPagamento || !data.horarioInicial || !data.dataReserva) {
+        if (!reserv.idQuadra || !reserv.idFormPagamento || !reserv.horarioInicial || !reserv.dataReserva) {
             toast.error('Preencha todas as informações', {
                 style: { fontWeight: 'bold' },
                 autoClose: 2500,
@@ -59,9 +64,9 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
         }
 
         const dataAtual = normalizaDataParaInicioDoDia(new Date());
-        const dataReserva = data.dataReserva;
+        const dataReserva = reserv.dataReserva;
         console.log(dataAtual);
-        console.log(data.dataReserva)
+        console.log(reserv.dataReserva)
 
         if (dataReserva < dataAtual) {
             toast.error("Não pode adicionar datas passadas", {
@@ -79,18 +84,18 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
             });
             return;
         }
-        const reserv = {
+        const reservJson = {
             idUsuario: user.idUser,
-            idQuadra: data.idQuadra,
-            idFormPagamento: data.idFormPagamento,
-            horarioInicial: data.horarioInicial,
-            dataReserva: data.dataReserva
+            idQuadra: reserv.idQuadra,
+            idFormPagamento: reserv.idFormPagamento,
+            horarioInicial: reserv.horarioInicial,
+            dataReserva: reserv.dataReserva
         }
 
 
         const postData = async () => {
             const toastId = toast.loading("Registrando reserva", { isLoading: true })
-            await api.post("reserva", reserv, headers)
+            await api.post("reserva", reservJson, headers)
                 .then((json) => {
                     console.log(json.data)
                     console.log(myReservs)
@@ -127,7 +132,7 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
         postData()
     };
 
-    const verifyReservsAvailableByDay = async (data) => {
+    const verifyReservsAvailableByDay = async (data, idQuadra) => {
         const user = getUserLocalStorage();
         const headers = {
             "Content-Type": 'application/json',
@@ -136,7 +141,7 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
 
         setStatusDateAvailable("loading");
         try {
-            const response = await api.get(`reserva/verify?dataReserva=${data}`, { headers });
+            const response = await api.get(`reserva/verify?dataReserva=${data}&idQuadra=${idQuadra}`, { headers });
             setHoursAvailable(response.data);
             setStatusDateAvailable("available");
         } catch (error) {
@@ -147,8 +152,11 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
 
     const handleDateChange = (e) => {
         const value = e.target.value;
-        if (e.target.value != '') {
-            verifyReservsAvailableByDay(value);
+        console.log('aq')
+        console.log(reserv)
+        if (e.target.value != '' && reserv.idQuadra) {
+            console.log('aqui')
+            verifyReservsAvailableByDay(value, reserv.idQuadra);
         }
     };
 
@@ -167,7 +175,7 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
                             <>
                                 <form onSubmit={handleSubmit(postMyReserv)} className="flex flex-col">
                                     <label htmlFor="idQuadra">Quadra</label>
-                                    <select {...register("idQuadra")} className="border rounded p-1" name="idQuadra" id="idQuadra">
+                                    <select onChange={(e) => { setReserv((prev) => { return { ...prev, idQuadra: e.target.value } }) }} className="border rounded p-1" name="idQuadra" id="idQuadra">
                                         <option value="">Selecione</option>
                                         {courtList.map((court) => (
                                             <option key={court.idQuadra} value={court.idQuadra}>
@@ -176,7 +184,7 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
                                         ))}
                                     </select>
                                     <label className="mt-2" htmlFor="idFormPagamento">Forma de pagamento</label>
-                                    <select {...register("idFormPagamento")} className="border rounded p-1" name="idFormPagamento" id="idFormPagamento">
+                                    <select onChange={(e) => { setReserv((prev) => { return { ...prev, idFormPagamento: e.target.value } }) }} className="border rounded p-1" name="idFormPagamento" id="idFormPagamento">
                                         <option value="">Selecione</option>
                                         {payments.map((payment, index) => (
                                             <option key={index} value={payment.idFormPagamento}>
@@ -185,27 +193,29 @@ const ModalRegisterMyReserv = ({ setRender, setMyReservs, myReservs, setIsModalR
                                         ))}
                                     </select>
                                     <label className="mt-2" htmlFor="dataReserva">Data</label>
-                                    <input onSelect={(e) => { handleDateChange(e) }} onBlur={(e) => { handleDateChange(e) }} onChange={(e) => { handleDateChange(e) }} {...register("dataReserva")} className="rounded border p-1" type="date" name="dataReserva" id="dataReserva" />
-
-                                    {statusDateAvailable === "notFound" && (
-                                        <span>Nenhum disponível encontrado</span>
-                                    )}
-                                    {statusDateAvailable === "loading" && (
-                                        <span>Carregando horários...</span>
-                                    )}
-                                    {statusDateAvailable === "available" && (
-                                        <>
-                                            <label className="font-bold mt-2" htmlFor="horarioReserva">Horários</label>
-                                            <select {...register("horarioInicial")} className="border rounded p-1" name="horarioInicial" id="horarioInicial">
-                                                <option value="">Selecione</option>
-                                                {hoursAvailable.map((hour, index) => (
-                                                    <option key={index} value={hour}>
-                                                        {`${hour}:00 - ${hour + 1}:00`}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </>
-                                    )}
+                                    <input onChange={(e) => { setReserv((prev) => { return { ...prev, dataReserva: e.target.value } }); handleDateChange(e) }} className="rounded border p-1" type="date" name="dataReserva" id="dataReserva" />
+                                    {reserv.dataReserva && reserv.idQuadra &&
+                                        (<>
+                                            {statusDateAvailable === "notFound" && (
+                                                <span>Nenhum disponível encontrado</span>
+                                            )}
+                                            {statusDateAvailable === "loading" && (
+                                                <span>Carregando horários...</span>
+                                            )}
+                                            {statusDateAvailable === "available" && (
+                                                <>
+                                                    <label className="font-bold mt-2" htmlFor="horarioReserva">Horários</label>
+                                                    <select onChange={(e) => { setReserv((prev) => { return { ...prev, horarioInicial: e.target.value } }) }} className="border rounded p-1" name="horarioInicial" id="horarioInicial">
+                                                        <option value="">Selecione</option>
+                                                        {hoursAvailable.map((hour, index) => (
+                                                            <option key={index} value={hour}>
+                                                                {`${hour}:00 - ${hour + 1}:00`}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </>
+                                            )}
+                                        </>)}
                                     <div className="self-end flex flex-row gap-2 my-3 font-medium">
                                         <button type="button" onClick={() => setIsModalRegisterMyReservsOpen(false)} className="bg-secundary px-2 py-1 rounded border text-primary">Cancelar</button>
                                         <button type="submit" className="bg-primary text-secundary rounded px-2 py-1">Registrar</button>

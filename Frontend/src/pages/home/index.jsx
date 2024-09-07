@@ -46,7 +46,7 @@ const Home = () => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className='h-full max-h-[100vh] md:pt-12 flex-1 flex flex-col items-center text-left lg:items-center lg:justify-start mb-2'>
+      <div className='h-full max-h-[100vh] md:pt-20 flex-1 flex flex-col items-center text-left lg:items-center lg:justify-start mb-2'>
         <h1 className='text-3xl md:text-5xl font-medium'>{`Olá, ${user.nome}`} </h1>
         <div className='w-[330px] hidden md:block mt-3 border'></div>
         <h2 className='text-xl font-medium md:text-2xl mb-8 md:mb-14 '>Seja bem vindo!</h2>

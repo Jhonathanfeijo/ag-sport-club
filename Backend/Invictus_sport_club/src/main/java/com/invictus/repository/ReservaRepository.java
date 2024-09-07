@@ -28,9 +28,9 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
                     " r.valor_reserva," +
                     " r.status " +
                     "from reserva r " +
-                    "where r.data = :dataReserva"
+                    "where r.data = :dataReserva r.id_quadra = :idQuadra"
             , nativeQuery = true)
-    List<Reserva> findAllByDataReservada(LocalDate dataReserva);
+    List<Reserva> findAllByDataReservadaAndIdQuadra(@Param("dataReserva") LocalDate dataReserva, @Param("idQuadra") Long idQuadra);
 
     @Query(value = "select exists (select 1 from reserva r where r.id_form_pagamento = :id_form_pagamento) as reserva_existe", nativeQuery = true)
     boolean existsByFormPagamento(@Param("id_form_pagamento") Long idFormPagamento);

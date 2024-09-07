@@ -75,8 +75,8 @@ public class ReservaService {
         return reservaRepository.findAllByUsuarioIdUsuario(idUsuario);
     }
 
-    public List<Integer> obterHorariosDisponiveis(LocalDate dataReserva) {
-        List<Reserva> reservasMarcadasNaData = reservaRepository.findAllByDataReservada(dataReserva);
+    public List<Integer> obterHorariosDisponiveis(LocalDate dataReserva, Long idQuadra) {
+        List<Reserva> reservasMarcadasNaData = reservaRepository.findAllByDataReservadaAndIdQuadra(dataReserva, idQuadra);
         ArrayList<Integer> horariosDisponiveis;
         if (dataReserva.getDayOfWeek().toString().toUpperCase().equals("SUNDAY"))
             horariosDisponiveis = new ArrayList<>(Arrays.asList(8, 9, 10, 11, 13, 14, 15, 16, 17));

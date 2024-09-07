@@ -40,8 +40,8 @@ public class ReservaController {
 
     @GetMapping("/verify")
     public ResponseEntity verificarHorariosDisponiveis(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataReserva) {
-        List<Integer> horariosDisponiveis = reservaService.obterHorariosDisponiveis(dataReserva);
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataReserva, @RequestParam Long idQuadra) {
+        List<Integer> horariosDisponiveis = reservaService.obterHorariosDisponiveis(dataReserva, idQuadra);
         return ResponseEntity.ok(horariosDisponiveis);
     }
 

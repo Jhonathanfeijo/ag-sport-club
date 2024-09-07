@@ -16,9 +16,9 @@ public class RegistroUsuarioDTO {
 	@NotBlank
 	private String nome;
 	@NotBlank
-	@Email
+	@Email(message = "Formato de email inválido")
 	private String email;
-	@CPF
+	@CPF(message = "CPF inválido")
 	private String cpf;
 	@NotBlank
 	private String login;
