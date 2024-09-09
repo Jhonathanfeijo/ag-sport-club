@@ -28,7 +28,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
                     " r.valor_reserva," +
                     " r.status " +
                     "from reserva r " +
-                    "where r.data = :dataReserva and r.id_quadra = :idQuadra"
+                    "where r.data = :dataReserva and r.id_quadra = :idQuadra and UPPER(r.status) <> 'CANCELADO'"
             , nativeQuery = true)
     List<Reserva> findAllByDataReservadaAndIdQuadra(@Param("dataReserva") LocalDate dataReserva, @Param("idQuadra") Long idQuadra);
 
@@ -58,10 +58,10 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     @Query(value = "select r.id_reserva, r.id_usuario, r.id_quadra, r.id_form_pagamento, r.data, r.realizacao_reserva, r.horario_inicial, r.esporte_reserva, r.valor_reserva, r.status from reserva r order by  r.data desc", nativeQuery = true)
     List<Reserva> findAllOrderByDataReserva();
 
-    @Query(nativeQuery = true, value = "select exists(select 1 from reserva r where r.data = :dataReserva and r.horario_inicial = :horarioInicial) as reserva_existe")
-    boolean existsReservaByDataReservaAndHorarioInicial(@Param("dataReserva") LocalDate dataReserva, @Param("horarioInicial") int horarioInicial);
+    @Query(nativeQuery = true, value = "select exists(select 1 from reserva r where r.data = :dataReserva and r.horario_inicial = :horarioInicial and UPPER(r.status) <> 'CANCELADO') as reserva_existe")
+    boolean existsReservaByDataReservaAndHorarioInicialAndIdQuadra(@Param("dataReserva") LocalDate dataReserva, @Param("horarioInicial") int horarioInicial);
 
-    @Query(nativeQuery = true, value = "select exists(select 1 from reserva r inner join quadra q on q.id_quadra = r.id_quadra where r.data = :dataReserva and r.horario_inicial = :horarioInicial and q.id_quadra = :idQuadra) as reserva_existe")
+    @Query(nativeQuery = true, value = "select exists(select 1 from reserva r inner join quadra q on q.id_quadra = r.id_quadra where r.data = :dataReserva and r.horario_inicial = :horarioInicial and q.id_quadra = :idQuadra and UPPER(r.status) <> 'CANCELADO') as reserva_existe")
     boolean existsReservaByDataReservaAndHorarioInicialAndIdQuadra(@Param("dataReserva") LocalDate dataReserva, @Param("horarioInicial") int horarioInicial, @Param("idQuadra") Long idQuadra);
 
     @Modifying

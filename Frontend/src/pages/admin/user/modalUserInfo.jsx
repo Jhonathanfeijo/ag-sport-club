@@ -97,7 +97,7 @@ const ModalUserInfo = ({ setIsModalUserInfoOpen, userInfo, setRender, setUserInf
                   >
                     Fechar
                   </button>
-                  <button onClick={() => setIsModalAlterUserRoleOpen(true)} className='rounded px-2 py-1 font-medium text-lg'>Salvar</button>
+                  <button onClick={() => setIsModalAlterUserRoleOpen(true)} className='rounded px-2 py-1 font-medium text-lg hidden'>Salvar</button>
                 </div>
               </div>
             </motion.div>

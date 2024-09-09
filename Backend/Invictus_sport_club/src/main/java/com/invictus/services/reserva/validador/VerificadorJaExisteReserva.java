@@ -14,7 +14,7 @@ public class VerificadorJaExisteReserva implements ValidadoresReserva {
 	
 	@Override
 	public void validar(ReservaRequestDTO request) {
-		if(reservaRepository.existsReservaByDataReservaAndHorarioInicial(request.getDataReserva(), request.getHorarioInicial()))
+		if(reservaRepository.existsReservaByDataReservaAndHorarioInicialAndIdQuadra(request.getDataReserva(), request.getHorarioInicial(), request.getIdQuadra()))
 			throw new RuntimeException("Já existe uma reserva para esse horario");
 	}
 
