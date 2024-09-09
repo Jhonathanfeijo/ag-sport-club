@@ -61,7 +61,7 @@ const Users = () => {
                 }}
                 className='w-[290px] max-w-full md:w-[750px] flex flex-row flex-wrap gap-3 items-end justify-center lg:justify-start'
               >
-                <h2 className='w-full text-left text-2xl font-bold'>
+                <h2 className='w-full text-center md:text-left text-2xl font-bold'>
                   Minhas informações
                 </h2>
                 <div className='flex flex-col w-[290px] md:w-auto gap-1'>
@@ -123,7 +123,7 @@ const Users = () => {
                 </div>
               </form>
               <div className=' w-[290px] max-w-full md:w-[750px] text-left flex flex-col items-start'>
-                <h3 className='mb-4 mt-10 text-2xl font-bold'>Segurança</h3>
+                <h3 className='mb-4 mt-10 text-2xl self-center md:self-auto font-bold'>Segurança</h3>
                 <div className='flex flex-col my-2 opacity-70'>
                   <label className='font-bold px-1' htmlFor=''>
                     Email

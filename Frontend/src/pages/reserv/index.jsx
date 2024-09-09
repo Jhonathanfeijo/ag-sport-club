@@ -77,7 +77,7 @@ const Reserv = () => {
           <h1 className='font-bold text-4xl text-center'>Minhas reservas</h1>
           {isDataLoaded && isDataLoaded === true && myReservs.length > 0 && (
             <>
-              <div className="flex flex-row w-full mt-5 flex-wrap gap-2">
+              <div className="flex flex-row justify-center md:justify-start w-full mt-5 flex-wrap gap-2">
                 <div className="flex flex-col">
                   <label className='font-bold' htmlFor="">Data</label>
                   <input
