@@ -78,6 +78,7 @@ const ModalUserInfo = ({ setIsModalUserInfoOpen, userInfo, setRender, setUserInf
                       Nivel de permissão
                     </label>
                     <select
+                      disabled
                       onChange={(e) => setUserEditable((prev) => { return { ...prev, nivelPermissao: e.target.value } })}
                       className='rounded border p-1'
                       value={userEditable.nivelPermissao.toUpperCase()}

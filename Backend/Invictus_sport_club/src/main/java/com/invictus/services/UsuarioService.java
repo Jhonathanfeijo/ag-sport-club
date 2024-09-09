@@ -61,7 +61,7 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
-    public void alterUserRole(Long idUsuario, @Valid String role) {
+    public void alterUserRole(Long idUsuario, String role) {
         if (!usuarioRepository.existsById(idUsuario))
             throw new RuntimeException("Usuário não encontrado");
         usuarioRepository.updateNivelPermissaoByIdUsuario(role, idUsuario);
