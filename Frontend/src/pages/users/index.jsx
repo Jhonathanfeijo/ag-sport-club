@@ -136,7 +136,7 @@ const Users = () => {
                   />
                 </div>
                 <div className='flex flex-row items-end gap-3'>
-                  <button className='bg-primary roundex px-2 py-1 text-secundary rounded text-lg font-medium'>
+                  <button className='bg-primary hidden roundex px-2 py-1 text-secundary rounded text-lg font-medium'>
                     Alterar email
                   </button>
                   <button

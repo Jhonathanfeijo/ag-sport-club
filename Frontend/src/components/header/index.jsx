@@ -19,7 +19,7 @@ const Header = ({ nivel_permissao }) => {
     return (
         <>
 
-            <header className="max-w-full top-0 sticky z-10 left-0 py-2 flex lg:w-[220px] lg:flex lg:max-w-[25%] w-full lg:h-screen bg-principal lg:flex-col items-center lg:items-center px-2 lg:px-0 text-xl justify-between shadow-xl drop-shadow-lg">
+            <header className="max-w-full top-0 sticky  z-10 left-0 py-2 flex lg:w-[220px] lg:flex lg:max-w-[25%] w-full lg:h-screen bg-principal lg:flex-col items-center lg:items-center px-2 lg:px-0 text-xl justify-between shadow-xl drop-shadow-lg">
                 <nav className='w-full flex flex-wrap lg:flex-col items-baseline gap-2.5'>
                     <img className='w-44 mt-12 mb-10 self-center hidden lg:block lg:px-2' src={logo} alt="" />
                     <NavLink onClick={() => setOption('begin')} className='flex flex-row items-center lg:px-2 lg:w-full gap-2 hover:opacity-80 transition-opacity duration-3000' to={'/home'}>

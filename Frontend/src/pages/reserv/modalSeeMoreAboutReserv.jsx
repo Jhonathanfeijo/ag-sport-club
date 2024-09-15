@@ -21,11 +21,11 @@ const ModalSeeMoreAboutReserv = ({ setRender, reserv, setMyReservs, myReservs, s
                 <div className="flex flex-row flex-wrap gap-3">
                     <div className="flex flex-col gap-1 flex-1">
                         <label htmlFor="">Quadra</label>
-                        <input disabled className="rounded px-1 border py-1" value={reserv.quadraLoc} type="text" />
+                        <input disabled className="rounded px-1 border py-1" value={reserv.quadraLoc.toUpperCase()} type="text" />
                     </div>
                     <div className="flex flex-col gap-1 flex-1">
                         <label htmlFor="">Tipo</label>
-                        <input disabled className="rounded px-1 border py-1" value={reserv.tipoQuadra} type="text" />
+                        <input disabled className="rounded px-1 border py-1" value={reserv.tipoQuadra.toUpperCase()} type="text" />
                     </div>
                     <div className="flex flex-col gap-1 flex-1">
                         <label htmlFor="">Data reservada</label>
@@ -37,7 +37,7 @@ const ModalSeeMoreAboutReserv = ({ setRender, reserv, setMyReservs, myReservs, s
                     </div>
                     <div className="flex flex-col gap-1 flex-1">
                         <label htmlFor="">Esporte</label>
-                        <input disabled className="rounded px-1 border py-1" value={reserv.esporteReserva} type="text" />
+                        <input disabled className="rounded px-1 border py-1" value={reserv.esporteReserva.toUpperCase()} type="text" />
                     </div>
                     <div className="flex flex-col gap-1 flex-1">
                         <label htmlFor="">Data efetuação da reserva</label>
