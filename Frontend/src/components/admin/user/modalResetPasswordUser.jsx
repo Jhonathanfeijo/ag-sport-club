@@ -41,6 +41,7 @@ const ModalResetPasswordUser = ({ setIsModalRessetPasswordUserOpen }) => {
             isLoading: false,
             style: { fontWeight: 'bold' },
           });
+          setIsModalRessetPasswordUserOpen(false);
         })
         .catch(err => {
           console.log(err);
